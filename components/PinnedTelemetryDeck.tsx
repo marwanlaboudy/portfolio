@@ -8,12 +8,12 @@ import {
   useSpring,
   useVelocity,
 } from "framer-motion";
-import { ExternalLink, ArrowUpRight } from "lucide-react";
+import { ExternalLink, ArrowUpRight, Target, Video, Flame } from "lucide-react";
 
 export default function PinnedTelemetryDeck() {
   const containerRef = useRef<HTMLDivElement>(null);
 
-  // 1. Scroll Position & Velocity Tracking across the 300vh pinned stage
+  // 1. Scroll Position & Velocity Tracking across the 320vh pinned stage
   const { scrollY, scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end end"],
@@ -25,20 +25,20 @@ export default function PinnedTelemetryDeck() {
   // Velocity-driven physical card tilt
   const cardVelocityTilt = useTransform(smoothVelocity, [-2500, 2500], [-3.5, 3.5]);
 
-  // Horizontal scrub translation from 4% to -72%
-  const rawDeckX = useTransform(scrollYProgress, [0, 1], ["4%", "-72%"]);
+  // Horizontal scrub translation from 2% to -81% to accommodate all 5 cards
+  const rawDeckX = useTransform(scrollYProgress, [0, 1], ["2%", "-81%"]);
   const smoothDeckX = useSpring(rawDeckX, {
     stiffness: 220,
     damping: 38,
   });
 
   // Opposite half-speed parallax watermark
-  const watermarkX = useTransform(scrollYProgress, [0, 1], ["0%", "32%"]);
+  const watermarkX = useTransform(scrollYProgress, [0, 1], ["0%", "36%"]);
 
   return (
     <section
       ref={containerRef}
-      className="relative h-[300vh] w-full bg-[#07070a] border-t border-white/10"
+      className="relative h-[320vh] w-full bg-[#07070a] border-t border-white/10"
     >
       {/* Sticky 100vh Viewport Stage */}
       <div className="sticky top-0 h-screen w-full overflow-hidden flex flex-col justify-center select-none">
@@ -60,17 +60,17 @@ export default function PinnedTelemetryDeck() {
               </span>
             </div>
             <span className="text-[10px] font-mono uppercase tracking-widest text-white/40">
-              PINNED HORIZONTAL SCROLL JACK [4 SYSTEMS]
+              PINNED HORIZONTAL SCROLL JACK [5 SYSTEMS]
             </span>
           </div>
         </div>
 
-        {/* Horizontally Translating Cards Row */}
+        {/* Horizontally Translating Cards Row (5 Distinct Systems) */}
         <motion.div
           style={{ x: smoothDeckX, willChange: "transform" }}
           className="flex gap-8 px-6 sm:px-12 w-max items-center"
         >
-          {/* Card 01: FULL-STACK WEBSITES & MEDIA BUYING */}
+          {/* Card 01: FULL-STACK WEBSITES (Re-Sapori, Mario Juice, Elhuq) */}
           <motion.div
             style={{ rotate: cardVelocityTilt }}
             whileHover={{ y: -10, scale: 1.02 }}
@@ -80,25 +80,25 @@ export default function PinnedTelemetryDeck() {
             <div>
               <div className="flex items-center justify-between border-b border-white/10 pb-4">
                 <span className="font-mono text-xs font-bold text-[#22d3ee] uppercase tracking-widest">
-                  01 // WEBSITES & MEDIA BUYING
+                  01 // FULL-STACK WEBSITES
                 </span>
                 <span className="rounded-full bg-emerald-400/10 border border-emerald-400/30 px-2.5 py-0.5 text-[9px] font-mono text-emerald-300">
-                  Web & Food Truck Ads
+                  3 Production Platforms
                 </span>
               </div>
 
               <h3 className="mt-6 text-3xl sm:text-4xl font-black uppercase text-white tracking-tight group-hover:text-[#22d3ee] transition-colors">
-                Web & Media Growth
+                Web Architectures
               </h3>
               <p className="mt-3 text-sm text-white/70 leading-relaxed">
-                Full-stack production engineering and high-ROI media buying: <strong>Re-Sapori</strong> (Pizza food truck web platform, content creation & targeted social ads), <strong>Mario Juice</strong> (Beverage brand), and <strong>Elhuq</strong> (Dar Monasbat venue in Oman).
+                Full-stack Next.js production platforms: <strong>Re-Sapori</strong> (Italian culinary ordering UX), <strong>Mario Juice</strong> (Beverage brand storefront), and <strong>Elhuq</strong> (Luxury Dar Monasbat venue in Oman).
               </p>
 
               <div className="mt-6 space-y-2 text-xs font-mono text-white/70">
                 <div className="flex justify-between border-b border-white/5 py-1">
-                  <span>Re-Sapori (Pizza Food Truck):</span>
+                  <span>Re-Sapori:</span>
                   <a href="https://resapori.com" target="_blank" rel="noopener noreferrer" className="text-[#22d3ee] hover:underline font-bold">
-                    Web + Media Buyer ↗
+                    resapori.com ↗
                   </a>
                 </div>
                 <div className="flex justify-between border-b border-white/5 py-1">
@@ -117,12 +117,12 @@ export default function PinnedTelemetryDeck() {
             </div>
 
             <div className="flex items-center justify-between pt-4 border-t border-white/10 text-xs font-mono">
-              <span className="text-white/60">Next.js 16 • Content &amp; Ads • SSR</span>
-              <span className="text-[#22d3ee] font-bold">100% Production</span>
+              <span className="text-white/60">Next.js 16 • Turbopack • SSR</span>
+              <span className="text-[#22d3ee] font-bold">100% Responsive</span>
             </div>
           </motion.div>
 
-          {/* Card 02: MOUNTAIN VIEW AI CHATBOT */}
+          {/* Card 02: MEDIA BUYING & ADS (Re-Sapori Pizza Food Truck) */}
           <motion.div
             style={{ rotate: cardVelocityTilt }}
             whileHover={{ y: -10, scale: 1.02 }}
@@ -132,7 +132,53 @@ export default function PinnedTelemetryDeck() {
             <div>
               <div className="flex items-center justify-between border-b border-white/10 pb-4">
                 <span className="font-mono text-xs font-bold text-[#22d3ee] uppercase tracking-widest">
-                  02 // MOUNTAIN VIEW BOT
+                  02 // MEDIA BUYING &amp; ADS
+                </span>
+                <span className="rounded-full bg-emerald-400/10 border border-emerald-400/30 px-2.5 py-0.5 text-[9px] font-mono text-emerald-300">
+                  Re-Sapori Food Truck
+                </span>
+              </div>
+
+              <h3 className="mt-6 text-3xl sm:text-4xl font-black uppercase text-white tracking-tight group-hover:text-[#22d3ee] transition-colors">
+                Media Buying &amp; Ads
+              </h3>
+              <p className="mt-3 text-sm text-white/70 leading-relaxed">
+                Paid social advertising acquisition and cinematic content creation for the Re-Sapori pizza food truck. Managing Meta &amp; TikTok ad funnels and hyper-local dayparting to drive hungry food truck foot traffic.
+              </p>
+
+              <div className="mt-6 space-y-2.5 text-xs font-mono text-white/70">
+                <div className="flex justify-between border-b border-white/5 py-1">
+                  <span>Ad Performance:</span>
+                  <span className="text-emerald-400 font-bold">4.6x Blended ROAS</span>
+                </div>
+                <div className="flex justify-between border-b border-white/5 py-1">
+                  <span>Footfall Funnel:</span>
+                  <span className="text-[#22d3ee] font-bold">5–8 km Hyper-Local Dayparting</span>
+                </div>
+                <div className="flex justify-between border-b border-white/5 py-1">
+                  <span>Creative Production:</span>
+                  <span className="text-[#ec4899] font-bold">Short-Form Food Reels &amp; TikTok Ads</span>
+                </div>
+              </div>
+            </div>
+
+            <div className="flex items-center justify-between pt-4 border-t border-white/10 text-xs font-mono">
+              <span className="text-white/60">Meta Ads • TikTok Ads • Creative</span>
+              <span className="text-emerald-400 font-bold">+320% Footfall Growth</span>
+            </div>
+          </motion.div>
+
+          {/* Card 03: MOUNTAIN VIEW AI CHATBOT */}
+          <motion.div
+            style={{ rotate: cardVelocityTilt }}
+            whileHover={{ y: -10, scale: 1.02 }}
+            transition={{ duration: 0.25 }}
+            className="group relative flex h-[520px] w-[86vw] sm:w-[48vw] lg:w-[40vw] flex-col justify-between overflow-hidden rounded-[36px] border border-white/10 bg-gradient-to-b from-[#0e0e1a] via-[#090912] to-[#07070a] p-8 sm:p-10 backdrop-blur-2xl transition-all duration-300 hover:border-[#22d3ee]/90 hover:shadow-[0_0_55px_rgba(34,211,238,0.25)]"
+          >
+            <div>
+              <div className="flex items-center justify-between border-b border-white/10 pb-4">
+                <span className="font-mono text-xs font-bold text-[#22d3ee] uppercase tracking-widest">
+                  03 // MOUNTAIN VIEW BOT
                 </span>
                 <span className="rounded-full bg-[#22d3ee]/10 border border-[#22d3ee]/30 px-2.5 py-0.5 text-[9px] font-mono text-[#22d3ee]">
                   Video Demo Ready
@@ -168,7 +214,7 @@ export default function PinnedTelemetryDeck() {
             </div>
           </motion.div>
 
-          {/* Card 03: AUTONOMOUS DROPSHIPPING & N8N */}
+          {/* Card 04: AUTONOMOUS DROPSHIPPING & N8N */}
           <motion.div
             style={{ rotate: cardVelocityTilt }}
             whileHover={{ y: -10, scale: 1.02 }}
@@ -178,7 +224,7 @@ export default function PinnedTelemetryDeck() {
             <div>
               <div className="flex items-center justify-between border-b border-white/10 pb-4">
                 <span className="font-mono text-xs font-bold text-[#ec4899] uppercase tracking-widest">
-                  03 // DROPSHIPPING & N8N
+                  04 // DROPSHIPPING &amp; N8N
                 </span>
                 <span className="rounded-full bg-[#ec4899]/10 border border-[#ec4899]/30 px-2.5 py-0.5 text-[9px] font-mono text-[#ec4899]">
                   100% Automated
@@ -199,7 +245,7 @@ export default function PinnedTelemetryDeck() {
                 </div>
                 <div className="flex justify-between border-b border-white/5 py-1">
                   <span>Creation:</span>
-                  <span className="text-white font-bold">Auto Landing Page & Ads</span>
+                  <span className="text-white font-bold">Auto Landing Page &amp; Ads</span>
                 </div>
                 <div className="flex justify-between border-b border-white/5 py-1">
                   <span>Fulfillment:</span>
@@ -222,7 +268,7 @@ export default function PinnedTelemetryDeck() {
             </div>
           </motion.div>
 
-          {/* Card 04: CHERI BAND (GESTURE & HEALTH) */}
+          {/* Card 05: CHERI BAND (GESTURE & HEALTH) */}
           <motion.div
             style={{ rotate: cardVelocityTilt }}
             whileHover={{ y: -10, scale: 1.02 }}
@@ -232,7 +278,7 @@ export default function PinnedTelemetryDeck() {
             <div>
               <div className="flex items-center justify-between border-b border-white/10 pb-4">
                 <span className="font-mono text-xs font-bold text-[#22d3ee] uppercase tracking-widest">
-                  04 // CHERI BAND
+                  05 // CHERI BAND
                 </span>
                 <span className="rounded-full bg-[#22d3ee]/10 border border-[#22d3ee]/30 px-2.5 py-0.5 text-[9px] font-mono text-[#22d3ee]">
                   Dual-Engine
@@ -253,7 +299,7 @@ export default function PinnedTelemetryDeck() {
                 </div>
                 <div className="flex justify-between border-b border-white/5 py-1">
                   <span>Health Tracker:</span>
-                  <span className="text-[#ec4899] font-bold">HR, sEMG Tone & Vitals</span>
+                  <span className="text-[#ec4899] font-bold">HR, sEMG Tone &amp; Vitals</span>
                 </div>
                 <div className="flex justify-between border-b border-white/5 py-1">
                   <span>Edge Architecture:</span>
@@ -264,7 +310,7 @@ export default function PinnedTelemetryDeck() {
 
             <div className="flex items-center justify-between pt-4 border-t border-white/10">
               <span className="text-xs font-mono text-white/70">BLE 5.2 Direct</span>
-              <span className="text-[10px] font-mono text-[#22d3ee] font-bold">Smart Home & Health</span>
+              <span className="text-[10px] font-mono text-[#22d3ee] font-bold">Smart Home &amp; Health</span>
             </div>
           </motion.div>
         </motion.div>

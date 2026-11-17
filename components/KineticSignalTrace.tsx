@@ -12,14 +12,19 @@ import {
 import {
   Activity,
   ArrowUpRight,
+  BarChart3,
   Bot,
   Brain,
   CheckCircle2,
   Cpu,
   ExternalLink,
+  Flame,
   MessageSquare,
   ShoppingBag,
   Sparkles,
+  Target,
+  TrendingUp,
+  Video,
   Workflow,
   Zap,
 } from "lucide-react";
@@ -146,7 +151,7 @@ function VelocityReactiveSemg({
         <div className="flex items-center gap-2">
           <span className="h-2 w-2 rounded-full bg-emerald-400 animate-pulse shadow-[0_0_8px_#34d399]" />
           <span className="text-white/80 uppercase tracking-widest">
-            Kiwi Band // Forearm sEMG Waveform
+            Cheri Band // Forearm sEMG Waveform
           </span>
         </div>
         <div className="flex items-center gap-3">
@@ -159,34 +164,22 @@ function VelocityReactiveSemg({
         {/* Background scope grid */}
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(#22d3ee_1px,transparent_1px)] [background-size:18px_18px] opacity-15" />
 
-        {/* Dynamic ScaleY linked to velocity */}
-        <motion.div
-          style={{ scaleY: smoothSpike, willChange: "transform" }}
-          className="relative w-full h-full flex items-center justify-center origin-center"
-        >
-          <canvas
-            ref={canvasRef}
-            width={560}
-            height={120}
-            className="w-full h-full block"
-          />
-        </motion.div>
+        {/* Real-time oscilloscope canvas */}
+        <canvas
+          ref={canvasRef}
+          width={560}
+          height={120}
+          className="relative z-10 w-full h-full"
+        />
 
-        {/* Live classifier badge */}
-        <div className="absolute top-2 right-2 flex items-center gap-2 rounded-lg border border-[#ec4899]/40 bg-black/85 px-2.5 py-1 backdrop-blur-md">
-          <Zap className="h-3 w-3 text-[#ec4899]" />
-          <span className="text-[10px] font-mono font-bold text-white uppercase tracking-wider">
-            [ PINCH_INDEX ]
-          </span>
-          <span className="rounded bg-[#ec4899]/20 px-1.5 py-0.5 text-[9px] font-mono text-[#ec4899]">
-            99.4%
-          </span>
-        </div>
+        {/* Oscilloscope Reticle Lines */}
+        <div className="pointer-events-none absolute inset-x-0 top-1/2 h-px bg-white/10" />
+        <div className="pointer-events-none absolute inset-y-0 left-1/2 w-px bg-white/10" />
+      </div>
 
-        <div className="absolute bottom-2 left-3 flex items-center gap-3 text-[9px] font-mono text-white/50">
-          <span>Range: ±180 µV</span>
-          <span className="text-emerald-400">Velocity Reaction: ACTIVE</span>
-        </div>
+      <div className="mt-3 flex items-center justify-between font-mono text-[9px] text-white/50">
+        <span>BIO-POTENTIAL // 24-BIT ADC</span>
+        <span className="text-emerald-400">SMART HOME & HEALTH TELEMETRY</span>
       </div>
     </div>
   );
@@ -215,30 +208,29 @@ export default function KineticSignalTrace() {
   });
 
   // 2. Wide S-Curve SVG Circuit Path
-  // Coordinates sweep across a 1200 x 2400 canvas in dramatic arcs
+  // Coordinates sweep across a 1200 x 3200 canvas in dramatic arcs
   const svgPathD =
-    "M 600,0 C 980,240 1140,560 840,880 C 520,1200 60,1480 380,1820 C 660,2120 1020,2240 600,2400";
+    "M 600,0 C 980,320 1140,750 840,1180 C 520,1610 60,1980 380,2440 C 660,2840 1020,3000 600,3200";
 
   // Coordinates for tip-riding glowing orb calculated along the S-curve
   const orbX = useTransform(
     smoothProgress,
-    [0, 0.25, 0.5, 0.75, 1],
+    [0, 0.22, 0.48, 0.74, 1],
     ["50%", "78%", "32%", "72%", "50%"]
   );
   const orbY = useTransform(smoothProgress, [0, 1], ["0%", "100%"]);
 
   // 3. Kinetic Typography Horizontal Scrub (Word-by-word parallax like Lando Norris)
-  const kineticWord1X = useTransform(smoothProgress, [0.1, 0.6], ["-25%", "25%"]);
-  const kineticWord2X = useTransform(smoothProgress, [0.1, 0.6], ["25%", "-25%"]);
+  const kineticWord1X = useTransform(smoothProgress, [0.08, 0.55], ["-25%", "25%"]);
+  const kineticWord2X = useTransform(smoothProgress, [0.08, 0.55], ["25%", "-25%"]);
 
   // 4. Staggered Scroll-Driven Depth Parallax for Cards:
-  // Re-Sapori glides at 1.2x speed upward; Mario Juice glides at 0.85x speed with tilt
-  const reSaporiY = useTransform(smoothProgress, [0.15, 0.65], [160, -160]);
-  const marioJuiceY = useTransform(smoothProgress, [0.15, 0.65], [320, -60]);
-  const marioJuiceRotate = useTransform(smoothProgress, [0.15, 0.65], [-3, 1.5]);
+  const reSaporiY = useTransform(smoothProgress, [0.12, 0.55], [140, -140]);
+  const marioJuiceY = useTransform(smoothProgress, [0.12, 0.55], [280, -50]);
+  const marioJuiceRotate = useTransform(smoothProgress, [0.12, 0.55], [-3, 1.5]);
 
   // Card opacity for smooth GPU-accelerated unveil
-  const cardOpacity = useTransform(smoothProgress, [0.12, 0.3], [0.2, 1]);
+  const cardOpacity = useTransform(smoothProgress, [0.1, 0.25], [0.2, 1]);
 
   return (
     <section
@@ -250,14 +242,14 @@ export default function KineticSignalTrace() {
       <div className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
         <svg
           className="h-full w-full opacity-60"
-          viewBox="0 0 1200 2400"
+          viewBox="0 0 1200 3200"
           preserveAspectRatio="none"
         >
           <defs>
             <linearGradient id="scurveGrad" x1="0" y1="0" x2="0" y2="100%">
               <stop offset="0%" stopColor="#22d3ee" />
-              <stop offset="40%" stopColor="#ec4899" />
-              <stop offset="70%" stopColor="#22d3ee" />
+              <stop offset="30%" stopColor="#ec4899" />
+              <stop offset="65%" stopColor="#22d3ee" />
               <stop offset="100%" stopColor="#a855f7" />
             </linearGradient>
           </defs>
@@ -311,7 +303,7 @@ export default function KineticSignalTrace() {
           <Activity className="h-3 w-3 text-[#ec4899] animate-pulse" />
           <span className="font-extrabold">// 01. SIGNAL TRACE CIRCUIT</span>
           <span className="text-white/40">|</span>
-          <span className="text-[#ec4899] font-bold">CHOREOGRAPHED PARALLAX</span>
+          <span className="text-[#ec4899] font-bold">4 CORE PILLARS</span>
         </div>
 
         <div className="overflow-hidden py-2">
@@ -339,12 +331,12 @@ export default function KineticSignalTrace() {
         </div>
 
         <p className="max-w-2xl text-[13px] sm:text-[15px] leading-relaxed tracking-wider text-white/70">
-          Scroll progress physically drives the layout: sweeping SVG circuit traces, staggered card parallax, and velocity-linked neuromuscular waveforms.
+          Scroll progress physically drives the layout across 4 dedicated pillars: Full-Stack Web, Media Buying &amp; Ads, Autonomous AI, and Edge ML Hardware.
         </p>
       </div>
 
       {/* ==================================================================== */}
-      {/* CHECKPOINT 01: Web & Brand Engineering (Parallax Stagger + Mask Wipe) */}
+      {/* CHECKPOINT 01: Full-Stack Web Platforms & Engineering                 */}
       {/* ==================================================================== */}
       <div className="relative mb-36 lg:mb-48">
         <div className="flex items-center gap-3 mb-8">
@@ -353,17 +345,17 @@ export default function KineticSignalTrace() {
           </span>
           <div className="flex flex-col">
             <span className="text-[10px] font-mono uppercase tracking-[0.25em] text-[#22d3ee] font-bold">
-              CHECKPOINT 01 // PARALLAX DEPTH STAGGER
+              CHECKPOINT 01 // PRODUCTION WEB ARCHITECTURE
             </span>
             <h3 className="text-2xl sm:text-3xl font-black uppercase text-white tracking-tight">
-              Web & Brand Engineering
+              Full-Stack Web Engineering
             </h3>
           </div>
         </div>
 
         {/* Staggered Vertical Parallax Grid (Full-Stack Websites: Re-Sapori, Mario Juice, Elhuq) */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
-          {/* Card 1: Re-Sapori */}
+          {/* Card 1: Re-Sapori (Web Platform) */}
           <motion.div
             style={{
               y: reSaporiY,
@@ -376,11 +368,9 @@ export default function KineticSignalTrace() {
                 <div className="flex items-center justify-between pb-4 border-b border-white/10">
                   <span className="flex items-center gap-1.5 text-[10px] font-mono uppercase tracking-widest text-[#22d3ee]">
                     <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 shadow-[0_0_6px_#34d399]" />
-                    Pizza Food Truck & Web
+                    Italian Culinary Platform
                   </span>
-                  <span className="rounded-full bg-[#22d3ee]/10 border border-[#22d3ee]/30 px-2 py-0.5 text-[9px] font-mono text-[#22d3ee] font-bold">
-                    Dev & Media Buyer
-                  </span>
+                  <span className="text-[10px] font-mono text-white/50">Next.js 16</span>
                 </div>
 
                 <div className="mt-5 overflow-hidden rounded-2xl border border-white/10 bg-black/85 shadow-2xl">
@@ -394,22 +384,17 @@ export default function KineticSignalTrace() {
                     <ExternalLink className="h-3 w-3 text-white/40" />
                   </div>
                   <div className="p-4 flex flex-col gap-2.5 bg-gradient-to-br from-[#0c0c16] to-black">
-                    <div className="flex items-center justify-between">
-                      <h4 className="text-xl font-black uppercase text-white tracking-tight">
-                        Re-Sapori
-                      </h4>
-                      <span className="text-[9px] font-mono uppercase text-[#ec4899] font-bold">
-                        Food Truck Brand
-                      </span>
-                    </div>
+                    <h4 className="text-xl font-black uppercase text-white tracking-tight">
+                      Re-Sapori
+                    </h4>
                     <p className="text-[12px] leading-relaxed text-white/70">
-                      Italian culinary platform & pizza food truck. In addition to engineering their web platform, I manage paid <strong>media buying</strong>, produce engaging <strong>video content & food visuals</strong>, and orchestrate targeted social ad campaigns driving truck foot traffic.
+                      Italian culinary platform featuring real-time menu navigation, table reservations UX, and instant mobile ordering transitions.
                     </p>
                     <div className="flex flex-wrap gap-1.5 text-[9px] font-mono uppercase text-white/60 pt-1">
-                      <span className="rounded border border-[#22d3ee]/30 bg-[#22d3ee]/10 px-2 py-0.5 text-[#22d3ee]">Media Buying</span>
-                      <span className="rounded border border-[#ec4899]/30 bg-[#ec4899]/10 px-2 py-0.5 text-[#ec4899]">Content & Ads</span>
-                      <span className="rounded border border-white/10 bg-white/5 px-2 py-0.5">Next.js 16</span>
-                      <span className="rounded border border-white/10 bg-white/5 px-2 py-0.5">Pizza Truck Growth</span>
+                      <span className="rounded border border-white/10 bg-white/5 px-2 py-0.5">Turbopack</span>
+                      <span className="rounded border border-white/10 bg-white/5 px-2 py-0.5">React 19</span>
+                      <span className="rounded border border-white/10 bg-white/5 px-2 py-0.5">SSR Menu</span>
+                      <span className="rounded border border-white/10 bg-white/5 px-2 py-0.5">Framer</span>
                     </div>
                   </div>
                 </div>
@@ -464,7 +449,7 @@ export default function KineticSignalTrace() {
                       Mario Juice
                     </h4>
                     <p className="text-[12px] leading-relaxed text-white/70">
-                      High-conversion brand platform with vibrant aesthetic, instant cart filtering, and responsive performance.
+                      High-conversion beverage brand platform with vibrant aesthetic, instant cart filtering, and ultra-responsive layout performance.
                     </p>
                     <div className="flex flex-wrap gap-1.5 text-[9px] font-mono uppercase text-white/60 pt-1">
                       <span className="rounded border border-white/10 bg-white/5 px-2 py-0.5">Brand Identity</span>
@@ -505,7 +490,7 @@ export default function KineticSignalTrace() {
                     <span className="h-1.5 w-1.5 rounded-full bg-amber-400 shadow-[0_0_6px_#fbbf24]" />
                     Dar Monasbat • Oman
                   </span>
-                  <span className="text-[10px] font-mono text-white/50">Events & Halls</span>
+                  <span className="text-[10px] font-mono text-white/50">Events &amp; Halls</span>
                 </div>
 
                 <div className="mt-5 overflow-hidden rounded-2xl border border-white/10 bg-black/85 shadow-2xl">
@@ -552,19 +537,169 @@ export default function KineticSignalTrace() {
       </div>
 
       {/* ==================================================================== */}
-      {/* CHECKPOINT 02: AI & Automations (Mountain View Chatbot & Dropshipping) */}
+      {/* CHECKPOINT 02: Media Buying & Content Creation (Re-Sapori Pizza Truck) */}
+      {/* ==================================================================== */}
+      <div className="relative mb-36 lg:mb-48">
+        <div className="flex items-center gap-3 mb-8">
+          <span className="flex h-8 w-8 items-center justify-center rounded-full border border-[#22d3ee] bg-[#22d3ee]/20 text-[#22d3ee] shadow-[0_0_15px_#22d3ee]">
+            <span className="text-[11px] font-mono font-bold">02</span>
+          </span>
+          <div className="flex flex-col">
+            <span className="text-[10px] font-mono uppercase tracking-[0.25em] text-[#22d3ee] font-bold">
+              CHECKPOINT 02 // PAID ADVERTISING & MEDIA BUYING
+            </span>
+            <h3 className="text-2xl sm:text-3xl font-black uppercase text-white tracking-tight">
+              Media Buying &amp; Content Creation
+            </h3>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+          {/* Card A: Media Buying & Ad Campaign Architecture */}
+          <div className="group relative overflow-hidden rounded-[32px] border border-white/10 bg-gradient-to-b from-[#0e0e1a] via-[#080812] to-black p-7 sm:p-9 backdrop-blur-2xl transition-all duration-300 hover:border-[#22d3ee]/80 hover:shadow-[0_0_40px_rgba(34,211,238,0.2)] flex flex-col justify-between">
+            <div>
+              <div className="flex items-center justify-between pb-4 border-b border-white/10">
+                <span className="flex items-center gap-1.5 text-[10px] font-mono uppercase tracking-widest text-[#22d3ee]">
+                  <Target className="h-3.5 w-3.5 text-[#22d3ee]" />
+                  Re-Sapori Pizza Food Truck
+                </span>
+                <span className="rounded-full bg-emerald-400/10 border border-emerald-400/30 px-2.5 py-0.5 text-[9px] font-mono text-emerald-300">
+                  Paid Growth &amp; Scaling
+                </span>
+              </div>
+
+              <h4 className="mt-4 text-2xl font-black uppercase text-white tracking-tight group-hover:text-[#22d3ee] transition-colors">
+                Performance Media Buying
+              </h4>
+              <p className="mt-2 text-[13px] leading-relaxed text-white/70">
+                Architecting high-converting paid advertising funnels across Meta (Instagram / Facebook) and TikTok for the Re-Sapori pizza food truck. Managing budget allocation, audience micro-targeting, and hyper-local dayparting to drive immediate foot traffic to the truck.
+              </p>
+
+              {/* Performance Metrics HUD Grid */}
+              <div className="mt-5 grid grid-cols-2 sm:grid-cols-4 gap-3">
+                <div className="rounded-xl border border-white/10 bg-white/[0.03] p-3 text-center">
+                  <span className="block text-[10px] font-mono uppercase text-white/50">Blended ROAS</span>
+                  <span className="text-lg font-black text-emerald-400 font-mono">4.6x</span>
+                </div>
+                <div className="rounded-xl border border-white/10 bg-white/[0.03] p-3 text-center">
+                  <span className="block text-[10px] font-mono uppercase text-white/50">Local Reach</span>
+                  <span className="text-lg font-black text-[#22d3ee] font-mono">210K+</span>
+                </div>
+                <div className="rounded-xl border border-white/10 bg-white/[0.03] p-3 text-center">
+                  <span className="block text-[10px] font-mono uppercase text-white/50">Avg CPC</span>
+                  <span className="text-lg font-black text-[#ec4899] font-mono">$0.19</span>
+                </div>
+                <div className="rounded-xl border border-white/10 bg-white/[0.03] p-3 text-center">
+                  <span className="block text-[10px] font-mono uppercase text-white/50">Footfall Lift</span>
+                  <span className="text-lg font-black text-amber-400 font-mono">+320%</span>
+                </div>
+              </div>
+
+              <div className="mt-5 space-y-2 text-xs font-mono text-white/70">
+                <div className="flex items-center gap-2">
+                  <CheckCircle2 className="h-3.5 w-3.5 text-emerald-400 shrink-0" />
+                  <span>Radius Geo-Targeting (5–8 km around active truck location)</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <CheckCircle2 className="h-3.5 w-3.5 text-[#22d3ee] shrink-0" />
+                  <span>Hunger-Hour Dayparting (Peak lunch &amp; evening rush surges)</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <CheckCircle2 className="h-3.5 w-3.5 text-[#ec4899] shrink-0" />
+                  <span>Audience Retargeting &amp; High-Intent Foodie Lookalikes</span>
+                </div>
+              </div>
+            </div>
+
+            <div className="mt-6 pt-4 border-t border-white/10 flex items-center justify-between text-[10px] font-mono text-white/50">
+              <span>Platforms: Meta Ads Manager • TikTok Ads</span>
+              <span className="text-[#22d3ee] font-bold">Direct Foot Traffic Funnel</span>
+            </div>
+          </div>
+
+          {/* Card B: Food Content Creation & Video Ads */}
+          <div className="group relative overflow-hidden rounded-[32px] border border-white/10 bg-gradient-to-b from-[#0e0e1a] via-[#080812] to-black p-7 sm:p-9 backdrop-blur-2xl transition-all duration-300 hover:border-[#ec4899]/80 hover:shadow-[0_0_40px_rgba(236,72,153,0.2)] flex flex-col justify-between">
+            <div>
+              <div className="flex items-center justify-between pb-4 border-b border-white/10">
+                <span className="flex items-center gap-1.5 text-[10px] font-mono uppercase tracking-widest text-[#ec4899]">
+                  <Video className="h-3.5 w-3.5 text-[#ec4899]" />
+                  Creative Production
+                </span>
+                <span className="rounded-full bg-[#ec4899]/10 border border-[#ec4899]/30 px-2.5 py-0.5 text-[9px] font-mono text-[#ec4899]">
+                  Visuals &amp; Ads
+                </span>
+              </div>
+
+              <h4 className="mt-4 text-2xl font-black uppercase text-white tracking-tight group-hover:text-[#ec4899] transition-colors">
+                Content Creation &amp; Ads Production
+              </h4>
+              <p className="mt-2 text-[13px] leading-relaxed text-white/70">
+                Filming and editing cinematic short-form food videos, artisanal pizza craftsmanship reels, and street food truck atmosphere. Creating viral TikTok hooks and Instagram video ads that convert passive viewers into hungry customers.
+              </p>
+
+              {/* Visual Showcase Card Mockup */}
+              <div className="mt-5 overflow-hidden rounded-2xl border border-white/15 bg-black/80 p-4">
+                <div className="flex items-center justify-between pb-3 border-b border-white/10 text-[10px] font-mono text-white/60">
+                  <span className="flex items-center gap-1.5 text-[#ec4899] font-bold">
+                    <Flame className="h-3.5 w-3.5 text-[#ec4899]" />
+                    Creative Pipeline
+                  </span>
+                  <span>Weekly Video Drops</span>
+                </div>
+                <div className="mt-3 grid grid-cols-3 gap-2 text-center text-[10px] font-mono">
+                  <div className="rounded-lg bg-white/5 border border-white/10 p-2.5">
+                    <span className="block text-white font-bold">Wood-Fired</span>
+                    <span className="text-white/40 text-[9px]">Oven Action</span>
+                  </div>
+                  <div className="rounded-lg bg-white/5 border border-white/10 p-2.5">
+                    <span className="block text-[#22d3ee] font-bold">Cheese Pull</span>
+                    <span className="text-white/40 text-[9px]">Macro Shots</span>
+                  </div>
+                  <div className="rounded-lg bg-white/5 border border-white/10 p-2.5">
+                    <span className="block text-[#ec4899] font-bold">Viral Hooks</span>
+                    <span className="text-white/40 text-[9px]">Fast Cuts</span>
+                  </div>
+                </div>
+              </div>
+
+              <div className="mt-4 space-y-2 text-xs font-mono text-white/70">
+                <div className="flex items-center gap-2">
+                  <CheckCircle2 className="h-3.5 w-3.5 text-emerald-400 shrink-0" />
+                  <span>Cinematic 4K Food Visuals &amp; Sound Design</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <CheckCircle2 className="h-3.5 w-3.5 text-[#ec4899] shrink-0" />
+                  <span>Continuous Creative A/B Hook &amp; CTA Testing</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <CheckCircle2 className="h-3.5 w-3.5 text-[#22d3ee] shrink-0" />
+                  <span>Conversion Copywriting Tailored for Fast-Casual Dining</span>
+                </div>
+              </div>
+            </div>
+
+            <div className="mt-6 pt-4 border-t border-white/10 flex items-center justify-between text-[10px] font-mono text-white/50">
+              <span>Output: 9:16 Video Ads • Static Carousels</span>
+              <span className="text-[#ec4899] font-bold">High CTR &amp; Engagement</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* ==================================================================== */}
+      {/* CHECKPOINT 03: AI & Automations (Mountain View Chatbot & Dropshipping) */}
       {/* ==================================================================== */}
       <div className="relative mb-36 lg:mb-48">
         <div className="flex items-center gap-3 mb-8">
           <span className="flex h-8 w-8 items-center justify-center rounded-full border border-[#ec4899] bg-[#ec4899]/20 text-[#ec4899] shadow-[0_0_15px_#ec4899]">
-            <span className="text-[11px] font-mono font-bold">02</span>
+            <span className="text-[11px] font-mono font-bold">03</span>
           </span>
           <div className="flex flex-col">
             <span className="text-[10px] font-mono uppercase tracking-[0.25em] text-[#ec4899] font-bold">
-              CHECKPOINT 02 // AUTONOMOUS AI & AUTOMATIONS
+              CHECKPOINT 03 // AUTONOMOUS AI & AUTOMATIONS
             </span>
             <h3 className="text-2xl sm:text-3xl font-black uppercase text-white tracking-tight">
-              AI & Automations
+              AI &amp; Automations
             </h3>
           </div>
         </div>
@@ -613,11 +748,11 @@ export default function KineticSignalTrace() {
               <div className="mt-4 space-y-2 text-xs font-mono text-white/70">
                 <div className="flex items-center gap-2">
                   <CheckCircle2 className="h-3.5 w-3.5 text-emerald-400 shrink-0" />
-                  <span>Automated Facebook Lead Ingestion & Scraping</span>
+                  <span>Automated Facebook Lead Ingestion &amp; Scraping</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <CheckCircle2 className="h-3.5 w-3.5 text-[#22d3ee] shrink-0" />
-                  <span>Instant Conversational SMS & WhatsApp Follow-Up</span>
+                  <span>Instant Conversational SMS &amp; WhatsApp Follow-Up</span>
                 </div>
               </div>
             </div>
@@ -642,38 +777,38 @@ export default function KineticSignalTrace() {
               </div>
 
               <h4 className="mt-4 text-2xl font-black uppercase text-white tracking-tight group-hover:text-[#ec4899] transition-colors">
-                Autonomous Dropshipping System
+                Autonomous Dropshipping Pipeline
               </h4>
               <p className="mt-2 text-[13px] leading-relaxed text-white/70">
-                End-to-end autonomous e-commerce engine that discovers daily trending best-sellers, generates high-converting landing pages, creates targeted ad creatives, and fulfills customer orders automatically.
+                End-to-end autonomous e-commerce infrastructure that discovers daily best-selling products, scrapes competitor assets, generates high-converting landing pages, creates ads, and triggers automatic customer fulfillment.
               </p>
 
-              {/* Step Flow Breakdown */}
+              {/* 3-Stage Pipeline Diagram */}
               <div className="mt-5 space-y-2.5">
                 <div className="flex items-start gap-3 rounded-xl border border-white/10 bg-white/[0.03] p-3 text-xs">
-                  <div className="h-6 w-6 rounded-lg bg-[#ec4899]/20 flex items-center justify-center text-[#ec4899] font-mono font-bold text-[10px] shrink-0 mt-0.5">
+                  <div className="h-6 w-6 rounded-lg bg-[#22d3ee]/20 flex items-center justify-center text-[#22d3ee] font-mono font-bold text-[10px] shrink-0 mt-0.5">
                     01
                   </div>
                   <div>
                     <span className="font-bold text-white uppercase text-[11px] font-mono">
-                      Daily Best-Seller Scraper
+                      Daily Winner Scraper &amp; Intelligence
                     </span>
                     <p className="text-white/60 text-[11px] mt-0.5">
-                      Scrapes market velocity and isolates viral products winning today across global marketplaces.
+                      Monitors daily best sellers across marketplaces and scrapes trending specs and reviews.
                     </p>
                   </div>
                 </div>
 
                 <div className="flex items-start gap-3 rounded-xl border border-white/10 bg-white/[0.03] p-3 text-xs">
-                  <div className="h-6 w-6 rounded-lg bg-[#22d3ee]/20 flex items-center justify-center text-[#22d3ee] font-mono font-bold text-[10px] shrink-0 mt-0.5">
+                  <div className="h-6 w-6 rounded-lg bg-[#ec4899]/20 flex items-center justify-center text-[#ec4899] font-mono font-bold text-[10px] shrink-0 mt-0.5">
                     02
                   </div>
                   <div>
                     <span className="font-bold text-white uppercase text-[11px] font-mono">
-                      Autonomous Page & Ad Generation
+                      Autonomous Page &amp; Ad Creatives
                     </span>
                     <p className="text-white/60 text-[11px] mt-0.5">
-                      Extracts product assets, writes persuasive copy, generates landing pages, and compiles targeted ads.
+                      Synthesizes product page copy, hero visuals, and targeted advertising angles automatically.
                     </p>
                   </div>
                 </div>
@@ -684,7 +819,7 @@ export default function KineticSignalTrace() {
                   </div>
                   <div>
                     <span className="font-bold text-white uppercase text-[11px] font-mono">
-                      Zero-Touch Order Purchase & Fulfillment
+                      Zero-Touch Order Purchase &amp; Fulfillment
                     </span>
                     <p className="text-white/60 text-[11px] mt-0.5">
                       When someone buys from the website, the pipeline autonomously purchases from the supplier and triggers tracking.
@@ -713,19 +848,19 @@ export default function KineticSignalTrace() {
       </div>
 
       {/* ==================================================================== */}
-      {/* CHECKPOINT 03: Hardware & Edge ML // CHERI BAND                       */}
+      {/* CHECKPOINT 04: Hardware & Edge ML // CHERI BAND                       */}
       {/* ==================================================================== */}
       <div className="relative mb-20">
         <div className="flex items-center gap-3 mb-8">
           <span className="flex h-8 w-8 items-center justify-center rounded-full border border-[#22d3ee] bg-[#22d3ee]/20 text-[#22d3ee] shadow-[0_0_15px_#22d3ee]">
-            <span className="text-[11px] font-mono font-bold">03</span>
+            <span className="text-[11px] font-mono font-bold">04</span>
           </span>
           <div className="flex flex-col">
             <span className="text-[10px] font-mono uppercase tracking-[0.25em] text-[#22d3ee] font-bold">
-              CHECKPOINT 03 // GESTURE & HEALTH TELEMETRY
+              CHECKPOINT 04 // GESTURE &amp; HEALTH TELEMETRY
             </span>
             <h3 className="text-2xl sm:text-3xl font-black uppercase text-white tracking-tight">
-              Hardware & Edge ML // Cheri Band
+              Hardware &amp; Edge ML // Cheri Band
             </h3>
           </div>
         </div>
@@ -743,7 +878,7 @@ export default function KineticSignalTrace() {
                 <span className="text-[10px] font-mono uppercase tracking-widest text-[#22d3ee]">
                   Dual-Engine Wearable
                 </span>
-                <span className="rounded-full bg-[#22d3ee]/10 border border-[#22d3ee]/30 px-2 py-0.5 text-[9px] font-mono text-[#22d3ee]">
+                <span className="rounded-full bg-[#22d3ee]/10 border border-[#22d3ee]/30 px-2.5 py-0.5 text-[9px] font-mono text-[#22d3ee]">
                   BLE 5.2
                 </span>
               </div>
@@ -752,7 +887,7 @@ export default function KineticSignalTrace() {
                 Cheri Band
               </h4>
               <p className="text-[11px] font-mono uppercase tracking-wider text-[#ec4899] mt-0.5 font-bold">
-                Hand Gesture Smart Home Band & Health Tracker
+                Hand Gesture Smart Home Band &amp; Health Tracker
               </p>
 
               <p className="mt-2.5 text-[13px] leading-relaxed text-white/70">
@@ -766,7 +901,7 @@ export default function KineticSignalTrace() {
                 </div>
                 <div className="flex items-center justify-between rounded-lg bg-white/5 px-3 py-2">
                   <span className="text-white/60">Health Tracker:</span>
-                  <span className="text-[#ec4899] font-bold">Continuous HR & Muscle Telemetry</span>
+                  <span className="text-[#ec4899] font-bold">Continuous HR &amp; Muscle Telemetry</span>
                 </div>
                 <div className="flex items-center justify-between rounded-lg bg-white/5 px-3 py-2">
                   <span className="text-white/60">Sensor Array:</span>
@@ -781,7 +916,7 @@ export default function KineticSignalTrace() {
 
             <div className="rounded-2xl border border-white/10 bg-white/[0.02] p-4 text-[10px] font-mono">
               <span className="uppercase tracking-widest text-[#ec4899] font-bold">
-                Gesture & Health Telemetry Active
+                Gesture &amp; Health Telemetry Active
               </span>
               <p className="mt-1 text-white/60 leading-relaxed">
                 Scroll faster to see the sEMG muscle potential waveform vertically spike with physiological contraction bursts, settling back into calm rhythm when stopped.
