@@ -70,7 +70,7 @@ export default function PinnedTelemetryDeck() {
           style={{ x: smoothDeckX, willChange: "transform" }}
           className="flex gap-8 px-6 sm:px-12 w-max items-center"
         >
-          {/* Card 01: FULL-STACK WEBSITES (Re-Sapori, Mario Juice, Elhuq) */}
+          {/* Card 01: FULL-STACK WEBSITES & MEDIA BUYING */}
           <motion.div
             style={{ rotate: cardVelocityTilt }}
             whileHover={{ y: -10, scale: 1.02 }}
@@ -80,25 +80,25 @@ export default function PinnedTelemetryDeck() {
             <div>
               <div className="flex items-center justify-between border-b border-white/10 pb-4">
                 <span className="font-mono text-xs font-bold text-[#22d3ee] uppercase tracking-widest">
-                  01 // FULL-STACK WEBSITES
+                  01 // WEBSITES & MEDIA BUYING
                 </span>
                 <span className="rounded-full bg-emerald-400/10 border border-emerald-400/30 px-2.5 py-0.5 text-[9px] font-mono text-emerald-300">
-                  3 Production Platforms
+                  Web & Food Truck Ads
                 </span>
               </div>
 
               <h3 className="mt-6 text-3xl sm:text-4xl font-black uppercase text-white tracking-tight group-hover:text-[#22d3ee] transition-colors">
-                Web Architectures
+                Web & Media Growth
               </h3>
               <p className="mt-3 text-sm text-white/70 leading-relaxed">
-                Full-stack Next.js production platforms: <strong>Re-Sapori</strong> (Italian culinary), <strong>Mario Juice</strong> (Beverage brand), and <strong>Elhuq</strong> (Luxury Dar Monasbat venue in Oman).
+                Full-stack production engineering and high-ROI media buying: <strong>Re-Sapori</strong> (Pizza food truck web platform, content creation & targeted social ads), <strong>Mario Juice</strong> (Beverage brand), and <strong>Elhuq</strong> (Dar Monasbat venue in Oman).
               </p>
 
               <div className="mt-6 space-y-2 text-xs font-mono text-white/70">
                 <div className="flex justify-between border-b border-white/5 py-1">
-                  <span>Re-Sapori:</span>
-                  <a href="https://resapori.com" target="_blank" rel="noopener noreferrer" className="text-[#22d3ee] hover:underline">
-                    resapori.com ↗
+                  <span>Re-Sapori (Pizza Food Truck):</span>
+                  <a href="https://resapori.com" target="_blank" rel="noopener noreferrer" className="text-[#22d3ee] hover:underline font-bold">
+                    Web + Media Buyer ↗
                   </a>
                 </div>
                 <div className="flex justify-between border-b border-white/5 py-1">
@@ -117,8 +117,8 @@ export default function PinnedTelemetryDeck() {
             </div>
 
             <div className="flex items-center justify-between pt-4 border-t border-white/10 text-xs font-mono">
-              <span className="text-white/60">Next.js 16 • Turbopack • SSR</span>
-              <span className="text-[#22d3ee] font-bold">100% Responsive</span>
+              <span className="text-white/60">Next.js 16 • Content &amp; Ads • SSR</span>
+              <span className="text-[#22d3ee] font-bold">100% Production</span>
             </div>
           </motion.div>
 

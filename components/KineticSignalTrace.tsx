@@ -376,9 +376,11 @@ export default function KineticSignalTrace() {
                 <div className="flex items-center justify-between pb-4 border-b border-white/10">
                   <span className="flex items-center gap-1.5 text-[10px] font-mono uppercase tracking-widest text-[#22d3ee]">
                     <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 shadow-[0_0_6px_#34d399]" />
-                    Italian Culinary
+                    Pizza Food Truck & Web
                   </span>
-                  <span className="text-[10px] font-mono text-white/50">Next.js 16</span>
+                  <span className="rounded-full bg-[#22d3ee]/10 border border-[#22d3ee]/30 px-2 py-0.5 text-[9px] font-mono text-[#22d3ee] font-bold">
+                    Dev & Media Buyer
+                  </span>
                 </div>
 
                 <div className="mt-5 overflow-hidden rounded-2xl border border-white/10 bg-black/85 shadow-2xl">
@@ -391,17 +393,23 @@ export default function KineticSignalTrace() {
                     <span className="truncate text-[#22d3ee]">https://resapori.com</span>
                     <ExternalLink className="h-3 w-3 text-white/40" />
                   </div>
-                  <div className="p-4 flex flex-col gap-2 bg-gradient-to-br from-[#0c0c16] to-black">
-                    <h4 className="text-xl font-black uppercase text-white tracking-tight">
-                      Re-Sapori
-                    </h4>
+                  <div className="p-4 flex flex-col gap-2.5 bg-gradient-to-br from-[#0c0c16] to-black">
+                    <div className="flex items-center justify-between">
+                      <h4 className="text-xl font-black uppercase text-white tracking-tight">
+                        Re-Sapori
+                      </h4>
+                      <span className="text-[9px] font-mono uppercase text-[#ec4899] font-bold">
+                        Food Truck Brand
+                      </span>
+                    </div>
                     <p className="text-[12px] leading-relaxed text-white/70">
-                      Italian culinary platform with real-time menu navigation, table reservations UX, and kinetic transitions.
+                      Italian culinary platform & pizza food truck. In addition to engineering their web platform, I manage paid <strong>media buying</strong>, produce engaging <strong>video content & food visuals</strong>, and orchestrate targeted social ad campaigns driving truck foot traffic.
                     </p>
                     <div className="flex flex-wrap gap-1.5 text-[9px] font-mono uppercase text-white/60 pt-1">
-                      <span className="rounded border border-white/10 bg-white/5 px-2 py-0.5">Turbopack</span>
-                      <span className="rounded border border-white/10 bg-white/5 px-2 py-0.5">React 19</span>
-                      <span className="rounded border border-white/10 bg-white/5 px-2 py-0.5">Framer</span>
+                      <span className="rounded border border-[#22d3ee]/30 bg-[#22d3ee]/10 px-2 py-0.5 text-[#22d3ee]">Media Buying</span>
+                      <span className="rounded border border-[#ec4899]/30 bg-[#ec4899]/10 px-2 py-0.5 text-[#ec4899]">Content & Ads</span>
+                      <span className="rounded border border-white/10 bg-white/5 px-2 py-0.5">Next.js 16</span>
+                      <span className="rounded border border-white/10 bg-white/5 px-2 py-0.5">Pizza Truck Growth</span>
                     </div>
                   </div>
                 </div>
