@@ -14,6 +14,7 @@ export default function ResaporiPhoneTrigger() {
   const [hasOpenedOnce, setHasOpenedOnce] = useState(false);
   const [iframeKey, setIframeKey] = useState(0);
   const [isLoaded, setIsLoaded] = useState(false);
+  const [scrollOpacity, setScrollOpacity] = useState(1);
   const closeTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const clearTimer = () => {
@@ -38,12 +39,24 @@ export default function ResaporiPhoneTrigger() {
   };
 
   useEffect(() => {
-    return () => clearTimer();
+    const onScroll = () => {
+      const sy = window.scrollY || document.documentElement.scrollTop || 0;
+      const op = Math.max(0, Math.min(1, 1 - (sy - 40) / 180));
+      setScrollOpacity(op);
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => {
+      clearTimer();
+      window.removeEventListener("scroll", onScroll);
+    };
   }, []);
+
+  if (scrollOpacity <= 0) return null;
 
   return (
     <div
-      className="absolute left-4 sm:left-8 lg:left-12 top-1/2 -translate-y-1/2 z-30"
+      style={{ opacity: scrollOpacity }}
+      className="absolute left-4 sm:left-8 lg:left-12 top-[50vh] -translate-y-1/2 z-30 transition-opacity duration-150"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >

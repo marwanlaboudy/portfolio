@@ -14,6 +14,12 @@ export default function Home() {
         <div className="absolute left-1/3 bottom-10 h-[30rem] w-[30rem] rounded-full bg-[#7ee8ff]/10 blur-[180px]" />
       </div>
 
+      {/* Glowy Neon Re Sapori Phone Trigger: placed in the middle-left of the first page */}
+      <ResaporiPhoneTrigger />
+
+      {/* Glowy Neon Mario Juice Phone Trigger: placed in the middle-right of the first page */}
+      <MarioJuicePhoneTrigger />
+
       {/* Top bar */}
       <header className="relative z-20 mx-auto flex max-w-7xl items-center justify-between px-6 py-6 text-[11px] uppercase tracking-[0.35em] text-white/80">
         <div className="flex items-center gap-2">
@@ -36,13 +42,8 @@ export default function Home() {
         </div>
       </header>
 
-      {/* Hero Section: Phone buttons live exclusively here and naturally scroll away */}
+      {/* Hero Section */}
       <section className="relative z-10 mx-auto flex min-h-[calc(100vh-80px)] max-w-7xl flex-col items-center justify-between px-6 pb-12 pt-4">
-        {/* Glowy Neon Re Sapori Phone Trigger on the Left of the Hero */}
-        <ResaporiPhoneTrigger />
-
-        {/* Glowy Neon Mario Juice Phone Trigger on the Right of the Hero */}
-        <MarioJuicePhoneTrigger />
 
         {/* Giant title behind the face */}
         <h1 className="pointer-events-none absolute inset-x-0 top-[12%] z-0 select-none text-center font-black uppercase leading-[0.85] tracking-tight">

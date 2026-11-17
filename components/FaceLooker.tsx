@@ -139,15 +139,16 @@ export default function FaceLooker({
       const sy = smoothCoordRef.current.y;
 
       const blinkCount = manifest.blinkFrames?.length ?? 0;
-      // Tight dead-center threshold so frames 81..98 immediately activate on any rightward motion
-      const atDeadCenter = sx * sx + sy * sy < 0.0009;
 
       if (
         isCursorOnFaceRef.current &&
-        atDeadCenter &&
         blinkCount > 0 &&
         blinkImagesRef.current.size > 0
       ) {
+        // Lock coordinates firmly at neutral center so face never drifts or moves while cursor is on face
+        smoothCoordRef.current.x = 0;
+        smoothCoordRef.current.y = 0;
+
         // Loop through blink frames at 24fps
         const blinkIdx = Math.floor(performance.now() / (1000 / 24)) % blinkCount;
         const bImg = blinkImagesRef.current.get(blinkIdx);
@@ -222,14 +223,14 @@ export default function FaceLooker({
       const scrollY = window.scrollY || document.documentElement.scrollTop || 0;
       const scrollRatio = Math.min(1, Math.max(0, scrollY / 360));
 
-      // Center focal rest deadzone for blinking: tight radius (~4.5% of portrait width, ~28px)
-      // so any slight movement to the right immediately engages frames 81, 82, 83...
-      const centerFocalX = rect.width * 0.045;
-      const centerFocalY = rect.height * 0.055;
-      const normCenterDist =
-        (deltaX / centerFocalX) ** 2 + (deltaY / centerFocalY) ** 2;
+      // Face bounding radius: face occupies the central area (~20% width, ~26% height)
+      const faceRadiusX = rect.width * 0.20;
+      const faceRadiusY = rect.height * 0.26;
+      const normFaceDist =
+        (deltaX / faceRadiusX) ** 2 + (deltaY / faceRadiusY) ** 2;
 
-      if (normCenterDist <= 1.0 && scrollRatio < 0.05) {
+      // 1. When cursor is on the face: lock face at (0, 0) and keep blinking only!
+      if (normFaceDist <= 1.0 && scrollRatio < 0.05) {
         isCursorOnFaceRef.current = true;
         mouseTargetRef.current = { x: 0, y: 0 };
         return;
@@ -237,19 +238,19 @@ export default function FaceLooker({
 
       isCursorOnFaceRef.current = false;
 
-      const reachLeft = Math.max(160, faceCenterX * 0.85);
-      const reachRight = Math.max(160, (window.innerWidth - faceCenterX) * 0.85);
-      const reachUp = Math.max(160, faceCenterY * 0.85);
-      const reachDown = Math.max(160, (window.innerHeight - faceCenterY) * 0.85);
+      // 2. As cursor moves off the face, smoothly ramp from 0.0 outwards
+      // so frame 81 (x = 0.025) starts immediately right at the edge of the face with zero jumps!
+      const signX = deltaX >= 0 ? 1 : -1;
+      const signY = deltaY >= 0 ? 1 : -1;
 
-      const normX = Math.max(
-        -1,
-        Math.min(1, deltaX < 0 ? deltaX / reachLeft : deltaX / reachRight)
-      );
-      const normY = Math.max(
-        -1,
-        Math.min(1, deltaY < 0 ? deltaY / reachUp : deltaY / reachDown)
-      );
+      const excessX = Math.max(0, Math.abs(deltaX) - faceRadiusX);
+      const excessY = Math.max(0, Math.abs(deltaY) - faceRadiusY);
+
+      const maxExcessX = Math.max(120, (signX > 0 ? window.innerWidth - faceCenterX : faceCenterX) - faceRadiusX);
+      const maxExcessY = Math.max(120, (signY > 0 ? window.innerHeight - faceCenterY : faceCenterY) - faceRadiusY);
+
+      const normX = signX * Math.min(1, (excessX / maxExcessX) * 1.15 + (excessX > 0 ? 0.025 : 0));
+      const normY = signY * Math.min(1, (excessY / maxExcessY) * 1.15 + (excessY > 0 ? 0.025 : 0));
 
       // Blend scroll downward look smoothly:
       // When scrollRatio increases towards 1, target y smoothly approaches +1.0 (looking straight down at work)

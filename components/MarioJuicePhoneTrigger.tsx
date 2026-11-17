@@ -14,6 +14,7 @@ export default function MarioJuicePhoneTrigger() {
   const [hasOpenedOnce, setHasOpenedOnce] = useState(false);
   const [iframeKey, setIframeKey] = useState(0);
   const [isLoaded, setIsLoaded] = useState(false);
+  const [scrollOpacity, setScrollOpacity] = useState(1);
   const closeTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const clearTimer = () => {
@@ -38,12 +39,24 @@ export default function MarioJuicePhoneTrigger() {
   };
 
   useEffect(() => {
-    return () => clearTimer();
+    const onScroll = () => {
+      const sy = window.scrollY || document.documentElement.scrollTop || 0;
+      const op = Math.max(0, Math.min(1, 1 - (sy - 40) / 180));
+      setScrollOpacity(op);
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => {
+      clearTimer();
+      window.removeEventListener("scroll", onScroll);
+    };
   }, []);
+
+  if (scrollOpacity <= 0) return null;
 
   return (
     <div
-      className="absolute right-4 sm:right-8 lg:right-12 top-1/2 -translate-y-1/2 z-30"
+      style={{ opacity: scrollOpacity }}
+      className="absolute right-4 sm:right-8 lg:right-12 top-[50vh] -translate-y-1/2 z-30 transition-opacity duration-150"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
