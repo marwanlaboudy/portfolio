@@ -67,7 +67,7 @@ export default function PinnedTelemetryDeck() {
 
         {/* Horizontally Translating Cards Row */}
         <motion.div
-          style={{ x: smoothDeckX }}
+          style={{ x: smoothDeckX, willChange: "transform" }}
           className="flex gap-8 px-6 sm:px-12 w-max items-center"
         >
           {/* Card 01: RE-SAPORI */}

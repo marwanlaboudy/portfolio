@@ -81,45 +81,64 @@ function TiltCard({
 }
 
 // ============================================================================
-// 2. VELOCITY-REACTIVE sEMG MUSCLE WAVEFORM (Spikes intensely on fast scroll)
+// 2. HIGH-PERFORMANCE CANVAS-BASED sEMG WAVEFORM (Zero React Re-renders)
 // ============================================================================
 function VelocityReactiveSemg({
   velocityValue,
 }: {
   velocityValue: any;
 }) {
-  const [frameTick, setFrameTick] = useState(0);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
 
   // Velocity-driven amplitude spike factor
   const rawSpike = useTransform(velocityValue, [-3500, 0, 3500], [3.2, 0.8, 3.2]);
   const smoothSpike = useSpring(rawSpike, { stiffness: 320, damping: 24 });
 
   useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
+
     let animId: number;
-    const loop = () => {
-      setFrameTick((t) => (t + 1) % 1000);
-      animId = requestAnimationFrame(loop);
+    let t = 0;
+    const width = 560;
+    const height = 120;
+    const midY = height / 2;
+
+    const render = () => {
+      t += 0.04;
+      ctx.clearRect(0, 0, width, height);
+
+      // Gradient stroke
+      const grad = ctx.createLinearGradient(0, 0, width, 0);
+      grad.addColorStop(0, "#22d3ee");
+      grad.addColorStop(0.5, "#ec4899");
+      grad.addColorStop(1, "#22d3ee");
+
+      ctx.strokeStyle = grad;
+      ctx.lineWidth = 2.5;
+      ctx.beginPath();
+
+      for (let x = 0; x <= width; x += 4) {
+        const phase = (x * 0.05 - t * 3.5) % (Math.PI * 2);
+        const burstWindow = Math.sin(x * 0.02 - t * 1.2);
+        const isBurst = burstWindow > 0.4;
+        const spike = isBurst ? Math.pow(burstWindow, 3) * 36 : 4;
+        const noise = (Math.sin(phase * 4.2) + Math.cos(phase * 7.9)) * 3;
+        const y = midY + Math.sin(phase * 9.0) * spike + noise;
+
+        if (x === 0) ctx.moveTo(x, y);
+        else ctx.lineTo(x, y);
+      }
+      ctx.stroke();
+
+      animId = requestAnimationFrame(render);
     };
-    animId = requestAnimationFrame(loop);
+
+    render();
     return () => cancelAnimationFrame(animId);
   }, []);
-
-  const generateWaveform = () => {
-    const points: string[] = [];
-    const width = 560;
-    const midY = 60;
-
-    for (let x = 0; x <= width; x += 4) {
-      const phase = (x * 0.05 - frameTick * 0.15) % (Math.PI * 2);
-      const burstWindow = Math.sin(x * 0.02 - frameTick * 0.05);
-      const isBurst = burstWindow > 0.4;
-      const spike = isBurst ? Math.pow(burstWindow, 3) * 36 : 4;
-      const noise = (Math.sin(phase * 4.2) + Math.cos(phase * 7.9)) * 3;
-      const y = midY + Math.sin(phase * 9.0) * spike + noise;
-      points.push(`${x === 0 ? "M" : "L"} ${x} ${y.toFixed(1)}`);
-    }
-    return points.join(" ");
-  };
 
   return (
     <div className="relative w-full overflow-hidden rounded-2xl border border-[#22d3ee]/30 bg-[#07070a]/95 p-4 shadow-[0_0_35px_rgba(34,211,238,0.18)]">
@@ -142,30 +161,15 @@ function VelocityReactiveSemg({
 
         {/* Dynamic ScaleY linked to velocity */}
         <motion.div
-          style={{ scaleY: smoothSpike }}
+          style={{ scaleY: smoothSpike, willChange: "transform" }}
           className="relative w-full h-full flex items-center justify-center origin-center"
         >
-          <svg
-            viewBox="0 0 560 120"
+          <canvas
+            ref={canvasRef}
+            width={560}
+            height={120}
             className="w-full h-full block"
-            preserveAspectRatio="none"
-          >
-            <defs>
-              <linearGradient id="velocitySemgGrad" x1="0" y1="0" x2="1" y2="0">
-                <stop offset="0%" stopColor="#22d3ee" />
-                <stop offset="50%" stopColor="#ec4899" />
-                <stop offset="100%" stopColor="#22d3ee" />
-              </linearGradient>
-            </defs>
-            <path
-              d={generateWaveform()}
-              fill="none"
-              stroke="url(#velocitySemgGrad)"
-              strokeWidth="2.5"
-              strokeLinecap="round"
-              filter="drop-shadow(0 0 8px #22d3ee)"
-            />
-          </svg>
+          />
         </motion.div>
 
         {/* Live classifier badge */}
@@ -233,12 +237,8 @@ export default function KineticSignalTrace() {
   const marioJuiceY = useTransform(smoothProgress, [0.15, 0.65], [320, -60]);
   const marioJuiceRotate = useTransform(smoothProgress, [0.15, 0.65], [-3, 1.5]);
 
-  // Mask wipes for smooth unveil
-  const cardClipPath = useTransform(
-    smoothProgress,
-    [0.12, 0.32],
-    ["inset(80% 0% 0% 0%)", "inset(0% 0% 0% 0%)"]
-  );
+  // Card opacity for smooth GPU-accelerated unveil
+  const cardOpacity = useTransform(smoothProgress, [0.12, 0.3], [0.2, 1]);
 
   return (
     <section
@@ -260,14 +260,6 @@ export default function KineticSignalTrace() {
               <stop offset="70%" stopColor="#22d3ee" />
               <stop offset="100%" stopColor="#a855f7" />
             </linearGradient>
-
-            <filter id="circuitNeonGlow" x="-50%" y="-50%" width="200%" height="200%">
-              <feGaussianBlur in="SourceGraphic" stdDeviation="8" result="blur" />
-              <feMerge>
-                <feMergeNode in="blur" />
-                <feMergeNode in="SourceGraphic" />
-              </feMerge>
-            </filter>
           </defs>
 
           {/* Faint blueprint background path */}
@@ -275,19 +267,28 @@ export default function KineticSignalTrace() {
             d={svgPathD}
             fill="none"
             stroke="rgba(255, 255, 255, 0.07)"
-            strokeWidth="3.5"
+            strokeWidth="3"
             strokeDasharray="6 8"
           />
 
-          {/* Dynamic drawing S-curve path */}
+          {/* GPU-accelerated outer neon bloom path (zero raster filter overhead) */}
+          <motion.path
+            d={svgPathD}
+            fill="none"
+            stroke="url(#scurveGrad)"
+            strokeWidth="12"
+            opacity="0.32"
+            style={{ pathLength: smoothProgress, willChange: "stroke-dashoffset" }}
+          />
+
+          {/* Crisp inner neon trace */}
           <motion.path
             ref={pathRef}
             d={svgPathD}
             fill="none"
             stroke="url(#scurveGrad)"
-            strokeWidth="4"
-            filter="url(#circuitNeonGlow)"
-            style={{ pathLength: smoothProgress }}
+            strokeWidth="3.5"
+            style={{ pathLength: smoothProgress, willChange: "stroke-dashoffset" }}
           />
         </svg>
 
@@ -366,7 +367,8 @@ export default function KineticSignalTrace() {
           <motion.div
             style={{
               y: reSaporiY,
-              clipPath: cardClipPath,
+              opacity: cardOpacity,
+              willChange: "transform, opacity",
             }}
           >
             <TiltCard glowColor="cyan" className="p-8 sm:p-10">
@@ -424,7 +426,8 @@ export default function KineticSignalTrace() {
             style={{
               y: marioJuiceY,
               rotate: marioJuiceRotate,
-              clipPath: cardClipPath,
+              opacity: cardOpacity,
+              willChange: "transform, opacity",
             }}
           >
             <TiltCard glowColor="magenta" className="p-8 sm:p-10">

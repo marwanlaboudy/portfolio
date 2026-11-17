@@ -28,15 +28,10 @@ export default function HeroPhysicalUnveil() {
   const titleOpacity = useTransform(smoothProgress, [0, 0.5, 0.75], [1, 0.8, 0]);
 
   // 2. Central Portrait Scale & Dock into Top-Left Navbar Avatar
+  // Strictly GPU-accelerated transforms (scale, x, y) for 120 FPS buttery smoothness
   const portraitScale = useTransform(smoothProgress, [0, 0.75], [1, 0.22]);
   const portraitX = useTransform(smoothProgress, [0, 0.75], ["0vw", "-36vw"]);
   const portraitY = useTransform(smoothProgress, [0, 0.75], ["0vh", "-41vh"]);
-  const portraitBorderRadius = useTransform(smoothProgress, [0, 0.7], ["0%", "50%"]);
-  const portraitGlow = useTransform(
-    smoothProgress,
-    [0, 0.75],
-    ["drop-shadow(0 0 0px transparent)", "drop-shadow(0 0 16px #22d3ee)"]
-  );
 
   // 3. Side Phone Badges morphing outward as you scroll
   const phoneTriggersOpacity = useTransform(smoothProgress, [0, 0.25, 0.55], [1, 1, 0]);
@@ -107,10 +102,9 @@ export default function HeroPhysicalUnveil() {
               scale: portraitScale,
               x: portraitX,
               y: portraitY,
-              borderRadius: portraitBorderRadius,
-              filter: portraitGlow,
+              willChange: "transform",
             }}
-            className="origin-center transition-shadow duration-300"
+            className="origin-center"
           >
             <FaceLooker size={620} className="max-w-[90vw]" />
           </motion.div>
