@@ -3,8 +3,10 @@
 @tailwind utilities;
 
 :root {
-  --background: #0B1220;
-  --foreground: #FAF7F0;
+  --background: #000000;
+  --foreground: #ffffff;
+  --neon-cyan: #7ee8ff;
+  --neon-pink: #ff2fb9;
 }
 
 *, *::before, *::after {
