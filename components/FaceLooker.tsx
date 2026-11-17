@@ -120,10 +120,6 @@ export default function FaceLooker({
       const sx = smoothCoordRef.current.x;
       const sy = smoothCoordRef.current.y;
 
-      const curFrame = currentFrameRef.current;
-      const curSeg = curFrame?.seg ?? -1;
-      const curId = curFrame?.id ?? -1;
-
       let bestScore = Infinity;
       let bestFrame: GazeFrame | null = null;
 
@@ -134,13 +130,7 @@ export default function FaceLooker({
 
         const dx = f.x - sx;
         const dy = f.y - sy;
-        let score = dx * dx + dy * dy;
-
-        if (f.seg === curSeg) {
-          score += Math.min(0.002, Math.abs(f.id - curId) * 0.00005);
-        } else {
-          score += 0.003;
-        }
+        const score = dx * dx + dy * dy;
 
         if (score < bestScore) {
           bestScore = score;
