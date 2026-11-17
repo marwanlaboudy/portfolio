@@ -1,4 +1,5 @@
 import FaceLooker from "@/components/FaceLooker";
+import ResaporiPhoneTrigger from "@/components/ResaporiPhoneTrigger";
 import { ArrowRight, Mail } from "lucide-react";
 
 export default function Home() {
@@ -9,6 +10,9 @@ export default function Home() {
         <div className="absolute -left-40 top-1/3 h-[34rem] w-[34rem] rounded-full bg-[#22d3ee]/20 blur-[160px]" />
         <div className="absolute -right-40 top-1/4 h-[34rem] w-[34rem] rounded-full bg-[#ff2fb9]/25 blur-[160px]" />
       </div>
+
+      {/* Glowy Neon Re Sapori Phone Trigger & Preview on the Left */}
+      <ResaporiPhoneTrigger />
 
       {/* Top bar */}
       <header className="relative z-20 mx-auto flex max-w-7xl items-center justify-between px-6 py-6 text-[11px] uppercase tracking-[0.35em] text-white/80">

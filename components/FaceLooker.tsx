@@ -249,7 +249,16 @@ export default function FaceLooker({
       }
     };
 
-    const onMouseLeave = () => {
+    const onMouseLeave = (e: MouseEvent) => {
+      // If pointer entered an iframe inside the viewport (e.g. the phone preview), keep looking at it
+      if (
+        e.clientX > 8 &&
+        e.clientX < window.innerWidth - 8 &&
+        e.clientY > 8 &&
+        e.clientY < window.innerHeight - 8
+      ) {
+        return;
+      }
       isCursorOnFaceRef.current = true;
       mouseTargetRef.current = { x: 0, y: 0 };
     };
