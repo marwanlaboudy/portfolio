@@ -70,7 +70,7 @@ export default function PinnedTelemetryDeck() {
           style={{ x: smoothDeckX, willChange: "transform" }}
           className="flex gap-8 px-6 sm:px-12 w-max items-center"
         >
-          {/* Card 01: RE-SAPORI */}
+          {/* Card 01: FULL-STACK WEBSITES (Re-Sapori, Mario Juice, Elhuq) */}
           <motion.div
             style={{ rotate: cardVelocityTilt }}
             whileHover={{ y: -10, scale: 1.02 }}
@@ -80,51 +80,95 @@ export default function PinnedTelemetryDeck() {
             <div>
               <div className="flex items-center justify-between border-b border-white/10 pb-4">
                 <span className="font-mono text-xs font-bold text-[#22d3ee] uppercase tracking-widest">
-                  01 // RE-SAPORI
+                  01 // FULL-STACK WEBSITES
                 </span>
                 <span className="rounded-full bg-emerald-400/10 border border-emerald-400/30 px-2.5 py-0.5 text-[9px] font-mono text-emerald-300">
-                  Live Production
+                  3 Production Platforms
                 </span>
               </div>
 
               <h3 className="mt-6 text-3xl sm:text-4xl font-black uppercase text-white tracking-tight group-hover:text-[#22d3ee] transition-colors">
-                Re-Sapori
+                Web Architectures
               </h3>
               <p className="mt-3 text-sm text-white/70 leading-relaxed">
-                Italian culinary digital platform engineered with Next.js 16 App Router, Turbopack, and reactive reservation UX.
+                Full-stack Next.js production platforms: <strong>Re-Sapori</strong> (Italian culinary), <strong>Mario Juice</strong> (Beverage brand), and <strong>Elhuq</strong> (Luxury Dar Monasbat venue in Oman).
               </p>
 
-              <div className="mt-6 space-y-2.5 text-xs font-mono text-white/70">
+              <div className="mt-6 space-y-2 text-xs font-mono text-white/70">
                 <div className="flex justify-between border-b border-white/5 py-1">
-                  <span>Performance TTFB:</span>
-                  <span className="text-[#22d3ee] font-bold">&lt; 180ms</span>
+                  <span>Re-Sapori:</span>
+                  <a href="https://resapori.com" target="_blank" rel="noopener noreferrer" className="text-[#22d3ee] hover:underline">
+                    resapori.com ↗
+                  </a>
                 </div>
                 <div className="flex justify-between border-b border-white/5 py-1">
-                  <span>Core Web Vitals:</span>
-                  <span className="text-emerald-400 font-bold">99.8%</span>
+                  <span>Mario Juice:</span>
+                  <a href="https://mariojuice.com" target="_blank" rel="noopener noreferrer" className="text-[#ec4899] hover:underline">
+                    mariojuice.com ↗
+                  </a>
                 </div>
                 <div className="flex justify-between border-b border-white/5 py-1">
-                  <span>Stack:</span>
-                  <span className="text-white">Next.js 16 • React 19 • Tailwind</span>
+                  <span>Elhuq (Dar Monasbat Oman):</span>
+                  <a href="https://elhuq.com" target="_blank" rel="noopener noreferrer" className="text-amber-400 hover:underline">
+                    elhuq.com ↗
+                  </a>
                 </div>
               </div>
             </div>
 
-            <div className="flex items-center justify-between pt-4 border-t border-white/10">
-              <a
-                href="https://resapori.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 text-xs font-mono font-bold uppercase tracking-wider text-[#22d3ee] group-hover:underline"
-              >
-                <span>Visit Platform</span>
-                <ExternalLink className="h-3.5 w-3.5" />
-              </a>
-              <span className="text-[10px] font-mono text-white/40">resapori.com</span>
+            <div className="flex items-center justify-between pt-4 border-t border-white/10 text-xs font-mono">
+              <span className="text-white/60">Next.js 16 • Turbopack • SSR</span>
+              <span className="text-[#22d3ee] font-bold">100% Responsive</span>
             </div>
           </motion.div>
 
-          {/* Card 02: MARIO JUICE */}
+          {/* Card 02: MOUNTAIN VIEW AI CHATBOT */}
+          <motion.div
+            style={{ rotate: cardVelocityTilt }}
+            whileHover={{ y: -10, scale: 1.02 }}
+            transition={{ duration: 0.25 }}
+            className="group relative flex h-[520px] w-[86vw] sm:w-[48vw] lg:w-[40vw] flex-col justify-between overflow-hidden rounded-[36px] border border-white/10 bg-gradient-to-b from-[#0e0e1a] via-[#090912] to-[#07070a] p-8 sm:p-10 backdrop-blur-2xl transition-all duration-300 hover:border-[#22d3ee]/90 hover:shadow-[0_0_55px_rgba(34,211,238,0.25)]"
+          >
+            <div>
+              <div className="flex items-center justify-between border-b border-white/10 pb-4">
+                <span className="font-mono text-xs font-bold text-[#22d3ee] uppercase tracking-widest">
+                  02 // MOUNTAIN VIEW BOT
+                </span>
+                <span className="rounded-full bg-[#22d3ee]/10 border border-[#22d3ee]/30 px-2.5 py-0.5 text-[9px] font-mono text-[#22d3ee]">
+                  Video Demo Ready
+                </span>
+              </div>
+
+              <h3 className="mt-6 text-3xl sm:text-4xl font-black uppercase text-white tracking-tight group-hover:text-[#22d3ee] transition-colors">
+                Mountain View Chatbot
+              </h3>
+              <p className="mt-3 text-sm text-white/70 leading-relaxed">
+                Automated Facebook lead scraper that extracts high-intent buyers and texts them via conversational AI to qualify interest and book viewing appointments.
+              </p>
+
+              <div className="mt-6 space-y-2.5 text-xs font-mono text-white/70">
+                <div className="flex justify-between border-b border-white/5 py-1">
+                  <span>Lead Pipeline:</span>
+                  <span className="text-emerald-400 font-bold">Facebook Auto-Scraping</span>
+                </div>
+                <div className="flex justify-between border-b border-white/5 py-1">
+                  <span>Follow-Up:</span>
+                  <span className="text-[#22d3ee] font-bold">Conversational SMS/WhatsApp</span>
+                </div>
+                <div className="flex justify-between border-b border-white/5 py-1">
+                  <span>Media Demo:</span>
+                  <span className="text-white">Embedded Video Slot Included</span>
+                </div>
+              </div>
+            </div>
+
+            <div className="flex items-center justify-between pt-4 border-t border-white/10 text-xs font-mono">
+              <span className="text-white/60">Enterprise Real Estate Test</span>
+              <span className="text-[#22d3ee] font-bold">&lt; 30s Lead Outreach</span>
+            </div>
+          </motion.div>
+
+          {/* Card 03: AUTONOMOUS DROPSHIPPING & N8N */}
           <motion.div
             style={{ rotate: cardVelocityTilt }}
             whileHover={{ y: -10, scale: 1.02 }}
@@ -134,51 +178,51 @@ export default function PinnedTelemetryDeck() {
             <div>
               <div className="flex items-center justify-between border-b border-white/10 pb-4">
                 <span className="font-mono text-xs font-bold text-[#ec4899] uppercase tracking-widest">
-                  02 // MARIO JUICE
+                  03 // DROPSHIPPING & N8N
                 </span>
                 <span className="rounded-full bg-[#ec4899]/10 border border-[#ec4899]/30 px-2.5 py-0.5 text-[9px] font-mono text-[#ec4899]">
-                  Brand E-Com
+                  100% Automated
                 </span>
               </div>
 
               <h3 className="mt-6 text-3xl sm:text-4xl font-black uppercase text-white tracking-tight group-hover:text-[#ec4899] transition-colors">
-                Mario Juice
+                Autonomous Dropshipping
               </h3>
               <p className="mt-3 text-sm text-white/70 leading-relaxed">
-                Fresh beverage brand storefront with high-conversion mobile filtering, reactive cart engine, and bold design system.
+                Self-driving e-commerce pipeline that discovers daily best-sellers, generates dedicated landing pages, creates ads, and automatically fulfills customer orders.
               </p>
 
               <div className="mt-6 space-y-2.5 text-xs font-mono text-white/70">
                 <div className="flex justify-between border-b border-white/5 py-1">
-                  <span>Checkout Conversion:</span>
-                  <span className="text-[#ec4899] font-bold">+34% Lift</span>
+                  <span>Product Hunting:</span>
+                  <span className="text-[#ec4899] font-bold">Daily Winner Scraper</span>
                 </div>
                 <div className="flex justify-between border-b border-white/5 py-1">
-                  <span>Mobile First:</span>
-                  <span className="text-emerald-400 font-bold">100% Responsive</span>
+                  <span>Creation:</span>
+                  <span className="text-white font-bold">Auto Landing Page & Ads</span>
                 </div>
                 <div className="flex justify-between border-b border-white/5 py-1">
-                  <span>Stack:</span>
-                  <span className="text-white">TypeScript • Framer • SSR</span>
+                  <span>Fulfillment:</span>
+                  <span className="text-emerald-400 font-bold">Zero-Touch Supplier Buy</span>
                 </div>
               </div>
             </div>
 
             <div className="flex items-center justify-between pt-4 border-t border-white/10">
               <a
-                href="https://mariojuice.com"
+                href="https://n8n.io"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 text-xs font-mono font-bold uppercase tracking-wider text-[#ec4899] group-hover:underline"
+                className="inline-flex items-center gap-2 text-xs font-mono font-bold uppercase tracking-wider text-[#ec4899] hover:underline"
               >
-                <span>Visit Platform</span>
+                <span>View n8n Automations</span>
                 <ExternalLink className="h-3.5 w-3.5" />
               </a>
-              <span className="text-[10px] font-mono text-white/40">mariojuice.com</span>
+              <span className="text-[10px] font-mono text-white/40">n8n Workflow Link</span>
             </div>
           </motion.div>
 
-          {/* Card 03: KIWI BAND */}
+          {/* Card 04: CHERI BAND (GESTURE & HEALTH) */}
           <motion.div
             style={{ rotate: cardVelocityTilt }}
             whileHover={{ y: -10, scale: 1.02 }}
@@ -188,85 +232,39 @@ export default function PinnedTelemetryDeck() {
             <div>
               <div className="flex items-center justify-between border-b border-white/10 pb-4">
                 <span className="font-mono text-xs font-bold text-[#22d3ee] uppercase tracking-widest">
-                  03 // KIWI BAND
+                  04 // CHERI BAND
                 </span>
                 <span className="rounded-full bg-[#22d3ee]/10 border border-[#22d3ee]/30 px-2.5 py-0.5 text-[9px] font-mono text-[#22d3ee]">
-                  Edge ML Prototype
+                  Dual-Engine
                 </span>
               </div>
 
               <h3 className="mt-6 text-3xl sm:text-4xl font-black uppercase text-white tracking-tight group-hover:text-[#22d3ee] transition-colors">
-                Kiwi Band
+                Cheri Band
               </h3>
               <p className="mt-3 text-sm text-white/70 leading-relaxed">
-                ESP32 wearable gesture bracelet combining differential sEMG muscle potentials with 6-axis IMU tracking for sub-14ms gesture classification.
+                Smart home hand gesture bracelet (controlling lights, AC, volume, media, locks) combined with real-time continuous health and biometric vital signs tracking.
               </p>
 
               <div className="mt-6 space-y-2.5 text-xs font-mono text-white/70">
                 <div className="flex justify-between border-b border-white/5 py-1">
-                  <span>Hardware:</span>
-                  <span className="text-[#22d3ee] font-bold">ESP32-S3 Dual-Core</span>
+                  <span>Smart Home:</span>
+                  <span className="text-[#22d3ee] font-bold">Contactless Micro-Gestures</span>
                 </div>
                 <div className="flex justify-between border-b border-white/5 py-1">
-                  <span>Sampling Rate:</span>
-                  <span className="text-white font-bold">1 kHz ADC + 200 Hz IMU</span>
+                  <span>Health Tracker:</span>
+                  <span className="text-[#ec4899] font-bold">HR, sEMG Tone & Vitals</span>
                 </div>
                 <div className="flex justify-between border-b border-white/5 py-1">
-                  <span>Inference Model:</span>
-                  <span className="text-emerald-400 font-bold">Quantized 1D-CNN</span>
+                  <span>Edge Architecture:</span>
+                  <span className="text-emerald-400 font-bold">TinyML CNN &lt; 14ms</span>
                 </div>
               </div>
             </div>
 
             <div className="flex items-center justify-between pt-4 border-t border-white/10">
               <span className="text-xs font-mono text-white/70">BLE 5.2 Direct</span>
-              <span className="text-[10px] font-mono text-[#22d3ee] font-bold">Low Latency</span>
-            </div>
-          </motion.div>
-
-          {/* Card 04: N8N ENGINE */}
-          <motion.div
-            style={{ rotate: cardVelocityTilt }}
-            whileHover={{ y: -10, scale: 1.02 }}
-            transition={{ duration: 0.25 }}
-            className="group relative flex h-[520px] w-[86vw] sm:w-[48vw] lg:w-[40vw] flex-col justify-between overflow-hidden rounded-[36px] border border-white/10 bg-gradient-to-b from-[#0e0e1a] via-[#090912] to-[#07070a] p-8 sm:p-10 backdrop-blur-2xl transition-all duration-300 hover:border-[#ec4899]/90 hover:shadow-[0_0_55px_rgba(236,72,153,0.25)]"
-          >
-            <div>
-              <div className="flex items-center justify-between border-b border-white/10 pb-4">
-                <span className="font-mono text-xs font-bold text-[#ec4899] uppercase tracking-widest">
-                  04 // N8N ENGINE
-                </span>
-                <span className="rounded-full bg-emerald-400/10 border border-emerald-400/30 px-2.5 py-0.5 text-[9px] font-mono text-emerald-400">
-                  Agentic AI
-                </span>
-              </div>
-
-              <h3 className="mt-6 text-3xl sm:text-4xl font-black uppercase text-white tracking-tight group-hover:text-[#ec4899] transition-colors">
-                Autonomous Engine
-              </h3>
-              <p className="mt-3 text-sm text-white/70 leading-relaxed">
-                Multi-channel event orchestration linking Shopify webhooks, n8n async core, and Qwen3.5/AraBERT NLP models on WhatsApp Cloud.
-              </p>
-
-              <div className="mt-6 space-y-2.5 text-xs font-mono text-white/70">
-                <div className="flex justify-between border-b border-white/5 py-1">
-                  <span>Throughput:</span>
-                  <span className="text-[#ec4899] font-bold">10k+ events/day</span>
-                </div>
-                <div className="flex justify-between border-b border-white/5 py-1">
-                  <span>NLP Models:</span>
-                  <span className="text-white font-bold">Qwen3.5 + AraBERT</span>
-                </div>
-                <div className="flex justify-between border-b border-white/5 py-1">
-                  <span>Uptime:</span>
-                  <span className="text-emerald-400 font-bold">99.98% SLA</span>
-                </div>
-              </div>
-            </div>
-
-            <div className="flex items-center justify-between pt-4 border-t border-white/10">
-              <span className="text-xs font-mono text-white/70">Zero-Touch Automation</span>
-              <span className="text-[10px] font-mono text-[#ec4899] font-bold">Autonomous</span>
+              <span className="text-[10px] font-mono text-[#22d3ee] font-bold">Smart Home & Health</span>
             </div>
           </motion.div>
         </motion.div>

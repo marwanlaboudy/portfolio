@@ -361,9 +361,9 @@ export default function KineticSignalTrace() {
           </div>
         </div>
 
-        {/* Staggered Vertical Parallax Grid (Re-Sapori @ 1.2x speed, Mario Juice @ 0.85x speed) */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 items-start">
-          {/* Card A: Re-Sapori (Glides faster upward) */}
+        {/* Staggered Vertical Parallax Grid (Full-Stack Websites: Re-Sapori, Mario Juice, Elhuq) */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
+          {/* Card 1: Re-Sapori */}
           <motion.div
             style={{
               y: reSaporiY,
@@ -371,57 +371,58 @@ export default function KineticSignalTrace() {
               willChange: "transform, opacity",
             }}
           >
-            <TiltCard glowColor="cyan" className="p-8 sm:p-10">
-              <div className="flex items-center justify-between pb-4 border-b border-white/10">
-                <span className="flex items-center gap-1.5 text-[10px] font-mono uppercase tracking-widest text-[#22d3ee]">
-                  <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 shadow-[0_0_6px_#34d399]" />
-                  Live Production Storefront
-                </span>
-                <span className="text-[10px] font-mono text-white/50">Next.js 16 + React 19</span>
+            <TiltCard glowColor="cyan" className="p-7 sm:p-8 flex flex-col justify-between min-h-[480px]">
+              <div>
+                <div className="flex items-center justify-between pb-4 border-b border-white/10">
+                  <span className="flex items-center gap-1.5 text-[10px] font-mono uppercase tracking-widest text-[#22d3ee]">
+                    <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 shadow-[0_0_6px_#34d399]" />
+                    Italian Culinary
+                  </span>
+                  <span className="text-[10px] font-mono text-white/50">Next.js 16</span>
+                </div>
+
+                <div className="mt-5 overflow-hidden rounded-2xl border border-white/10 bg-black/85 shadow-2xl">
+                  <div className="flex items-center justify-between bg-white/[0.04] px-4 py-2 border-b border-white/10 text-[10px] font-mono text-white/60">
+                    <div className="flex items-center gap-1.5">
+                      <span className="h-2 w-2 rounded-full bg-red-500/70" />
+                      <span className="h-2 w-2 rounded-full bg-yellow-500/70" />
+                      <span className="h-2 w-2 rounded-full bg-emerald-500/70" />
+                    </div>
+                    <span className="truncate text-[#22d3ee]">https://resapori.com</span>
+                    <ExternalLink className="h-3 w-3 text-white/40" />
+                  </div>
+                  <div className="p-4 flex flex-col gap-2 bg-gradient-to-br from-[#0c0c16] to-black">
+                    <h4 className="text-xl font-black uppercase text-white tracking-tight">
+                      Re-Sapori
+                    </h4>
+                    <p className="text-[12px] leading-relaxed text-white/70">
+                      Italian culinary platform with real-time menu navigation, table reservations UX, and kinetic transitions.
+                    </p>
+                    <div className="flex flex-wrap gap-1.5 text-[9px] font-mono uppercase text-white/60 pt-1">
+                      <span className="rounded border border-white/10 bg-white/5 px-2 py-0.5">Turbopack</span>
+                      <span className="rounded border border-white/10 bg-white/5 px-2 py-0.5">React 19</span>
+                      <span className="rounded border border-white/10 bg-white/5 px-2 py-0.5">Framer</span>
+                    </div>
+                  </div>
+                </div>
               </div>
 
-              <div className="mt-6 overflow-hidden rounded-2xl border border-white/10 bg-black/85 shadow-2xl">
-                <div className="flex items-center justify-between bg-white/[0.04] px-4 py-2 border-b border-white/10 text-[10px] font-mono text-white/60">
-                  <div className="flex items-center gap-1.5">
-                    <span className="h-2 w-2 rounded-full bg-red-500/70" />
-                    <span className="h-2 w-2 rounded-full bg-yellow-500/70" />
-                    <span className="h-2 w-2 rounded-full bg-emerald-500/70" />
-                  </div>
-                  <span className="truncate text-[#22d3ee]">https://resapori.com</span>
-                  <ExternalLink className="h-3 w-3 text-white/40" />
-                </div>
-                <div className="p-5 flex flex-col gap-2.5 bg-gradient-to-br from-[#0c0c16] to-black">
-                  <h4 className="text-2xl font-black uppercase text-white tracking-tight">
-                    Re-Sapori
-                  </h4>
-                  <p className="text-[13px] leading-relaxed text-white/70">
-                    Italian culinary web platform engineered with Next.js 16 App Router, Turbopack, real-time table reservations, and fluid kinetic transitions.
-                  </p>
-                  <div className="flex flex-wrap gap-2 text-[10px] font-mono uppercase text-white/60 pt-2">
-                    <span className="rounded-md border border-white/10 bg-white/5 px-2 py-0.5">Turbopack</span>
-                    <span className="rounded-md border border-white/10 bg-white/5 px-2 py-0.5">SSR Next.js</span>
-                    <span className="rounded-md border border-white/10 bg-white/5 px-2 py-0.5">Tailwind</span>
-                    <span className="rounded-md border border-white/10 bg-white/5 px-2 py-0.5">Framer Motion</span>
-                  </div>
-                </div>
-              </div>
-
-              <div className="mt-6 flex items-center justify-between">
+              <div className="mt-5 pt-3 border-t border-white/10 flex items-center justify-between">
                 <a
                   href="https://resapori.com"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-[#22d3ee] to-[#38bdf8] px-5 py-2.5 text-[11px] font-black uppercase tracking-wider text-black shadow-[0_0_20px_rgba(34,211,238,0.4)] transition-all hover:scale-105 active:scale-95"
+                  className="inline-flex items-center gap-1.5 rounded-xl bg-gradient-to-r from-[#22d3ee] to-[#38bdf8] px-4 py-2 text-[10px] font-black uppercase tracking-wider text-black shadow-[0_0_15px_rgba(34,211,238,0.4)] transition-all hover:scale-105 active:scale-95"
                 >
                   <span>Launch Site</span>
-                  <ArrowUpRight className="h-3.5 w-3.5" />
+                  <ArrowUpRight className="h-3 w-3" />
                 </a>
-                <span className="text-[10px] font-mono text-white/40">1.2x Parallax Speed</span>
+                <span className="text-[9px] font-mono text-white/40">resapori.com</span>
               </div>
             </TiltCard>
           </motion.div>
 
-          {/* Card B: Mario Juice (Glides slower with scroll-linked rotation) */}
+          {/* Card 2: Mario Juice */}
           <motion.div
             style={{
               y: marioJuiceY,
@@ -430,52 +431,112 @@ export default function KineticSignalTrace() {
               willChange: "transform, opacity",
             }}
           >
-            <TiltCard glowColor="magenta" className="p-8 sm:p-10">
-              <div className="flex items-center justify-between pb-4 border-b border-white/10">
-                <span className="flex items-center gap-1.5 text-[10px] font-mono uppercase tracking-widest text-[#ec4899]">
-                  <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 shadow-[0_0_6px_#34d399]" />
-                  Live Beverage Storefront
-                </span>
-                <span className="text-[10px] font-mono text-white/50">Mobile-First UI</span>
+            <TiltCard glowColor="magenta" className="p-7 sm:p-8 flex flex-col justify-between min-h-[480px]">
+              <div>
+                <div className="flex items-center justify-between pb-4 border-b border-white/10">
+                  <span className="flex items-center gap-1.5 text-[10px] font-mono uppercase tracking-widest text-[#ec4899]">
+                    <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 shadow-[0_0_6px_#34d399]" />
+                    Beverage Storefront
+                  </span>
+                  <span className="text-[10px] font-mono text-white/50">Mobile First</span>
+                </div>
+
+                <div className="mt-5 overflow-hidden rounded-2xl border border-white/10 bg-black/85 shadow-2xl">
+                  <div className="flex items-center justify-between bg-white/[0.04] px-4 py-2 border-b border-white/10 text-[10px] font-mono text-white/60">
+                    <div className="flex items-center gap-1.5">
+                      <span className="h-2 w-2 rounded-full bg-red-500/70" />
+                      <span className="h-2 w-2 rounded-full bg-yellow-500/70" />
+                      <span className="h-2 w-2 rounded-full bg-emerald-500/70" />
+                    </div>
+                    <span className="truncate text-[#ec4899]">https://mariojuice.com</span>
+                    <ExternalLink className="h-3 w-3 text-white/40" />
+                  </div>
+                  <div className="p-4 flex flex-col gap-2 bg-gradient-to-br from-[#0c0c16] to-black">
+                    <h4 className="text-xl font-black uppercase text-white tracking-tight">
+                      Mario Juice
+                    </h4>
+                    <p className="text-[12px] leading-relaxed text-white/70">
+                      High-conversion brand platform with vibrant aesthetic, instant cart filtering, and responsive performance.
+                    </p>
+                    <div className="flex flex-wrap gap-1.5 text-[9px] font-mono uppercase text-white/60 pt-1">
+                      <span className="rounded border border-white/10 bg-white/5 px-2 py-0.5">Brand Identity</span>
+                      <span className="rounded border border-white/10 bg-white/5 px-2 py-0.5">High Conversion</span>
+                      <span className="rounded border border-white/10 bg-white/5 px-2 py-0.5">SSR</span>
+                    </div>
+                  </div>
+                </div>
               </div>
 
-              <div className="mt-6 overflow-hidden rounded-2xl border border-white/10 bg-black/85 shadow-2xl">
-                <div className="flex items-center justify-between bg-white/[0.04] px-4 py-2 border-b border-white/10 text-[10px] font-mono text-white/60">
-                  <div className="flex items-center gap-1.5">
-                    <span className="h-2 w-2 rounded-full bg-red-500/70" />
-                    <span className="h-2 w-2 rounded-full bg-yellow-500/70" />
-                    <span className="h-2 w-2 rounded-full bg-emerald-500/70" />
-                  </div>
-                  <span className="truncate text-[#ec4899]">https://mariojuice.com</span>
-                  <ExternalLink className="h-3 w-3 text-white/40" />
-                </div>
-                <div className="p-5 flex flex-col gap-2.5 bg-gradient-to-br from-[#0c0c16] to-black">
-                  <h4 className="text-2xl font-black uppercase text-white tracking-tight">
-                    Mario Juice
-                  </h4>
-                  <p className="text-[13px] leading-relaxed text-white/70">
-                    High-conversion brand storefront with vibrant color theory, reactive menu filtering, instant cart UX, and mobile-first responsive architecture.
-                  </p>
-                  <div className="flex flex-wrap gap-2 text-[10px] font-mono uppercase text-white/60 pt-2">
-                    <span className="rounded-md border border-white/10 bg-white/5 px-2 py-0.5">Fast Cart UX</span>
-                    <span className="rounded-md border border-white/10 bg-white/5 px-2 py-0.5">Brand Identity</span>
-                    <span className="rounded-md border border-white/10 bg-white/5 px-2 py-0.5">Responsive</span>
-                    <span className="rounded-md border border-white/10 bg-white/5 px-2 py-0.5">Sub-Second TTFB</span>
-                  </div>
-                </div>
-              </div>
-
-              <div className="mt-6 flex items-center justify-between">
+              <div className="mt-5 pt-3 border-t border-white/10 flex items-center justify-between">
                 <a
                   href="https://mariojuice.com"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-[#ec4899] to-[#f43f5e] px-5 py-2.5 text-[11px] font-black uppercase tracking-wider text-white shadow-[0_0_20px_rgba(236,72,153,0.4)] transition-all hover:scale-105 active:scale-95"
+                  className="inline-flex items-center gap-1.5 rounded-xl bg-gradient-to-r from-[#ec4899] to-[#f43f5e] px-4 py-2 text-[10px] font-black uppercase tracking-wider text-white shadow-[0_0_15px_rgba(236,72,153,0.4)] transition-all hover:scale-105 active:scale-95"
                 >
                   <span>Launch Site</span>
-                  <ArrowUpRight className="h-3.5 w-3.5" />
+                  <ArrowUpRight className="h-3 w-3" />
                 </a>
-                <span className="text-[10px] font-mono text-white/40">0.85x Parallax + Rotation</span>
+                <span className="text-[9px] font-mono text-white/40">mariojuice.com</span>
+              </div>
+            </TiltCard>
+          </motion.div>
+
+          {/* Card 3: Elhuq (Dar Monasbat Oman) */}
+          <motion.div
+            style={{
+              y: reSaporiY,
+              opacity: cardOpacity,
+              willChange: "transform, opacity",
+            }}
+          >
+            <TiltCard glowColor="cyan" className="p-7 sm:p-8 flex flex-col justify-between min-h-[480px]">
+              <div>
+                <div className="flex items-center justify-between pb-4 border-b border-white/10">
+                  <span className="flex items-center gap-1.5 text-[10px] font-mono uppercase tracking-widest text-[#22d3ee]">
+                    <span className="h-1.5 w-1.5 rounded-full bg-amber-400 shadow-[0_0_6px_#fbbf24]" />
+                    Dar Monasbat • Oman
+                  </span>
+                  <span className="text-[10px] font-mono text-white/50">Events & Halls</span>
+                </div>
+
+                <div className="mt-5 overflow-hidden rounded-2xl border border-white/10 bg-black/85 shadow-2xl">
+                  <div className="flex items-center justify-between bg-white/[0.04] px-4 py-2 border-b border-white/10 text-[10px] font-mono text-white/60">
+                    <div className="flex items-center gap-1.5">
+                      <span className="h-2 w-2 rounded-full bg-red-500/70" />
+                      <span className="h-2 w-2 rounded-full bg-yellow-500/70" />
+                      <span className="h-2 w-2 rounded-full bg-emerald-500/70" />
+                    </div>
+                    <span className="truncate text-[#22d3ee]">https://elhuq.com</span>
+                    <ExternalLink className="h-3 w-3 text-white/40" />
+                  </div>
+                  <div className="p-4 flex flex-col gap-2 bg-gradient-to-br from-[#0c0c16] to-black">
+                    <h4 className="text-xl font-black uppercase text-white tracking-tight">
+                      Elhuq
+                    </h4>
+                    <p className="text-[12px] leading-relaxed text-white/70">
+                      Luxury Dar Monasbat venue in Oman for weddings, banquets, and major celebrations with custom hall reservation scheduling.
+                    </p>
+                    <div className="flex flex-wrap gap-1.5 text-[9px] font-mono uppercase text-white/60 pt-1">
+                      <span className="rounded border border-white/10 bg-white/5 px-2 py-0.5">Dar Monasbat</span>
+                      <span className="rounded border border-white/10 bg-white/5 px-2 py-0.5">Oman Venue</span>
+                      <span className="rounded border border-white/10 bg-white/5 px-2 py-0.5">Booking UX</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="mt-5 pt-3 border-t border-white/10 flex items-center justify-between">
+                <a
+                  href="https://elhuq.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 rounded-xl bg-gradient-to-r from-amber-400 to-[#22d3ee] px-4 py-2 text-[10px] font-black uppercase tracking-wider text-black shadow-[0_0_15px_rgba(251,191,36,0.4)] transition-all hover:scale-105 active:scale-95"
+                >
+                  <span>Launch Site</span>
+                  <ArrowUpRight className="h-3 w-3" />
+                </a>
+                <span className="text-[9px] font-mono text-white/40">elhuq.com</span>
               </div>
             </TiltCard>
           </motion.div>
@@ -483,7 +544,7 @@ export default function KineticSignalTrace() {
       </div>
 
       {/* ==================================================================== */}
-      {/* CHECKPOINT 02: Automation & AI Systems (Live Photon Data Stream)      */}
+      {/* CHECKPOINT 02: AI & Automations (Mountain View Chatbot & Dropshipping) */}
       {/* ==================================================================== */}
       <div className="relative mb-36 lg:mb-48">
         <div className="flex items-center gap-3 mb-8">
@@ -492,109 +553,159 @@ export default function KineticSignalTrace() {
           </span>
           <div className="flex flex-col">
             <span className="text-[10px] font-mono uppercase tracking-[0.25em] text-[#ec4899] font-bold">
-              CHECKPOINT 02 // STREAMING PHOTON PACKETS
+              CHECKPOINT 02 // AUTONOMOUS AI & AUTOMATIONS
             </span>
             <h3 className="text-2xl sm:text-3xl font-black uppercase text-white tracking-tight">
-              Automation & AI Systems
+              AI & Automations
             </h3>
           </div>
         </div>
 
-        <div className="relative overflow-hidden rounded-[32px] border border-white/10 bg-gradient-to-b from-[#0a0a14] via-[#07070a] to-black p-6 sm:p-10 backdrop-blur-2xl">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-white/10">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+          {/* Project A: Mountain View Real Estate AI Chatbot (With Video Player Slot) */}
+          <div className="group relative overflow-hidden rounded-[32px] border border-white/10 bg-gradient-to-b from-[#0e0e1a] via-[#080812] to-black p-7 sm:p-9 backdrop-blur-2xl transition-all duration-300 hover:border-[#22d3ee]/80 hover:shadow-[0_0_40px_rgba(34,211,238,0.2)] flex flex-col justify-between">
             <div>
-              <span className="text-[10px] font-mono uppercase tracking-[0.25em] text-[#ec4899]">
-                n8n Core • Shopify Hooks • WhatsApp Cloud API
-              </span>
-              <p className="mt-1 text-sm text-white/70 max-w-2xl">
-                Asynchronous event pipelines connecting Shopify order streams with fine-tuned Qwen3.5 and AraBERT NLP conversational agents.
+              <div className="flex items-center justify-between pb-4 border-b border-white/10">
+                <span className="flex items-center gap-1.5 text-[10px] font-mono uppercase tracking-widest text-[#22d3ee]">
+                  <Bot className="h-3.5 w-3.5 text-[#22d3ee]" />
+                  Enterprise Real Estate Bot
+                </span>
+                <span className="rounded-full bg-[#22d3ee]/10 border border-[#22d3ee]/30 px-2.5 py-0.5 text-[9px] font-mono text-[#22d3ee]">
+                  Mountain View Test
+                </span>
+              </div>
+
+              <h4 className="mt-4 text-2xl font-black uppercase text-white tracking-tight group-hover:text-[#22d3ee] transition-colors">
+                Mountain View AI Chatbot
+              </h4>
+              <p className="mt-2 text-[13px] leading-relaxed text-white/70">
+                Automated Facebook lead scraper that extracts qualified prospective buyers and engages them immediately via conversational AI, answering property inquiries and scheduling viewing tours.
               </p>
+
+              {/* Video Player Demo Container Slot */}
+              <div className="mt-5 overflow-hidden rounded-2xl border border-white/15 bg-black/90 shadow-2xl relative aspect-video flex flex-col items-center justify-center group/video">
+                <video
+                  controls
+                  playsInline
+                  preload="metadata"
+                  poster="/gaze_frames/frame_0001.webp"
+                  className="w-full h-full object-cover rounded-2xl"
+                >
+                  <source src="/videos/mountain-view-demo.mp4" type="video/mp4" />
+                  Your browser does not support HTML video.
+                </video>
+
+                {/* Video Demo Badge Overlay */}
+                <div className="pointer-events-none absolute top-3 left-3 flex items-center gap-2 rounded-lg bg-black/80 border border-white/20 px-2.5 py-1 text-[9px] font-mono text-white backdrop-blur-md">
+                  <span className="h-1.5 w-1.5 rounded-full bg-red-500 animate-pulse" />
+                  <span>DEMO VIDEO SLOT // MOUNTAIN VIEW CHATBOT</span>
+                </div>
+              </div>
+
+              <div className="mt-4 space-y-2 text-xs font-mono text-white/70">
+                <div className="flex items-center gap-2">
+                  <CheckCircle2 className="h-3.5 w-3.5 text-emerald-400 shrink-0" />
+                  <span>Automated Facebook Lead Ingestion & Scraping</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <CheckCircle2 className="h-3.5 w-3.5 text-[#22d3ee] shrink-0" />
+                  <span>Instant Conversational SMS & WhatsApp Follow-Up</span>
+                </div>
+              </div>
             </div>
 
-            <div className="flex items-center gap-2 rounded-full border border-emerald-400/30 bg-emerald-400/10 px-3 py-1 text-[10px] font-mono text-emerald-300 shrink-0">
-              <span className="h-2 w-2 rounded-full bg-emerald-400 animate-ping" />
-              <span>Pipeline Latency: &lt; 85ms</span>
+            <div className="mt-6 pt-4 border-t border-white/10 flex items-center justify-between text-[10px] font-mono text-white/50">
+              <span>Stack: Python • WhatsApp API • Meta Graph</span>
+              <span className="text-emerald-400 font-bold">&lt; 30s Lead Outreach</span>
             </div>
           </div>
 
-          {/* Animated Connecting Nodes */}
-          <div className="relative my-8 p-6 rounded-2xl bg-black/70 border border-white/10 overflow-hidden">
-            <div className="relative z-10 grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
-              <div className="flex flex-col items-center text-center p-5 rounded-2xl border border-white/10 bg-white/[0.03] backdrop-blur-md">
-                <div className="h-12 w-12 rounded-xl bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center text-emerald-400 shadow-[0_0_15px_rgba(52,211,153,0.3)] mb-2">
-                  <ShoppingBag className="h-6 w-6" />
-                </div>
-                <span className="text-xs font-mono font-bold text-white uppercase tracking-wider">
-                  SHOPIFY
+          {/* Project B: Fully Automated Dropshipping & E-Commerce System (With n8n Link) */}
+          <div className="group relative overflow-hidden rounded-[32px] border border-white/10 bg-gradient-to-b from-[#0e0e1a] via-[#080812] to-black p-7 sm:p-9 backdrop-blur-2xl transition-all duration-300 hover:border-[#ec4899]/80 hover:shadow-[0_0_40px_rgba(236,72,153,0.2)] flex flex-col justify-between">
+            <div>
+              <div className="flex items-center justify-between pb-4 border-b border-white/10">
+                <span className="flex items-center gap-1.5 text-[10px] font-mono uppercase tracking-widest text-[#ec4899]">
+                  <Sparkles className="h-3.5 w-3.5 text-[#ec4899]" />
+                  Zero-Touch Commercial Engine
                 </span>
-                <span className="text-[9px] font-mono text-white/50 mt-1">
-                  Order Ingestion & Catalog Webhook
+                <span className="rounded-full bg-[#ec4899]/10 border border-[#ec4899]/30 px-2.5 py-0.5 text-[9px] font-mono text-[#ec4899]">
+                  100% Automated
                 </span>
               </div>
 
-              <div className="flex flex-col items-center text-center p-5 rounded-2xl border border-[#ec4899]/50 bg-[#ec4899]/10 backdrop-blur-md shadow-[0_0_25px_rgba(236,72,153,0.2)]">
-                <div className="h-12 w-12 rounded-xl bg-[#ec4899]/30 border border-[#ec4899] flex items-center justify-center text-[#ec4899] shadow-[0_0_20px_#ec4899] mb-2">
-                  <Workflow className="h-6 w-6" />
-                </div>
-                <span className="text-xs font-mono font-bold text-white uppercase tracking-wider">
-                  N8N CORE
-                </span>
-                <span className="text-[9px] font-mono text-[#ec4899] mt-1">
-                  Async Router & Qwen3.5 Inference
-                </span>
-              </div>
+              <h4 className="mt-4 text-2xl font-black uppercase text-white tracking-tight group-hover:text-[#ec4899] transition-colors">
+                Autonomous Dropshipping System
+              </h4>
+              <p className="mt-2 text-[13px] leading-relaxed text-white/70">
+                End-to-end autonomous e-commerce engine that discovers daily trending best-sellers, generates high-converting landing pages, creates targeted ad creatives, and fulfills customer orders automatically.
+              </p>
 
-              <div className="flex flex-col items-center text-center p-5 rounded-2xl border border-white/10 bg-white/[0.03] backdrop-blur-md">
-                <div className="h-12 w-12 rounded-xl bg-[#22d3ee]/20 border border-[#22d3ee]/40 flex items-center justify-center text-[#22d3ee] shadow-[0_0_15px_rgba(34,211,238,0.3)] mb-2">
-                  <MessageSquare className="h-6 w-6" />
+              {/* Step Flow Breakdown */}
+              <div className="mt-5 space-y-2.5">
+                <div className="flex items-start gap-3 rounded-xl border border-white/10 bg-white/[0.03] p-3 text-xs">
+                  <div className="h-6 w-6 rounded-lg bg-[#ec4899]/20 flex items-center justify-center text-[#ec4899] font-mono font-bold text-[10px] shrink-0 mt-0.5">
+                    01
+                  </div>
+                  <div>
+                    <span className="font-bold text-white uppercase text-[11px] font-mono">
+                      Daily Best-Seller Scraper
+                    </span>
+                    <p className="text-white/60 text-[11px] mt-0.5">
+                      Scrapes market velocity and isolates viral products winning today across global marketplaces.
+                    </p>
+                  </div>
                 </div>
-                <span className="text-xs font-mono font-bold text-white uppercase tracking-wider">
-                  WHATSAPP
-                </span>
-                <span className="text-[9px] font-mono text-[#22d3ee] mt-1">
-                  AraBERT Multi-Dialect Response
-                </span>
+
+                <div className="flex items-start gap-3 rounded-xl border border-white/10 bg-white/[0.03] p-3 text-xs">
+                  <div className="h-6 w-6 rounded-lg bg-[#22d3ee]/20 flex items-center justify-center text-[#22d3ee] font-mono font-bold text-[10px] shrink-0 mt-0.5">
+                    02
+                  </div>
+                  <div>
+                    <span className="font-bold text-white uppercase text-[11px] font-mono">
+                      Autonomous Page & Ad Generation
+                    </span>
+                    <p className="text-white/60 text-[11px] mt-0.5">
+                      Extracts product assets, writes persuasive copy, generates landing pages, and compiles targeted ads.
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-3 rounded-xl border border-white/10 bg-white/[0.03] p-3 text-xs">
+                  <div className="h-6 w-6 rounded-lg bg-emerald-400/20 flex items-center justify-center text-emerald-400 font-mono font-bold text-[10px] shrink-0 mt-0.5">
+                    03
+                  </div>
+                  <div>
+                    <span className="font-bold text-white uppercase text-[11px] font-mono">
+                      Zero-Touch Order Purchase & Fulfillment
+                    </span>
+                    <p className="text-white/60 text-[11px] mt-0.5">
+                      When someone buys from the website, the pipeline autonomously purchases from the supplier and triggers tracking.
+                    </p>
+                  </div>
+                </div>
               </div>
             </div>
 
-            {/* Traveling Photon Data Packets */}
-            <div className="relative mt-8 pt-4 border-t border-white/10">
-              <div className="flex items-center justify-between text-[10px] font-mono text-white/50 mb-2">
-                <span className="flex items-center gap-1.5 text-[#22d3ee]">
-                  <Zap className="h-3 w-3" />
-                  LIVE PHOTON STREAM: payload.order.json [2.1 KB]
-                </span>
-                <span>EXECUTION: 100% AUTONOMOUS</span>
-              </div>
-
-              <div className="relative h-2 w-full rounded-full bg-white/10 overflow-hidden">
-                <motion.div
-                  animate={{ x: ["-100%", "200%"] }}
-                  transition={{
-                    repeat: Infinity,
-                    duration: 1.8,
-                    ease: "linear",
-                  }}
-                  className="h-full w-48 rounded-full bg-gradient-to-r from-transparent via-[#22d3ee] to-transparent shadow-[0_0_14px_#22d3ee]"
-                />
-                <motion.div
-                  animate={{ x: ["-100%", "200%"] }}
-                  transition={{
-                    repeat: Infinity,
-                    duration: 1.8,
-                    delay: 0.9,
-                    ease: "linear",
-                  }}
-                  className="h-full w-36 rounded-full bg-gradient-to-r from-transparent via-[#ec4899] to-transparent shadow-[0_0_14px_#ec4899]"
-                />
-              </div>
+            {/* Dedicated n8n Automation Link Slot */}
+            <div className="mt-6 pt-4 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-3">
+              <a
+                href="https://n8n.io"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex w-full sm:w-auto items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-[#ec4899] to-[#f43f5e] px-5 py-2.5 text-[11px] font-mono font-black uppercase tracking-wider text-white shadow-[0_0_20px_rgba(236,72,153,0.4)] transition-all hover:scale-105 active:scale-95"
+              >
+                <Workflow className="h-4 w-4" />
+                <span>View n8n Automations</span>
+                <ArrowUpRight className="h-3.5 w-3.5" />
+              </a>
+              <span className="text-[10px] font-mono text-white/40">n8n Workflow Blueprint Link</span>
             </div>
           </div>
         </div>
       </div>
 
       {/* ==================================================================== */}
-      {/* CHECKPOINT 03: Hardware & Edge ML (Velocity-Reactive sEMG Waveform)  */}
+      {/* CHECKPOINT 03: Hardware & Edge ML // CHERI BAND                       */}
       {/* ==================================================================== */}
       <div className="relative mb-20">
         <div className="flex items-center gap-3 mb-8">
@@ -603,10 +714,10 @@ export default function KineticSignalTrace() {
           </span>
           <div className="flex flex-col">
             <span className="text-[10px] font-mono uppercase tracking-[0.25em] text-[#22d3ee] font-bold">
-              CHECKPOINT 03 // VELOCITY-LINKED sEMG SPIKES
+              CHECKPOINT 03 // GESTURE & HEALTH TELEMETRY
             </span>
             <h3 className="text-2xl sm:text-3xl font-black uppercase text-white tracking-tight">
-              Hardware & Edge ML // Kiwi Band
+              Hardware & Edge ML // Cheri Band
             </h3>
           </div>
         </div>
@@ -622,50 +733,50 @@ export default function KineticSignalTrace() {
             <div className="rounded-2xl border border-white/10 bg-gradient-to-br from-[#0c0c16] to-[#07070a] p-6 backdrop-blur-xl">
               <div className="flex items-center justify-between pb-3 border-b border-white/10">
                 <span className="text-[10px] font-mono uppercase tracking-widest text-[#22d3ee]">
-                  Neural Sensor Telemetry
+                  Dual-Engine Wearable
                 </span>
                 <span className="rounded-full bg-[#22d3ee]/10 border border-[#22d3ee]/30 px-2 py-0.5 text-[9px] font-mono text-[#22d3ee]">
-                  ESP32-S3 Core
+                  BLE 5.2
                 </span>
               </div>
 
               <h4 className="text-xl font-bold text-white mt-3 uppercase tracking-tight">
-                Kiwi Band
+                Cheri Band
               </h4>
               <p className="text-[11px] font-mono uppercase tracking-wider text-[#ec4899] mt-0.5 font-bold">
-                ESP32 + sEMG Muscle Sensor + 6-Axis IMU
+                Hand Gesture Smart Home Band & Health Tracker
               </p>
 
               <p className="mt-2.5 text-[13px] leading-relaxed text-white/70">
-                Wearable neural-interface prototype acquiring micro-voltage surface electromyography from forearm muscles paired with 6-axis IMU tracking for sub-14ms gesture inference.
+                Dual-purpose smart wearable combining micro-voltage surface electromyography (sEMG) for contactless smart home appliance control (lights, AC, volume, media, locks) with continuous biometric health tracking.
               </p>
 
               <div className="mt-4 space-y-2 text-[11px] font-mono text-white/80">
                 <div className="flex items-center justify-between rounded-lg bg-white/5 px-3 py-2">
-                  <span className="text-white/60">Processor:</span>
-                  <span className="text-[#22d3ee] font-bold">ESP32-S3 Dual-Core</span>
+                  <span className="text-white/60">Smart Home Controls:</span>
+                  <span className="text-[#22d3ee] font-bold">Lights, AC, Volume, Locks</span>
                 </div>
                 <div className="flex items-center justify-between rounded-lg bg-white/5 px-3 py-2">
-                  <span className="text-white/60">Muscle Front-End:</span>
-                  <span className="text-[#ec4899] font-bold">Differential sEMG (1 kHz)</span>
+                  <span className="text-white/60">Health Tracker:</span>
+                  <span className="text-[#ec4899] font-bold">Continuous HR & Muscle Telemetry</span>
                 </div>
                 <div className="flex items-center justify-between rounded-lg bg-white/5 px-3 py-2">
-                  <span className="text-white/60">Motion Tracking:</span>
-                  <span className="text-white font-bold">6-Axis IMU (200 Hz)</span>
+                  <span className="text-white/60">Sensor Array:</span>
+                  <span className="text-white font-bold">24-bit sEMG ADC + 6-Axis IMU</span>
                 </div>
                 <div className="flex items-center justify-between rounded-lg bg-white/5 px-3 py-2">
-                  <span className="text-white/60">Edge ML Model:</span>
-                  <span className="text-emerald-400 font-bold">Quantized 1D-CNN</span>
+                  <span className="text-white/60">Edge Model:</span>
+                  <span className="text-emerald-400 font-bold">Quantized 1D-CNN (TinyML)</span>
                 </div>
               </div>
             </div>
 
             <div className="rounded-2xl border border-white/10 bg-white/[0.02] p-4 text-[10px] font-mono">
               <span className="uppercase tracking-widest text-[#ec4899] font-bold">
-                Velocity Feedback Active
+                Gesture & Health Telemetry Active
               </span>
               <p className="mt-1 text-white/60 leading-relaxed">
-                Scroll faster to see the sEMG muscle potential amplitude spike violently with physiological firing bursts, settling smoothly when you pause.
+                Scroll faster to see the sEMG muscle potential waveform vertically spike with physiological contraction bursts, settling back into calm rhythm when stopped.
               </p>
             </div>
           </div>
