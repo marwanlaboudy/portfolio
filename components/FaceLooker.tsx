@@ -305,7 +305,7 @@ export default function FaceLooker({
     <div
       ref={containerRef}
       className={`relative block select-none ${className}`}
-      style={{ width: size, aspectRatio: "1 / 1" }}
+      style={{ width: size, aspectRatio: "1 / 1", maxWidth: "100%", maxHeight: "100%" }}
     >
       <canvas
         ref={canvasRef}

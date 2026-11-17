@@ -2,7 +2,7 @@
 
 import React, { useRef } from "react";
 import { motion, useScroll, useTransform, useSpring } from "framer-motion";
-import FaceLooker from "@/components/FaceLooker";
+import HeroPortrait from "@/components/HeroPortrait";
 import ResaporiPhoneTrigger from "@/components/ResaporiPhoneTrigger";
 import MarioJuicePhoneTrigger from "@/components/MarioJuicePhoneTrigger";
 import { ArrowUpRight } from "lucide-react";
@@ -28,12 +28,7 @@ export default function HeroPhysicalUnveil() {
   const titleRightX = useTransform(smoothProgress, [0.12, 0.82], ["0%", "+140%"]);
   const titleOpacity = useTransform(smoothProgress, [0, 0.6, 0.85], [1, 0.9, 0]);
 
-  // 2. Central Portrait Scale & Dock into Top-Left Navbar
-  const portraitScale = useTransform(smoothProgress, [0.12, 0.85], [1, 0.22]);
-  const portraitX = useTransform(smoothProgress, [0.12, 0.85], ["0vw", "-36vw"]);
-  const portraitY = useTransform(smoothProgress, [0.12, 0.85], ["0vh", "-41vh"]);
-
-  // 3. Side Phone Badges morphing outward / fading smoothly on scroll
+  // 2. Side Phone Badges morphing outward / fading smoothly on scroll
   const phoneTriggersOpacity = useTransform(smoothProgress, [0, 0.18, 0.45], [1, 0.9, 0]);
   const phoneTriggersScale = useTransform(smoothProgress, [0, 0.45], [1, 1.1]);
 
@@ -103,19 +98,9 @@ export default function HeroPhysicalUnveil() {
           </motion.span>
         </div>
 
-        {/* Central Morphing Portrait: Scales down and docks into top-left HUD avatar */}
+        {/* Central Portrait: Seamlessly dissolves into dark #07070a with cyan/magenta rim lighting on scroll down */}
         <div className="relative z-20 flex-1 flex items-center justify-center pointer-events-auto">
-          <motion.div
-            style={{
-              scale: portraitScale,
-              x: portraitX,
-              y: portraitY,
-              willChange: "transform",
-            }}
-            className="origin-center"
-          >
-            <FaceLooker size={620} className="max-w-[90vw]" />
-          </motion.div>
+          <HeroPortrait progress={smoothProgress} />
         </div>
 
         {/* Floating Phone Sites Buttons (Preserved in place on Left and Right) */}
