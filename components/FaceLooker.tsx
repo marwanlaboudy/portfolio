@@ -4,120 +4,129 @@ import React, { useEffect, useRef, useState, useCallback } from "react";
 import Image from "next/image";
 
 interface FaceLookerProps {
-  /**
-   * Base image path to display when idle or as fallback
-   */
   src?: string;
-  /**
-   * Optional sprite sheet path (e.g. '/avatar_sprite.webp')
-   */
-  spriteSrc?: string;
-  /**
-   * Number of grid columns and rows (e.g. 11 for an 11x11 = 121 frame grid)
-   */
-  gridCols?: number;
-  gridRows?: number;
-  /**
-   * Width & height in pixels
-   */
+  basePath?: string;
+  defaultSrc?: string;
   size?: number;
   className?: string;
 }
 
+const P_MIN = -15;
+const P_MAX = 15;
+const STEP = 3;
+const FRAME_SIZE = 256;
+
+function quantizeToGrid(val: number): number {
+  const raw = P_MIN + ((val + 1) * (P_MAX - P_MIN)) / 2;
+  const snapped = Math.round(raw / STEP) * STEP;
+  return Math.max(P_MIN, Math.min(P_MAX, snapped));
+}
+
+function sanitizeVal(v: number): string {
+  return `${v}`.replace("-", "m").replace(".", "p");
+}
+
+function getGazeFilename(px: number, py: number): string {
+  return `gaze_px${sanitizeVal(px)}_py${sanitizeVal(py)}_${FRAME_SIZE}.webp`;
+}
+
 export default function FaceLooker({
-  src = "/avatar_square.jpg",
-  spriteSrc,
-  gridCols = 11,
-  gridRows = 11,
-  size = 280,
+  src,
+  basePath = "/avatar_frames/",
+  defaultSrc = "/avatar_square.jpg",
+  size = 320,
   className = "",
 }: FaceLookerProps) {
+  const fallbackImage = src || defaultSrc;
   const containerRef = useRef<HTMLDivElement>(null);
-  const [coords, setCoords] = useState({ x: 0, y: 0 }); // Normalized -1 to 1
-  const [gridPos, setGridPos] = useState({
-    col: Math.floor(gridCols / 2),
-    row: Math.floor(gridRows / 2),
-  });
+  const [coords, setCoords] = useState({ px: 0, py: 0 });
+  const [hasFrames, setHasFrames] = useState<boolean | null>(null);
+  const [currentFrameUrl, setCurrentFrameUrl] = useState<string>(
+    `${basePath}${getGazeFilename(0, 0)}`
+  );
+  const [loadedFrame, setLoadedFrame] = useState<string | null>(null);
   const [isHovering, setIsHovering] = useState(false);
-  const [hasFrames, setHasFrames] = useState(false);
-  const [frameIndex, setFrameIndex] = useState(Math.floor((gridCols * gridRows) / 2));
 
-  // Check if avatar_frames folder has frames or if spriteSrc is active
+  // Check if frames exist in the target folder
   useEffect(() => {
-    if (spriteSrc) {
+    const testCenterImg = new window.Image();
+    const testPath = `${basePath}${getGazeFilename(0, 0)}`;
+    testCenterImg.src = testPath;
+    testCenterImg.onload = () => {
       setHasFrames(true);
-      return;
-    }
-    // Probe if individual frames exist
-    const testImg = new window.Image();
-    testImg.src = `/avatar_frames/frame_0_0.jpg`;
-    testImg.onload = () => setHasFrames(true);
-    testImg.onerror = () => setHasFrames(false);
-  }, [spriteSrc]);
+      setLoadedFrame(testPath);
+    };
+    testCenterImg.onerror = () => {
+      setHasFrames(false);
+    };
+  }, [basePath]);
 
-  // Handle mouse movement across the entire viewport
-  const handleMouseMove = useCallback(
-    (e: MouseEvent) => {
+  // Update gaze based on mouse movement across the screen
+  const updateGaze = useCallback(
+    (clientX: number, clientY: number) => {
       if (!containerRef.current) return;
 
       const rect = containerRef.current.getBoundingClientRect();
-      const faceCenterX = rect.left + rect.width / 2;
-      const faceCenterY = rect.top + rect.height / 2;
+      const centerX = rect.left + rect.width / 2;
+      const centerY = rect.top + rect.height / 2;
 
-      // Distance from mouse to center of the face
-      const deltaX = e.clientX - faceCenterX;
-      const deltaY = e.clientY - faceCenterY;
+      // Mouse distance from center of the face
+      const deltaX = clientX - centerX;
+      const deltaY = clientY - centerY;
 
-      // Max reach across the window
-      const maxDistanceX = window.innerWidth / 1.5;
-      const maxDistanceY = window.innerHeight / 1.5;
+      // Screen sensitivity range
+      const maxDistanceX = window.innerWidth / 1.6;
+      const maxDistanceY = window.innerHeight / 1.6;
 
       const normX = Math.max(-1, Math.min(1, deltaX / maxDistanceX));
       const normY = Math.max(-1, Math.min(1, deltaY / maxDistanceY));
 
-      setCoords({ x: normX, y: normY });
+      const px = quantizeToGrid(normX);
+      const py = quantizeToGrid(normY);
 
-      // Calculate grid indices (0 to gridCols - 1)
-      const col = Math.max(0, Math.min(gridCols - 1, Math.round(((normX + 1) / 2) * (gridCols - 1))));
-      const row = Math.max(0, Math.min(gridRows - 1, Math.round(((normY + 1) / 2) * (gridRows - 1))));
+      setCoords({ px, py });
 
-      setGridPos({ col, row });
-      setFrameIndex(row * gridCols + col);
+      const newFrameUrl = `${basePath}${getGazeFilename(px, py)}`;
+      setCurrentFrameUrl(newFrameUrl);
+
+      // Preload image in memory for zero-lag swapping
+      const img = new window.Image();
+      img.src = newFrameUrl;
+      img.onload = () => {
+        setLoadedFrame(newFrameUrl);
+      };
     },
-    [gridCols, gridRows]
+    [basePath]
   );
 
-  // Return to center when mouse leaves window
-  const handleMouseLeave = useCallback(() => {
-    setIsHovering(false);
-    setCoords({ x: 0, y: 0 });
-    setGridPos({
-      col: Math.floor(gridCols / 2),
-      row: Math.floor(gridRows / 2),
-    });
-    setFrameIndex(Math.floor((gridCols * gridRows) / 2));
-  }, [gridCols, gridRows]);
-
   useEffect(() => {
-    const onMove = (e: MouseEvent) => {
+    const onMouseMove = (e: MouseEvent) => {
       setIsHovering(true);
-      handleMouseMove(e);
+      updateGaze(e.clientX, e.clientY);
     };
 
-    window.addEventListener("mousemove", onMove);
-    window.addEventListener("mouseleave", handleMouseLeave);
+    const onMouseLeave = () => {
+      setIsHovering(false);
+      setCoords({ px: 0, py: 0 });
+      const centerUrl = `${basePath}${getGazeFilename(0, 0)}`;
+      setCurrentFrameUrl(centerUrl);
+      setLoadedFrame(centerUrl);
+    };
+
+    window.addEventListener("mousemove", onMouseMove);
+    window.addEventListener("mouseleave", onMouseLeave);
 
     return () => {
-      window.removeEventListener("mousemove", onMove);
-      window.removeEventListener("mouseleave", handleMouseLeave);
+      window.removeEventListener("mousemove", onMouseMove);
+      window.removeEventListener("mouseleave", onMouseLeave);
     };
-  }, [handleMouseMove, handleMouseLeave]);
+  }, [updateGaze, basePath]);
 
-  // CSS 3D Tilt angles for fallback/enhanced mode
-  const tiltX = -coords.y * 14; // Pitch tilt
-  const tiltY = coords.x * 16;  // Yaw rotation
-  const glareX = 50 + coords.x * 30;
-  const glareY = 50 + coords.y * 30;
+  // Subtle 3D tilt calculation
+  const tiltX = -(coords.py / 15) * 8;
+  const tiltY = (coords.px / 15) * 10;
+  const glareX = 50 + (coords.px / 15) * 35;
+  const glareY = 50 + (coords.py / 15) * 35;
 
   return (
     <div
@@ -137,64 +146,60 @@ export default function FaceLooker({
         }}
       />
 
-      {/* Main Container with 3D Perspective */}
+      {/* Main Container */}
       <div
-        className="w-full h-full rounded-2xl overflow-hidden border border-[#22334A] bg-[#0B1220] shadow-[0_12px_40px_rgba(0,0,0,0.6)] transition-transform ease-out duration-150 relative"
+        className="w-full h-full rounded-2xl overflow-hidden border border-[#22334A] bg-[#0B1220] shadow-[0_12px_40px_rgba(0,0,0,0.6)] transition-transform ease-out duration-100 relative"
         style={{
           transform: `rotateX(${tiltX}deg) rotateY(${tiltY}deg) scale3d(1.02, 1.02, 1.02)`,
           transformStyle: "preserve-3d",
         }}
       >
-        {/* If Sprite Sheet is configured */}
-        {spriteSrc ? (
-          <div
-            className="w-full h-full bg-no-repeat"
+        {/* If 121 Frames are generated and available */}
+        {hasFrames ? (
+          <img
+            src={loadedFrame || currentFrameUrl}
+            alt="Interactive Gaze Portrait"
+            className="w-full h-full object-cover select-none pointer-events-none"
             style={{
-              backgroundImage: `url(${spriteSrc})`,
-              backgroundSize: `${gridCols * 100}% ${gridRows * 100}%`,
-              backgroundPosition: `${(gridPos.col / (gridCols - 1)) * 100}% ${(gridPos.row / (gridRows - 1)) * 100}%`,
+              imageRendering: "auto",
             }}
           />
-        ) : hasFrames ? (
-          /* If Individual 121 Frames are present in /avatar_frames/frame_{row}_{col}.jpg */
-          <img
-            src={`/avatar_frames/frame_${gridPos.row}_${gridPos.col}.jpg`}
-            alt="Interactive Portrait"
-            className="w-full h-full object-cover"
-          />
         ) : (
-          /* Standard High-Quality Base Image with Real-time 3D Head Tracking */
+          /* Fallback while waiting for generation */
           <div className="relative w-full h-full">
             <Image
-              src={src}
-              alt="Interactive Portrait"
+              src={fallbackImage}
+              alt="Portrait"
               fill
               priority
               sizes={`${size}px`}
-              className="object-cover transition-transform duration-100 ease-out"
-              style={{
-                transform: `scale(1.08) translate(${coords.x * 6}px, ${coords.y * 6}px)`,
-              }}
+              className="object-cover pointer-events-none"
             />
-
-            {/* Subtle dynamic sheen reflection over the portrait */}
             <div
               className="absolute inset-0 pointer-events-none transition-opacity duration-300"
               style={{
-                background: `radial-gradient(circle at ${glareX}% ${glareY}%, rgba(255, 255, 255, 0.12) 0%, transparent 60%)`,
+                background: `radial-gradient(circle at ${glareX}% ${glareY}%, rgba(255, 255, 255, 0.15) 0%, transparent 60%)`,
               }}
             />
           </div>
         )}
 
-        {/* Live Coordinate Badge (Hover/Debug indicator) */}
-        <div className="absolute bottom-2 left-2 right-2 px-2.5 py-1 rounded-md bg-black/60 backdrop-blur-md border border-white/10 flex items-center justify-between text-[10px] text-white/80 font-mono pointer-events-none">
+        {/* Live Coordinate Status Badge */}
+        <div className="absolute bottom-2 left-2 right-2 px-2.5 py-1.5 rounded-md bg-black/80 backdrop-blur-md border border-white/10 flex items-center justify-between text-[10px] text-white/90 font-mono pointer-events-none">
           <span className="flex items-center gap-1.5">
-            <span className={`w-1.5 h-1.5 rounded-full ${isHovering ? "bg-emerald-400 animate-pulse" : "bg-neutral-500"}`} />
-            {hasFrames || spriteSrc ? "121-Frame Mode" : "Interactive Head Track"}
+            <span
+              className={`w-2 h-2 rounded-full ${
+                hasFrames
+                  ? "bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.8)]"
+                  : isHovering
+                  ? "bg-amber-400 animate-pulse"
+                  : "bg-neutral-500"
+              }`}
+            />
+            {hasFrames ? "121 Frames Active" : "Generating Frames..."}
           </span>
           <span>
-            Col: {gridPos.col} | Row: {gridPos.row}
+            px: {coords.px} | py: {coords.py}
           </span>
         </div>
       </div>
