@@ -1,5 +1,5 @@
 {
-  "total": 310,
+  "total": 391,
   "centerFrame": "/gaze_frames/blink_0000.webp?v=neon3",
   "centerFrameId": 247,
   "frames": [
@@ -2172,6 +2172,573 @@
       "file": "/gaze_frames/frame_0309.webp?v=neon3",
       "x": 0.0,
       "y": 0.9992
+    },
+    {
+      "id": 310,
+      "seg": 4,
+      "file": "/gaze_frames/frame_0310.webp?v=neon4",
+      "x": 0.98,
+      "y": 0.03
+    },
+    {
+      "id": 311,
+      "seg": 4,
+      "file": "/gaze_frames/frame_0311.webp?v=neon4",
+      "x": 0.9796,
+      "y": 0.0389
+    },
+    {
+      "id": 312,
+      "seg": 4,
+      "file": "/gaze_frames/frame_0312.webp?v=neon4",
+      "x": 0.978,
+      "y": 0.0516
+    },
+    {
+      "id": 313,
+      "seg": 4,
+      "file": "/gaze_frames/frame_0313.webp?v=neon4",
+      "x": 0.975,
+      "y": 0.0676
+    },
+    {
+      "id": 314,
+      "seg": 4,
+      "file": "/gaze_frames/frame_0314.webp?v=neon4",
+      "x": 0.9702,
+      "y": 0.0857
+    },
+    {
+      "id": 315,
+      "seg": 4,
+      "file": "/gaze_frames/frame_0315.webp?v=neon4",
+      "x": 0.964,
+      "y": 0.1059
+    },
+    {
+      "id": 316,
+      "seg": 4,
+      "file": "/gaze_frames/frame_0316.webp?v=neon4",
+      "x": 0.9574,
+      "y": 0.1261
+    },
+    {
+      "id": 317,
+      "seg": 4,
+      "file": "/gaze_frames/frame_0317.webp?v=neon4",
+      "x": 0.9514,
+      "y": 0.1456
+    },
+    {
+      "id": 318,
+      "seg": 4,
+      "file": "/gaze_frames/frame_0318.webp?v=neon4",
+      "x": 0.9466,
+      "y": 0.1631
+    },
+    {
+      "id": 319,
+      "seg": 4,
+      "file": "/gaze_frames/frame_0319.webp?v=neon4",
+      "x": 0.9429,
+      "y": 0.1786
+    },
+    {
+      "id": 320,
+      "seg": 4,
+      "file": "/gaze_frames/frame_0320.webp?v=neon4",
+      "x": 0.9396,
+      "y": 0.1916
+    },
+    {
+      "id": 321,
+      "seg": 4,
+      "file": "/gaze_frames/frame_0321.webp?v=neon4",
+      "x": 0.9356,
+      "y": 0.2041
+    },
+    {
+      "id": 322,
+      "seg": 4,
+      "file": "/gaze_frames/frame_0322.webp?v=neon4",
+      "x": 0.9302,
+      "y": 0.2178
+    },
+    {
+      "id": 323,
+      "seg": 4,
+      "file": "/gaze_frames/frame_0323.webp?v=neon4",
+      "x": 0.9232,
+      "y": 0.2334
+    },
+    {
+      "id": 324,
+      "seg": 4,
+      "file": "/gaze_frames/frame_0324.webp?v=neon4",
+      "x": 0.9142,
+      "y": 0.2515
+    },
+    {
+      "id": 325,
+      "seg": 4,
+      "file": "/gaze_frames/frame_0325.webp?v=neon4",
+      "x": 0.9035,
+      "y": 0.273
+    },
+    {
+      "id": 326,
+      "seg": 4,
+      "file": "/gaze_frames/frame_0326.webp?v=neon4",
+      "x": 0.891,
+      "y": 0.2975
+    },
+    {
+      "id": 327,
+      "seg": 4,
+      "file": "/gaze_frames/frame_0327.webp?v=neon4",
+      "x": 0.8768,
+      "y": 0.3235
+    },
+    {
+      "id": 328,
+      "seg": 4,
+      "file": "/gaze_frames/frame_0328.webp?v=neon4",
+      "x": 0.8613,
+      "y": 0.3496
+    },
+    {
+      "id": 329,
+      "seg": 4,
+      "file": "/gaze_frames/frame_0329.webp?v=neon4",
+      "x": 0.8452,
+      "y": 0.3729
+    },
+    {
+      "id": 330,
+      "seg": 4,
+      "file": "/gaze_frames/frame_0330.webp?v=neon4",
+      "x": 0.8291,
+      "y": 0.3914
+    },
+    {
+      "id": 331,
+      "seg": 4,
+      "file": "/gaze_frames/frame_0331.webp?v=neon4",
+      "x": 0.8131,
+      "y": 0.4048
+    },
+    {
+      "id": 332,
+      "seg": 4,
+      "file": "/gaze_frames/frame_0332.webp?v=neon4",
+      "x": 0.797,
+      "y": 0.415
+    },
+    {
+      "id": 333,
+      "seg": 4,
+      "file": "/gaze_frames/frame_0333.webp?v=neon4",
+      "x": 0.7806,
+      "y": 0.4232
+    },
+    {
+      "id": 334,
+      "seg": 4,
+      "file": "/gaze_frames/frame_0334.webp?v=neon4",
+      "x": 0.763,
+      "y": 0.431
+    },
+    {
+      "id": 335,
+      "seg": 4,
+      "file": "/gaze_frames/frame_0335.webp?v=neon4",
+      "x": 0.7446,
+      "y": 0.4387
+    },
+    {
+      "id": 336,
+      "seg": 4,
+      "file": "/gaze_frames/frame_0336.webp?v=neon4",
+      "x": 0.7254,
+      "y": 0.4463
+    },
+    {
+      "id": 337,
+      "seg": 4,
+      "file": "/gaze_frames/frame_0337.webp?v=neon4",
+      "x": 0.7053,
+      "y": 0.4527
+    },
+    {
+      "id": 338,
+      "seg": 4,
+      "file": "/gaze_frames/frame_0338.webp?v=neon4",
+      "x": 0.6844,
+      "y": 0.4587
+    },
+    {
+      "id": 339,
+      "seg": 4,
+      "file": "/gaze_frames/frame_0339.webp?v=neon4",
+      "x": 0.6627,
+      "y": 0.4647
+    },
+    {
+      "id": 340,
+      "seg": 4,
+      "file": "/gaze_frames/frame_0340.webp?v=neon4",
+      "x": 0.6402,
+      "y": 0.4714
+    },
+    {
+      "id": 341,
+      "seg": 4,
+      "file": "/gaze_frames/frame_0341.webp?v=neon4",
+      "x": 0.6177,
+      "y": 0.4789
+    },
+    {
+      "id": 342,
+      "seg": 4,
+      "file": "/gaze_frames/frame_0342.webp?v=neon4",
+      "x": 0.5956,
+      "y": 0.4869
+    },
+    {
+      "id": 343,
+      "seg": 4,
+      "file": "/gaze_frames/frame_0343.webp?v=neon4",
+      "x": 0.5751,
+      "y": 0.4942
+    },
+    {
+      "id": 344,
+      "seg": 4,
+      "file": "/gaze_frames/frame_0344.webp?v=neon4",
+      "x": 0.5562,
+      "y": 0.5005
+    },
+    {
+      "id": 345,
+      "seg": 4,
+      "file": "/gaze_frames/frame_0345.webp?v=neon4",
+      "x": 0.5394,
+      "y": 0.506
+    },
+    {
+      "id": 346,
+      "seg": 4,
+      "file": "/gaze_frames/frame_0346.webp?v=neon4",
+      "x": 0.5244,
+      "y": 0.5116
+    },
+    {
+      "id": 347,
+      "seg": 4,
+      "file": "/gaze_frames/frame_0347.webp?v=neon4",
+      "x": 0.5101,
+      "y": 0.5182
+    },
+    {
+      "id": 348,
+      "seg": 4,
+      "file": "/gaze_frames/frame_0348.webp?v=neon4",
+      "x": 0.495,
+      "y": 0.5271
+    },
+    {
+      "id": 349,
+      "seg": 4,
+      "file": "/gaze_frames/frame_0349.webp?v=neon4",
+      "x": 0.4784,
+      "y": 0.5381
+    },
+    {
+      "id": 350,
+      "seg": 4,
+      "file": "/gaze_frames/frame_0350.webp?v=neon4",
+      "x": 0.4597,
+      "y": 0.5507
+    },
+    {
+      "id": 351,
+      "seg": 4,
+      "file": "/gaze_frames/frame_0351.webp?v=neon4",
+      "x": 0.4394,
+      "y": 0.5644
+    },
+    {
+      "id": 352,
+      "seg": 4,
+      "file": "/gaze_frames/frame_0352.webp?v=neon4",
+      "x": 0.4184,
+      "y": 0.5781
+    },
+    {
+      "id": 353,
+      "seg": 4,
+      "file": "/gaze_frames/frame_0353.webp?v=neon4",
+      "x": 0.3982,
+      "y": 0.5907
+    },
+    {
+      "id": 354,
+      "seg": 4,
+      "file": "/gaze_frames/frame_0354.webp?v=neon4",
+      "x": 0.3793,
+      "y": 0.6018
+    },
+    {
+      "id": 355,
+      "seg": 4,
+      "file": "/gaze_frames/frame_0355.webp?v=neon4",
+      "x": 0.3616,
+      "y": 0.6115
+    },
+    {
+      "id": 356,
+      "seg": 4,
+      "file": "/gaze_frames/frame_0356.webp?v=neon4",
+      "x": 0.3445,
+      "y": 0.6206
+    },
+    {
+      "id": 357,
+      "seg": 4,
+      "file": "/gaze_frames/frame_0357.webp?v=neon4",
+      "x": 0.3278,
+      "y": 0.6294
+    },
+    {
+      "id": 358,
+      "seg": 4,
+      "file": "/gaze_frames/frame_0358.webp?v=neon4",
+      "x": 0.311,
+      "y": 0.6388
+    },
+    {
+      "id": 359,
+      "seg": 4,
+      "file": "/gaze_frames/frame_0359.webp?v=neon4",
+      "x": 0.2941,
+      "y": 0.649
+    },
+    {
+      "id": 360,
+      "seg": 4,
+      "file": "/gaze_frames/frame_0360.webp?v=neon4",
+      "x": 0.2774,
+      "y": 0.6599
+    },
+    {
+      "id": 361,
+      "seg": 4,
+      "file": "/gaze_frames/frame_0361.webp?v=neon4",
+      "x": 0.2614,
+      "y": 0.6713
+    },
+    {
+      "id": 362,
+      "seg": 4,
+      "file": "/gaze_frames/frame_0362.webp?v=neon4",
+      "x": 0.2465,
+      "y": 0.6831
+    },
+    {
+      "id": 363,
+      "seg": 4,
+      "file": "/gaze_frames/frame_0363.webp?v=neon4",
+      "x": 0.2327,
+      "y": 0.6957
+    },
+    {
+      "id": 364,
+      "seg": 4,
+      "file": "/gaze_frames/frame_0364.webp?v=neon4",
+      "x": 0.2199,
+      "y": 0.7095
+    },
+    {
+      "id": 365,
+      "seg": 4,
+      "file": "/gaze_frames/frame_0365.webp?v=neon4",
+      "x": 0.2078,
+      "y": 0.7247
+    },
+    {
+      "id": 366,
+      "seg": 4,
+      "file": "/gaze_frames/frame_0366.webp?v=neon4",
+      "x": 0.1959,
+      "y": 0.7411
+    },
+    {
+      "id": 367,
+      "seg": 4,
+      "file": "/gaze_frames/frame_0367.webp?v=neon4",
+      "x": 0.1843,
+      "y": 0.7578
+    },
+    {
+      "id": 368,
+      "seg": 4,
+      "file": "/gaze_frames/frame_0368.webp?v=neon4",
+      "x": 0.1732,
+      "y": 0.774
+    },
+    {
+      "id": 369,
+      "seg": 4,
+      "file": "/gaze_frames/frame_0369.webp?v=neon4",
+      "x": 0.1633,
+      "y": 0.7892
+    },
+    {
+      "id": 370,
+      "seg": 4,
+      "file": "/gaze_frames/frame_0370.webp?v=neon4",
+      "x": 0.1545,
+      "y": 0.8028
+    },
+    {
+      "id": 371,
+      "seg": 4,
+      "file": "/gaze_frames/frame_0371.webp?v=neon4",
+      "x": 0.1465,
+      "y": 0.8159
+    },
+    {
+      "id": 372,
+      "seg": 4,
+      "file": "/gaze_frames/frame_0372.webp?v=neon4",
+      "x": 0.139,
+      "y": 0.829
+    },
+    {
+      "id": 373,
+      "seg": 4,
+      "file": "/gaze_frames/frame_0373.webp?v=neon4",
+      "x": 0.1316,
+      "y": 0.8427
+    },
+    {
+      "id": 374,
+      "seg": 4,
+      "file": "/gaze_frames/frame_0374.webp?v=neon4",
+      "x": 0.1244,
+      "y": 0.8569
+    },
+    {
+      "id": 375,
+      "seg": 4,
+      "file": "/gaze_frames/frame_0375.webp?v=neon4",
+      "x": 0.1175,
+      "y": 0.8718
+    },
+    {
+      "id": 376,
+      "seg": 4,
+      "file": "/gaze_frames/frame_0376.webp?v=neon4",
+      "x": 0.1112,
+      "y": 0.8858
+    },
+    {
+      "id": 377,
+      "seg": 4,
+      "file": "/gaze_frames/frame_0377.webp?v=neon4",
+      "x": 0.1048,
+      "y": 0.8976
+    },
+    {
+      "id": 378,
+      "seg": 4,
+      "file": "/gaze_frames/frame_0378.webp?v=neon4",
+      "x": 0.0984,
+      "y": 0.9075
+    },
+    {
+      "id": 379,
+      "seg": 4,
+      "file": "/gaze_frames/frame_0379.webp?v=neon4",
+      "x": 0.092,
+      "y": 0.9148
+    },
+    {
+      "id": 380,
+      "seg": 4,
+      "file": "/gaze_frames/frame_0380.webp?v=neon4",
+      "x": 0.0856,
+      "y": 0.92
+    },
+    {
+      "id": 381,
+      "seg": 4,
+      "file": "/gaze_frames/frame_0381.webp?v=neon4",
+      "x": 0.0791,
+      "y": 0.9244
+    },
+    {
+      "id": 382,
+      "seg": 4,
+      "file": "/gaze_frames/frame_0382.webp?v=neon4",
+      "x": 0.0726,
+      "y": 0.929
+    },
+    {
+      "id": 383,
+      "seg": 4,
+      "file": "/gaze_frames/frame_0383.webp?v=neon4",
+      "x": 0.066,
+      "y": 0.9348
+    },
+    {
+      "id": 384,
+      "seg": 4,
+      "file": "/gaze_frames/frame_0384.webp?v=neon4",
+      "x": 0.0595,
+      "y": 0.9417
+    },
+    {
+      "id": 385,
+      "seg": 4,
+      "file": "/gaze_frames/frame_0385.webp?v=neon4",
+      "x": 0.0529,
+      "y": 0.9496
+    },
+    {
+      "id": 386,
+      "seg": 4,
+      "file": "/gaze_frames/frame_0386.webp?v=neon4",
+      "x": 0.0464,
+      "y": 0.9585
+    },
+    {
+      "id": 387,
+      "seg": 4,
+      "file": "/gaze_frames/frame_0387.webp?v=neon4",
+      "x": 0.0398,
+      "y": 0.9665
+    },
+    {
+      "id": 388,
+      "seg": 4,
+      "file": "/gaze_frames/frame_0388.webp?v=neon4",
+      "x": 0.0332,
+      "y": 0.9737
+    },
+    {
+      "id": 389,
+      "seg": 4,
+      "file": "/gaze_frames/frame_0389.webp?v=neon4",
+      "x": 0.0266,
+      "y": 0.9784
+    },
+    {
+      "id": 390,
+      "seg": 4,
+      "file": "/gaze_frames/frame_0390.webp?v=neon4",
+      "x": 0.02,
+      "y": 0.98
     }
   ],
   "blinkFrames": [
