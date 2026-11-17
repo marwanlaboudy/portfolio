@@ -1,5 +1,6 @@
 import FaceLooker from "@/components/FaceLooker";
 import ResaporiPhoneTrigger from "@/components/ResaporiPhoneTrigger";
+import MarioJuicePhoneTrigger from "@/components/MarioJuicePhoneTrigger";
 import { ArrowRight, Mail } from "lucide-react";
 
 export default function Home() {
@@ -13,6 +14,9 @@ export default function Home() {
 
       {/* Glowy Neon Re Sapori Phone Trigger & Preview on the Left */}
       <ResaporiPhoneTrigger />
+
+      {/* Glowy Neon Mario Juice Phone Trigger & Preview on the Right */}
+      <MarioJuicePhoneTrigger />
 
       {/* Top bar */}
       <header className="relative z-20 mx-auto flex max-w-7xl items-center justify-between px-6 py-6 text-[11px] uppercase tracking-[0.35em] text-white/80">
