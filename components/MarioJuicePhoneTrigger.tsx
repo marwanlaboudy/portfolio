@@ -41,7 +41,7 @@ export default function MarioJuicePhoneTrigger() {
   useEffect(() => {
     const onScroll = () => {
       const sy = window.scrollY || document.documentElement.scrollTop || 0;
-      const op = Math.max(0, Math.min(1, 1 - (sy - 40) / 180));
+      const op = Math.max(0, Math.min(1, 1 - (sy - 120) / 500));
       setScrollOpacity(op);
     };
     window.addEventListener("scroll", onScroll, { passive: true });

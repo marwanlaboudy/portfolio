@@ -221,7 +221,7 @@ export default function FaceLooker({
 
       // Scroll downward tracking: as scroll increases, face tilts down towards the rest of the work
       const scrollY = window.scrollY || document.documentElement.scrollTop || 0;
-      const scrollRatio = Math.min(1, Math.max(0, scrollY / 360));
+      const scrollRatio = Math.min(1, Math.max(0, scrollY / 850));
 
       // Face bounding radius: face occupies the central area (~20% width, ~26% height)
       const faceRadiusX = rect.width * 0.20;

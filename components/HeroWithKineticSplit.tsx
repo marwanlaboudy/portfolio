@@ -5,7 +5,7 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import FaceLooker from "@/components/FaceLooker";
 import ResaporiPhoneTrigger from "@/components/ResaporiPhoneTrigger";
 import MarioJuicePhoneTrigger from "@/components/MarioJuicePhoneTrigger";
-import { ArrowRight, ChevronDown, Mail } from "lucide-react";
+import { ArrowRight, Mail } from "lucide-react";
 
 export default function HeroWithKineticSplit() {
   const heroRef = useRef<HTMLDivElement>(null);
@@ -13,9 +13,10 @@ export default function HeroWithKineticSplit() {
   const { scrollY } = useScroll();
 
   // Kinetic Typography Split: "MARWAN" slides left, "LABOUDY" slides right on scroll
-  const titleLeftX = useTransform(scrollY, [0, 500], ["0%", "-55%"]);
-  const titleRightX = useTransform(scrollY, [0, 500], ["0%", "+55%"]);
-  const titleOpacity = useTransform(scrollY, [0, 450], [1, 0.15]);
+  // Expanded scroll range so the text sliding takes much more scroll time and distance
+  const titleLeftX = useTransform(scrollY, [0, 1400], ["0%", "-75%"]);
+  const titleRightX = useTransform(scrollY, [0, 1400], ["0%", "+75%"]);
+  const titleOpacity = useTransform(scrollY, [0, 900, 1500], [1, 0.9, 0.15]);
 
   return (
     <section
@@ -43,20 +44,6 @@ export default function HeroWithKineticSplit() {
             Laboudy
           </span>
         </a>
-        <div className="flex items-center gap-6">
-          <a
-            href="#experience"
-            className="hidden sm:inline-block text-white/70 hover:text-[#7ee8ff] transition-colors"
-          >
-            Experience
-          </a>
-          <a
-            href="#contact"
-            className="text-[#ff2fb9] hover:text-[#7ee8ff] transition-colors font-bold"
-          >
-            Available for work
-          </a>
-        </div>
       </header>
 
       {/* Giant Typography with Kinetic Split (No bounding box) */}
@@ -78,24 +65,6 @@ export default function HeroWithKineticSplit() {
       {/* Portrait: Completely frameless, transparent cutout (NO box, NO borders) */}
       <div className="relative z-10 mt-6 sm:mt-10 flex items-center justify-center pointer-events-auto">
         <FaceLooker size={640} className="max-w-[92vw]" />
-      </div>
-
-      {/* Scroll Call-To-Action (Face looks down with it) */}
-      <div className="relative z-20 my-4 flex flex-col items-center gap-2.5">
-        <a
-          href="#experience"
-          className="group relative inline-flex items-center gap-3 rounded-full border border-[#7ee8ff]/60 bg-black/85 px-6 py-3.5 text-[11px] font-extrabold uppercase tracking-[0.25em] text-[#7ee8ff] shadow-[0_0_20px_rgba(126,232,255,0.35),inset_0_0_12px_rgba(126,232,255,0.2)] backdrop-blur-xl transition-all duration-300 hover:border-[#ff2fb9] hover:text-[#ff2fb9] hover:shadow-[0_0_35px_rgba(255,47,185,0.6),inset_0_0_15px_rgba(255,47,185,0.3)] hover:scale-105 active:scale-95"
-        >
-          <span className="relative flex h-2.5 w-2.5">
-            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#ff2fb9] opacity-75" />
-            <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-[#7ee8ff] group-hover:bg-[#ff2fb9] shadow-[0_0_8px_#7ee8ff]" />
-          </span>
-          <span>Scroll down to see the rest of my work</span>
-          <ChevronDown className="h-4 w-4 animate-bounce text-[#ff2fb9] group-hover:text-[#7ee8ff]" />
-        </a>
-        <span className="text-[9px] uppercase tracking-[0.3em] text-white/40">
-          Scroll Down to Explore Experience
-        </span>
       </div>
 
       {/* Bottom row */}
