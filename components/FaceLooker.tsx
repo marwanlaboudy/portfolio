@@ -139,10 +139,12 @@ export default function FaceLooker({
       const sy = smoothCoordRef.current.y;
 
       const blinkCount = manifest.blinkFrames?.length ?? 0;
-      const nearCenter = sx * sx + sy * sy < 0.025;
+      // Tight dead-center threshold so frames 81..98 immediately activate on any rightward motion
+      const atDeadCenter = sx * sx + sy * sy < 0.0009;
 
       if (
-        (isCursorOnFaceRef.current || nearCenter) &&
+        isCursorOnFaceRef.current &&
+        atDeadCenter &&
         blinkCount > 0 &&
         blinkImagesRef.current.size > 0
       ) {
@@ -220,13 +222,14 @@ export default function FaceLooker({
       const scrollY = window.scrollY || document.documentElement.scrollTop || 0;
       const scrollRatio = Math.min(1, Math.max(0, scrollY / 360));
 
-      // Check if cursor is within central face area only if not scrolled down
-      const faceRadiusX = rect.width * 0.28;
-      const faceRadiusY = rect.height * 0.34;
-      const normFaceDist =
-        (deltaX / faceRadiusX) ** 2 + (deltaY / faceRadiusY) ** 2;
+      // Center focal rest deadzone for blinking: tight radius (~4.5% of portrait width, ~28px)
+      // so any slight movement to the right immediately engages frames 81, 82, 83...
+      const centerFocalX = rect.width * 0.045;
+      const centerFocalY = rect.height * 0.055;
+      const normCenterDist =
+        (deltaX / centerFocalX) ** 2 + (deltaY / centerFocalY) ** 2;
 
-      if (normFaceDist <= 1.0 && scrollRatio < 0.05) {
+      if (normCenterDist <= 1.0 && scrollRatio < 0.05) {
         isCursorOnFaceRef.current = true;
         mouseTargetRef.current = { x: 0, y: 0 };
         return;
