@@ -30,10 +30,19 @@ export default function HeroWithKineticSplit() {
 
       {/* Top bar */}
       <header className="relative z-20 flex w-full max-w-7xl items-center justify-between text-[11px] uppercase tracking-[0.35em] text-white/80">
-        <div className="flex items-center gap-2">
-          <span className="h-2 w-2 rounded-full bg-[#7ee8ff] shadow-[0_0_8px_#7ee8ff]" />
-          <span>Marwan Laboudy</span>
-        </div>
+        {/* Lando Norris style logo lockup: MARWAN (Didone Serif) stacked over LABOUDY (Heavy Sans) */}
+        <a
+          href="#top"
+          className="group flex flex-col leading-[0.82] select-none text-left transition-transform duration-200 hover:opacity-90 active:scale-95"
+          title="Marwan Laboudy"
+        >
+          <span className="font-logo-serif text-[22px] sm:text-[26px] font-black uppercase text-white tracking-tight">
+            Marwan
+          </span>
+          <span className="font-logo-sans text-[18.5px] sm:text-[22px] font-black uppercase text-white tracking-[-0.025em]">
+            Laboudy
+          </span>
+        </a>
         <div className="flex items-center gap-6">
           <a
             href="#experience"

@@ -8,8 +8,8 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  title: "Portfolio",
-  description: "Personal Portfolio",
+  title: "Marwan Laboudy | Portfolio",
+  description: "Personal Portfolio of Marwan Laboudy - AI Engineer, Co-Founder of Cheri Band, Full-Stack Developer",
 };
 
 export default function RootLayout({
