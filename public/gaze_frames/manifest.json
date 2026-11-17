@@ -1,0 +1,2154 @@
+{
+  "total": 358,
+  "centerFrame": "/gaze_frames/frame_0208.webp",
+  "frames": [
+    {
+      "id": 0,
+      "file": "/gaze_frames/frame_0000.webp",
+      "x": -0.0531,
+      "y": -0.213
+    },
+    {
+      "id": 1,
+      "file": "/gaze_frames/frame_0001.webp",
+      "x": -0.0376,
+      "y": -0.3175
+    },
+    {
+      "id": 2,
+      "file": "/gaze_frames/frame_0002.webp",
+      "x": -0.0437,
+      "y": -0.2353
+    },
+    {
+      "id": 3,
+      "file": "/gaze_frames/frame_0003.webp",
+      "x": -0.0689,
+      "y": -0.2932
+    },
+    {
+      "id": 4,
+      "file": "/gaze_frames/frame_0004.webp",
+      "x": -0.0794,
+      "y": -0.319
+    },
+    {
+      "id": 5,
+      "file": "/gaze_frames/frame_0005.webp",
+      "x": -0.0965,
+      "y": -0.3415
+    },
+    {
+      "id": 6,
+      "file": "/gaze_frames/frame_0006.webp",
+      "x": -0.1,
+      "y": -0.2236
+    },
+    {
+      "id": 7,
+      "file": "/gaze_frames/frame_0007.webp",
+      "x": -0.0378,
+      "y": -0.3364
+    },
+    {
+      "id": 8,
+      "file": "/gaze_frames/frame_0008.webp",
+      "x": -0.0081,
+      "y": 0.9321
+    },
+    {
+      "id": 9,
+      "file": "/gaze_frames/frame_0009.webp",
+      "x": 0.0022,
+      "y": 1.0
+    },
+    {
+      "id": 10,
+      "file": "/gaze_frames/frame_0010.webp",
+      "x": -0.0232,
+      "y": 0.9773
+    },
+    {
+      "id": 11,
+      "file": "/gaze_frames/frame_0011.webp",
+      "x": 0.066,
+      "y": 0.3947
+    },
+    {
+      "id": 12,
+      "file": "/gaze_frames/frame_0012.webp",
+      "x": 0.0034,
+      "y": -0.1866
+    },
+    {
+      "id": 13,
+      "file": "/gaze_frames/frame_0013.webp",
+      "x": 0.0743,
+      "y": -0.2265
+    },
+    {
+      "id": 14,
+      "file": "/gaze_frames/frame_0014.webp",
+      "x": 0.0995,
+      "y": 0.0819
+    },
+    {
+      "id": 15,
+      "file": "/gaze_frames/frame_0015.webp",
+      "x": -0.0816,
+      "y": 0.8913
+    },
+    {
+      "id": 16,
+      "file": "/gaze_frames/frame_0016.webp",
+      "x": 0.0516,
+      "y": 0.9829
+    },
+    {
+      "id": 17,
+      "file": "/gaze_frames/frame_0017.webp",
+      "x": 0.5137,
+      "y": 0.8288
+    },
+    {
+      "id": 18,
+      "file": "/gaze_frames/frame_0018.webp",
+      "x": 0.8723,
+      "y": 0.6989
+    },
+    {
+      "id": 19,
+      "file": "/gaze_frames/frame_0019.webp",
+      "x": 0.9794,
+      "y": 0.4505
+    },
+    {
+      "id": 20,
+      "file": "/gaze_frames/frame_0020.webp",
+      "x": 1.0,
+      "y": 0.423
+    },
+    {
+      "id": 21,
+      "file": "/gaze_frames/frame_0021.webp",
+      "x": 1.0,
+      "y": 0.3969
+    },
+    {
+      "id": 22,
+      "file": "/gaze_frames/frame_0022.webp",
+      "x": 1.0,
+      "y": 0.3235
+    },
+    {
+      "id": 23,
+      "file": "/gaze_frames/frame_0023.webp",
+      "x": 0.94,
+      "y": 0.3196
+    },
+    {
+      "id": 24,
+      "file": "/gaze_frames/frame_0024.webp",
+      "x": 0.8601,
+      "y": 0.2784
+    },
+    {
+      "id": 25,
+      "file": "/gaze_frames/frame_0025.webp",
+      "x": 0.8318,
+      "y": 0.243
+    },
+    {
+      "id": 26,
+      "file": "/gaze_frames/frame_0026.webp",
+      "x": 0.8223,
+      "y": 0.3375
+    },
+    {
+      "id": 27,
+      "file": "/gaze_frames/frame_0027.webp",
+      "x": 0.9594,
+      "y": 0.2885
+    },
+    {
+      "id": 28,
+      "file": "/gaze_frames/frame_0028.webp",
+      "x": 0.9701,
+      "y": 0.2847
+    },
+    {
+      "id": 29,
+      "file": "/gaze_frames/frame_0029.webp",
+      "x": 0.9483,
+      "y": 0.414
+    },
+    {
+      "id": 30,
+      "file": "/gaze_frames/frame_0030.webp",
+      "x": 0.7825,
+      "y": 0.4783
+    },
+    {
+      "id": 31,
+      "file": "/gaze_frames/frame_0031.webp",
+      "x": 0.8014,
+      "y": 0.568
+    },
+    {
+      "id": 32,
+      "file": "/gaze_frames/frame_0032.webp",
+      "x": 0.7212,
+      "y": 0.6642
+    },
+    {
+      "id": 33,
+      "file": "/gaze_frames/frame_0033.webp",
+      "x": 0.8354,
+      "y": 0.5299
+    },
+    {
+      "id": 34,
+      "file": "/gaze_frames/frame_0034.webp",
+      "x": 0.8733,
+      "y": 0.7431
+    },
+    {
+      "id": 35,
+      "file": "/gaze_frames/frame_0035.webp",
+      "x": 0.9445,
+      "y": 0.6232
+    },
+    {
+      "id": 36,
+      "file": "/gaze_frames/frame_0036.webp",
+      "x": 0.6455,
+      "y": 0.71
+    },
+    {
+      "id": 37,
+      "file": "/gaze_frames/frame_0037.webp",
+      "x": 0.5544,
+      "y": 0.7504
+    },
+    {
+      "id": 38,
+      "file": "/gaze_frames/frame_0038.webp",
+      "x": 0.5748,
+      "y": 0.686
+    },
+    {
+      "id": 39,
+      "file": "/gaze_frames/frame_0039.webp",
+      "x": 0.3325,
+      "y": 0.4629
+    },
+    {
+      "id": 40,
+      "file": "/gaze_frames/frame_0040.webp",
+      "x": 0.3814,
+      "y": 0.5096
+    },
+    {
+      "id": 41,
+      "file": "/gaze_frames/frame_0041.webp",
+      "x": 0.4556,
+      "y": 0.4227
+    },
+    {
+      "id": 42,
+      "file": "/gaze_frames/frame_0042.webp",
+      "x": 0.3319,
+      "y": 0.4552
+    },
+    {
+      "id": 43,
+      "file": "/gaze_frames/frame_0043.webp",
+      "x": 0.1777,
+      "y": 0.4323
+    },
+    {
+      "id": 44,
+      "file": "/gaze_frames/frame_0044.webp",
+      "x": 0.2038,
+      "y": 0.3589
+    },
+    {
+      "id": 45,
+      "file": "/gaze_frames/frame_0045.webp",
+      "x": 0.2529,
+      "y": 0.4109
+    },
+    {
+      "id": 46,
+      "file": "/gaze_frames/frame_0046.webp",
+      "x": 0.1147,
+      "y": 0.3797
+    },
+    {
+      "id": 47,
+      "file": "/gaze_frames/frame_0047.webp",
+      "x": 0.471,
+      "y": 0.3933
+    },
+    {
+      "id": 48,
+      "file": "/gaze_frames/frame_0048.webp",
+      "x": 0.4508,
+      "y": 0.3605
+    },
+    {
+      "id": 49,
+      "file": "/gaze_frames/frame_0049.webp",
+      "x": 0.4464,
+      "y": 0.3881
+    },
+    {
+      "id": 50,
+      "file": "/gaze_frames/frame_0050.webp",
+      "x": 0.491,
+      "y": 0.3883
+    },
+    {
+      "id": 51,
+      "file": "/gaze_frames/frame_0051.webp",
+      "x": 0.2436,
+      "y": 0.4103
+    },
+    {
+      "id": 52,
+      "file": "/gaze_frames/frame_0052.webp",
+      "x": 0.2096,
+      "y": 0.367
+    },
+    {
+      "id": 53,
+      "file": "/gaze_frames/frame_0053.webp",
+      "x": 0.1348,
+      "y": 0.4611
+    },
+    {
+      "id": 54,
+      "file": "/gaze_frames/frame_0054.webp",
+      "x": 0.1292,
+      "y": 0.3874
+    },
+    {
+      "id": 55,
+      "file": "/gaze_frames/frame_0055.webp",
+      "x": 0.2308,
+      "y": 0.411
+    },
+    {
+      "id": 56,
+      "file": "/gaze_frames/frame_0056.webp",
+      "x": 0.1154,
+      "y": 0.5505
+    },
+    {
+      "id": 57,
+      "file": "/gaze_frames/frame_0057.webp",
+      "x": 0.0443,
+      "y": 0.943
+    },
+    {
+      "id": 58,
+      "file": "/gaze_frames/frame_0058.webp",
+      "x": -0.0614,
+      "y": 1.0
+    },
+    {
+      "id": 59,
+      "file": "/gaze_frames/frame_0059.webp",
+      "x": -0.3103,
+      "y": 1.0
+    },
+    {
+      "id": 60,
+      "file": "/gaze_frames/frame_0060.webp",
+      "x": -0.4142,
+      "y": 1.0
+    },
+    {
+      "id": 61,
+      "file": "/gaze_frames/frame_0061.webp",
+      "x": -1.0,
+      "y": 1.0
+    },
+    {
+      "id": 62,
+      "file": "/gaze_frames/frame_0062.webp",
+      "x": -1.0,
+      "y": 0.7698
+    },
+    {
+      "id": 63,
+      "file": "/gaze_frames/frame_0063.webp",
+      "x": -1.0,
+      "y": 0.5443
+    },
+    {
+      "id": 64,
+      "file": "/gaze_frames/frame_0064.webp",
+      "x": -1.0,
+      "y": 0.4516
+    },
+    {
+      "id": 65,
+      "file": "/gaze_frames/frame_0065.webp",
+      "x": -0.9797,
+      "y": 0.4337
+    },
+    {
+      "id": 66,
+      "file": "/gaze_frames/frame_0066.webp",
+      "x": -0.9021,
+      "y": 0.2636
+    },
+    {
+      "id": 67,
+      "file": "/gaze_frames/frame_0067.webp",
+      "x": -0.8296,
+      "y": 0.1888
+    },
+    {
+      "id": 68,
+      "file": "/gaze_frames/frame_0068.webp",
+      "x": -0.6281,
+      "y": 0.2093
+    },
+    {
+      "id": 69,
+      "file": "/gaze_frames/frame_0069.webp",
+      "x": -0.5298,
+      "y": 0.1622
+    },
+    {
+      "id": 70,
+      "file": "/gaze_frames/frame_0070.webp",
+      "x": -0.438,
+      "y": 0.045
+    },
+    {
+      "id": 71,
+      "file": "/gaze_frames/frame_0071.webp",
+      "x": -0.2961,
+      "y": 0.0619
+    },
+    {
+      "id": 72,
+      "file": "/gaze_frames/frame_0072.webp",
+      "x": -0.2615,
+      "y": -0.0386
+    },
+    {
+      "id": 73,
+      "file": "/gaze_frames/frame_0073.webp",
+      "x": -0.1744,
+      "y": -0.1643
+    },
+    {
+      "id": 74,
+      "file": "/gaze_frames/frame_0074.webp",
+      "x": -0.1316,
+      "y": -0.2456
+    },
+    {
+      "id": 75,
+      "file": "/gaze_frames/frame_0075.webp",
+      "x": -0.0446,
+      "y": -0.2353
+    },
+    {
+      "id": 76,
+      "file": "/gaze_frames/frame_0076.webp",
+      "x": -0.0103,
+      "y": -0.2465
+    },
+    {
+      "id": 77,
+      "file": "/gaze_frames/frame_0077.webp",
+      "x": 0.0599,
+      "y": -0.2678
+    },
+    {
+      "id": 78,
+      "file": "/gaze_frames/frame_0078.webp",
+      "x": 0.0593,
+      "y": -0.2507
+    },
+    {
+      "id": 79,
+      "file": "/gaze_frames/frame_0079.webp",
+      "x": 0.1332,
+      "y": -0.2412
+    },
+    {
+      "id": 80,
+      "file": "/gaze_frames/frame_0080.webp",
+      "x": 0.2769,
+      "y": -0.2686
+    },
+    {
+      "id": 81,
+      "file": "/gaze_frames/frame_0081.webp",
+      "x": 0.3129,
+      "y": -0.4167
+    },
+    {
+      "id": 82,
+      "file": "/gaze_frames/frame_0082.webp",
+      "x": 0.0603,
+      "y": 0.062
+    },
+    {
+      "id": 83,
+      "file": "/gaze_frames/frame_0083.webp",
+      "x": -0.131,
+      "y": 0.462
+    },
+    {
+      "id": 84,
+      "file": "/gaze_frames/frame_0084.webp",
+      "x": -0.5637,
+      "y": 0.0498
+    },
+    {
+      "id": 85,
+      "file": "/gaze_frames/frame_0085.webp",
+      "x": -0.7661,
+      "y": -0.0882
+    },
+    {
+      "id": 86,
+      "file": "/gaze_frames/frame_0086.webp",
+      "x": -0.9885,
+      "y": -0.3001
+    },
+    {
+      "id": 87,
+      "file": "/gaze_frames/frame_0087.webp",
+      "x": -0.8755,
+      "y": -0.2871
+    },
+    {
+      "id": 88,
+      "file": "/gaze_frames/frame_0088.webp",
+      "x": -0.8767,
+      "y": -0.4731
+    },
+    {
+      "id": 89,
+      "file": "/gaze_frames/frame_0089.webp",
+      "x": -0.6005,
+      "y": -0.4356
+    },
+    {
+      "id": 90,
+      "file": "/gaze_frames/frame_0090.webp",
+      "x": -0.598,
+      "y": -0.517
+    },
+    {
+      "id": 91,
+      "file": "/gaze_frames/frame_0091.webp",
+      "x": -0.5645,
+      "y": -0.5901
+    },
+    {
+      "id": 92,
+      "file": "/gaze_frames/frame_0092.webp",
+      "x": -0.4936,
+      "y": -0.6173
+    },
+    {
+      "id": 93,
+      "file": "/gaze_frames/frame_0093.webp",
+      "x": -0.5043,
+      "y": -0.6641
+    },
+    {
+      "id": 94,
+      "file": "/gaze_frames/frame_0094.webp",
+      "x": -0.3273,
+      "y": -0.6695
+    },
+    {
+      "id": 95,
+      "file": "/gaze_frames/frame_0095.webp",
+      "x": -0.4951,
+      "y": -0.8448
+    },
+    {
+      "id": 96,
+      "file": "/gaze_frames/frame_0096.webp",
+      "x": -0.3874,
+      "y": -0.7542
+    },
+    {
+      "id": 97,
+      "file": "/gaze_frames/frame_0097.webp",
+      "x": -0.3844,
+      "y": -0.6298
+    },
+    {
+      "id": 98,
+      "file": "/gaze_frames/frame_0098.webp",
+      "x": -0.4462,
+      "y": -0.884
+    },
+    {
+      "id": 99,
+      "file": "/gaze_frames/frame_0099.webp",
+      "x": -0.4982,
+      "y": -0.9424
+    },
+    {
+      "id": 100,
+      "file": "/gaze_frames/frame_0100.webp",
+      "x": -0.3533,
+      "y": -0.9744
+    },
+    {
+      "id": 101,
+      "file": "/gaze_frames/frame_0101.webp",
+      "x": -0.5752,
+      "y": -0.9977
+    },
+    {
+      "id": 102,
+      "file": "/gaze_frames/frame_0102.webp",
+      "x": -0.521,
+      "y": -0.9947
+    },
+    {
+      "id": 103,
+      "file": "/gaze_frames/frame_0103.webp",
+      "x": -0.3293,
+      "y": -0.7635
+    },
+    {
+      "id": 104,
+      "file": "/gaze_frames/frame_0104.webp",
+      "x": -0.6879,
+      "y": -0.9843
+    },
+    {
+      "id": 105,
+      "file": "/gaze_frames/frame_0105.webp",
+      "x": -0.5686,
+      "y": -1.0
+    },
+    {
+      "id": 106,
+      "file": "/gaze_frames/frame_0106.webp",
+      "x": -0.4693,
+      "y": -1.0
+    },
+    {
+      "id": 107,
+      "file": "/gaze_frames/frame_0107.webp",
+      "x": -0.3907,
+      "y": -1.0
+    },
+    {
+      "id": 108,
+      "file": "/gaze_frames/frame_0108.webp",
+      "x": -0.4048,
+      "y": -1.0
+    },
+    {
+      "id": 109,
+      "file": "/gaze_frames/frame_0109.webp",
+      "x": -0.4982,
+      "y": -1.0
+    },
+    {
+      "id": 110,
+      "file": "/gaze_frames/frame_0110.webp",
+      "x": -0.4598,
+      "y": -1.0
+    },
+    {
+      "id": 111,
+      "file": "/gaze_frames/frame_0111.webp",
+      "x": -0.5303,
+      "y": -1.0
+    },
+    {
+      "id": 112,
+      "file": "/gaze_frames/frame_0112.webp",
+      "x": -0.3549,
+      "y": -1.0
+    },
+    {
+      "id": 113,
+      "file": "/gaze_frames/frame_0113.webp",
+      "x": -0.1722,
+      "y": -0.3428
+    },
+    {
+      "id": 114,
+      "file": "/gaze_frames/frame_0114.webp",
+      "x": -0.0744,
+      "y": -0.3065
+    },
+    {
+      "id": 115,
+      "file": "/gaze_frames/frame_0115.webp",
+      "x": -0.2371,
+      "y": -0.4896
+    },
+    {
+      "id": 116,
+      "file": "/gaze_frames/frame_0116.webp",
+      "x": -0.0967,
+      "y": -0.55
+    },
+    {
+      "id": 117,
+      "file": "/gaze_frames/frame_0117.webp",
+      "x": 0.1412,
+      "y": -0.5845
+    },
+    {
+      "id": 118,
+      "file": "/gaze_frames/frame_0118.webp",
+      "x": 0.466,
+      "y": -0.5917
+    },
+    {
+      "id": 119,
+      "file": "/gaze_frames/frame_0119.webp",
+      "x": 0.3906,
+      "y": -0.6935
+    },
+    {
+      "id": 120,
+      "file": "/gaze_frames/frame_0120.webp",
+      "x": 0.3044,
+      "y": -0.5705
+    },
+    {
+      "id": 121,
+      "file": "/gaze_frames/frame_0121.webp",
+      "x": 0.0365,
+      "y": -0.5924
+    },
+    {
+      "id": 122,
+      "file": "/gaze_frames/frame_0122.webp",
+      "x": 0.3292,
+      "y": -0.3863
+    },
+    {
+      "id": 123,
+      "file": "/gaze_frames/frame_0123.webp",
+      "x": 0.5164,
+      "y": -0.538
+    },
+    {
+      "id": 124,
+      "file": "/gaze_frames/frame_0124.webp",
+      "x": 0.8913,
+      "y": -0.4044
+    },
+    {
+      "id": 125,
+      "file": "/gaze_frames/frame_0125.webp",
+      "x": 0.634,
+      "y": -0.3072
+    },
+    {
+      "id": 126,
+      "file": "/gaze_frames/frame_0126.webp",
+      "x": 0.6665,
+      "y": -0.3037
+    },
+    {
+      "id": 127,
+      "file": "/gaze_frames/frame_0127.webp",
+      "x": 0.5193,
+      "y": -0.1316
+    },
+    {
+      "id": 128,
+      "file": "/gaze_frames/frame_0128.webp",
+      "x": 0.5149,
+      "y": -0.0523
+    },
+    {
+      "id": 129,
+      "file": "/gaze_frames/frame_0129.webp",
+      "x": 0.5599,
+      "y": -0.0083
+    },
+    {
+      "id": 130,
+      "file": "/gaze_frames/frame_0130.webp",
+      "x": 0.6331,
+      "y": 0.0693
+    },
+    {
+      "id": 131,
+      "file": "/gaze_frames/frame_0131.webp",
+      "x": 0.6048,
+      "y": 0.1799
+    },
+    {
+      "id": 132,
+      "file": "/gaze_frames/frame_0132.webp",
+      "x": 0.4104,
+      "y": -0.2071
+    },
+    {
+      "id": 133,
+      "file": "/gaze_frames/frame_0133.webp",
+      "x": 0.4291,
+      "y": -0.1097
+    },
+    {
+      "id": 134,
+      "file": "/gaze_frames/frame_0134.webp",
+      "x": 0.3814,
+      "y": -0.202
+    },
+    {
+      "id": 135,
+      "file": "/gaze_frames/frame_0135.webp",
+      "x": 0.3049,
+      "y": -0.1437
+    },
+    {
+      "id": 136,
+      "file": "/gaze_frames/frame_0136.webp",
+      "x": 0.1146,
+      "y": -0.3146
+    },
+    {
+      "id": 137,
+      "file": "/gaze_frames/frame_0137.webp",
+      "x": 0.038,
+      "y": 0.22
+    },
+    {
+      "id": 138,
+      "file": "/gaze_frames/frame_0138.webp",
+      "x": -0.0379,
+      "y": -0.0601
+    },
+    {
+      "id": 139,
+      "file": "/gaze_frames/frame_0139.webp",
+      "x": 0.0045,
+      "y": 0.2826
+    },
+    {
+      "id": 140,
+      "file": "/gaze_frames/frame_0140.webp",
+      "x": 0.0842,
+      "y": 0.2666
+    },
+    {
+      "id": 141,
+      "file": "/gaze_frames/frame_0141.webp",
+      "x": 0.0611,
+      "y": 0.3545
+    },
+    {
+      "id": 142,
+      "file": "/gaze_frames/frame_0142.webp",
+      "x": -0.0438,
+      "y": 0.4213
+    },
+    {
+      "id": 143,
+      "file": "/gaze_frames/frame_0143.webp",
+      "x": 0.0236,
+      "y": 0.2905
+    },
+    {
+      "id": 144,
+      "file": "/gaze_frames/frame_0144.webp",
+      "x": 0.0233,
+      "y": 0.1189
+    },
+    {
+      "id": 145,
+      "file": "/gaze_frames/frame_0145.webp",
+      "x": 0.064,
+      "y": 0.2613
+    },
+    {
+      "id": 146,
+      "file": "/gaze_frames/frame_0146.webp",
+      "x": -0.0447,
+      "y": 0.3204
+    },
+    {
+      "id": 147,
+      "file": "/gaze_frames/frame_0147.webp",
+      "x": -0.0857,
+      "y": 0.4567
+    },
+    {
+      "id": 148,
+      "file": "/gaze_frames/frame_0148.webp",
+      "x": -0.1119,
+      "y": 0.0407
+    },
+    {
+      "id": 149,
+      "file": "/gaze_frames/frame_0149.webp",
+      "x": 0.1514,
+      "y": 0.0512
+    },
+    {
+      "id": 150,
+      "file": "/gaze_frames/frame_0150.webp",
+      "x": -0.0449,
+      "y": 0.2242
+    },
+    {
+      "id": 151,
+      "file": "/gaze_frames/frame_0151.webp",
+      "x": -0.0814,
+      "y": -0.1916
+    },
+    {
+      "id": 152,
+      "file": "/gaze_frames/frame_0152.webp",
+      "x": -0.0388,
+      "y": -0.4199
+    },
+    {
+      "id": 153,
+      "file": "/gaze_frames/frame_0153.webp",
+      "x": -0.1598,
+      "y": -0.1991
+    },
+    {
+      "id": 154,
+      "file": "/gaze_frames/frame_0154.webp",
+      "x": -0.1985,
+      "y": -0.1486
+    },
+    {
+      "id": 155,
+      "file": "/gaze_frames/frame_0155.webp",
+      "x": -0.1179,
+      "y": -0.1172
+    },
+    {
+      "id": 156,
+      "file": "/gaze_frames/frame_0156.webp",
+      "x": -0.108,
+      "y": -0.2275
+    },
+    {
+      "id": 157,
+      "file": "/gaze_frames/frame_0157.webp",
+      "x": -0.1056,
+      "y": 0.0425
+    },
+    {
+      "id": 158,
+      "file": "/gaze_frames/frame_0158.webp",
+      "x": -0.0803,
+      "y": 0.019
+    },
+    {
+      "id": 159,
+      "file": "/gaze_frames/frame_0159.webp",
+      "x": -0.2954,
+      "y": 0.198
+    },
+    {
+      "id": 160,
+      "file": "/gaze_frames/frame_0160.webp",
+      "x": -0.2786,
+      "y": 0.2869
+    },
+    {
+      "id": 161,
+      "file": "/gaze_frames/frame_0161.webp",
+      "x": -0.0798,
+      "y": -0.5461
+    },
+    {
+      "id": 162,
+      "file": "/gaze_frames/frame_0162.webp",
+      "x": -0.1207,
+      "y": -0.0516
+    },
+    {
+      "id": 163,
+      "file": "/gaze_frames/frame_0163.webp",
+      "x": -0.094,
+      "y": -0.1498
+    },
+    {
+      "id": 164,
+      "file": "/gaze_frames/frame_0164.webp",
+      "x": -0.0599,
+      "y": 0.0109
+    },
+    {
+      "id": 165,
+      "file": "/gaze_frames/frame_0165.webp",
+      "x": -0.1222,
+      "y": -0.1207
+    },
+    {
+      "id": 166,
+      "file": "/gaze_frames/frame_0166.webp",
+      "x": -0.0808,
+      "y": -0.0643
+    },
+    {
+      "id": 167,
+      "file": "/gaze_frames/frame_0167.webp",
+      "x": -0.0075,
+      "y": 0.2712
+    },
+    {
+      "id": 168,
+      "file": "/gaze_frames/frame_0168.webp",
+      "x": -0.0867,
+      "y": 0.5723
+    },
+    {
+      "id": 169,
+      "file": "/gaze_frames/frame_0169.webp",
+      "x": -0.1718,
+      "y": 0.6623
+    },
+    {
+      "id": 170,
+      "file": "/gaze_frames/frame_0170.webp",
+      "x": -0.189,
+      "y": 0.663
+    },
+    {
+      "id": 171,
+      "file": "/gaze_frames/frame_0171.webp",
+      "x": -0.1342,
+      "y": 0.6388
+    },
+    {
+      "id": 172,
+      "file": "/gaze_frames/frame_0172.webp",
+      "x": -0.1629,
+      "y": 0.7133
+    },
+    {
+      "id": 173,
+      "file": "/gaze_frames/frame_0173.webp",
+      "x": -0.2936,
+      "y": 0.6054
+    },
+    {
+      "id": 174,
+      "file": "/gaze_frames/frame_0174.webp",
+      "x": -0.2517,
+      "y": 0.6647
+    },
+    {
+      "id": 175,
+      "file": "/gaze_frames/frame_0175.webp",
+      "x": -0.2763,
+      "y": 0.6026
+    },
+    {
+      "id": 176,
+      "file": "/gaze_frames/frame_0176.webp",
+      "x": -0.3436,
+      "y": 0.6828
+    },
+    {
+      "id": 177,
+      "file": "/gaze_frames/frame_0177.webp",
+      "x": -0.3377,
+      "y": 0.5167
+    },
+    {
+      "id": 178,
+      "file": "/gaze_frames/frame_0178.webp",
+      "x": -0.2273,
+      "y": 0.5249
+    },
+    {
+      "id": 179,
+      "file": "/gaze_frames/frame_0179.webp",
+      "x": -0.244,
+      "y": 0.6308
+    },
+    {
+      "id": 180,
+      "file": "/gaze_frames/frame_0180.webp",
+      "x": -0.1565,
+      "y": 0.4656
+    },
+    {
+      "id": 181,
+      "file": "/gaze_frames/frame_0181.webp",
+      "x": -0.0839,
+      "y": 0.5146
+    },
+    {
+      "id": 182,
+      "file": "/gaze_frames/frame_0182.webp",
+      "x": -0.1354,
+      "y": 0.6204
+    },
+    {
+      "id": 183,
+      "file": "/gaze_frames/frame_0183.webp",
+      "x": -0.232,
+      "y": 0.8769
+    },
+    {
+      "id": 184,
+      "file": "/gaze_frames/frame_0184.webp",
+      "x": -0.1668,
+      "y": 0.9226
+    },
+    {
+      "id": 185,
+      "file": "/gaze_frames/frame_0185.webp",
+      "x": -0.1425,
+      "y": 0.9537
+    },
+    {
+      "id": 186,
+      "file": "/gaze_frames/frame_0186.webp",
+      "x": -0.1491,
+      "y": 0.9357
+    },
+    {
+      "id": 187,
+      "file": "/gaze_frames/frame_0187.webp",
+      "x": -0.0328,
+      "y": 1.0
+    },
+    {
+      "id": 188,
+      "file": "/gaze_frames/frame_0188.webp",
+      "x": -0.0645,
+      "y": 0.9058
+    },
+    {
+      "id": 189,
+      "file": "/gaze_frames/frame_0189.webp",
+      "x": -0.0666,
+      "y": 0.9717
+    },
+    {
+      "id": 190,
+      "file": "/gaze_frames/frame_0190.webp",
+      "x": -0.073,
+      "y": 0.9419
+    },
+    {
+      "id": 191,
+      "file": "/gaze_frames/frame_0191.webp",
+      "x": -0.0025,
+      "y": 0.9117
+    },
+    {
+      "id": 192,
+      "file": "/gaze_frames/frame_0192.webp",
+      "x": -0.0448,
+      "y": 0.8733
+    },
+    {
+      "id": 193,
+      "file": "/gaze_frames/frame_0193.webp",
+      "x": -0.014,
+      "y": 0.8682
+    },
+    {
+      "id": 194,
+      "file": "/gaze_frames/frame_0194.webp",
+      "x": -0.1118,
+      "y": 0.7546
+    },
+    {
+      "id": 195,
+      "file": "/gaze_frames/frame_0195.webp",
+      "x": -0.0019,
+      "y": 0.7676
+    },
+    {
+      "id": 196,
+      "file": "/gaze_frames/frame_0196.webp",
+      "x": -0.0567,
+      "y": 0.6348
+    },
+    {
+      "id": 197,
+      "file": "/gaze_frames/frame_0197.webp",
+      "x": -0.1155,
+      "y": 0.6041
+    },
+    {
+      "id": 198,
+      "file": "/gaze_frames/frame_0198.webp",
+      "x": -0.0279,
+      "y": 0.6673
+    },
+    {
+      "id": 199,
+      "file": "/gaze_frames/frame_0199.webp",
+      "x": -0.0116,
+      "y": 0.6485
+    },
+    {
+      "id": 200,
+      "file": "/gaze_frames/frame_0200.webp",
+      "x": -0.0481,
+      "y": 0.5621
+    },
+    {
+      "id": 201,
+      "file": "/gaze_frames/frame_0201.webp",
+      "x": 0.0179,
+      "y": 0.5518
+    },
+    {
+      "id": 202,
+      "file": "/gaze_frames/frame_0202.webp",
+      "x": -0.0013,
+      "y": 0.5324
+    },
+    {
+      "id": 203,
+      "file": "/gaze_frames/frame_0203.webp",
+      "x": -0.0239,
+      "y": 0.4982
+    },
+    {
+      "id": 204,
+      "file": "/gaze_frames/frame_0204.webp",
+      "x": -0.0299,
+      "y": 0.1724
+    },
+    {
+      "id": 205,
+      "file": "/gaze_frames/frame_0205.webp",
+      "x": -0.0373,
+      "y": -0.0014
+    },
+    {
+      "id": 206,
+      "file": "/gaze_frames/frame_0206.webp",
+      "x": 0.0234,
+      "y": -0.1371
+    },
+    {
+      "id": 207,
+      "file": "/gaze_frames/frame_0207.webp",
+      "x": -0.0202,
+      "y": -0.1449
+    },
+    {
+      "id": 208,
+      "file": "/gaze_frames/frame_0208.webp",
+      "x": 0.0075,
+      "y": -0.0204
+    },
+    {
+      "id": 209,
+      "file": "/gaze_frames/frame_0209.webp",
+      "x": -0.0583,
+      "y": -0.1095
+    },
+    {
+      "id": 210,
+      "file": "/gaze_frames/frame_0210.webp",
+      "x": 0.0157,
+      "y": -0.0506
+    },
+    {
+      "id": 211,
+      "file": "/gaze_frames/frame_0211.webp",
+      "x": -0.0139,
+      "y": 0.0243
+    },
+    {
+      "id": 212,
+      "file": "/gaze_frames/frame_0212.webp",
+      "x": 0.0208,
+      "y": 0.08
+    },
+    {
+      "id": 213,
+      "file": "/gaze_frames/frame_0213.webp",
+      "x": 0.061,
+      "y": 0.0777
+    },
+    {
+      "id": 214,
+      "file": "/gaze_frames/frame_0214.webp",
+      "x": 0.1065,
+      "y": 0.0875
+    },
+    {
+      "id": 215,
+      "file": "/gaze_frames/frame_0215.webp",
+      "x": 0.0488,
+      "y": 0.1466
+    },
+    {
+      "id": 216,
+      "file": "/gaze_frames/frame_0216.webp",
+      "x": 0.1146,
+      "y": 0.2805
+    },
+    {
+      "id": 217,
+      "file": "/gaze_frames/frame_0217.webp",
+      "x": 0.263,
+      "y": 0.295
+    },
+    {
+      "id": 218,
+      "file": "/gaze_frames/frame_0218.webp",
+      "x": 0.313,
+      "y": 0.2189
+    },
+    {
+      "id": 219,
+      "file": "/gaze_frames/frame_0219.webp",
+      "x": 0.5324,
+      "y": 0.2946
+    },
+    {
+      "id": 220,
+      "file": "/gaze_frames/frame_0220.webp",
+      "x": 0.5104,
+      "y": 0.2641
+    },
+    {
+      "id": 221,
+      "file": "/gaze_frames/frame_0221.webp",
+      "x": 0.7419,
+      "y": 0.2616
+    },
+    {
+      "id": 222,
+      "file": "/gaze_frames/frame_0222.webp",
+      "x": 0.6269,
+      "y": 0.3346
+    },
+    {
+      "id": 223,
+      "file": "/gaze_frames/frame_0223.webp",
+      "x": 0.8151,
+      "y": 0.3017
+    },
+    {
+      "id": 224,
+      "file": "/gaze_frames/frame_0224.webp",
+      "x": 0.8026,
+      "y": 0.2215
+    },
+    {
+      "id": 225,
+      "file": "/gaze_frames/frame_0225.webp",
+      "x": 0.9157,
+      "y": 0.4401
+    },
+    {
+      "id": 226,
+      "file": "/gaze_frames/frame_0226.webp",
+      "x": 0.5952,
+      "y": 0.5771
+    },
+    {
+      "id": 227,
+      "file": "/gaze_frames/frame_0227.webp",
+      "x": 0.5332,
+      "y": 0.7364
+    },
+    {
+      "id": 228,
+      "file": "/gaze_frames/frame_0228.webp",
+      "x": 0.2446,
+      "y": 0.8379
+    },
+    {
+      "id": 229,
+      "file": "/gaze_frames/frame_0229.webp",
+      "x": 0.3395,
+      "y": 0.6634
+    },
+    {
+      "id": 230,
+      "file": "/gaze_frames/frame_0230.webp",
+      "x": 0.6366,
+      "y": 0.6561
+    },
+    {
+      "id": 231,
+      "file": "/gaze_frames/frame_0231.webp",
+      "x": 1.0,
+      "y": 0.2015
+    },
+    {
+      "id": 232,
+      "file": "/gaze_frames/frame_0232.webp",
+      "x": 1.0,
+      "y": 0.1042
+    },
+    {
+      "id": 233,
+      "file": "/gaze_frames/frame_0233.webp",
+      "x": 1.0,
+      "y": 0.1903
+    },
+    {
+      "id": 234,
+      "file": "/gaze_frames/frame_0234.webp",
+      "x": 1.0,
+      "y": 0.3299
+    },
+    {
+      "id": 235,
+      "file": "/gaze_frames/frame_0235.webp",
+      "x": 1.0,
+      "y": 0.2613
+    },
+    {
+      "id": 236,
+      "file": "/gaze_frames/frame_0236.webp",
+      "x": 0.9508,
+      "y": 0.4089
+    },
+    {
+      "id": 237,
+      "file": "/gaze_frames/frame_0237.webp",
+      "x": 0.8351,
+      "y": 0.5274
+    },
+    {
+      "id": 238,
+      "file": "/gaze_frames/frame_0238.webp",
+      "x": 0.7745,
+      "y": 0.6238
+    },
+    {
+      "id": 239,
+      "file": "/gaze_frames/frame_0239.webp",
+      "x": 0.7106,
+      "y": 0.8279
+    },
+    {
+      "id": 240,
+      "file": "/gaze_frames/frame_0240.webp",
+      "x": 0.5458,
+      "y": 0.8963
+    },
+    {
+      "id": 241,
+      "file": "/gaze_frames/frame_0241.webp",
+      "x": 0.4388,
+      "y": 1.0
+    },
+    {
+      "id": 242,
+      "file": "/gaze_frames/frame_0242.webp",
+      "x": 0.6356,
+      "y": 0.7695
+    },
+    {
+      "id": 243,
+      "file": "/gaze_frames/frame_0243.webp",
+      "x": 0.521,
+      "y": 0.5197
+    },
+    {
+      "id": 244,
+      "file": "/gaze_frames/frame_0244.webp",
+      "x": 0.6736,
+      "y": 0.1753
+    },
+    {
+      "id": 245,
+      "file": "/gaze_frames/frame_0245.webp",
+      "x": 0.6792,
+      "y": 0.123
+    },
+    {
+      "id": 246,
+      "file": "/gaze_frames/frame_0246.webp",
+      "x": 0.4714,
+      "y": 0.1392
+    },
+    {
+      "id": 247,
+      "file": "/gaze_frames/frame_0247.webp",
+      "x": 0.4742,
+      "y": 0.0566
+    },
+    {
+      "id": 248,
+      "file": "/gaze_frames/frame_0248.webp",
+      "x": 0.2447,
+      "y": 0.1706
+    },
+    {
+      "id": 249,
+      "file": "/gaze_frames/frame_0249.webp",
+      "x": 0.4067,
+      "y": -0.0467
+    },
+    {
+      "id": 250,
+      "file": "/gaze_frames/frame_0250.webp",
+      "x": 0.451,
+      "y": 0.02
+    },
+    {
+      "id": 251,
+      "file": "/gaze_frames/frame_0251.webp",
+      "x": 0.2701,
+      "y": 0.022
+    },
+    {
+      "id": 252,
+      "file": "/gaze_frames/frame_0252.webp",
+      "x": 0.1917,
+      "y": 0.0126
+    },
+    {
+      "id": 253,
+      "file": "/gaze_frames/frame_0253.webp",
+      "x": 0.454,
+      "y": 0.1641
+    },
+    {
+      "id": 254,
+      "file": "/gaze_frames/frame_0254.webp",
+      "x": 0.4469,
+      "y": 0.0741
+    },
+    {
+      "id": 255,
+      "file": "/gaze_frames/frame_0255.webp",
+      "x": 0.3636,
+      "y": 0.1154
+    },
+    {
+      "id": 256,
+      "file": "/gaze_frames/frame_0256.webp",
+      "x": 0.2503,
+      "y": 0.1247
+    },
+    {
+      "id": 257,
+      "file": "/gaze_frames/frame_0257.webp",
+      "x": 0.4775,
+      "y": 0.0748
+    },
+    {
+      "id": 258,
+      "file": "/gaze_frames/frame_0258.webp",
+      "x": 0.2101,
+      "y": 0.0968
+    },
+    {
+      "id": 259,
+      "file": "/gaze_frames/frame_0259.webp",
+      "x": 0.5469,
+      "y": 0.1814
+    },
+    {
+      "id": 260,
+      "file": "/gaze_frames/frame_0260.webp",
+      "x": 0.2866,
+      "y": 0.0956
+    },
+    {
+      "id": 261,
+      "file": "/gaze_frames/frame_0261.webp",
+      "x": 0.1008,
+      "y": 0.2276
+    },
+    {
+      "id": 262,
+      "file": "/gaze_frames/frame_0262.webp",
+      "x": 0.6544,
+      "y": 0.009
+    },
+    {
+      "id": 263,
+      "file": "/gaze_frames/frame_0263.webp",
+      "x": 0.3438,
+      "y": 0.1605
+    },
+    {
+      "id": 264,
+      "file": "/gaze_frames/frame_0264.webp",
+      "x": 0.4759,
+      "y": 0.0441
+    },
+    {
+      "id": 265,
+      "file": "/gaze_frames/frame_0265.webp",
+      "x": 0.3582,
+      "y": 0.2795
+    },
+    {
+      "id": 266,
+      "file": "/gaze_frames/frame_0266.webp",
+      "x": 0.6449,
+      "y": 0.0472
+    },
+    {
+      "id": 267,
+      "file": "/gaze_frames/frame_0267.webp",
+      "x": 0.6479,
+      "y": 0.2016
+    },
+    {
+      "id": 268,
+      "file": "/gaze_frames/frame_0268.webp",
+      "x": 0.5047,
+      "y": 0.0477
+    },
+    {
+      "id": 269,
+      "file": "/gaze_frames/frame_0269.webp",
+      "x": 0.1689,
+      "y": 0.3102
+    },
+    {
+      "id": 270,
+      "file": "/gaze_frames/frame_0270.webp",
+      "x": 0.3563,
+      "y": 0.3137
+    },
+    {
+      "id": 271,
+      "file": "/gaze_frames/frame_0271.webp",
+      "x": 0.1882,
+      "y": 0.426
+    },
+    {
+      "id": 272,
+      "file": "/gaze_frames/frame_0272.webp",
+      "x": 0.3448,
+      "y": 0.4421
+    },
+    {
+      "id": 273,
+      "file": "/gaze_frames/frame_0273.webp",
+      "x": -0.1825,
+      "y": 0.6671
+    },
+    {
+      "id": 274,
+      "file": "/gaze_frames/frame_0274.webp",
+      "x": 0.1077,
+      "y": 0.755
+    },
+    {
+      "id": 275,
+      "file": "/gaze_frames/frame_0275.webp",
+      "x": 0.6298,
+      "y": 0.8655
+    },
+    {
+      "id": 276,
+      "file": "/gaze_frames/frame_0276.webp",
+      "x": 0.5129,
+      "y": 0.3381
+    },
+    {
+      "id": 277,
+      "file": "/gaze_frames/frame_0277.webp",
+      "x": 0.4276,
+      "y": 0.0172
+    },
+    {
+      "id": 278,
+      "file": "/gaze_frames/frame_0278.webp",
+      "x": -0.0144,
+      "y": 0.5243
+    },
+    {
+      "id": 279,
+      "file": "/gaze_frames/frame_0279.webp",
+      "x": -0.1873,
+      "y": 0.6339
+    },
+    {
+      "id": 280,
+      "file": "/gaze_frames/frame_0280.webp",
+      "x": -0.3823,
+      "y": 0.4471
+    },
+    {
+      "id": 281,
+      "file": "/gaze_frames/frame_0281.webp",
+      "x": -0.2219,
+      "y": 0.1493
+    },
+    {
+      "id": 282,
+      "file": "/gaze_frames/frame_0282.webp",
+      "x": -0.3521,
+      "y": 0.1302
+    },
+    {
+      "id": 283,
+      "file": "/gaze_frames/frame_0283.webp",
+      "x": -0.5162,
+      "y": -0.0467
+    },
+    {
+      "id": 284,
+      "file": "/gaze_frames/frame_0284.webp",
+      "x": -0.9331,
+      "y": 0.2166
+    },
+    {
+      "id": 285,
+      "file": "/gaze_frames/frame_0285.webp",
+      "x": -0.8349,
+      "y": 0.1126
+    },
+    {
+      "id": 286,
+      "file": "/gaze_frames/frame_0286.webp",
+      "x": -0.7752,
+      "y": 0.3152
+    },
+    {
+      "id": 287,
+      "file": "/gaze_frames/frame_0287.webp",
+      "x": -0.8138,
+      "y": -0.2915
+    },
+    {
+      "id": 288,
+      "file": "/gaze_frames/frame_0288.webp",
+      "x": -0.6251,
+      "y": 0.142
+    },
+    {
+      "id": 289,
+      "file": "/gaze_frames/frame_0289.webp",
+      "x": -0.9727,
+      "y": -0.5592
+    },
+    {
+      "id": 290,
+      "file": "/gaze_frames/frame_0290.webp",
+      "x": -1.0,
+      "y": -0.1777
+    },
+    {
+      "id": 291,
+      "file": "/gaze_frames/frame_0291.webp",
+      "x": -0.8553,
+      "y": -0.216
+    },
+    {
+      "id": 292,
+      "file": "/gaze_frames/frame_0292.webp",
+      "x": -0.8075,
+      "y": 0.0765
+    },
+    {
+      "id": 293,
+      "file": "/gaze_frames/frame_0293.webp",
+      "x": -0.8057,
+      "y": 0.1613
+    },
+    {
+      "id": 294,
+      "file": "/gaze_frames/frame_0294.webp",
+      "x": -0.9277,
+      "y": 0.1766
+    },
+    {
+      "id": 295,
+      "file": "/gaze_frames/frame_0295.webp",
+      "x": -0.7784,
+      "y": 0.2331
+    },
+    {
+      "id": 296,
+      "file": "/gaze_frames/frame_0296.webp",
+      "x": -0.7139,
+      "y": 0.1301
+    },
+    {
+      "id": 297,
+      "file": "/gaze_frames/frame_0297.webp",
+      "x": -0.5825,
+      "y": 0.2162
+    },
+    {
+      "id": 298,
+      "file": "/gaze_frames/frame_0298.webp",
+      "x": -0.7653,
+      "y": 0.1458
+    },
+    {
+      "id": 299,
+      "file": "/gaze_frames/frame_0299.webp",
+      "x": -0.8997,
+      "y": 0.2818
+    },
+    {
+      "id": 300,
+      "file": "/gaze_frames/frame_0300.webp",
+      "x": -1.0,
+      "y": -0.0939
+    },
+    {
+      "id": 301,
+      "file": "/gaze_frames/frame_0301.webp",
+      "x": -1.0,
+      "y": -0.1707
+    },
+    {
+      "id": 302,
+      "file": "/gaze_frames/frame_0302.webp",
+      "x": -0.9871,
+      "y": 0.0193
+    },
+    {
+      "id": 303,
+      "file": "/gaze_frames/frame_0303.webp",
+      "x": -1.0,
+      "y": -0.0271
+    },
+    {
+      "id": 304,
+      "file": "/gaze_frames/frame_0304.webp",
+      "x": -0.8309,
+      "y": 0.0835
+    },
+    {
+      "id": 305,
+      "file": "/gaze_frames/frame_0305.webp",
+      "x": -0.5858,
+      "y": 0.0629
+    },
+    {
+      "id": 306,
+      "file": "/gaze_frames/frame_0306.webp",
+      "x": -0.337,
+      "y": 0.0597
+    },
+    {
+      "id": 307,
+      "file": "/gaze_frames/frame_0307.webp",
+      "x": -0.3363,
+      "y": -0.013
+    },
+    {
+      "id": 308,
+      "file": "/gaze_frames/frame_0308.webp",
+      "x": -0.2244,
+      "y": -0.03
+    },
+    {
+      "id": 309,
+      "file": "/gaze_frames/frame_0309.webp",
+      "x": -0.2665,
+      "y": -0.1001
+    },
+    {
+      "id": 310,
+      "file": "/gaze_frames/frame_0310.webp",
+      "x": -0.278,
+      "y": -0.1745
+    },
+    {
+      "id": 311,
+      "file": "/gaze_frames/frame_0311.webp",
+      "x": -0.3262,
+      "y": -0.2178
+    },
+    {
+      "id": 312,
+      "file": "/gaze_frames/frame_0312.webp",
+      "x": -0.4229,
+      "y": -0.2811
+    },
+    {
+      "id": 313,
+      "file": "/gaze_frames/frame_0313.webp",
+      "x": -0.4234,
+      "y": -0.5248
+    },
+    {
+      "id": 314,
+      "file": "/gaze_frames/frame_0314.webp",
+      "x": -0.6644,
+      "y": -0.3338
+    },
+    {
+      "id": 315,
+      "file": "/gaze_frames/frame_0315.webp",
+      "x": -0.2236,
+      "y": 0.0722
+    },
+    {
+      "id": 316,
+      "file": "/gaze_frames/frame_0316.webp",
+      "x": -0.1192,
+      "y": 0.3258
+    },
+    {
+      "id": 317,
+      "file": "/gaze_frames/frame_0317.webp",
+      "x": -0.2138,
+      "y": 0.4344
+    },
+    {
+      "id": 318,
+      "file": "/gaze_frames/frame_0318.webp",
+      "x": -0.094,
+      "y": 0.3859
+    },
+    {
+      "id": 319,
+      "file": "/gaze_frames/frame_0319.webp",
+      "x": 0.0535,
+      "y": 0.4487
+    },
+    {
+      "id": 320,
+      "file": "/gaze_frames/frame_0320.webp",
+      "x": 0.4213,
+      "y": 0.0464
+    },
+    {
+      "id": 321,
+      "file": "/gaze_frames/frame_0321.webp",
+      "x": 0.3586,
+      "y": -0.6274
+    },
+    {
+      "id": 322,
+      "file": "/gaze_frames/frame_0322.webp",
+      "x": 0.2294,
+      "y": -0.6747
+    },
+    {
+      "id": 323,
+      "file": "/gaze_frames/frame_0323.webp",
+      "x": 0.1328,
+      "y": -0.5988
+    },
+    {
+      "id": 324,
+      "file": "/gaze_frames/frame_0324.webp",
+      "x": 0.0525,
+      "y": -0.6255
+    },
+    {
+      "id": 325,
+      "file": "/gaze_frames/frame_0325.webp",
+      "x": -0.0246,
+      "y": -0.491
+    },
+    {
+      "id": 326,
+      "file": "/gaze_frames/frame_0326.webp",
+      "x": -0.0412,
+      "y": -0.5434
+    },
+    {
+      "id": 327,
+      "file": "/gaze_frames/frame_0327.webp",
+      "x": -0.0276,
+      "y": -0.4636
+    },
+    {
+      "id": 328,
+      "file": "/gaze_frames/frame_0328.webp",
+      "x": -0.0328,
+      "y": -0.3287
+    },
+    {
+      "id": 329,
+      "file": "/gaze_frames/frame_0329.webp",
+      "x": -0.0159,
+      "y": -0.3831
+    },
+    {
+      "id": 330,
+      "file": "/gaze_frames/frame_0330.webp",
+      "x": -0.098,
+      "y": -0.4579
+    },
+    {
+      "id": 331,
+      "file": "/gaze_frames/frame_0331.webp",
+      "x": -0.1179,
+      "y": -0.3425
+    },
+    {
+      "id": 332,
+      "file": "/gaze_frames/frame_0332.webp",
+      "x": -0.0798,
+      "y": -0.3369
+    },
+    {
+      "id": 333,
+      "file": "/gaze_frames/frame_0333.webp",
+      "x": -0.0804,
+      "y": -0.3705
+    },
+    {
+      "id": 334,
+      "file": "/gaze_frames/frame_0334.webp",
+      "x": -0.1267,
+      "y": -0.333
+    },
+    {
+      "id": 335,
+      "file": "/gaze_frames/frame_0335.webp",
+      "x": -0.1604,
+      "y": -0.3005
+    },
+    {
+      "id": 336,
+      "file": "/gaze_frames/frame_0336.webp",
+      "x": -0.1668,
+      "y": -0.2605
+    },
+    {
+      "id": 337,
+      "file": "/gaze_frames/frame_0337.webp",
+      "x": -0.1532,
+      "y": -0.3278
+    },
+    {
+      "id": 338,
+      "file": "/gaze_frames/frame_0338.webp",
+      "x": -0.2017,
+      "y": -0.2741
+    },
+    {
+      "id": 339,
+      "file": "/gaze_frames/frame_0339.webp",
+      "x": -0.1173,
+      "y": -0.3057
+    },
+    {
+      "id": 340,
+      "file": "/gaze_frames/frame_0340.webp",
+      "x": -0.1884,
+      "y": -0.3138
+    },
+    {
+      "id": 341,
+      "file": "/gaze_frames/frame_0341.webp",
+      "x": -0.1187,
+      "y": -0.2667
+    },
+    {
+      "id": 342,
+      "file": "/gaze_frames/frame_0342.webp",
+      "x": -0.1318,
+      "y": -0.2304
+    },
+    {
+      "id": 343,
+      "file": "/gaze_frames/frame_0343.webp",
+      "x": -0.0878,
+      "y": -0.2397
+    },
+    {
+      "id": 344,
+      "file": "/gaze_frames/frame_0344.webp",
+      "x": -0.1434,
+      "y": -0.2811
+    },
+    {
+      "id": 345,
+      "file": "/gaze_frames/frame_0345.webp",
+      "x": -0.0458,
+      "y": -0.2645
+    },
+    {
+      "id": 346,
+      "file": "/gaze_frames/frame_0346.webp",
+      "x": -0.1012,
+      "y": -0.2544
+    },
+    {
+      "id": 347,
+      "file": "/gaze_frames/frame_0347.webp",
+      "x": -0.1304,
+      "y": -0.2045
+    },
+    {
+      "id": 348,
+      "file": "/gaze_frames/frame_0348.webp",
+      "x": -0.1118,
+      "y": -0.3136
+    },
+    {
+      "id": 349,
+      "file": "/gaze_frames/frame_0349.webp",
+      "x": -0.1463,
+      "y": -0.2666
+    },
+    {
+      "id": 350,
+      "file": "/gaze_frames/frame_0350.webp",
+      "x": -0.1105,
+      "y": -0.3135
+    },
+    {
+      "id": 351,
+      "file": "/gaze_frames/frame_0351.webp",
+      "x": -0.0782,
+      "y": -0.2255
+    },
+    {
+      "id": 352,
+      "file": "/gaze_frames/frame_0352.webp",
+      "x": -0.0854,
+      "y": 0.7883
+    },
+    {
+      "id": 353,
+      "file": "/gaze_frames/frame_0353.webp",
+      "x": -0.0045,
+      "y": 1.0
+    },
+    {
+      "id": 354,
+      "file": "/gaze_frames/frame_0354.webp",
+      "x": -0.064,
+      "y": 0.7872
+    },
+    {
+      "id": 355,
+      "file": "/gaze_frames/frame_0355.webp",
+      "x": -0.0999,
+      "y": 0.0422
+    },
+    {
+      "id": 356,
+      "file": "/gaze_frames/frame_0356.webp",
+      "x": -0.0845,
+      "y": -0.1099
+    },
+    {
+      "id": 357,
+      "file": "/gaze_frames/frame_0357.webp",
+      "x": -0.0831,
+      "y": -0.1897
+    }
+  ]
+}

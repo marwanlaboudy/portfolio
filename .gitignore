@@ -23,7 +23,11 @@ out/
 # sub-tools and external repos
 /face_looker/
 /LivePortrait/
+/raw_video/
+/bin/
 .venv/
+venv/
+
 
 
 # debug
