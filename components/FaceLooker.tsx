@@ -196,9 +196,17 @@ export default function FaceLooker({
     };
   }, [renderFrame]);
 
-  // 3. Viewport-Aware Cursor & Touch Tracking (detects when cursor is on the face)
+  // 3. Viewport-Aware Cursor, Touch & Scroll Tracking (detects when cursor is on face & looks down on scroll)
   useEffect(() => {
+    const lastClientPos = {
+      x: typeof window !== "undefined" ? window.innerWidth / 2 : 0,
+      y: typeof window !== "undefined" ? window.innerHeight / 2 : 0,
+    };
+
     const updateFromClientXY = (clientX: number, clientY: number) => {
+      lastClientPos.x = clientX;
+      lastClientPos.y = clientY;
+
       if (!containerRef.current) return;
 
       const rect = containerRef.current.getBoundingClientRect();
@@ -208,13 +216,17 @@ export default function FaceLooker({
       const deltaX = clientX - faceCenterX;
       const deltaY = clientY - faceCenterY;
 
-      // Check if cursor is within the central face area (radius ~32% of portrait box)
+      // Scroll downward tracking: as scroll increases, face tilts down towards the rest of the work
+      const scrollY = window.scrollY || document.documentElement.scrollTop || 0;
+      const scrollRatio = Math.min(1, Math.max(0, scrollY / 360));
+
+      // Check if cursor is within central face area only if not scrolled down
       const faceRadiusX = rect.width * 0.28;
       const faceRadiusY = rect.height * 0.34;
       const normFaceDist =
         (deltaX / faceRadiusX) ** 2 + (deltaY / faceRadiusY) ** 2;
 
-      if (normFaceDist <= 1.0) {
+      if (normFaceDist <= 1.0 && scrollRatio < 0.05) {
         isCursorOnFaceRef.current = true;
         mouseTargetRef.current = { x: 0, y: 0 };
         return;
@@ -236,7 +248,12 @@ export default function FaceLooker({
         Math.min(1, deltaY < 0 ? deltaY / reachUp : deltaY / reachDown)
       );
 
-      mouseTargetRef.current = { x: normX, y: normY };
+      // Blend scroll downward look smoothly:
+      // When scrollRatio increases towards 1, target y smoothly approaches +1.0 (looking straight down at work)
+      const targetY = normY * (1 - scrollRatio) + 1.0 * scrollRatio;
+      const targetX = normX * (1 - scrollRatio * 0.45);
+
+      mouseTargetRef.current = { x: targetX, y: targetY };
     };
 
     const onMouseMove = (e: MouseEvent) => {
@@ -247,6 +264,10 @@ export default function FaceLooker({
       if (e.touches.length > 0) {
         updateFromClientXY(e.touches[0].clientX, e.touches[0].clientY);
       }
+    };
+
+    const onScroll = () => {
+      updateFromClientXY(lastClientPos.x, lastClientPos.y);
     };
 
     const onMouseLeave = (e: MouseEvent) => {
@@ -265,11 +286,13 @@ export default function FaceLooker({
 
     window.addEventListener("mousemove", onMouseMove, { passive: true });
     window.addEventListener("touchmove", onTouchMove, { passive: true });
+    window.addEventListener("scroll", onScroll, { passive: true });
     document.addEventListener("mouseleave", onMouseLeave);
 
     return () => {
       window.removeEventListener("mousemove", onMouseMove);
       window.removeEventListener("touchmove", onTouchMove);
+      window.removeEventListener("scroll", onScroll);
       document.removeEventListener("mouseleave", onMouseLeave);
     };
   }, []);
