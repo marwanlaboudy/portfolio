@@ -80,25 +80,34 @@ function TiltCard({
   );
 }
 
-// Live simulated sEMG bio-signal oscilloscope for Kiwi Gesture Band
+// Live simulated sEMG bio-signal oscilloscope for Cheri Band (Smart Home Gesture & Health Tracker)
 function SemgOscilloscope() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [activeGesture, setActiveGesture] = useState<string>("PINCH_INDEX");
-  const [confidence, setConfidence] = useState<number>(98.6);
+  const [activeGesture, setActiveGesture] = useState<{
+    gesture: string;
+    action: string;
+    conf: number;
+  }>({
+    gesture: "PINCH_INDEX",
+    action: "TOGGLE SMART LIGHTS",
+    conf: 98.6,
+  });
+
+  const [heartRate, setHeartRate] = useState<number>(72);
 
   useEffect(() => {
     const gestures = [
-      { name: "PINCH_INDEX", conf: 98.4 },
-      { name: "FIST_CLENCH", conf: 99.1 },
-      { name: "SWIPE_RIGHT", conf: 97.8 },
-      { name: "WRIST_EXTENSION", conf: 98.9 },
-      { name: "DOUBLE_TAP", conf: 99.4 },
+      { gesture: "PINCH_INDEX", action: "TOGGLE SMART LIGHTS", conf: 98.4 },
+      { gesture: "ROTATE_CW", action: "VOLUME / THERMOSTAT +", conf: 99.1 },
+      { gesture: "DOUBLE_TAP", action: "AC MODE SWITCH", conf: 97.8 },
+      { gesture: "FIST_HOLD", action: "SMART LOCK & ARM", conf: 98.9 },
+      { gesture: "SWIPE_RIGHT", action: "NEXT MEDIA TRACK", conf: 99.4 },
     ];
     let idx = 0;
     const interval = setInterval(() => {
       idx = (idx + 1) % gestures.length;
-      setActiveGesture(gestures[idx].name);
-      setConfidence(gestures[idx].conf);
+      setActiveGesture(gestures[idx]);
+      setHeartRate(70 + Math.floor(Math.random() * 6));
     }, 2800);
     return () => clearInterval(interval);
   }, []);
@@ -181,10 +190,13 @@ function SemgOscilloscope() {
         <div className="flex items-center gap-2">
           <span className="h-2 w-2 rounded-full bg-emerald-400 animate-pulse shadow-[0_0_8px_#34d399]" />
           <span className="text-white/80 uppercase tracking-widest">
-            CH1: Forearm Extensor Carpi Radialis
+            Cheri Band Telemetry: Smart Home & Health
           </span>
         </div>
-        <span className="text-[#7ee8ff] font-bold">1000 Hz / 24-bit ADC</span>
+        <div className="flex items-center gap-3">
+          <span className="text-[#ff2fb9] font-bold">♥ {heartRate} BPM</span>
+          <span className="text-[#7ee8ff] font-bold">1000 Hz sEMG</span>
+        </div>
       </div>
 
       {/* Canvas */}
@@ -197,20 +209,25 @@ function SemgOscilloscope() {
         />
 
         {/* Live Classifier Overlay */}
-        <div className="absolute top-2 right-2 flex items-center gap-2 rounded-lg border border-[#ff2fb9]/40 bg-black/80 px-2.5 py-1 backdrop-blur-md">
-          <Brain className="h-3 w-3 text-[#ff2fb9]" />
-          <span className="text-[10px] font-mono font-bold text-white uppercase tracking-wider">
-            {activeGesture}
-          </span>
-          <span className="rounded bg-[#ff2fb9]/20 px-1.5 py-0.5 text-[9px] font-mono text-[#ff2fb9]">
-            {confidence}%
+        <div className="absolute top-2 right-2 flex flex-col items-end gap-1">
+          <div className="flex items-center gap-2 rounded-lg border border-[#ff2fb9]/40 bg-black/85 px-2.5 py-1 backdrop-blur-md">
+            <Zap className="h-3 w-3 text-[#ff2fb9]" />
+            <span className="text-[10px] font-mono font-bold text-white uppercase tracking-wider">
+              {activeGesture.gesture}
+            </span>
+            <span className="rounded bg-[#ff2fb9]/20 px-1.5 py-0.5 text-[9px] font-mono text-[#ff2fb9]">
+              {activeGesture.conf}%
+            </span>
+          </div>
+          <span className="text-[9px] font-mono uppercase tracking-wider text-[#7ee8ff] bg-black/70 px-2 py-0.5 rounded border border-[#7ee8ff]/30">
+            Smart Home: {activeGesture.action}
           </span>
         </div>
 
         <div className="absolute bottom-2 left-3 flex items-center gap-3 text-[9px] font-mono text-white/50">
           <span>Range: ±150 µV</span>
-          <span>IMU: 6-DoF 200Hz</span>
-          <span className="text-emerald-400">BLE 5.2 Connected</span>
+          <span className="text-emerald-400">Health: Continuous ECG/PPG</span>
+          <span className="text-[#7ee8ff]">BLE 5.2</span>
         </div>
       </div>
     </div>
@@ -498,7 +515,7 @@ export default function SignalTraceSection() {
         </div>
 
         {/* ============================================================== */}
-        {/* CHECKPOINT 2: Automation & AI Systems (n8n / Shopify / WhatsApp) */}
+        {/* CHECKPOINT 2: Automation & AI Systems (Autonomous Dropshipping & Mountain View Bot) */}
         {/* ============================================================== */}
         <div className="relative z-10 mb-28 lg:mb-36">
           {/* Node Badge Anchor */}
@@ -514,154 +531,165 @@ export default function SignalTraceSection() {
             </span>
             <div className="flex flex-col">
               <span className="text-[10px] font-mono uppercase tracking-[0.25em] text-[#ff2fb9] font-bold">
-                CHECKPOINT 02 // DATA PACKETS PULSING
+                CHECKPOINT 02 // AUTONOMOUS AI & AUTOMATIONS
               </span>
               <h3 className="text-2xl sm:text-3xl font-black uppercase text-white tracking-tight">
-                Automation & AI Systems
+                Autonomous AI Systems & Growth Pipelines
               </h3>
             </div>
           </div>
 
-          {/* Interactive Automation Network Card */}
-          <div className="relative overflow-hidden rounded-[32px] border border-white/10 bg-gradient-to-b from-[#0a0a16] via-[#06060e] to-black p-6 sm:p-10 backdrop-blur-2xl">
-            {/* Header info */}
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-white/10">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            {/* System 1: Fully Automated Dropshipping & E-Commerce Engine */}
+            <div className="group relative overflow-hidden rounded-[32px] border border-white/10 bg-gradient-to-b from-[#0e0e1a] via-[#080812] to-black p-7 sm:p-9 backdrop-blur-2xl transition-all duration-500 hover:border-[#ff2fb9]/80 hover:shadow-[0_0_45px_rgba(255,47,185,0.22)] flex flex-col justify-between">
               <div>
-                <span className="text-[10px] font-mono uppercase tracking-[0.25em] text-[#ff2fb9]">
-                  Multi-Channel Agentic Workflows
-                </span>
-                <p className="mt-1 text-sm text-white/70">
-                  Orchestrating event-driven webhooks, WhatsApp conversational engines, Shopify automated fulfillments, and fine-tuned NLP pipelines.
+                <div className="flex items-center justify-between pb-4 border-b border-white/10">
+                  <span className="flex items-center gap-2 text-[10px] font-mono uppercase tracking-widest text-[#ff2fb9]">
+                    <Sparkles className="h-3 w-3 text-[#ff2fb9]" />
+                    End-to-End Autonomous E-Commerce
+                  </span>
+                  <span className="rounded-full bg-emerald-400/10 border border-emerald-400/30 px-2 py-0.5 text-[9px] font-mono text-emerald-400">
+                    Zero-Touch
+                  </span>
+                </div>
+
+                <h4 className="mt-4 text-2xl font-black uppercase text-white tracking-tight group-hover:text-[#ff2fb9] transition-colors">
+                  Autonomous Dropshipping Engine
+                </h4>
+
+                <p className="mt-2.5 text-[13px] leading-relaxed text-white/70">
+                  Self-driving commercial pipeline that discovers viral products, generates dedicated storefronts, synthesizes ad campaigns, and fulfills purchases automatically.
                 </p>
+
+                {/* Step-by-Step Autonomous Loop */}
+                <div className="mt-5 space-y-2.5">
+                  <div className="flex items-start gap-3 rounded-xl border border-white/10 bg-white/[0.03] p-3 text-xs">
+                    <div className="h-6 w-6 rounded-lg bg-[#ff2fb9]/20 flex items-center justify-center text-[#ff2fb9] font-mono font-bold text-[10px] shrink-0 mt-0.5">
+                      01
+                    </div>
+                    <div>
+                      <span className="font-bold text-white uppercase text-[11px] font-mono">
+                        Daily Best-Seller Scraper
+                      </span>
+                      <p className="text-white/60 text-[11px] mt-0.5">
+                        Scrapes high-velocity trending products and viral winners across e-commerce marketplaces daily.
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start gap-3 rounded-xl border border-white/10 bg-white/[0.03] p-3 text-xs">
+                    <div className="h-6 w-6 rounded-lg bg-[#7ee8ff]/20 flex items-center justify-center text-[#7ee8ff] font-mono font-bold text-[10px] shrink-0 mt-0.5">
+                      02
+                    </div>
+                    <div>
+                      <span className="font-bold text-white uppercase text-[11px] font-mono">
+                        Autonomous Landing Page & Ads
+                      </span>
+                      <p className="text-white/60 text-[11px] mt-0.5">
+                        Extracts product assets, generates high-converting landing pages, and compiles targeted ad creatives automatically.
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start gap-3 rounded-xl border border-white/10 bg-white/[0.03] p-3 text-xs">
+                    <div className="h-6 w-6 rounded-lg bg-emerald-400/20 flex items-center justify-center text-emerald-400 font-mono font-bold text-[10px] shrink-0 mt-0.5">
+                      03
+                    </div>
+                    <div>
+                      <span className="font-bold text-white uppercase text-[11px] font-mono">
+                        Instant Zero-Touch Supplier Fulfillment
+                      </span>
+                      <p className="text-white/60 text-[11px] mt-0.5">
+                        When a customer checks out, the pipeline autonomously places the order with the supplier and routes tracking directly.
+                      </p>
+                    </div>
+                  </div>
+                </div>
               </div>
 
-              <div className="flex items-center gap-2 self-start sm:self-auto rounded-full border border-emerald-400/30 bg-emerald-400/10 px-3 py-1 text-[10px] font-mono text-emerald-300">
-                <span className="h-2 w-2 rounded-full bg-emerald-400 animate-ping" />
-                <span>Pipelines Active: 99.98% SLA</span>
+              <div className="mt-6 pt-4 border-t border-white/10 flex items-center justify-between text-[10px] font-mono text-white/50">
+                <span>Stack: Python • Webhooks • Headless E-Com</span>
+                <span className="text-[#ff2fb9] font-bold">100% Automated</span>
               </div>
             </div>
 
-            {/* Visual Node Circuit with Traveling Data Packets */}
-            <div className="relative my-8 py-6 px-4 rounded-2xl bg-black/60 border border-white/10 overflow-hidden">
-              {/* Background Circuit Grid */}
-              <div className="pointer-events-none absolute inset-0 opacity-15">
-                <div className="h-full w-full bg-[radial-gradient(#ff2fb9_1px,transparent_1px)] [background-size:16px_16px]" />
-              </div>
+            {/* System 2: Mountain View AI Chatbot & Facebook Lead Scraper */}
+            <div className="group relative overflow-hidden rounded-[32px] border border-white/10 bg-gradient-to-b from-[#0e0e1a] via-[#080812] to-black p-7 sm:p-9 backdrop-blur-2xl transition-all duration-500 hover:border-[#7ee8ff]/80 hover:shadow-[0_0_45px_rgba(126,232,255,0.22)] flex flex-col justify-between">
+              <div>
+                <div className="flex items-center justify-between pb-4 border-b border-white/10">
+                  <span className="flex items-center gap-2 text-[10px] font-mono uppercase tracking-widest text-[#7ee8ff]">
+                    <Bot className="h-3 w-3 text-[#7ee8ff]" />
+                    Enterprise Real Estate Pilot
+                  </span>
+                  <span className="rounded-full bg-[#7ee8ff]/10 border border-[#7ee8ff]/30 px-2 py-0.5 text-[9px] font-mono text-[#7ee8ff]">
+                    Mountain View Test
+                  </span>
+                </div>
 
-              {/* Service Pipeline Nodes Flow */}
-              <div className="relative z-10 grid grid-cols-1 md:grid-cols-4 gap-4 items-center">
-                {/* Node A: Shopify Webhook */}
-                <div className="flex flex-col items-center text-center p-4 rounded-xl border border-white/10 bg-white/[0.03] backdrop-blur-md">
-                  <div className="h-10 w-10 rounded-xl bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center text-emerald-400 shadow-[0_0_15px_rgba(52,211,153,0.3)] mb-2">
-                    <ShoppingBag className="h-5 w-5" />
+                <h4 className="mt-4 text-2xl font-black uppercase text-white tracking-tight group-hover:text-[#7ee8ff] transition-colors">
+                  Mountain View Lead Bot
+                </h4>
+
+                <p className="mt-2.5 text-[13px] leading-relaxed text-white/70">
+                  Intelligent property engagement system combining automated social scraping with real-time conversational qualification to capture and convert high-intent buyers.
+                </p>
+
+                {/* Architecture Highlights */}
+                <div className="mt-5 space-y-2.5">
+                  <div className="flex items-start gap-3 rounded-xl border border-white/10 bg-white/[0.03] p-3 text-xs">
+                    <div className="h-6 w-6 rounded-lg bg-[#7ee8ff]/20 flex items-center justify-center text-[#7ee8ff] font-mono font-bold text-[10px] shrink-0 mt-0.5">
+                      <Share2 className="h-3.5 w-3.5" />
+                    </div>
+                    <div>
+                      <span className="font-bold text-white uppercase text-[11px] font-mono">
+                        Facebook Lead Scraper Engine
+                      </span>
+                      <p className="text-white/60 text-[11px] mt-0.5">
+                        Autonomous scraping pipelines tracking targeted groups and inquiries to extract qualified real estate lead contacts.
+                      </p>
+                    </div>
                   </div>
-                  <span className="text-[11px] font-bold text-white uppercase tracking-wider">
-                    Shopify Event
-                  </span>
-                  <span className="text-[9px] font-mono text-white/50 mt-0.5">
-                    Order Ingestion Webhook
-                  </span>
-                </div>
 
-                {/* Node B: n8n / Make Engine */}
-                <div className="flex flex-col items-center text-center p-4 rounded-xl border border-[#ff2fb9]/40 bg-[#ff2fb9]/10 backdrop-blur-md shadow-[0_0_20px_rgba(255,47,185,0.15)]">
-                  <div className="h-10 w-10 rounded-xl bg-[#ff2fb9]/30 border border-[#ff2fb9] flex items-center justify-center text-[#ff2fb9] shadow-[0_0_20px_#ff2fb9] mb-2">
-                    <Workflow className="h-5 w-5" />
+                  <div className="flex items-start gap-3 rounded-xl border border-white/10 bg-white/[0.03] p-3 text-xs">
+                    <div className="h-6 w-6 rounded-lg bg-[#ff2fb9]/20 flex items-center justify-center text-[#ff2fb9] font-mono font-bold text-[10px] shrink-0 mt-0.5">
+                      <MessageSquare className="h-3.5 w-3.5" />
+                    </div>
+                    <div>
+                      <span className="font-bold text-white uppercase text-[11px] font-mono">
+                        Instant SMS & WhatsApp Conversational AI
+                      </span>
+                      <p className="text-white/60 text-[11px] mt-0.5">
+                        Instantly triggers personalized outreach texts, answers property questions, and qualifies buyer intent within seconds.
+                      </p>
+                    </div>
                   </div>
-                  <span className="text-[11px] font-bold text-white uppercase tracking-wider">
-                    n8n / Make Engine
-                  </span>
-                  <span className="text-[9px] font-mono text-[#ff2fb9] mt-0.5">
-                    Async State & Router
-                  </span>
-                </div>
 
-                {/* Node C: NLP Fine-Tuning */}
-                <div className="flex flex-col items-center text-center p-4 rounded-xl border border-white/10 bg-white/[0.03] backdrop-blur-md">
-                  <div className="h-10 w-10 rounded-xl bg-[#7ee8ff]/20 border border-[#7ee8ff]/40 flex items-center justify-center text-[#7ee8ff] shadow-[0_0_15px_rgba(126,232,255,0.3)] mb-2">
-                    <Brain className="h-5 w-5" />
+                  <div className="flex items-start gap-3 rounded-xl border border-white/10 bg-white/[0.03] p-3 text-xs">
+                    <div className="h-6 w-6 rounded-lg bg-emerald-400/20 flex items-center justify-center text-emerald-400 font-mono font-bold text-[10px] shrink-0 mt-0.5">
+                      <CheckCircle2 className="h-3.5 w-3.5" />
+                    </div>
+                    <div>
+                      <span className="font-bold text-white uppercase text-[11px] font-mono">
+                        Tested & Validated for Mountain View
+                      </span>
+                      <p className="text-white/60 text-[11px] mt-0.5">
+                        Engineered specifically to test and streamline lead velocity and booking conversion rates for luxury developments.
+                      </p>
+                    </div>
                   </div>
-                  <span className="text-[11px] font-bold text-white uppercase tracking-wider">
-                    NLP Fine-Tuning
-                  </span>
-                  <span className="text-[9px] font-mono text-[#7ee8ff] mt-0.5">
-                    Intent & Sentiment AI
-                  </span>
-                </div>
-
-                {/* Node D: WhatsApp / Customer API */}
-                <div className="flex flex-col items-center text-center p-4 rounded-xl border border-white/10 bg-white/[0.03] backdrop-blur-md">
-                  <div className="h-10 w-10 rounded-xl bg-emerald-400/20 border border-emerald-400/40 flex items-center justify-center text-emerald-400 shadow-[0_0_15px_rgba(52,211,153,0.3)] mb-2">
-                    <MessageSquare className="h-5 w-5" />
-                  </div>
-                  <span className="text-[11px] font-bold text-white uppercase tracking-wider">
-                    WhatsApp Cloud
-                  </span>
-                  <span className="text-[9px] font-mono text-white/50 mt-0.5">
-                    Real-Time Dispatch
-                  </span>
                 </div>
               </div>
 
-              {/* Data Packet Pulse SVG Bar */}
-              <div className="relative mt-6 pt-4 border-t border-white/10">
-                <div className="flex items-center justify-between text-[10px] font-mono text-white/50 mb-2">
-                  <span className="flex items-center gap-1.5 text-[#ff2fb9]">
-                    <Zap className="h-3 w-3" />
-                    LIVE PACKET STREAM: payload.json [2.4 KB]
-                  </span>
-                  <span>LATENCY: 84ms</span>
-                </div>
-
-                {/* Animated progress track with moving data packets */}
-                <div className="relative h-2 w-full rounded-full bg-white/10 overflow-hidden">
-                  <motion.div
-                    animate={{ x: ["-100%", "200%"] }}
-                    transition={{
-                      repeat: Infinity,
-                      duration: 2.2,
-                      ease: "linear",
-                    }}
-                    className="h-full w-48 rounded-full bg-gradient-to-r from-transparent via-[#ff2fb9] to-transparent shadow-[0_0_12px_#ff2fb9]"
-                  />
-                  <motion.div
-                    animate={{ x: ["-100%", "200%"] }}
-                    transition={{
-                      repeat: Infinity,
-                      duration: 2.2,
-                      delay: 1.1,
-                      ease: "linear",
-                    }}
-                    className="h-full w-36 rounded-full bg-gradient-to-r from-transparent via-[#7ee8ff] to-transparent shadow-[0_0_12px_#7ee8ff]"
-                  />
-                </div>
-              </div>
-            </div>
-
-            {/* Architecture Details Badges */}
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 text-center">
-              <div className="rounded-xl border border-white/10 bg-white/[0.02] p-3">
-                <span className="text-xl font-black text-white">n8n & Make</span>
-                <p className="text-[10px] font-mono text-white/50 mt-1 uppercase">Workflow Orchestration</p>
-              </div>
-              <div className="rounded-xl border border-white/10 bg-white/[0.02] p-3">
-                <span className="text-xl font-black text-[#ff2fb9]">WhatsApp API</span>
-                <p className="text-[10px] font-mono text-white/50 mt-1 uppercase">Meta Cloud Platform</p>
-              </div>
-              <div className="rounded-xl border border-white/10 bg-white/[0.02] p-3">
-                <span className="text-xl font-black text-[#7ee8ff]">NLP Models</span>
-                <p className="text-[10px] font-mono text-white/50 mt-1 uppercase">Fine-Tuned Embeddings</p>
-              </div>
-              <div className="rounded-xl border border-white/10 bg-white/[0.02] p-3">
-                <span className="text-xl font-black text-emerald-400">&lt; 100ms</span>
-                <p className="text-[10px] font-mono text-white/50 mt-1 uppercase">Webhook Execution</p>
+              <div className="mt-6 pt-4 border-t border-white/10 flex items-center justify-between text-[10px] font-mono text-white/50">
+                <span>Stack: Facebook Scraping • SMS/WhatsApp • NLP</span>
+                <span className="text-[#7ee8ff] font-bold">&lt; 30s Lead Outreach</span>
               </div>
             </div>
           </div>
         </div>
 
         {/* ============================================================== */}
-        {/* CHECKPOINT 3: Hardware & Edge ML (Kiwi sEMG / IMU Gesture Band) */}
+        {/* CHECKPOINT 3: Hardware & Edge ML (Cheri Band: Smart Home Gesture & Health Tracker) */}
         {/* ============================================================== */}
         <div className="relative z-10 mb-20">
           {/* Node Badge Anchor */}
@@ -677,16 +705,16 @@ export default function SignalTraceSection() {
             </span>
             <div className="flex flex-col">
               <span className="text-[10px] font-mono uppercase tracking-[0.25em] text-[#7ee8ff] font-bold">
-                CHECKPOINT 03 // LIVE sEMG WAVEFORM MORPH
+                CHECKPOINT 03 // LIVE sEMG WAVEFORM & HEALTH TELEMETRY
               </span>
               <h3 className="text-2xl sm:text-3xl font-black uppercase text-white tracking-tight">
-                Hardware & Edge ML // Kiwi Gesture Band
+                Hardware & Edge ML // Cheri Band
               </h3>
             </div>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-            {/* Left: Live sEMG Bio-Waveform Oscilloscope (Morphed from straight trace) */}
+            {/* Left: Live sEMG Bio-Waveform Oscilloscope & Smart Home Trigger */}
             <div className="lg:col-span-7">
               <SemgOscilloscope />
             </div>
@@ -696,47 +724,50 @@ export default function SignalTraceSection() {
               <div className="rounded-2xl border border-white/10 bg-gradient-to-br from-[#0c0c16] to-black p-6 backdrop-blur-xl">
                 <div className="flex items-center justify-between pb-3 border-b border-white/10">
                   <span className="text-[10px] font-mono uppercase tracking-widest text-[#7ee8ff]">
-                    Embedded Sensor Architecture
+                    Wearable Hardware Architecture
                   </span>
                   <span className="rounded-full bg-[#7ee8ff]/10 border border-[#7ee8ff]/30 px-2 py-0.5 text-[9px] font-mono text-[#7ee8ff]">
-                    BLE 5.2
+                    Dual-Engine
                   </span>
                 </div>
 
                 <h4 className="text-xl font-bold text-white mt-3 uppercase tracking-tight">
-                  Kiwi sEMG & IMU Wristband
+                  Cheri Band
                 </h4>
+                <p className="text-[11px] font-mono uppercase tracking-wider text-[#ff2fb9] mt-0.5 font-bold">
+                  Hand Gesture Smart Home Band & Health Tracker
+                </p>
 
-                <p className="mt-2 text-[13px] leading-relaxed text-white/70">
-                  Wearable neural-interface prototype acquiring micro-voltage surface electromyography (sEMG) from forearm musculature coupled with 6-DoF inertial motion tracking.
+                <p className="mt-2.5 text-[13px] leading-relaxed text-white/70">
+                  A dual-purpose smart wearable combining micro-voltage surface electromyography (sEMG) for intuitive smart home hand gesture control with continuous biometric vital signs and health telemetry.
                 </p>
 
                 <div className="mt-4 space-y-2.5 text-[11px] font-mono text-white/80">
                   <div className="flex items-center justify-between rounded-lg bg-white/5 px-3 py-2">
-                    <span className="text-white/60">Analog Front-End:</span>
-                    <span className="text-[#7ee8ff] font-bold">24-bit sEMG ADC (1kHz)</span>
+                    <span className="text-white/60">Smart Home Engine:</span>
+                    <span className="text-[#7ee8ff] font-bold">Lights, AC, Media, Locks</span>
                   </div>
                   <div className="flex items-center justify-between rounded-lg bg-white/5 px-3 py-2">
-                    <span className="text-white/60">Motion Tracking:</span>
-                    <span className="text-[#ff2fb9] font-bold">6-Axis IMU (Gyro + Accel)</span>
+                    <span className="text-white/60">Health Tracker:</span>
+                    <span className="text-[#ff2fb9] font-bold">Continuous HR & Vital Telemetry</span>
                   </div>
                   <div className="flex items-center justify-between rounded-lg bg-white/5 px-3 py-2">
-                    <span className="text-white/60">On-Device Inference:</span>
-                    <span className="text-emerald-400 font-bold">Quantized 1D-CNN (TinyML)</span>
+                    <span className="text-white/60">Sensor Suite:</span>
+                    <span className="text-white font-bold">24-bit sEMG + 6-DoF IMU</span>
                   </div>
                   <div className="flex items-center justify-between rounded-lg bg-white/5 px-3 py-2">
-                    <span className="text-white/60">Gesture Latency:</span>
-                    <span className="text-white font-bold">&lt; 16ms (Instantaneous)</span>
+                    <span className="text-white/60">Edge Inference:</span>
+                    <span className="text-emerald-400 font-bold">On-Device Quantized TinyML</span>
                   </div>
                 </div>
               </div>
 
               <div className="rounded-2xl border border-white/10 bg-white/[0.02] p-5">
                 <span className="text-[10px] font-mono uppercase tracking-widest text-[#ff2fb9] font-bold">
-                  Gesture Recognition Spectrum
+                  Simultaneous Control & Wellness
                 </span>
                 <p className="mt-1 text-xs text-white/60 leading-relaxed">
-                  Real-time pattern classification recognizes subtle finger pinches, fist contractions, hand waves, and continuous wrist rotation vectors with &gt; 98% accuracy.
+                  Controls your entire ambient living environment with subtle finger pinches and rotations while passively tracking neuromuscular activation fatigue, heart rate dynamics, and daily biometric health.
                 </p>
               </div>
             </div>
