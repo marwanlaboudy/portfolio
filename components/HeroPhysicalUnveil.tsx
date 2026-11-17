@@ -3,7 +3,9 @@
 import React, { useRef } from "react";
 import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 import FaceLooker from "@/components/FaceLooker";
-import { ArrowUpRight, Cpu, Sparkles, Radio } from "lucide-react";
+import ResaporiPhoneTrigger from "@/components/ResaporiPhoneTrigger";
+import MarioJuicePhoneTrigger from "@/components/MarioJuicePhoneTrigger";
+import { ArrowUpRight } from "lucide-react";
 
 export default function HeroPhysicalUnveil() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -31,11 +33,9 @@ export default function HeroPhysicalUnveil() {
   const portraitX = useTransform(smoothProgress, [0.12, 0.85], ["0vw", "-36vw"]);
   const portraitY = useTransform(smoothProgress, [0.12, 0.85], ["0vh", "-41vh"]);
 
-  // 3. Side Experience Badges (AI Engineer & Co-Founder of Cheri Band)
-  const experienceOpacity = useTransform(smoothProgress, [0, 0.45, 0.72], [1, 0.85, 0]);
-  const experienceScale = useTransform(smoothProgress, [0, 0.7], [1, 0.92]);
-  const experienceLeftX = useTransform(smoothProgress, [0.15, 0.75], ["0%", "-40%"]);
-  const experienceRightX = useTransform(smoothProgress, [0.15, 0.75], ["0%", "+40%"]);
+  // 3. Side Phone Badges morphing outward / fading smoothly on scroll
+  const phoneTriggersOpacity = useTransform(smoothProgress, [0, 0.18, 0.45], [1, 0.9, 0]);
+  const phoneTriggersScale = useTransform(smoothProgress, [0, 0.45], [1, 1.1]);
 
   return (
     <section ref={containerRef} className="relative h-[280vh] w-full bg-[#07070a]">
@@ -70,6 +70,23 @@ export default function HeroPhysicalUnveil() {
           </div>
         </header>
 
+        {/* Experience HUD Pill: Prominently showcasing credentials without displacing phone buttons */}
+        <div className="relative z-30 mx-auto -mt-2 flex items-center justify-center">
+          <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-black/60 px-4 py-1.5 backdrop-blur-md shadow-[0_0_20px_rgba(34,211,238,0.15)]">
+            <span className="relative flex h-2 w-2">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#22d3ee] opacity-75" />
+              <span className="relative inline-flex h-2 w-2 rounded-full bg-[#22d3ee]" />
+            </span>
+            <span className="text-[10px] sm:text-[11px] font-mono uppercase tracking-[0.22em] text-white/90">
+              <span className="text-[#22d3ee] font-bold">AI Engineer</span>
+              <span className="mx-2 text-white/30">•</span>
+              <span className="text-[#ec4899] font-bold">Co-Founder of Cheri Band</span>
+              <span className="mx-2 text-white/30 hidden sm:inline">•</span>
+              <span className="text-white/70 font-medium hidden sm:inline">Media Buyer &amp; Full-Stack</span>
+            </span>
+          </div>
+        </div>
+
         {/* Giant Kinetic Typography ("MARWAN" left, "LABOUDY" right) */}
         <div className="pointer-events-none absolute inset-x-0 top-[15%] z-0 select-none text-center font-black uppercase leading-[0.85] tracking-tight">
           <motion.span
@@ -101,77 +118,26 @@ export default function HeroPhysicalUnveil() {
           </motion.div>
         </div>
 
-        {/* Side Experience Badges (Replaced phone popups with user experience credentials) */}
-        {/* Left Badge: AI Engineer */}
+        {/* Floating Phone Sites Buttons (Preserved in place on Left and Right) */}
         <motion.div
           style={{
-            opacity: experienceOpacity,
-            scale: experienceScale,
-            x: experienceLeftX,
+            opacity: phoneTriggersOpacity,
+            scale: phoneTriggersScale,
           }}
-          className="pointer-events-auto absolute left-4 sm:left-8 lg:left-12 top-[52vh] -translate-y-1/2 z-30 hidden sm:block max-w-[260px] lg:max-w-[280px]"
+          className="pointer-events-auto"
         >
-          <div className="group rounded-2xl border border-white/10 bg-[#07070a]/80 p-4 backdrop-blur-xl shadow-[0_0_30px_rgba(34,211,238,0.12)] transition-all hover:border-[#22d3ee]/60 hover:shadow-[0_0_40px_rgba(34,211,238,0.25)]">
-            <div className="flex items-center justify-between border-b border-white/10 pb-2.5">
-              <span className="flex items-center gap-1.5 text-[9px] font-mono uppercase tracking-widest text-[#22d3ee]">
-                <Cpu className="h-3 w-3 text-[#22d3ee]" />
-                Role // 01
-              </span>
-              <span className="h-1.5 w-1.5 rounded-full bg-[#22d3ee] shadow-[0_0_6px_#22d3ee]" />
-            </div>
-            <h3 className="mt-2.5 text-base font-black uppercase text-white tracking-tight">
-              AI Engineer
-            </h3>
-            <p className="mt-1 text-[11px] text-white/70 leading-relaxed font-sans">
-              Autonomous agent systems, Qwen/AraBERT NLP fine-tuning, automated Facebook lead scrapers & conversational bots.
-            </p>
-            <div className="mt-3 flex flex-wrap gap-1 text-[8.5px] font-mono uppercase text-[#22d3ee]">
-              <span className="rounded bg-[#22d3ee]/10 border border-[#22d3ee]/30 px-1.5 py-0.5">Automations</span>
-              <span className="rounded bg-white/5 border border-white/10 px-1.5 py-0.5 text-white/60">Lead Bots</span>
-              <span className="rounded bg-white/5 border border-white/10 px-1.5 py-0.5 text-white/60">n8n Core</span>
-            </div>
-          </div>
+          <ResaporiPhoneTrigger />
+          <MarioJuicePhoneTrigger />
         </motion.div>
 
-        {/* Right Badge: Co-Founder Cheri Band */}
-        <motion.div
-          style={{
-            opacity: experienceOpacity,
-            scale: experienceScale,
-            x: experienceRightX,
-          }}
-          className="pointer-events-auto absolute right-4 sm:right-8 lg:right-12 top-[52vh] -translate-y-1/2 z-30 hidden sm:block max-w-[260px] lg:max-w-[280px]"
-        >
-          <div className="group rounded-2xl border border-white/10 bg-[#07070a]/80 p-4 backdrop-blur-xl shadow-[0_0_30px_rgba(236,72,153,0.12)] transition-all hover:border-[#ec4899]/60 hover:shadow-[0_0_40px_rgba(236,72,153,0.25)]">
-            <div className="flex items-center justify-between border-b border-white/10 pb-2.5">
-              <span className="flex items-center gap-1.5 text-[9px] font-mono uppercase tracking-widest text-[#ec4899]">
-                <Radio className="h-3 w-3 text-[#ec4899]" />
-                Role // 02
-              </span>
-              <span className="h-1.5 w-1.5 rounded-full bg-[#ec4899] shadow-[0_0_6px_#ec4899]" />
-            </div>
-            <h3 className="mt-2.5 text-base font-black uppercase text-white tracking-tight">
-              Co-Founder // Cheri
-            </h3>
-            <p className="mt-1 text-[11px] text-white/70 leading-relaxed font-sans">
-              Smart home hand gesture controller & continuous health tracker band using bio-signal sEMG and 6-axis IMU sensors.
-            </p>
-            <div className="mt-3 flex flex-wrap gap-1 text-[8.5px] font-mono uppercase text-[#ec4899]">
-              <span className="rounded bg-[#ec4899]/10 border border-[#ec4899]/30 px-1.5 py-0.5">Gesture Band</span>
-              <span className="rounded bg-white/5 border border-white/10 px-1.5 py-0.5 text-white/60">sEMG Sensor</span>
-              <span className="rounded bg-white/5 border border-white/10 px-1.5 py-0.5 text-white/60">Edge ML</span>
-            </div>
-          </div>
-        </motion.div>
-
-        {/* Bottom Bar: Cleaned up with experience summary (scroll down button removed) */}
+        {/* Bottom Bar: Experience credential ticker & Get in Touch (scroll down button removed) */}
         <div className="relative z-30 mx-auto w-full max-w-7xl flex items-center justify-between border-t border-white/10 pt-4">
           <div className="flex items-center gap-3 text-[10px] sm:text-[11px] font-mono uppercase tracking-[0.25em] text-white/70">
             <span className="text-[#22d3ee] font-bold">AI Engineer</span>
             <span className="text-white/30">•</span>
             <span className="text-[#ec4899] font-bold">Co-Founder Cheri Band</span>
             <span className="text-white/30">•</span>
-            <span className="text-white/60 hidden md:inline">Media Buyer & Full-Stack</span>
+            <span className="text-white/60 hidden md:inline">Full-Stack Web &amp; Media Buying</span>
           </div>
 
           <a
