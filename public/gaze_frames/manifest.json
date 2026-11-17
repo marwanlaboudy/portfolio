@@ -1,2818 +1,2818 @@
 {
   "total": 391,
-  "centerFrame": "/gaze_frames/blink_0000.webp?v=neon3",
+  "centerFrame": "/gaze_frames/blink_0000.webp?v=neon5",
   "centerFrameId": 247,
   "frames": [
     {
       "id": 0,
       "seg": 0,
-      "file": "/gaze_frames/frame_0000.webp?v=neon3",
+      "file": "/gaze_frames/frame_0000.webp?v=neon5",
       "x": -0.025,
       "y": 0.0
     },
     {
       "id": 1,
       "seg": 0,
-      "file": "/gaze_frames/frame_0001.webp?v=neon3",
+      "file": "/gaze_frames/frame_0001.webp?v=neon5",
       "x": -0.0322,
       "y": 0.0
     },
     {
       "id": 2,
       "seg": 0,
-      "file": "/gaze_frames/frame_0002.webp?v=neon3",
+      "file": "/gaze_frames/frame_0002.webp?v=neon5",
       "x": -0.0441,
       "y": 0.0
     },
     {
       "id": 3,
       "seg": 0,
-      "file": "/gaze_frames/frame_0003.webp?v=neon3",
+      "file": "/gaze_frames/frame_0003.webp?v=neon5",
       "x": -0.0597,
       "y": 0.0
     },
     {
       "id": 4,
       "seg": 0,
-      "file": "/gaze_frames/frame_0004.webp?v=neon3",
+      "file": "/gaze_frames/frame_0004.webp?v=neon5",
       "x": -0.0776,
       "y": 0.0
     },
     {
       "id": 5,
       "seg": 0,
-      "file": "/gaze_frames/frame_0005.webp?v=neon3",
+      "file": "/gaze_frames/frame_0005.webp?v=neon5",
       "x": -0.0965,
       "y": 0.0
     },
     {
       "id": 6,
       "seg": 0,
-      "file": "/gaze_frames/frame_0006.webp?v=neon3",
+      "file": "/gaze_frames/frame_0006.webp?v=neon5",
       "x": -0.1153,
       "y": 0.0
     },
     {
       "id": 7,
       "seg": 0,
-      "file": "/gaze_frames/frame_0007.webp?v=neon3",
+      "file": "/gaze_frames/frame_0007.webp?v=neon5",
       "x": -0.1342,
       "y": 0.0
     },
     {
       "id": 8,
       "seg": 0,
-      "file": "/gaze_frames/frame_0008.webp?v=neon3",
+      "file": "/gaze_frames/frame_0008.webp?v=neon5",
       "x": -0.1536,
       "y": 0.0
     },
     {
       "id": 9,
       "seg": 0,
-      "file": "/gaze_frames/frame_0009.webp?v=neon3",
+      "file": "/gaze_frames/frame_0009.webp?v=neon5",
       "x": -0.174,
       "y": 0.0
     },
     {
       "id": 10,
       "seg": 0,
-      "file": "/gaze_frames/frame_0010.webp?v=neon3",
+      "file": "/gaze_frames/frame_0010.webp?v=neon5",
       "x": -0.1959,
       "y": 0.0
     },
     {
       "id": 11,
       "seg": 0,
-      "file": "/gaze_frames/frame_0011.webp?v=neon3",
+      "file": "/gaze_frames/frame_0011.webp?v=neon5",
       "x": -0.2188,
       "y": 0.0
     },
     {
       "id": 12,
       "seg": 0,
-      "file": "/gaze_frames/frame_0012.webp?v=neon3",
+      "file": "/gaze_frames/frame_0012.webp?v=neon5",
       "x": -0.2424,
       "y": 0.0
     },
     {
       "id": 13,
       "seg": 0,
-      "file": "/gaze_frames/frame_0013.webp?v=neon3",
+      "file": "/gaze_frames/frame_0013.webp?v=neon5",
       "x": -0.2659,
       "y": 0.0
     },
     {
       "id": 14,
       "seg": 0,
-      "file": "/gaze_frames/frame_0014.webp?v=neon3",
+      "file": "/gaze_frames/frame_0014.webp?v=neon5",
       "x": -0.2892,
       "y": 0.0
     },
     {
       "id": 15,
       "seg": 0,
-      "file": "/gaze_frames/frame_0015.webp?v=neon3",
+      "file": "/gaze_frames/frame_0015.webp?v=neon5",
       "x": -0.3118,
       "y": 0.0
     },
     {
       "id": 16,
       "seg": 0,
-      "file": "/gaze_frames/frame_0016.webp?v=neon3",
+      "file": "/gaze_frames/frame_0016.webp?v=neon5",
       "x": -0.3334,
       "y": 0.0
     },
     {
       "id": 17,
       "seg": 0,
-      "file": "/gaze_frames/frame_0017.webp?v=neon3",
+      "file": "/gaze_frames/frame_0017.webp?v=neon5",
       "x": -0.3539,
       "y": 0.0
     },
     {
       "id": 18,
       "seg": 0,
-      "file": "/gaze_frames/frame_0018.webp?v=neon3",
+      "file": "/gaze_frames/frame_0018.webp?v=neon5",
       "x": -0.3732,
       "y": 0.0
     },
     {
       "id": 19,
       "seg": 0,
-      "file": "/gaze_frames/frame_0019.webp?v=neon3",
+      "file": "/gaze_frames/frame_0019.webp?v=neon5",
       "x": -0.3908,
       "y": 0.0
     },
     {
       "id": 20,
       "seg": 0,
-      "file": "/gaze_frames/frame_0020.webp?v=neon3",
+      "file": "/gaze_frames/frame_0020.webp?v=neon5",
       "x": -0.4072,
       "y": 0.0
     },
     {
       "id": 21,
       "seg": 0,
-      "file": "/gaze_frames/frame_0021.webp?v=neon3",
+      "file": "/gaze_frames/frame_0021.webp?v=neon5",
       "x": -0.4222,
       "y": 0.0
     },
     {
       "id": 22,
       "seg": 0,
-      "file": "/gaze_frames/frame_0022.webp?v=neon3",
+      "file": "/gaze_frames/frame_0022.webp?v=neon5",
       "x": -0.4357,
       "y": 0.0
     },
     {
       "id": 23,
       "seg": 0,
-      "file": "/gaze_frames/frame_0023.webp?v=neon3",
+      "file": "/gaze_frames/frame_0023.webp?v=neon5",
       "x": -0.4477,
       "y": 0.0
     },
     {
       "id": 24,
       "seg": 0,
-      "file": "/gaze_frames/frame_0024.webp?v=neon3",
+      "file": "/gaze_frames/frame_0024.webp?v=neon5",
       "x": -0.4581,
       "y": 0.0
     },
     {
       "id": 25,
       "seg": 0,
-      "file": "/gaze_frames/frame_0025.webp?v=neon3",
+      "file": "/gaze_frames/frame_0025.webp?v=neon5",
       "x": -0.4673,
       "y": 0.0
     },
     {
       "id": 26,
       "seg": 0,
-      "file": "/gaze_frames/frame_0026.webp?v=neon3",
+      "file": "/gaze_frames/frame_0026.webp?v=neon5",
       "x": -0.4756,
       "y": 0.0
     },
     {
       "id": 27,
       "seg": 0,
-      "file": "/gaze_frames/frame_0027.webp?v=neon3",
+      "file": "/gaze_frames/frame_0027.webp?v=neon5",
       "x": -0.4835,
       "y": 0.0
     },
     {
       "id": 28,
       "seg": 0,
-      "file": "/gaze_frames/frame_0028.webp?v=neon3",
+      "file": "/gaze_frames/frame_0028.webp?v=neon5",
       "x": -0.4916,
       "y": 0.0
     },
     {
       "id": 29,
       "seg": 0,
-      "file": "/gaze_frames/frame_0029.webp?v=neon3",
+      "file": "/gaze_frames/frame_0029.webp?v=neon5",
       "x": -0.5011,
       "y": 0.0
     },
     {
       "id": 30,
       "seg": 0,
-      "file": "/gaze_frames/frame_0030.webp?v=neon3",
+      "file": "/gaze_frames/frame_0030.webp?v=neon5",
       "x": -0.5119,
       "y": 0.0
     },
     {
       "id": 31,
       "seg": 0,
-      "file": "/gaze_frames/frame_0031.webp?v=neon3",
+      "file": "/gaze_frames/frame_0031.webp?v=neon5",
       "x": -0.5249,
       "y": 0.0
     },
     {
       "id": 32,
       "seg": 0,
-      "file": "/gaze_frames/frame_0032.webp?v=neon3",
+      "file": "/gaze_frames/frame_0032.webp?v=neon5",
       "x": -0.5396,
       "y": 0.0
     },
     {
       "id": 33,
       "seg": 0,
-      "file": "/gaze_frames/frame_0033.webp?v=neon3",
+      "file": "/gaze_frames/frame_0033.webp?v=neon5",
       "x": -0.5561,
       "y": 0.0
     },
     {
       "id": 34,
       "seg": 0,
-      "file": "/gaze_frames/frame_0034.webp?v=neon3",
+      "file": "/gaze_frames/frame_0034.webp?v=neon5",
       "x": -0.5734,
       "y": 0.0
     },
     {
       "id": 35,
       "seg": 0,
-      "file": "/gaze_frames/frame_0035.webp?v=neon3",
+      "file": "/gaze_frames/frame_0035.webp?v=neon5",
       "x": -0.5914,
       "y": 0.0
     },
     {
       "id": 36,
       "seg": 0,
-      "file": "/gaze_frames/frame_0036.webp?v=neon3",
+      "file": "/gaze_frames/frame_0036.webp?v=neon5",
       "x": -0.6101,
       "y": 0.0
     },
     {
       "id": 37,
       "seg": 0,
-      "file": "/gaze_frames/frame_0037.webp?v=neon3",
+      "file": "/gaze_frames/frame_0037.webp?v=neon5",
       "x": -0.6291,
       "y": 0.0
     },
     {
       "id": 38,
       "seg": 0,
-      "file": "/gaze_frames/frame_0038.webp?v=neon3",
+      "file": "/gaze_frames/frame_0038.webp?v=neon5",
       "x": -0.6482,
       "y": 0.0
     },
     {
       "id": 39,
       "seg": 0,
-      "file": "/gaze_frames/frame_0039.webp?v=neon3",
+      "file": "/gaze_frames/frame_0039.webp?v=neon5",
       "x": -0.6671,
       "y": 0.0
     },
     {
       "id": 40,
       "seg": 0,
-      "file": "/gaze_frames/frame_0040.webp?v=neon3",
+      "file": "/gaze_frames/frame_0040.webp?v=neon5",
       "x": -0.684,
       "y": 0.0
     },
     {
       "id": 41,
       "seg": 0,
-      "file": "/gaze_frames/frame_0041.webp?v=neon3",
+      "file": "/gaze_frames/frame_0041.webp?v=neon5",
       "x": -0.6977,
       "y": 0.0
     },
     {
       "id": 42,
       "seg": 0,
-      "file": "/gaze_frames/frame_0042.webp?v=neon3",
+      "file": "/gaze_frames/frame_0042.webp?v=neon5",
       "x": -0.7076,
       "y": 0.0
     },
     {
       "id": 43,
       "seg": 0,
-      "file": "/gaze_frames/frame_0043.webp?v=neon3",
+      "file": "/gaze_frames/frame_0043.webp?v=neon5",
       "x": -0.7143,
       "y": 0.0
     },
     {
       "id": 44,
       "seg": 0,
-      "file": "/gaze_frames/frame_0044.webp?v=neon3",
+      "file": "/gaze_frames/frame_0044.webp?v=neon5",
       "x": -0.7197,
       "y": 0.0
     },
     {
       "id": 45,
       "seg": 0,
-      "file": "/gaze_frames/frame_0045.webp?v=neon3",
+      "file": "/gaze_frames/frame_0045.webp?v=neon5",
       "x": -0.7252,
       "y": 0.0
     },
     {
       "id": 46,
       "seg": 0,
-      "file": "/gaze_frames/frame_0046.webp?v=neon3",
+      "file": "/gaze_frames/frame_0046.webp?v=neon5",
       "x": -0.7331,
       "y": 0.0
     },
     {
       "id": 47,
       "seg": 0,
-      "file": "/gaze_frames/frame_0047.webp?v=neon3",
+      "file": "/gaze_frames/frame_0047.webp?v=neon5",
       "x": -0.7432,
       "y": 0.0
     },
     {
       "id": 48,
       "seg": 0,
-      "file": "/gaze_frames/frame_0048.webp?v=neon3",
+      "file": "/gaze_frames/frame_0048.webp?v=neon5",
       "x": -0.7548,
       "y": 0.0
     },
     {
       "id": 49,
       "seg": 0,
-      "file": "/gaze_frames/frame_0049.webp?v=neon3",
+      "file": "/gaze_frames/frame_0049.webp?v=neon5",
       "x": -0.7668,
       "y": 0.0
     },
     {
       "id": 50,
       "seg": 0,
-      "file": "/gaze_frames/frame_0050.webp?v=neon3",
+      "file": "/gaze_frames/frame_0050.webp?v=neon5",
       "x": -0.7783,
       "y": 0.0
     },
     {
       "id": 51,
       "seg": 0,
-      "file": "/gaze_frames/frame_0051.webp?v=neon3",
+      "file": "/gaze_frames/frame_0051.webp?v=neon5",
       "x": -0.7889,
       "y": 0.0
     },
     {
       "id": 52,
       "seg": 0,
-      "file": "/gaze_frames/frame_0052.webp?v=neon3",
+      "file": "/gaze_frames/frame_0052.webp?v=neon5",
       "x": -0.7984,
       "y": 0.0
     },
     {
       "id": 53,
       "seg": 0,
-      "file": "/gaze_frames/frame_0053.webp?v=neon3",
+      "file": "/gaze_frames/frame_0053.webp?v=neon5",
       "x": -0.8074,
       "y": 0.0
     },
     {
       "id": 54,
       "seg": 0,
-      "file": "/gaze_frames/frame_0054.webp?v=neon3",
+      "file": "/gaze_frames/frame_0054.webp?v=neon5",
       "x": -0.8176,
       "y": 0.0
     },
     {
       "id": 55,
       "seg": 0,
-      "file": "/gaze_frames/frame_0055.webp?v=neon3",
+      "file": "/gaze_frames/frame_0055.webp?v=neon5",
       "x": -0.8279,
       "y": 0.0
     },
     {
       "id": 56,
       "seg": 0,
-      "file": "/gaze_frames/frame_0056.webp?v=neon3",
+      "file": "/gaze_frames/frame_0056.webp?v=neon5",
       "x": -0.8388,
       "y": 0.0
     },
     {
       "id": 57,
       "seg": 0,
-      "file": "/gaze_frames/frame_0057.webp?v=neon3",
+      "file": "/gaze_frames/frame_0057.webp?v=neon5",
       "x": -0.8492,
       "y": 0.0
     },
     {
       "id": 58,
       "seg": 0,
-      "file": "/gaze_frames/frame_0058.webp?v=neon3",
+      "file": "/gaze_frames/frame_0058.webp?v=neon5",
       "x": -0.8594,
       "y": 0.0
     },
     {
       "id": 59,
       "seg": 0,
-      "file": "/gaze_frames/frame_0059.webp?v=neon3",
+      "file": "/gaze_frames/frame_0059.webp?v=neon5",
       "x": -0.8685,
       "y": 0.0
     },
     {
       "id": 60,
       "seg": 0,
-      "file": "/gaze_frames/frame_0060.webp?v=neon3",
+      "file": "/gaze_frames/frame_0060.webp?v=neon5",
       "x": -0.8776,
       "y": 0.0
     },
     {
       "id": 61,
       "seg": 0,
-      "file": "/gaze_frames/frame_0061.webp?v=neon3",
+      "file": "/gaze_frames/frame_0061.webp?v=neon5",
       "x": -0.8877,
       "y": 0.0
     },
     {
       "id": 62,
       "seg": 0,
-      "file": "/gaze_frames/frame_0062.webp?v=neon3",
+      "file": "/gaze_frames/frame_0062.webp?v=neon5",
       "x": -0.8985,
       "y": 0.0
     },
     {
       "id": 63,
       "seg": 0,
-      "file": "/gaze_frames/frame_0063.webp?v=neon3",
+      "file": "/gaze_frames/frame_0063.webp?v=neon5",
       "x": -0.9095,
       "y": 0.0
     },
     {
       "id": 64,
       "seg": 0,
-      "file": "/gaze_frames/frame_0064.webp?v=neon3",
+      "file": "/gaze_frames/frame_0064.webp?v=neon5",
       "x": -0.9193,
       "y": 0.0
     },
     {
       "id": 65,
       "seg": 0,
-      "file": "/gaze_frames/frame_0065.webp?v=neon3",
+      "file": "/gaze_frames/frame_0065.webp?v=neon5",
       "x": -0.9266,
       "y": 0.0
     },
     {
       "id": 66,
       "seg": 0,
-      "file": "/gaze_frames/frame_0066.webp?v=neon3",
+      "file": "/gaze_frames/frame_0066.webp?v=neon5",
       "x": -0.9317,
       "y": 0.0
     },
     {
       "id": 67,
       "seg": 0,
-      "file": "/gaze_frames/frame_0067.webp?v=neon3",
+      "file": "/gaze_frames/frame_0067.webp?v=neon5",
       "x": -0.9361,
       "y": 0.0
     },
     {
       "id": 68,
       "seg": 0,
-      "file": "/gaze_frames/frame_0068.webp?v=neon3",
+      "file": "/gaze_frames/frame_0068.webp?v=neon5",
       "x": -0.9404,
       "y": 0.0
     },
     {
       "id": 69,
       "seg": 0,
-      "file": "/gaze_frames/frame_0069.webp?v=neon3",
+      "file": "/gaze_frames/frame_0069.webp?v=neon5",
       "x": -0.9459,
       "y": 0.0
     },
     {
       "id": 70,
       "seg": 0,
-      "file": "/gaze_frames/frame_0070.webp?v=neon3",
+      "file": "/gaze_frames/frame_0070.webp?v=neon5",
       "x": -0.9528,
       "y": 0.0
     },
     {
       "id": 71,
       "seg": 0,
-      "file": "/gaze_frames/frame_0071.webp?v=neon3",
+      "file": "/gaze_frames/frame_0071.webp?v=neon5",
       "x": -0.9597,
       "y": 0.0
     },
     {
       "id": 72,
       "seg": 0,
-      "file": "/gaze_frames/frame_0072.webp?v=neon3",
+      "file": "/gaze_frames/frame_0072.webp?v=neon5",
       "x": -0.9657,
       "y": 0.0
     },
     {
       "id": 73,
       "seg": 0,
-      "file": "/gaze_frames/frame_0073.webp?v=neon3",
+      "file": "/gaze_frames/frame_0073.webp?v=neon5",
       "x": -0.9701,
       "y": 0.0
     },
     {
       "id": 74,
       "seg": 0,
-      "file": "/gaze_frames/frame_0074.webp?v=neon3",
+      "file": "/gaze_frames/frame_0074.webp?v=neon5",
       "x": -0.9744,
       "y": 0.0
     },
     {
       "id": 75,
       "seg": 0,
-      "file": "/gaze_frames/frame_0075.webp?v=neon3",
+      "file": "/gaze_frames/frame_0075.webp?v=neon5",
       "x": -0.9787,
       "y": 0.0
     },
     {
       "id": 76,
       "seg": 0,
-      "file": "/gaze_frames/frame_0076.webp?v=neon3",
+      "file": "/gaze_frames/frame_0076.webp?v=neon5",
       "x": -0.9829,
       "y": 0.0
     },
     {
       "id": 77,
       "seg": 0,
-      "file": "/gaze_frames/frame_0077.webp?v=neon3",
+      "file": "/gaze_frames/frame_0077.webp?v=neon5",
       "x": -0.9872,
       "y": 0.0
     },
     {
       "id": 78,
       "seg": 0,
-      "file": "/gaze_frames/frame_0078.webp?v=neon3",
+      "file": "/gaze_frames/frame_0078.webp?v=neon5",
       "x": -0.9915,
       "y": 0.0
     },
     {
       "id": 79,
       "seg": 0,
-      "file": "/gaze_frames/frame_0079.webp?v=neon3",
+      "file": "/gaze_frames/frame_0079.webp?v=neon5",
       "x": -0.9957,
       "y": 0.0
     },
     {
       "id": 80,
       "seg": 0,
-      "file": "/gaze_frames/frame_0080.webp?v=neon3",
+      "file": "/gaze_frames/frame_0080.webp?v=neon5",
       "x": -1.0,
       "y": 0.0
     },
     {
       "id": 81,
       "seg": 1,
-      "file": "/gaze_frames/frame_0081.webp?v=neon3",
+      "file": "/gaze_frames/frame_0081.webp?v=neon5",
       "x": 0.025,
       "y": 0.0
     },
     {
       "id": 82,
       "seg": 1,
-      "file": "/gaze_frames/frame_0082.webp?v=neon3",
-      "x": 0.0335,
+      "file": "/gaze_frames/frame_0082.webp?v=neon5",
+      "x": 0.0407,
       "y": 0.0
     },
     {
       "id": 83,
       "seg": 1,
-      "file": "/gaze_frames/frame_0083.webp?v=neon3",
-      "x": 0.0471,
+      "file": "/gaze_frames/frame_0083.webp?v=neon5",
+      "x": 0.0565,
       "y": 0.0
     },
     {
       "id": 84,
       "seg": 1,
-      "file": "/gaze_frames/frame_0084.webp?v=neon3",
-      "x": 0.0639,
+      "file": "/gaze_frames/frame_0084.webp?v=neon5",
+      "x": 0.0722,
       "y": 0.0
     },
     {
       "id": 85,
       "seg": 1,
-      "file": "/gaze_frames/frame_0085.webp?v=neon3",
-      "x": 0.0815,
+      "file": "/gaze_frames/frame_0085.webp?v=neon5",
+      "x": 0.0879,
       "y": 0.0
     },
     {
       "id": 86,
       "seg": 1,
-      "file": "/gaze_frames/frame_0086.webp?v=neon3",
-      "x": 0.1092,
+      "file": "/gaze_frames/frame_0086.webp?v=neon5",
+      "x": 0.1036,
       "y": 0.0
     },
     {
       "id": 87,
       "seg": 1,
-      "file": "/gaze_frames/frame_0087.webp?v=neon3",
-      "x": 0.1499,
+      "file": "/gaze_frames/frame_0087.webp?v=neon5",
+      "x": 0.1194,
       "y": 0.0
     },
     {
       "id": 88,
       "seg": 1,
-      "file": "/gaze_frames/frame_0088.webp?v=neon3",
-      "x": 0.2111,
+      "file": "/gaze_frames/frame_0088.webp?v=neon5",
+      "x": 0.1351,
       "y": 0.0
     },
     {
       "id": 89,
       "seg": 1,
-      "file": "/gaze_frames/frame_0089.webp?v=neon3",
-      "x": 0.2936,
+      "file": "/gaze_frames/frame_0089.webp?v=neon5",
+      "x": 0.1508,
       "y": 0.0
     },
     {
       "id": 90,
       "seg": 1,
-      "file": "/gaze_frames/frame_0090.webp?v=neon3",
-      "x": 0.3861,
+      "file": "/gaze_frames/frame_0090.webp?v=neon5",
+      "x": 0.1665,
       "y": 0.0
     },
     {
       "id": 91,
       "seg": 1,
-      "file": "/gaze_frames/frame_0091.webp?v=neon3",
-      "x": 0.4711,
+      "file": "/gaze_frames/frame_0091.webp?v=neon5",
+      "x": 0.1823,
       "y": 0.0
     },
     {
       "id": 92,
       "seg": 1,
-      "file": "/gaze_frames/frame_0092.webp?v=neon3",
-      "x": 0.5365,
+      "file": "/gaze_frames/frame_0092.webp?v=neon5",
+      "x": 0.198,
       "y": 0.0
     },
     {
       "id": 93,
       "seg": 1,
-      "file": "/gaze_frames/frame_0093.webp?v=neon3",
-      "x": 0.5806,
+      "file": "/gaze_frames/frame_0093.webp?v=neon5",
+      "x": 0.2137,
       "y": 0.0
     },
     {
       "id": 94,
       "seg": 1,
-      "file": "/gaze_frames/frame_0094.webp?v=neon3",
-      "x": 0.6101,
+      "file": "/gaze_frames/frame_0094.webp?v=neon5",
+      "x": 0.2294,
       "y": 0.0
     },
     {
       "id": 95,
       "seg": 1,
-      "file": "/gaze_frames/frame_0095.webp?v=neon3",
-      "x": 0.6272,
+      "file": "/gaze_frames/frame_0095.webp?v=neon5",
+      "x": 0.2452,
       "y": 0.0
     },
     {
       "id": 96,
       "seg": 1,
-      "file": "/gaze_frames/frame_0096.webp?v=neon3",
-      "x": 0.6419,
+      "file": "/gaze_frames/frame_0096.webp?v=neon5",
+      "x": 0.2609,
       "y": 0.0
     },
     {
       "id": 97,
       "seg": 1,
-      "file": "/gaze_frames/frame_0097.webp?v=neon3",
-      "x": 0.6543,
+      "file": "/gaze_frames/frame_0097.webp?v=neon5",
+      "x": 0.2766,
       "y": 0.0
     },
     {
       "id": 98,
       "seg": 1,
-      "file": "/gaze_frames/frame_0098.webp?v=neon3",
-      "x": 0.6651,
+      "file": "/gaze_frames/frame_0098.webp?v=neon5",
+      "x": 0.2923,
       "y": 0.0
     },
     {
       "id": 99,
       "seg": 1,
-      "file": "/gaze_frames/frame_0099.webp?v=neon3",
-      "x": 0.6748,
+      "file": "/gaze_frames/frame_0099.webp?v=neon5",
+      "x": 0.3081,
       "y": 0.0
     },
     {
       "id": 100,
       "seg": 1,
-      "file": "/gaze_frames/frame_0100.webp?v=neon3",
-      "x": 0.684,
+      "file": "/gaze_frames/frame_0100.webp?v=neon5",
+      "x": 0.3238,
       "y": 0.0
     },
     {
       "id": 101,
       "seg": 1,
-      "file": "/gaze_frames/frame_0101.webp?v=neon3",
-      "x": 0.6927,
+      "file": "/gaze_frames/frame_0101.webp?v=neon5",
+      "x": 0.3395,
       "y": 0.0
     },
     {
       "id": 102,
       "seg": 1,
-      "file": "/gaze_frames/frame_0102.webp?v=neon3",
-      "x": 0.7015,
+      "file": "/gaze_frames/frame_0102.webp?v=neon5",
+      "x": 0.3552,
       "y": 0.0
     },
     {
       "id": 103,
       "seg": 1,
-      "file": "/gaze_frames/frame_0103.webp?v=neon3",
-      "x": 0.71,
+      "file": "/gaze_frames/frame_0103.webp?v=neon5",
+      "x": 0.371,
       "y": 0.0
     },
     {
       "id": 104,
       "seg": 1,
-      "file": "/gaze_frames/frame_0104.webp?v=neon3",
-      "x": 0.7193,
+      "file": "/gaze_frames/frame_0104.webp?v=neon5",
+      "x": 0.3867,
       "y": 0.0
     },
     {
       "id": 105,
       "seg": 1,
-      "file": "/gaze_frames/frame_0105.webp?v=neon3",
-      "x": 0.7295,
+      "file": "/gaze_frames/frame_0105.webp?v=neon5",
+      "x": 0.4024,
       "y": 0.0
     },
     {
       "id": 106,
       "seg": 1,
-      "file": "/gaze_frames/frame_0106.webp?v=neon3",
-      "x": 0.7398,
+      "file": "/gaze_frames/frame_0106.webp?v=neon5",
+      "x": 0.4181,
       "y": 0.0
     },
     {
       "id": 107,
       "seg": 1,
-      "file": "/gaze_frames/frame_0107.webp?v=neon3",
-      "x": 0.7493,
+      "file": "/gaze_frames/frame_0107.webp?v=neon5",
+      "x": 0.4339,
       "y": 0.0
     },
     {
       "id": 108,
       "seg": 1,
-      "file": "/gaze_frames/frame_0108.webp?v=neon3",
-      "x": 0.7573,
+      "file": "/gaze_frames/frame_0108.webp?v=neon5",
+      "x": 0.4496,
       "y": 0.0
     },
     {
       "id": 109,
       "seg": 1,
-      "file": "/gaze_frames/frame_0109.webp?v=neon3",
-      "x": 0.7646,
+      "file": "/gaze_frames/frame_0109.webp?v=neon5",
+      "x": 0.4653,
       "y": 0.0
     },
     {
       "id": 110,
       "seg": 1,
-      "file": "/gaze_frames/frame_0110.webp?v=neon3",
-      "x": 0.7726,
+      "file": "/gaze_frames/frame_0110.webp?v=neon5",
+      "x": 0.481,
       "y": 0.0
     },
     {
       "id": 111,
       "seg": 1,
-      "file": "/gaze_frames/frame_0111.webp?v=neon3",
-      "x": 0.7821,
+      "file": "/gaze_frames/frame_0111.webp?v=neon5",
+      "x": 0.4968,
       "y": 0.0
     },
     {
       "id": 112,
       "seg": 1,
-      "file": "/gaze_frames/frame_0112.webp?v=neon3",
-      "x": 0.793,
+      "file": "/gaze_frames/frame_0112.webp?v=neon5",
+      "x": 0.5125,
       "y": 0.0
     },
     {
       "id": 113,
       "seg": 1,
-      "file": "/gaze_frames/frame_0113.webp?v=neon3",
-      "x": 0.8038,
+      "file": "/gaze_frames/frame_0113.webp?v=neon5",
+      "x": 0.5282,
       "y": 0.0
     },
     {
       "id": 114,
       "seg": 1,
-      "file": "/gaze_frames/frame_0114.webp?v=neon3",
-      "x": 0.8135,
+      "file": "/gaze_frames/frame_0114.webp?v=neon5",
+      "x": 0.544,
       "y": 0.0
     },
     {
       "id": 115,
       "seg": 1,
-      "file": "/gaze_frames/frame_0115.webp?v=neon3",
-      "x": 0.822,
+      "file": "/gaze_frames/frame_0115.webp?v=neon5",
+      "x": 0.5597,
       "y": 0.0
     },
     {
       "id": 116,
       "seg": 1,
-      "file": "/gaze_frames/frame_0116.webp?v=neon3",
-      "x": 0.829,
+      "file": "/gaze_frames/frame_0116.webp?v=neon5",
+      "x": 0.5754,
       "y": 0.0
     },
     {
       "id": 117,
       "seg": 1,
-      "file": "/gaze_frames/frame_0117.webp?v=neon3",
-      "x": 0.8353,
+      "file": "/gaze_frames/frame_0117.webp?v=neon5",
+      "x": 0.5911,
       "y": 0.0
     },
     {
       "id": 118,
       "seg": 1,
-      "file": "/gaze_frames/frame_0118.webp?v=neon3",
-      "x": 0.8416,
+      "file": "/gaze_frames/frame_0118.webp?v=neon5",
+      "x": 0.6069,
       "y": 0.0
     },
     {
       "id": 119,
       "seg": 1,
-      "file": "/gaze_frames/frame_0119.webp?v=neon3",
-      "x": 0.8484,
+      "file": "/gaze_frames/frame_0119.webp?v=neon5",
+      "x": 0.6226,
       "y": 0.0
     },
     {
       "id": 120,
       "seg": 1,
-      "file": "/gaze_frames/frame_0120.webp?v=neon3",
-      "x": 0.8558,
+      "file": "/gaze_frames/frame_0120.webp?v=neon5",
+      "x": 0.6383,
       "y": 0.0
     },
     {
       "id": 121,
       "seg": 1,
-      "file": "/gaze_frames/frame_0121.webp?v=neon3",
-      "x": 0.8637,
+      "file": "/gaze_frames/frame_0121.webp?v=neon5",
+      "x": 0.654,
       "y": 0.0
     },
     {
       "id": 122,
       "seg": 1,
-      "file": "/gaze_frames/frame_0122.webp?v=neon3",
-      "x": 0.8716,
+      "file": "/gaze_frames/frame_0122.webp?v=neon5",
+      "x": 0.6698,
       "y": 0.0
     },
     {
       "id": 123,
       "seg": 1,
-      "file": "/gaze_frames/frame_0123.webp?v=neon3",
-      "x": 0.8791,
+      "file": "/gaze_frames/frame_0123.webp?v=neon5",
+      "x": 0.6855,
       "y": 0.0
     },
     {
       "id": 124,
       "seg": 1,
-      "file": "/gaze_frames/frame_0124.webp?v=neon3",
-      "x": 0.8859,
+      "file": "/gaze_frames/frame_0124.webp?v=neon5",
+      "x": 0.7012,
       "y": 0.0
     },
     {
       "id": 125,
       "seg": 1,
-      "file": "/gaze_frames/frame_0125.webp?v=neon3",
-      "x": 0.892,
+      "file": "/gaze_frames/frame_0125.webp?v=neon5",
+      "x": 0.7169,
       "y": 0.0
     },
     {
       "id": 126,
       "seg": 1,
-      "file": "/gaze_frames/frame_0126.webp?v=neon3",
-      "x": 0.8984,
+      "file": "/gaze_frames/frame_0126.webp?v=neon5",
+      "x": 0.7327,
       "y": 0.0
     },
     {
       "id": 127,
       "seg": 1,
-      "file": "/gaze_frames/frame_0127.webp?v=neon3",
-      "x": 0.9052,
+      "file": "/gaze_frames/frame_0127.webp?v=neon5",
+      "x": 0.7484,
       "y": 0.0
     },
     {
       "id": 128,
       "seg": 1,
-      "file": "/gaze_frames/frame_0128.webp?v=neon3",
-      "x": 0.9125,
+      "file": "/gaze_frames/frame_0128.webp?v=neon5",
+      "x": 0.7641,
       "y": 0.0
     },
     {
       "id": 129,
       "seg": 1,
-      "file": "/gaze_frames/frame_0129.webp?v=neon3",
-      "x": 0.9195,
+      "file": "/gaze_frames/frame_0129.webp?v=neon5",
+      "x": 0.7798,
       "y": 0.0
     },
     {
       "id": 130,
       "seg": 1,
-      "file": "/gaze_frames/frame_0130.webp?v=neon3",
-      "x": 0.9257,
+      "file": "/gaze_frames/frame_0130.webp?v=neon5",
+      "x": 0.7956,
       "y": 0.0
     },
     {
       "id": 131,
       "seg": 1,
-      "file": "/gaze_frames/frame_0131.webp?v=neon3",
-      "x": 0.9312,
+      "file": "/gaze_frames/frame_0131.webp?v=neon5",
+      "x": 0.8113,
       "y": 0.0
     },
     {
       "id": 132,
       "seg": 1,
-      "file": "/gaze_frames/frame_0132.webp?v=neon3",
-      "x": 0.9367,
+      "file": "/gaze_frames/frame_0132.webp?v=neon5",
+      "x": 0.827,
       "y": 0.0
     },
     {
       "id": 133,
       "seg": 1,
-      "file": "/gaze_frames/frame_0133.webp?v=neon3",
-      "x": 0.9423,
+      "file": "/gaze_frames/frame_0133.webp?v=neon5",
+      "x": 0.8427,
       "y": 0.0
     },
     {
       "id": 134,
       "seg": 1,
-      "file": "/gaze_frames/frame_0134.webp?v=neon3",
-      "x": 0.9477,
+      "file": "/gaze_frames/frame_0134.webp?v=neon5",
+      "x": 0.8585,
       "y": 0.0
     },
     {
       "id": 135,
       "seg": 1,
-      "file": "/gaze_frames/frame_0135.webp?v=neon3",
-      "x": 0.9532,
+      "file": "/gaze_frames/frame_0135.webp?v=neon5",
+      "x": 0.8742,
       "y": 0.0
     },
     {
       "id": 136,
       "seg": 1,
-      "file": "/gaze_frames/frame_0136.webp?v=neon3",
-      "x": 0.9588,
+      "file": "/gaze_frames/frame_0136.webp?v=neon5",
+      "x": 0.8899,
       "y": 0.0
     },
     {
       "id": 137,
       "seg": 1,
-      "file": "/gaze_frames/frame_0137.webp?v=neon3",
-      "x": 0.9642,
+      "file": "/gaze_frames/frame_0137.webp?v=neon5",
+      "x": 0.9056,
       "y": 0.0
     },
     {
       "id": 138,
       "seg": 1,
-      "file": "/gaze_frames/frame_0138.webp?v=neon3",
-      "x": 0.9699,
+      "file": "/gaze_frames/frame_0138.webp?v=neon5",
+      "x": 0.9214,
       "y": 0.0
     },
     {
       "id": 139,
       "seg": 1,
-      "file": "/gaze_frames/frame_0139.webp?v=neon3",
-      "x": 0.9769,
+      "file": "/gaze_frames/frame_0139.webp?v=neon5",
+      "x": 0.9371,
       "y": 0.0
     },
     {
       "id": 140,
       "seg": 1,
-      "file": "/gaze_frames/frame_0140.webp?v=neon3",
-      "x": 0.9833,
+      "file": "/gaze_frames/frame_0140.webp?v=neon5",
+      "x": 0.9528,
       "y": 0.0
     },
     {
       "id": 141,
       "seg": 1,
-      "file": "/gaze_frames/frame_0141.webp?v=neon3",
-      "x": 0.9889,
+      "file": "/gaze_frames/frame_0141.webp?v=neon5",
+      "x": 0.9685,
       "y": 0.0
     },
     {
       "id": 142,
       "seg": 1,
-      "file": "/gaze_frames/frame_0142.webp?v=neon3",
-      "x": 0.9945,
+      "file": "/gaze_frames/frame_0142.webp?v=neon5",
+      "x": 0.9843,
       "y": 0.0
     },
     {
       "id": 143,
       "seg": 1,
-      "file": "/gaze_frames/frame_0143.webp?v=neon3",
+      "file": "/gaze_frames/frame_0143.webp?v=neon5",
       "x": 1.0,
       "y": 0.0
     },
     {
       "id": 144,
       "seg": 2,
-      "file": "/gaze_frames/frame_0144.webp?v=neon3",
+      "file": "/gaze_frames/frame_0144.webp?v=neon5",
       "x": 0.827,
       "y": -0.236
     },
     {
       "id": 145,
       "seg": 2,
-      "file": "/gaze_frames/frame_0145.webp?v=neon3",
+      "file": "/gaze_frames/frame_0145.webp?v=neon5",
       "x": 0.8249,
       "y": -0.2371
     },
     {
       "id": 146,
       "seg": 2,
-      "file": "/gaze_frames/frame_0146.webp?v=neon3",
+      "file": "/gaze_frames/frame_0146.webp?v=neon5",
       "x": 0.8187,
       "y": -0.2399
     },
     {
       "id": 147,
       "seg": 2,
-      "file": "/gaze_frames/frame_0147.webp?v=neon3",
+      "file": "/gaze_frames/frame_0147.webp?v=neon5",
       "x": 0.8096,
       "y": -0.244
     },
     {
       "id": 148,
       "seg": 2,
-      "file": "/gaze_frames/frame_0148.webp?v=neon3",
+      "file": "/gaze_frames/frame_0148.webp?v=neon5",
       "x": 0.7994,
       "y": -0.2498
     },
     {
       "id": 149,
       "seg": 2,
-      "file": "/gaze_frames/frame_0149.webp?v=neon3",
+      "file": "/gaze_frames/frame_0149.webp?v=neon5",
       "x": 0.7891,
       "y": -0.2568
     },
     {
       "id": 150,
       "seg": 2,
-      "file": "/gaze_frames/frame_0150.webp?v=neon3",
+      "file": "/gaze_frames/frame_0150.webp?v=neon5",
       "x": 0.7799,
       "y": -0.2655
     },
     {
       "id": 151,
       "seg": 2,
-      "file": "/gaze_frames/frame_0151.webp?v=neon3",
+      "file": "/gaze_frames/frame_0151.webp?v=neon5",
       "x": 0.7718,
       "y": -0.2753
     },
     {
       "id": 152,
       "seg": 2,
-      "file": "/gaze_frames/frame_0152.webp?v=neon3",
+      "file": "/gaze_frames/frame_0152.webp?v=neon5",
       "x": 0.7651,
       "y": -0.2859
     },
     {
       "id": 153,
       "seg": 2,
-      "file": "/gaze_frames/frame_0153.webp?v=neon3",
+      "file": "/gaze_frames/frame_0153.webp?v=neon5",
       "x": 0.7582,
       "y": -0.2968
     },
     {
       "id": 154,
       "seg": 2,
-      "file": "/gaze_frames/frame_0154.webp?v=neon3",
+      "file": "/gaze_frames/frame_0154.webp?v=neon5",
       "x": 0.7505,
       "y": -0.3074
     },
     {
       "id": 155,
       "seg": 2,
-      "file": "/gaze_frames/frame_0155.webp?v=neon3",
+      "file": "/gaze_frames/frame_0155.webp?v=neon5",
       "x": 0.7405,
       "y": -0.3178
     },
     {
       "id": 156,
       "seg": 2,
-      "file": "/gaze_frames/frame_0156.webp?v=neon3",
+      "file": "/gaze_frames/frame_0156.webp?v=neon5",
       "x": 0.7282,
       "y": -0.3287
     },
     {
       "id": 157,
       "seg": 2,
-      "file": "/gaze_frames/frame_0157.webp?v=neon3",
+      "file": "/gaze_frames/frame_0157.webp?v=neon5",
       "x": 0.7144,
       "y": -0.3391
     },
     {
       "id": 158,
       "seg": 2,
-      "file": "/gaze_frames/frame_0158.webp?v=neon3",
+      "file": "/gaze_frames/frame_0158.webp?v=neon5",
       "x": 0.6997,
       "y": -0.3505
     },
     {
       "id": 159,
       "seg": 2,
-      "file": "/gaze_frames/frame_0159.webp?v=neon3",
+      "file": "/gaze_frames/frame_0159.webp?v=neon5",
       "x": 0.684,
       "y": -0.362
     },
     {
       "id": 160,
       "seg": 2,
-      "file": "/gaze_frames/frame_0160.webp?v=neon3",
+      "file": "/gaze_frames/frame_0160.webp?v=neon5",
       "x": 0.6672,
       "y": -0.3735
     },
     {
       "id": 161,
       "seg": 2,
-      "file": "/gaze_frames/frame_0161.webp?v=neon3",
+      "file": "/gaze_frames/frame_0161.webp?v=neon5",
       "x": 0.6498,
       "y": -0.3848
     },
     {
       "id": 162,
       "seg": 2,
-      "file": "/gaze_frames/frame_0162.webp?v=neon3",
+      "file": "/gaze_frames/frame_0162.webp?v=neon5",
       "x": 0.6322,
       "y": -0.3955
     },
     {
       "id": 163,
       "seg": 2,
-      "file": "/gaze_frames/frame_0163.webp?v=neon3",
+      "file": "/gaze_frames/frame_0163.webp?v=neon5",
       "x": 0.6146,
       "y": -0.4058
     },
     {
       "id": 164,
       "seg": 2,
-      "file": "/gaze_frames/frame_0164.webp?v=neon3",
+      "file": "/gaze_frames/frame_0164.webp?v=neon5",
       "x": 0.5971,
       "y": -0.4159
     },
     {
       "id": 165,
       "seg": 2,
-      "file": "/gaze_frames/frame_0165.webp?v=neon3",
+      "file": "/gaze_frames/frame_0165.webp?v=neon5",
       "x": 0.5795,
       "y": -0.4259
     },
     {
       "id": 166,
       "seg": 2,
-      "file": "/gaze_frames/frame_0166.webp?v=neon3",
+      "file": "/gaze_frames/frame_0166.webp?v=neon5",
       "x": 0.5607,
       "y": -0.4373
     },
     {
       "id": 167,
       "seg": 2,
-      "file": "/gaze_frames/frame_0167.webp?v=neon3",
+      "file": "/gaze_frames/frame_0167.webp?v=neon5",
       "x": 0.5414,
       "y": -0.4488
     },
     {
       "id": 168,
       "seg": 2,
-      "file": "/gaze_frames/frame_0168.webp?v=neon3",
+      "file": "/gaze_frames/frame_0168.webp?v=neon5",
       "x": 0.5208,
       "y": -0.4615
     },
     {
       "id": 169,
       "seg": 2,
-      "file": "/gaze_frames/frame_0169.webp?v=neon3",
+      "file": "/gaze_frames/frame_0169.webp?v=neon5",
       "x": 0.4993,
       "y": -0.4746
     },
     {
       "id": 170,
       "seg": 2,
-      "file": "/gaze_frames/frame_0170.webp?v=neon3",
+      "file": "/gaze_frames/frame_0170.webp?v=neon5",
       "x": 0.4766,
       "y": -0.4878
     },
     {
       "id": 171,
       "seg": 2,
-      "file": "/gaze_frames/frame_0171.webp?v=neon3",
+      "file": "/gaze_frames/frame_0171.webp?v=neon5",
       "x": 0.4518,
       "y": -0.5019
     },
     {
       "id": 172,
       "seg": 2,
-      "file": "/gaze_frames/frame_0172.webp?v=neon3",
+      "file": "/gaze_frames/frame_0172.webp?v=neon5",
       "x": 0.4249,
       "y": -0.5165
     },
     {
       "id": 173,
       "seg": 2,
-      "file": "/gaze_frames/frame_0173.webp?v=neon3",
+      "file": "/gaze_frames/frame_0173.webp?v=neon5",
       "x": 0.397,
       "y": -0.5305
     },
     {
       "id": 174,
       "seg": 2,
-      "file": "/gaze_frames/frame_0174.webp?v=neon3",
+      "file": "/gaze_frames/frame_0174.webp?v=neon5",
       "x": 0.3693,
       "y": -0.5422
     },
     {
       "id": 175,
       "seg": 2,
-      "file": "/gaze_frames/frame_0175.webp?v=neon3",
+      "file": "/gaze_frames/frame_0175.webp?v=neon5",
       "x": 0.3436,
       "y": -0.5494
     },
     {
       "id": 176,
       "seg": 2,
-      "file": "/gaze_frames/frame_0176.webp?v=neon3",
+      "file": "/gaze_frames/frame_0176.webp?v=neon5",
       "x": 0.3191,
       "y": -0.5528
     },
     {
       "id": 177,
       "seg": 2,
-      "file": "/gaze_frames/frame_0177.webp?v=neon3",
+      "file": "/gaze_frames/frame_0177.webp?v=neon5",
       "x": 0.2963,
       "y": -0.5531
     },
     {
       "id": 178,
       "seg": 2,
-      "file": "/gaze_frames/frame_0178.webp?v=neon3",
+      "file": "/gaze_frames/frame_0178.webp?v=neon5",
       "x": 0.274,
       "y": -0.5531
     },
     {
       "id": 179,
       "seg": 2,
-      "file": "/gaze_frames/frame_0179.webp?v=neon3",
+      "file": "/gaze_frames/frame_0179.webp?v=neon5",
       "x": 0.2506,
       "y": -0.5542
     },
     {
       "id": 180,
       "seg": 2,
-      "file": "/gaze_frames/frame_0180.webp?v=neon3",
+      "file": "/gaze_frames/frame_0180.webp?v=neon5",
       "x": 0.2266,
       "y": -0.5615
     },
     {
       "id": 181,
       "seg": 2,
-      "file": "/gaze_frames/frame_0181.webp?v=neon3",
+      "file": "/gaze_frames/frame_0181.webp?v=neon5",
       "x": 0.2017,
       "y": -0.5753
     },
     {
       "id": 182,
       "seg": 2,
-      "file": "/gaze_frames/frame_0182.webp?v=neon3",
+      "file": "/gaze_frames/frame_0182.webp?v=neon5",
       "x": 0.1759,
       "y": -0.5952
     },
     {
       "id": 183,
       "seg": 2,
-      "file": "/gaze_frames/frame_0183.webp?v=neon3",
+      "file": "/gaze_frames/frame_0183.webp?v=neon5",
       "x": 0.1506,
       "y": -0.6181
     },
     {
       "id": 184,
       "seg": 2,
-      "file": "/gaze_frames/frame_0184.webp?v=neon3",
+      "file": "/gaze_frames/frame_0184.webp?v=neon5",
       "x": 0.1278,
       "y": -0.6401
     },
     {
       "id": 185,
       "seg": 2,
-      "file": "/gaze_frames/frame_0185.webp?v=neon3",
+      "file": "/gaze_frames/frame_0185.webp?v=neon5",
       "x": 0.1093,
       "y": -0.6579
     },
     {
       "id": 186,
       "seg": 2,
-      "file": "/gaze_frames/frame_0186.webp?v=neon3",
+      "file": "/gaze_frames/frame_0186.webp?v=neon5",
       "x": 0.097,
       "y": -0.6712
     },
     {
       "id": 187,
       "seg": 2,
-      "file": "/gaze_frames/frame_0187.webp?v=neon3",
+      "file": "/gaze_frames/frame_0187.webp?v=neon5",
       "x": 0.0896,
       "y": -0.681
     },
     {
       "id": 188,
       "seg": 2,
-      "file": "/gaze_frames/frame_0188.webp?v=neon3",
+      "file": "/gaze_frames/frame_0188.webp?v=neon5",
       "x": 0.0865,
       "y": -0.687
     },
     {
       "id": 189,
       "seg": 2,
-      "file": "/gaze_frames/frame_0189.webp?v=neon3",
+      "file": "/gaze_frames/frame_0189.webp?v=neon5",
       "x": 0.0845,
       "y": -0.6913
     },
     {
       "id": 190,
       "seg": 2,
-      "file": "/gaze_frames/frame_0190.webp?v=neon3",
+      "file": "/gaze_frames/frame_0190.webp?v=neon5",
       "x": 0.0814,
       "y": -0.6949
     },
     {
       "id": 191,
       "seg": 2,
-      "file": "/gaze_frames/frame_0191.webp?v=neon3",
+      "file": "/gaze_frames/frame_0191.webp?v=neon5",
       "x": 0.0758,
       "y": -0.6995
     },
     {
       "id": 192,
       "seg": 2,
-      "file": "/gaze_frames/frame_0192.webp?v=neon3",
+      "file": "/gaze_frames/frame_0192.webp?v=neon5",
       "x": 0.0676,
       "y": -0.7073
     },
     {
       "id": 193,
       "seg": 2,
-      "file": "/gaze_frames/frame_0193.webp?v=neon3",
+      "file": "/gaze_frames/frame_0193.webp?v=neon5",
       "x": 0.0584,
       "y": -0.7185
     },
     {
       "id": 194,
       "seg": 2,
-      "file": "/gaze_frames/frame_0194.webp?v=neon3",
+      "file": "/gaze_frames/frame_0194.webp?v=neon5",
       "x": 0.0503,
       "y": -0.7312
     },
     {
       "id": 195,
       "seg": 2,
-      "file": "/gaze_frames/frame_0195.webp?v=neon3",
+      "file": "/gaze_frames/frame_0195.webp?v=neon5",
       "x": 0.0444,
       "y": -0.7416
     },
     {
       "id": 196,
       "seg": 2,
-      "file": "/gaze_frames/frame_0196.webp?v=neon3",
+      "file": "/gaze_frames/frame_0196.webp?v=neon5",
       "x": 0.0427,
       "y": -0.7454
     },
     {
       "id": 197,
       "seg": 3,
-      "file": "/gaze_frames/frame_0197.webp?v=neon3",
+      "file": "/gaze_frames/frame_0197.webp?v=neon5",
       "x": 0.0,
       "y": -0.9945
     },
     {
       "id": 198,
       "seg": 3,
-      "file": "/gaze_frames/frame_0198.webp?v=neon3",
+      "file": "/gaze_frames/frame_0198.webp?v=neon5",
       "x": 0.0,
       "y": -0.9891
     },
     {
       "id": 199,
       "seg": 3,
-      "file": "/gaze_frames/frame_0199.webp?v=neon3",
+      "file": "/gaze_frames/frame_0199.webp?v=neon5",
       "x": 0.0,
       "y": -0.9838
     },
     {
       "id": 200,
       "seg": 3,
-      "file": "/gaze_frames/frame_0200.webp?v=neon3",
+      "file": "/gaze_frames/frame_0200.webp?v=neon5",
       "x": 0.0,
       "y": -0.9784
     },
     {
       "id": 201,
       "seg": 3,
-      "file": "/gaze_frames/frame_0201.webp?v=neon3",
+      "file": "/gaze_frames/frame_0201.webp?v=neon5",
       "x": 0.0,
       "y": -0.9731
     },
     {
       "id": 202,
       "seg": 3,
-      "file": "/gaze_frames/frame_0202.webp?v=neon3",
+      "file": "/gaze_frames/frame_0202.webp?v=neon5",
       "x": 0.0,
       "y": -0.9677
     },
     {
       "id": 203,
       "seg": 3,
-      "file": "/gaze_frames/frame_0203.webp?v=neon3",
+      "file": "/gaze_frames/frame_0203.webp?v=neon5",
       "x": 0.0,
       "y": -0.9623
     },
     {
       "id": 204,
       "seg": 3,
-      "file": "/gaze_frames/frame_0204.webp?v=neon3",
+      "file": "/gaze_frames/frame_0204.webp?v=neon5",
       "x": 0.0,
       "y": -0.9552
     },
     {
       "id": 205,
       "seg": 3,
-      "file": "/gaze_frames/frame_0205.webp?v=neon3",
+      "file": "/gaze_frames/frame_0205.webp?v=neon5",
       "x": 0.0,
       "y": -0.9446
     },
     {
       "id": 206,
       "seg": 3,
-      "file": "/gaze_frames/frame_0206.webp?v=neon3",
+      "file": "/gaze_frames/frame_0206.webp?v=neon5",
       "x": 0.0,
       "y": -0.9323
     },
     {
       "id": 207,
       "seg": 3,
-      "file": "/gaze_frames/frame_0207.webp?v=neon3",
+      "file": "/gaze_frames/frame_0207.webp?v=neon5",
       "x": 0.0,
       "y": -0.9189
     },
     {
       "id": 208,
       "seg": 3,
-      "file": "/gaze_frames/frame_0208.webp?v=neon3",
+      "file": "/gaze_frames/frame_0208.webp?v=neon5",
       "x": 0.0,
       "y": -0.9044
     },
     {
       "id": 209,
       "seg": 3,
-      "file": "/gaze_frames/frame_0209.webp?v=neon3",
+      "file": "/gaze_frames/frame_0209.webp?v=neon5",
       "x": 0.0,
       "y": -0.8891
     },
     {
       "id": 210,
       "seg": 3,
-      "file": "/gaze_frames/frame_0210.webp?v=neon3",
+      "file": "/gaze_frames/frame_0210.webp?v=neon5",
       "x": 0.0,
       "y": -0.873
     },
     {
       "id": 211,
       "seg": 3,
-      "file": "/gaze_frames/frame_0211.webp?v=neon3",
+      "file": "/gaze_frames/frame_0211.webp?v=neon5",
       "x": 0.0,
       "y": -0.8565
     },
     {
       "id": 212,
       "seg": 3,
-      "file": "/gaze_frames/frame_0212.webp?v=neon3",
+      "file": "/gaze_frames/frame_0212.webp?v=neon5",
       "x": 0.0,
       "y": -0.8392
     },
     {
       "id": 213,
       "seg": 3,
-      "file": "/gaze_frames/frame_0213.webp?v=neon3",
+      "file": "/gaze_frames/frame_0213.webp?v=neon5",
       "x": 0.0,
       "y": -0.8215
     },
     {
       "id": 214,
       "seg": 3,
-      "file": "/gaze_frames/frame_0214.webp?v=neon3",
+      "file": "/gaze_frames/frame_0214.webp?v=neon5",
       "x": 0.0,
       "y": -0.8033
     },
     {
       "id": 215,
       "seg": 3,
-      "file": "/gaze_frames/frame_0215.webp?v=neon3",
+      "file": "/gaze_frames/frame_0215.webp?v=neon5",
       "x": 0.0,
       "y": -0.7851
     },
     {
       "id": 216,
       "seg": 3,
-      "file": "/gaze_frames/frame_0216.webp?v=neon3",
+      "file": "/gaze_frames/frame_0216.webp?v=neon5",
       "x": 0.0,
       "y": -0.766
     },
     {
       "id": 217,
       "seg": 3,
-      "file": "/gaze_frames/frame_0217.webp?v=neon3",
+      "file": "/gaze_frames/frame_0217.webp?v=neon5",
       "x": 0.0,
       "y": -0.746
     },
     {
       "id": 218,
       "seg": 3,
-      "file": "/gaze_frames/frame_0218.webp?v=neon3",
+      "file": "/gaze_frames/frame_0218.webp?v=neon5",
       "x": 0.0,
       "y": -0.7244
     },
     {
       "id": 219,
       "seg": 3,
-      "file": "/gaze_frames/frame_0219.webp?v=neon3",
+      "file": "/gaze_frames/frame_0219.webp?v=neon5",
       "x": 0.0,
       "y": -0.7014
     },
     {
       "id": 220,
       "seg": 3,
-      "file": "/gaze_frames/frame_0220.webp?v=neon3",
+      "file": "/gaze_frames/frame_0220.webp?v=neon5",
       "x": 0.0,
       "y": -0.6772
     },
     {
       "id": 221,
       "seg": 3,
-      "file": "/gaze_frames/frame_0221.webp?v=neon3",
+      "file": "/gaze_frames/frame_0221.webp?v=neon5",
       "x": 0.0,
       "y": -0.6515
     },
     {
       "id": 222,
       "seg": 3,
-      "file": "/gaze_frames/frame_0222.webp?v=neon3",
+      "file": "/gaze_frames/frame_0222.webp?v=neon5",
       "x": 0.0,
       "y": -0.6261
     },
     {
       "id": 223,
       "seg": 3,
-      "file": "/gaze_frames/frame_0223.webp?v=neon3",
+      "file": "/gaze_frames/frame_0223.webp?v=neon5",
       "x": 0.0,
       "y": -0.6018
     },
     {
       "id": 224,
       "seg": 3,
-      "file": "/gaze_frames/frame_0224.webp?v=neon3",
+      "file": "/gaze_frames/frame_0224.webp?v=neon5",
       "x": 0.0,
       "y": -0.5781
     },
     {
       "id": 225,
       "seg": 3,
-      "file": "/gaze_frames/frame_0225.webp?v=neon3",
+      "file": "/gaze_frames/frame_0225.webp?v=neon5",
       "x": 0.0,
       "y": -0.5554
     },
     {
       "id": 226,
       "seg": 3,
-      "file": "/gaze_frames/frame_0226.webp?v=neon3",
+      "file": "/gaze_frames/frame_0226.webp?v=neon5",
       "x": 0.0,
       "y": -0.5325
     },
     {
       "id": 227,
       "seg": 3,
-      "file": "/gaze_frames/frame_0227.webp?v=neon3",
+      "file": "/gaze_frames/frame_0227.webp?v=neon5",
       "x": 0.0,
       "y": -0.508
     },
     {
       "id": 228,
       "seg": 3,
-      "file": "/gaze_frames/frame_0228.webp?v=neon3",
+      "file": "/gaze_frames/frame_0228.webp?v=neon5",
       "x": 0.0,
       "y": -0.4812
     },
     {
       "id": 229,
       "seg": 3,
-      "file": "/gaze_frames/frame_0229.webp?v=neon3",
+      "file": "/gaze_frames/frame_0229.webp?v=neon5",
       "x": 0.0,
       "y": -0.4516
     },
     {
       "id": 230,
       "seg": 3,
-      "file": "/gaze_frames/frame_0230.webp?v=neon3",
+      "file": "/gaze_frames/frame_0230.webp?v=neon5",
       "x": 0.0,
       "y": -0.4201
     },
     {
       "id": 231,
       "seg": 3,
-      "file": "/gaze_frames/frame_0231.webp?v=neon3",
+      "file": "/gaze_frames/frame_0231.webp?v=neon5",
       "x": 0.0,
       "y": -0.3872
     },
     {
       "id": 232,
       "seg": 3,
-      "file": "/gaze_frames/frame_0232.webp?v=neon3",
+      "file": "/gaze_frames/frame_0232.webp?v=neon5",
       "x": 0.0,
       "y": -0.3554
     },
     {
       "id": 233,
       "seg": 3,
-      "file": "/gaze_frames/frame_0233.webp?v=neon3",
+      "file": "/gaze_frames/frame_0233.webp?v=neon5",
       "x": 0.0,
       "y": -0.3261
     },
     {
       "id": 234,
       "seg": 3,
-      "file": "/gaze_frames/frame_0234.webp?v=neon3",
+      "file": "/gaze_frames/frame_0234.webp?v=neon5",
       "x": 0.0,
       "y": -0.2996
     },
     {
       "id": 235,
       "seg": 3,
-      "file": "/gaze_frames/frame_0235.webp?v=neon3",
+      "file": "/gaze_frames/frame_0235.webp?v=neon5",
       "x": 0.0,
       "y": -0.2757
     },
     {
       "id": 236,
       "seg": 3,
-      "file": "/gaze_frames/frame_0236.webp?v=neon3",
+      "file": "/gaze_frames/frame_0236.webp?v=neon5",
       "x": 0.0,
       "y": -0.2537
     },
     {
       "id": 237,
       "seg": 3,
-      "file": "/gaze_frames/frame_0237.webp?v=neon3",
+      "file": "/gaze_frames/frame_0237.webp?v=neon5",
       "x": 0.0,
       "y": -0.2319
     },
     {
       "id": 238,
       "seg": 3,
-      "file": "/gaze_frames/frame_0238.webp?v=neon3",
+      "file": "/gaze_frames/frame_0238.webp?v=neon5",
       "x": 0.0,
       "y": -0.2099
     },
     {
       "id": 239,
       "seg": 3,
-      "file": "/gaze_frames/frame_0239.webp?v=neon3",
+      "file": "/gaze_frames/frame_0239.webp?v=neon5",
       "x": 0.0,
       "y": -0.1874
     },
     {
       "id": 240,
       "seg": 3,
-      "file": "/gaze_frames/frame_0240.webp?v=neon3",
+      "file": "/gaze_frames/frame_0240.webp?v=neon5",
       "x": 0.0,
       "y": -0.1646
     },
     {
       "id": 241,
       "seg": 3,
-      "file": "/gaze_frames/frame_0241.webp?v=neon3",
+      "file": "/gaze_frames/frame_0241.webp?v=neon5",
       "x": 0.0,
       "y": -0.142
     },
     {
       "id": 242,
       "seg": 3,
-      "file": "/gaze_frames/frame_0242.webp?v=neon3",
+      "file": "/gaze_frames/frame_0242.webp?v=neon5",
       "x": 0.0,
       "y": -0.1199
     },
     {
       "id": 243,
       "seg": 3,
-      "file": "/gaze_frames/frame_0243.webp?v=neon3",
+      "file": "/gaze_frames/frame_0243.webp?v=neon5",
       "x": 0.0,
       "y": -0.098
     },
     {
       "id": 244,
       "seg": 3,
-      "file": "/gaze_frames/frame_0244.webp?v=neon3",
+      "file": "/gaze_frames/frame_0244.webp?v=neon5",
       "x": 0.0,
       "y": -0.0757
     },
     {
       "id": 245,
       "seg": 3,
-      "file": "/gaze_frames/frame_0245.webp?v=neon3",
+      "file": "/gaze_frames/frame_0245.webp?v=neon5",
       "x": 0.0,
       "y": -0.0521
     },
     {
       "id": 246,
       "seg": 3,
-      "file": "/gaze_frames/frame_0246.webp?v=neon3",
+      "file": "/gaze_frames/frame_0246.webp?v=neon5",
       "x": 0.0,
       "y": -0.0265
     },
     {
       "id": 247,
       "seg": 3,
-      "file": "/gaze_frames/frame_0247.webp?v=neon3",
+      "file": "/gaze_frames/frame_0247.webp?v=neon5",
       "x": 0.0,
       "y": 0.0
     },
     {
       "id": 248,
       "seg": 3,
-      "file": "/gaze_frames/frame_0248.webp?v=neon3",
+      "file": "/gaze_frames/frame_0248.webp?v=neon5",
       "x": 0.0,
       "y": 0.0313
     },
     {
       "id": 249,
       "seg": 3,
-      "file": "/gaze_frames/frame_0249.webp?v=neon3",
+      "file": "/gaze_frames/frame_0249.webp?v=neon5",
       "x": 0.0,
       "y": 0.0626
     },
     {
       "id": 250,
       "seg": 3,
-      "file": "/gaze_frames/frame_0250.webp?v=neon3",
+      "file": "/gaze_frames/frame_0250.webp?v=neon5",
       "x": 0.0,
       "y": 0.0937
     },
     {
       "id": 251,
       "seg": 3,
-      "file": "/gaze_frames/frame_0251.webp?v=neon3",
+      "file": "/gaze_frames/frame_0251.webp?v=neon5",
       "x": 0.0,
       "y": 0.1236
     },
     {
       "id": 252,
       "seg": 3,
-      "file": "/gaze_frames/frame_0252.webp?v=neon3",
+      "file": "/gaze_frames/frame_0252.webp?v=neon5",
       "x": 0.0,
       "y": 0.1513
     },
     {
       "id": 253,
       "seg": 3,
-      "file": "/gaze_frames/frame_0253.webp?v=neon3",
+      "file": "/gaze_frames/frame_0253.webp?v=neon5",
       "x": 0.0,
       "y": 0.1777
     },
     {
       "id": 254,
       "seg": 3,
-      "file": "/gaze_frames/frame_0254.webp?v=neon3",
+      "file": "/gaze_frames/frame_0254.webp?v=neon5",
       "x": 0.0,
       "y": 0.2038
     },
     {
       "id": 255,
       "seg": 3,
-      "file": "/gaze_frames/frame_0255.webp?v=neon3",
+      "file": "/gaze_frames/frame_0255.webp?v=neon5",
       "x": 0.0,
       "y": 0.2299
     },
     {
       "id": 256,
       "seg": 3,
-      "file": "/gaze_frames/frame_0256.webp?v=neon3",
+      "file": "/gaze_frames/frame_0256.webp?v=neon5",
       "x": 0.0,
       "y": 0.2565
     },
     {
       "id": 257,
       "seg": 3,
-      "file": "/gaze_frames/frame_0257.webp?v=neon3",
+      "file": "/gaze_frames/frame_0257.webp?v=neon5",
       "x": 0.0,
       "y": 0.2825
     },
     {
       "id": 258,
       "seg": 3,
-      "file": "/gaze_frames/frame_0258.webp?v=neon3",
+      "file": "/gaze_frames/frame_0258.webp?v=neon5",
       "x": 0.0,
       "y": 0.3079
     },
     {
       "id": 259,
       "seg": 3,
-      "file": "/gaze_frames/frame_0259.webp?v=neon3",
+      "file": "/gaze_frames/frame_0259.webp?v=neon5",
       "x": 0.0,
       "y": 0.3321
     },
     {
       "id": 260,
       "seg": 3,
-      "file": "/gaze_frames/frame_0260.webp?v=neon3",
+      "file": "/gaze_frames/frame_0260.webp?v=neon5",
       "x": 0.0,
       "y": 0.3552
     },
     {
       "id": 261,
       "seg": 3,
-      "file": "/gaze_frames/frame_0261.webp?v=neon3",
+      "file": "/gaze_frames/frame_0261.webp?v=neon5",
       "x": 0.0,
       "y": 0.3778
     },
     {
       "id": 262,
       "seg": 3,
-      "file": "/gaze_frames/frame_0262.webp?v=neon3",
+      "file": "/gaze_frames/frame_0262.webp?v=neon5",
       "x": 0.0,
       "y": 0.3996
     },
     {
       "id": 263,
       "seg": 3,
-      "file": "/gaze_frames/frame_0263.webp?v=neon3",
+      "file": "/gaze_frames/frame_0263.webp?v=neon5",
       "x": 0.0,
       "y": 0.4211
     },
     {
       "id": 264,
       "seg": 3,
-      "file": "/gaze_frames/frame_0264.webp?v=neon3",
+      "file": "/gaze_frames/frame_0264.webp?v=neon5",
       "x": 0.0,
       "y": 0.4428
     },
     {
       "id": 265,
       "seg": 3,
-      "file": "/gaze_frames/frame_0265.webp?v=neon3",
+      "file": "/gaze_frames/frame_0265.webp?v=neon5",
       "x": 0.0,
       "y": 0.4653
     },
     {
       "id": 266,
       "seg": 3,
-      "file": "/gaze_frames/frame_0266.webp?v=neon3",
+      "file": "/gaze_frames/frame_0266.webp?v=neon5",
       "x": 0.0,
       "y": 0.4882
     },
     {
       "id": 267,
       "seg": 3,
-      "file": "/gaze_frames/frame_0267.webp?v=neon3",
+      "file": "/gaze_frames/frame_0267.webp?v=neon5",
       "x": 0.0,
       "y": 0.5113
     },
     {
       "id": 268,
       "seg": 3,
-      "file": "/gaze_frames/frame_0268.webp?v=neon3",
+      "file": "/gaze_frames/frame_0268.webp?v=neon5",
       "x": 0.0,
       "y": 0.5348
     },
     {
       "id": 269,
       "seg": 3,
-      "file": "/gaze_frames/frame_0269.webp?v=neon3",
+      "file": "/gaze_frames/frame_0269.webp?v=neon5",
       "x": 0.0,
       "y": 0.5576
     },
     {
       "id": 270,
       "seg": 3,
-      "file": "/gaze_frames/frame_0270.webp?v=neon3",
+      "file": "/gaze_frames/frame_0270.webp?v=neon5",
       "x": 0.0,
       "y": 0.5798
     },
     {
       "id": 271,
       "seg": 3,
-      "file": "/gaze_frames/frame_0271.webp?v=neon3",
+      "file": "/gaze_frames/frame_0271.webp?v=neon5",
       "x": 0.0,
       "y": 0.6009
     },
     {
       "id": 272,
       "seg": 3,
-      "file": "/gaze_frames/frame_0272.webp?v=neon3",
+      "file": "/gaze_frames/frame_0272.webp?v=neon5",
       "x": 0.0,
       "y": 0.6209
     },
     {
       "id": 273,
       "seg": 3,
-      "file": "/gaze_frames/frame_0273.webp?v=neon3",
+      "file": "/gaze_frames/frame_0273.webp?v=neon5",
       "x": 0.0,
       "y": 0.6396
     },
     {
       "id": 274,
       "seg": 3,
-      "file": "/gaze_frames/frame_0274.webp?v=neon3",
+      "file": "/gaze_frames/frame_0274.webp?v=neon5",
       "x": 0.0,
       "y": 0.6569
     },
     {
       "id": 275,
       "seg": 3,
-      "file": "/gaze_frames/frame_0275.webp?v=neon3",
+      "file": "/gaze_frames/frame_0275.webp?v=neon5",
       "x": 0.0,
       "y": 0.6738
     },
     {
       "id": 276,
       "seg": 3,
-      "file": "/gaze_frames/frame_0276.webp?v=neon3",
+      "file": "/gaze_frames/frame_0276.webp?v=neon5",
       "x": 0.0,
       "y": 0.6898
     },
     {
       "id": 277,
       "seg": 3,
-      "file": "/gaze_frames/frame_0277.webp?v=neon3",
+      "file": "/gaze_frames/frame_0277.webp?v=neon5",
       "x": 0.0,
       "y": 0.7053
     },
     {
       "id": 278,
       "seg": 3,
-      "file": "/gaze_frames/frame_0278.webp?v=neon3",
+      "file": "/gaze_frames/frame_0278.webp?v=neon5",
       "x": 0.0,
       "y": 0.7211
     },
     {
       "id": 279,
       "seg": 3,
-      "file": "/gaze_frames/frame_0279.webp?v=neon3",
+      "file": "/gaze_frames/frame_0279.webp?v=neon5",
       "x": 0.0,
       "y": 0.7362
     },
     {
       "id": 280,
       "seg": 3,
-      "file": "/gaze_frames/frame_0280.webp?v=neon3",
+      "file": "/gaze_frames/frame_0280.webp?v=neon5",
       "x": 0.0,
       "y": 0.7508
     },
     {
       "id": 281,
       "seg": 3,
-      "file": "/gaze_frames/frame_0281.webp?v=neon3",
+      "file": "/gaze_frames/frame_0281.webp?v=neon5",
       "x": 0.0,
       "y": 0.7639
     },
     {
       "id": 282,
       "seg": 3,
-      "file": "/gaze_frames/frame_0282.webp?v=neon3",
+      "file": "/gaze_frames/frame_0282.webp?v=neon5",
       "x": 0.0,
       "y": 0.775
     },
     {
       "id": 283,
       "seg": 3,
-      "file": "/gaze_frames/frame_0283.webp?v=neon3",
+      "file": "/gaze_frames/frame_0283.webp?v=neon5",
       "x": 0.0,
       "y": 0.7839
     },
     {
       "id": 284,
       "seg": 3,
-      "file": "/gaze_frames/frame_0284.webp?v=neon3",
+      "file": "/gaze_frames/frame_0284.webp?v=neon5",
       "x": 0.0,
       "y": 0.7917
     },
     {
       "id": 285,
       "seg": 3,
-      "file": "/gaze_frames/frame_0285.webp?v=neon3",
+      "file": "/gaze_frames/frame_0285.webp?v=neon5",
       "x": 0.0,
       "y": 0.8002
     },
     {
       "id": 286,
       "seg": 3,
-      "file": "/gaze_frames/frame_0286.webp?v=neon3",
+      "file": "/gaze_frames/frame_0286.webp?v=neon5",
       "x": 0.0,
       "y": 0.8103
     },
     {
       "id": 287,
       "seg": 3,
-      "file": "/gaze_frames/frame_0287.webp?v=neon3",
+      "file": "/gaze_frames/frame_0287.webp?v=neon5",
       "x": 0.0,
       "y": 0.8228
     },
     {
       "id": 288,
       "seg": 3,
-      "file": "/gaze_frames/frame_0288.webp?v=neon3",
+      "file": "/gaze_frames/frame_0288.webp?v=neon5",
       "x": 0.0,
       "y": 0.8371
     },
     {
       "id": 289,
       "seg": 3,
-      "file": "/gaze_frames/frame_0289.webp?v=neon3",
+      "file": "/gaze_frames/frame_0289.webp?v=neon5",
       "x": 0.0,
       "y": 0.8523
     },
     {
       "id": 290,
       "seg": 3,
-      "file": "/gaze_frames/frame_0290.webp?v=neon3",
+      "file": "/gaze_frames/frame_0290.webp?v=neon5",
       "x": 0.0,
       "y": 0.867
     },
     {
       "id": 291,
       "seg": 3,
-      "file": "/gaze_frames/frame_0291.webp?v=neon3",
+      "file": "/gaze_frames/frame_0291.webp?v=neon5",
       "x": 0.0,
       "y": 0.8801
     },
     {
       "id": 292,
       "seg": 3,
-      "file": "/gaze_frames/frame_0292.webp?v=neon3",
+      "file": "/gaze_frames/frame_0292.webp?v=neon5",
       "x": 0.0,
       "y": 0.891
     },
     {
       "id": 293,
       "seg": 3,
-      "file": "/gaze_frames/frame_0293.webp?v=neon3",
+      "file": "/gaze_frames/frame_0293.webp?v=neon5",
       "x": 0.0,
       "y": 0.8999
     },
     {
       "id": 294,
       "seg": 3,
-      "file": "/gaze_frames/frame_0294.webp?v=neon3",
+      "file": "/gaze_frames/frame_0294.webp?v=neon5",
       "x": 0.0,
       "y": 0.9076
     },
     {
       "id": 295,
       "seg": 3,
-      "file": "/gaze_frames/frame_0295.webp?v=neon3",
+      "file": "/gaze_frames/frame_0295.webp?v=neon5",
       "x": 0.0,
       "y": 0.9147
     },
     {
       "id": 296,
       "seg": 3,
-      "file": "/gaze_frames/frame_0296.webp?v=neon3",
+      "file": "/gaze_frames/frame_0296.webp?v=neon5",
       "x": 0.0,
       "y": 0.922
     },
     {
       "id": 297,
       "seg": 3,
-      "file": "/gaze_frames/frame_0297.webp?v=neon3",
+      "file": "/gaze_frames/frame_0297.webp?v=neon5",
       "x": 0.0,
       "y": 0.9298
     },
     {
       "id": 298,
       "seg": 3,
-      "file": "/gaze_frames/frame_0298.webp?v=neon3",
+      "file": "/gaze_frames/frame_0298.webp?v=neon5",
       "x": 0.0,
       "y": 0.9373
     },
     {
       "id": 299,
       "seg": 3,
-      "file": "/gaze_frames/frame_0299.webp?v=neon3",
+      "file": "/gaze_frames/frame_0299.webp?v=neon5",
       "x": 0.0,
       "y": 0.9444
     },
     {
       "id": 300,
       "seg": 3,
-      "file": "/gaze_frames/frame_0300.webp?v=neon3",
+      "file": "/gaze_frames/frame_0300.webp?v=neon5",
       "x": 0.0,
       "y": 0.9508
     },
     {
       "id": 301,
       "seg": 3,
-      "file": "/gaze_frames/frame_0301.webp?v=neon3",
+      "file": "/gaze_frames/frame_0301.webp?v=neon5",
       "x": 0.0,
       "y": 0.9564
     },
     {
       "id": 302,
       "seg": 3,
-      "file": "/gaze_frames/frame_0302.webp?v=neon3",
+      "file": "/gaze_frames/frame_0302.webp?v=neon5",
       "x": 0.0,
       "y": 0.9617
     },
     {
       "id": 303,
       "seg": 3,
-      "file": "/gaze_frames/frame_0303.webp?v=neon3",
+      "file": "/gaze_frames/frame_0303.webp?v=neon5",
       "x": 0.0,
       "y": 0.9671
     },
     {
       "id": 304,
       "seg": 3,
-      "file": "/gaze_frames/frame_0304.webp?v=neon3",
+      "file": "/gaze_frames/frame_0304.webp?v=neon5",
       "x": 0.0,
       "y": 0.9724
     },
     {
       "id": 305,
       "seg": 3,
-      "file": "/gaze_frames/frame_0305.webp?v=neon3",
+      "file": "/gaze_frames/frame_0305.webp?v=neon5",
       "x": 0.0,
       "y": 0.9778
     },
     {
       "id": 306,
       "seg": 3,
-      "file": "/gaze_frames/frame_0306.webp?v=neon3",
+      "file": "/gaze_frames/frame_0306.webp?v=neon5",
       "x": 0.0,
       "y": 0.9831
     },
     {
       "id": 307,
       "seg": 3,
-      "file": "/gaze_frames/frame_0307.webp?v=neon3",
+      "file": "/gaze_frames/frame_0307.webp?v=neon5",
       "x": 0.0,
       "y": 0.9885
     },
     {
       "id": 308,
       "seg": 3,
-      "file": "/gaze_frames/frame_0308.webp?v=neon3",
+      "file": "/gaze_frames/frame_0308.webp?v=neon5",
       "x": 0.0,
       "y": 0.9939
     },
     {
       "id": 309,
       "seg": 3,
-      "file": "/gaze_frames/frame_0309.webp?v=neon3",
+      "file": "/gaze_frames/frame_0309.webp?v=neon5",
       "x": 0.0,
       "y": 0.9992
     },
     {
       "id": 310,
       "seg": 4,
-      "file": "/gaze_frames/frame_0310.webp?v=neon4",
+      "file": "/gaze_frames/frame_0310.webp?v=neon5",
       "x": 0.98,
       "y": 0.03
     },
     {
       "id": 311,
       "seg": 4,
-      "file": "/gaze_frames/frame_0311.webp?v=neon4",
+      "file": "/gaze_frames/frame_0311.webp?v=neon5",
       "x": 0.9796,
       "y": 0.0389
     },
     {
       "id": 312,
       "seg": 4,
-      "file": "/gaze_frames/frame_0312.webp?v=neon4",
+      "file": "/gaze_frames/frame_0312.webp?v=neon5",
       "x": 0.978,
       "y": 0.0516
     },
     {
       "id": 313,
       "seg": 4,
-      "file": "/gaze_frames/frame_0313.webp?v=neon4",
+      "file": "/gaze_frames/frame_0313.webp?v=neon5",
       "x": 0.975,
       "y": 0.0676
     },
     {
       "id": 314,
       "seg": 4,
-      "file": "/gaze_frames/frame_0314.webp?v=neon4",
+      "file": "/gaze_frames/frame_0314.webp?v=neon5",
       "x": 0.9702,
       "y": 0.0857
     },
     {
       "id": 315,
       "seg": 4,
-      "file": "/gaze_frames/frame_0315.webp?v=neon4",
+      "file": "/gaze_frames/frame_0315.webp?v=neon5",
       "x": 0.964,
       "y": 0.1059
     },
     {
       "id": 316,
       "seg": 4,
-      "file": "/gaze_frames/frame_0316.webp?v=neon4",
+      "file": "/gaze_frames/frame_0316.webp?v=neon5",
       "x": 0.9574,
       "y": 0.1261
     },
     {
       "id": 317,
       "seg": 4,
-      "file": "/gaze_frames/frame_0317.webp?v=neon4",
+      "file": "/gaze_frames/frame_0317.webp?v=neon5",
       "x": 0.9514,
       "y": 0.1456
     },
     {
       "id": 318,
       "seg": 4,
-      "file": "/gaze_frames/frame_0318.webp?v=neon4",
+      "file": "/gaze_frames/frame_0318.webp?v=neon5",
       "x": 0.9466,
       "y": 0.1631
     },
     {
       "id": 319,
       "seg": 4,
-      "file": "/gaze_frames/frame_0319.webp?v=neon4",
+      "file": "/gaze_frames/frame_0319.webp?v=neon5",
       "x": 0.9429,
       "y": 0.1786
     },
     {
       "id": 320,
       "seg": 4,
-      "file": "/gaze_frames/frame_0320.webp?v=neon4",
+      "file": "/gaze_frames/frame_0320.webp?v=neon5",
       "x": 0.9396,
       "y": 0.1916
     },
     {
       "id": 321,
       "seg": 4,
-      "file": "/gaze_frames/frame_0321.webp?v=neon4",
+      "file": "/gaze_frames/frame_0321.webp?v=neon5",
       "x": 0.9356,
       "y": 0.2041
     },
     {
       "id": 322,
       "seg": 4,
-      "file": "/gaze_frames/frame_0322.webp?v=neon4",
+      "file": "/gaze_frames/frame_0322.webp?v=neon5",
       "x": 0.9302,
       "y": 0.2178
     },
     {
       "id": 323,
       "seg": 4,
-      "file": "/gaze_frames/frame_0323.webp?v=neon4",
+      "file": "/gaze_frames/frame_0323.webp?v=neon5",
       "x": 0.9232,
       "y": 0.2334
     },
     {
       "id": 324,
       "seg": 4,
-      "file": "/gaze_frames/frame_0324.webp?v=neon4",
+      "file": "/gaze_frames/frame_0324.webp?v=neon5",
       "x": 0.9142,
       "y": 0.2515
     },
     {
       "id": 325,
       "seg": 4,
-      "file": "/gaze_frames/frame_0325.webp?v=neon4",
+      "file": "/gaze_frames/frame_0325.webp?v=neon5",
       "x": 0.9035,
       "y": 0.273
     },
     {
       "id": 326,
       "seg": 4,
-      "file": "/gaze_frames/frame_0326.webp?v=neon4",
+      "file": "/gaze_frames/frame_0326.webp?v=neon5",
       "x": 0.891,
       "y": 0.2975
     },
     {
       "id": 327,
       "seg": 4,
-      "file": "/gaze_frames/frame_0327.webp?v=neon4",
+      "file": "/gaze_frames/frame_0327.webp?v=neon5",
       "x": 0.8768,
       "y": 0.3235
     },
     {
       "id": 328,
       "seg": 4,
-      "file": "/gaze_frames/frame_0328.webp?v=neon4",
+      "file": "/gaze_frames/frame_0328.webp?v=neon5",
       "x": 0.8613,
       "y": 0.3496
     },
     {
       "id": 329,
       "seg": 4,
-      "file": "/gaze_frames/frame_0329.webp?v=neon4",
+      "file": "/gaze_frames/frame_0329.webp?v=neon5",
       "x": 0.8452,
       "y": 0.3729
     },
     {
       "id": 330,
       "seg": 4,
-      "file": "/gaze_frames/frame_0330.webp?v=neon4",
+      "file": "/gaze_frames/frame_0330.webp?v=neon5",
       "x": 0.8291,
       "y": 0.3914
     },
     {
       "id": 331,
       "seg": 4,
-      "file": "/gaze_frames/frame_0331.webp?v=neon4",
+      "file": "/gaze_frames/frame_0331.webp?v=neon5",
       "x": 0.8131,
       "y": 0.4048
     },
     {
       "id": 332,
       "seg": 4,
-      "file": "/gaze_frames/frame_0332.webp?v=neon4",
+      "file": "/gaze_frames/frame_0332.webp?v=neon5",
       "x": 0.797,
       "y": 0.415
     },
     {
       "id": 333,
       "seg": 4,
-      "file": "/gaze_frames/frame_0333.webp?v=neon4",
+      "file": "/gaze_frames/frame_0333.webp?v=neon5",
       "x": 0.7806,
       "y": 0.4232
     },
     {
       "id": 334,
       "seg": 4,
-      "file": "/gaze_frames/frame_0334.webp?v=neon4",
+      "file": "/gaze_frames/frame_0334.webp?v=neon5",
       "x": 0.763,
       "y": 0.431
     },
     {
       "id": 335,
       "seg": 4,
-      "file": "/gaze_frames/frame_0335.webp?v=neon4",
+      "file": "/gaze_frames/frame_0335.webp?v=neon5",
       "x": 0.7446,
       "y": 0.4387
     },
     {
       "id": 336,
       "seg": 4,
-      "file": "/gaze_frames/frame_0336.webp?v=neon4",
+      "file": "/gaze_frames/frame_0336.webp?v=neon5",
       "x": 0.7254,
       "y": 0.4463
     },
     {
       "id": 337,
       "seg": 4,
-      "file": "/gaze_frames/frame_0337.webp?v=neon4",
+      "file": "/gaze_frames/frame_0337.webp?v=neon5",
       "x": 0.7053,
       "y": 0.4527
     },
     {
       "id": 338,
       "seg": 4,
-      "file": "/gaze_frames/frame_0338.webp?v=neon4",
+      "file": "/gaze_frames/frame_0338.webp?v=neon5",
       "x": 0.6844,
       "y": 0.4587
     },
     {
       "id": 339,
       "seg": 4,
-      "file": "/gaze_frames/frame_0339.webp?v=neon4",
+      "file": "/gaze_frames/frame_0339.webp?v=neon5",
       "x": 0.6627,
       "y": 0.4647
     },
     {
       "id": 340,
       "seg": 4,
-      "file": "/gaze_frames/frame_0340.webp?v=neon4",
+      "file": "/gaze_frames/frame_0340.webp?v=neon5",
       "x": 0.6402,
       "y": 0.4714
     },
     {
       "id": 341,
       "seg": 4,
-      "file": "/gaze_frames/frame_0341.webp?v=neon4",
+      "file": "/gaze_frames/frame_0341.webp?v=neon5",
       "x": 0.6177,
       "y": 0.4789
     },
     {
       "id": 342,
       "seg": 4,
-      "file": "/gaze_frames/frame_0342.webp?v=neon4",
+      "file": "/gaze_frames/frame_0342.webp?v=neon5",
       "x": 0.5956,
       "y": 0.4869
     },
     {
       "id": 343,
       "seg": 4,
-      "file": "/gaze_frames/frame_0343.webp?v=neon4",
+      "file": "/gaze_frames/frame_0343.webp?v=neon5",
       "x": 0.5751,
       "y": 0.4942
     },
     {
       "id": 344,
       "seg": 4,
-      "file": "/gaze_frames/frame_0344.webp?v=neon4",
+      "file": "/gaze_frames/frame_0344.webp?v=neon5",
       "x": 0.5562,
       "y": 0.5005
     },
     {
       "id": 345,
       "seg": 4,
-      "file": "/gaze_frames/frame_0345.webp?v=neon4",
+      "file": "/gaze_frames/frame_0345.webp?v=neon5",
       "x": 0.5394,
       "y": 0.506
     },
     {
       "id": 346,
       "seg": 4,
-      "file": "/gaze_frames/frame_0346.webp?v=neon4",
+      "file": "/gaze_frames/frame_0346.webp?v=neon5",
       "x": 0.5244,
       "y": 0.5116
     },
     {
       "id": 347,
       "seg": 4,
-      "file": "/gaze_frames/frame_0347.webp?v=neon4",
+      "file": "/gaze_frames/frame_0347.webp?v=neon5",
       "x": 0.5101,
       "y": 0.5182
     },
     {
       "id": 348,
       "seg": 4,
-      "file": "/gaze_frames/frame_0348.webp?v=neon4",
+      "file": "/gaze_frames/frame_0348.webp?v=neon5",
       "x": 0.495,
       "y": 0.5271
     },
     {
       "id": 349,
       "seg": 4,
-      "file": "/gaze_frames/frame_0349.webp?v=neon4",
+      "file": "/gaze_frames/frame_0349.webp?v=neon5",
       "x": 0.4784,
       "y": 0.5381
     },
     {
       "id": 350,
       "seg": 4,
-      "file": "/gaze_frames/frame_0350.webp?v=neon4",
+      "file": "/gaze_frames/frame_0350.webp?v=neon5",
       "x": 0.4597,
       "y": 0.5507
     },
     {
       "id": 351,
       "seg": 4,
-      "file": "/gaze_frames/frame_0351.webp?v=neon4",
+      "file": "/gaze_frames/frame_0351.webp?v=neon5",
       "x": 0.4394,
       "y": 0.5644
     },
     {
       "id": 352,
       "seg": 4,
-      "file": "/gaze_frames/frame_0352.webp?v=neon4",
+      "file": "/gaze_frames/frame_0352.webp?v=neon5",
       "x": 0.4184,
       "y": 0.5781
     },
     {
       "id": 353,
       "seg": 4,
-      "file": "/gaze_frames/frame_0353.webp?v=neon4",
+      "file": "/gaze_frames/frame_0353.webp?v=neon5",
       "x": 0.3982,
       "y": 0.5907
     },
     {
       "id": 354,
       "seg": 4,
-      "file": "/gaze_frames/frame_0354.webp?v=neon4",
+      "file": "/gaze_frames/frame_0354.webp?v=neon5",
       "x": 0.3793,
       "y": 0.6018
     },
     {
       "id": 355,
       "seg": 4,
-      "file": "/gaze_frames/frame_0355.webp?v=neon4",
+      "file": "/gaze_frames/frame_0355.webp?v=neon5",
       "x": 0.3616,
       "y": 0.6115
     },
     {
       "id": 356,
       "seg": 4,
-      "file": "/gaze_frames/frame_0356.webp?v=neon4",
+      "file": "/gaze_frames/frame_0356.webp?v=neon5",
       "x": 0.3445,
       "y": 0.6206
     },
     {
       "id": 357,
       "seg": 4,
-      "file": "/gaze_frames/frame_0357.webp?v=neon4",
+      "file": "/gaze_frames/frame_0357.webp?v=neon5",
       "x": 0.3278,
       "y": 0.6294
     },
     {
       "id": 358,
       "seg": 4,
-      "file": "/gaze_frames/frame_0358.webp?v=neon4",
+      "file": "/gaze_frames/frame_0358.webp?v=neon5",
       "x": 0.311,
       "y": 0.6388
     },
     {
       "id": 359,
       "seg": 4,
-      "file": "/gaze_frames/frame_0359.webp?v=neon4",
+      "file": "/gaze_frames/frame_0359.webp?v=neon5",
       "x": 0.2941,
       "y": 0.649
     },
     {
       "id": 360,
       "seg": 4,
-      "file": "/gaze_frames/frame_0360.webp?v=neon4",
+      "file": "/gaze_frames/frame_0360.webp?v=neon5",
       "x": 0.2774,
       "y": 0.6599
     },
     {
       "id": 361,
       "seg": 4,
-      "file": "/gaze_frames/frame_0361.webp?v=neon4",
+      "file": "/gaze_frames/frame_0361.webp?v=neon5",
       "x": 0.2614,
       "y": 0.6713
     },
     {
       "id": 362,
       "seg": 4,
-      "file": "/gaze_frames/frame_0362.webp?v=neon4",
+      "file": "/gaze_frames/frame_0362.webp?v=neon5",
       "x": 0.2465,
       "y": 0.6831
     },
     {
       "id": 363,
       "seg": 4,
-      "file": "/gaze_frames/frame_0363.webp?v=neon4",
+      "file": "/gaze_frames/frame_0363.webp?v=neon5",
       "x": 0.2327,
       "y": 0.6957
     },
     {
       "id": 364,
       "seg": 4,
-      "file": "/gaze_frames/frame_0364.webp?v=neon4",
+      "file": "/gaze_frames/frame_0364.webp?v=neon5",
       "x": 0.2199,
       "y": 0.7095
     },
     {
       "id": 365,
       "seg": 4,
-      "file": "/gaze_frames/frame_0365.webp?v=neon4",
+      "file": "/gaze_frames/frame_0365.webp?v=neon5",
       "x": 0.2078,
       "y": 0.7247
     },
     {
       "id": 366,
       "seg": 4,
-      "file": "/gaze_frames/frame_0366.webp?v=neon4",
+      "file": "/gaze_frames/frame_0366.webp?v=neon5",
       "x": 0.1959,
       "y": 0.7411
     },
     {
       "id": 367,
       "seg": 4,
-      "file": "/gaze_frames/frame_0367.webp?v=neon4",
+      "file": "/gaze_frames/frame_0367.webp?v=neon5",
       "x": 0.1843,
       "y": 0.7578
     },
     {
       "id": 368,
       "seg": 4,
-      "file": "/gaze_frames/frame_0368.webp?v=neon4",
+      "file": "/gaze_frames/frame_0368.webp?v=neon5",
       "x": 0.1732,
       "y": 0.774
     },
     {
       "id": 369,
       "seg": 4,
-      "file": "/gaze_frames/frame_0369.webp?v=neon4",
+      "file": "/gaze_frames/frame_0369.webp?v=neon5",
       "x": 0.1633,
       "y": 0.7892
     },
     {
       "id": 370,
       "seg": 4,
-      "file": "/gaze_frames/frame_0370.webp?v=neon4",
+      "file": "/gaze_frames/frame_0370.webp?v=neon5",
       "x": 0.1545,
       "y": 0.8028
     },
     {
       "id": 371,
       "seg": 4,
-      "file": "/gaze_frames/frame_0371.webp?v=neon4",
+      "file": "/gaze_frames/frame_0371.webp?v=neon5",
       "x": 0.1465,
       "y": 0.8159
     },
     {
       "id": 372,
       "seg": 4,
-      "file": "/gaze_frames/frame_0372.webp?v=neon4",
+      "file": "/gaze_frames/frame_0372.webp?v=neon5",
       "x": 0.139,
       "y": 0.829
     },
     {
       "id": 373,
       "seg": 4,
-      "file": "/gaze_frames/frame_0373.webp?v=neon4",
+      "file": "/gaze_frames/frame_0373.webp?v=neon5",
       "x": 0.1316,
       "y": 0.8427
     },
     {
       "id": 374,
       "seg": 4,
-      "file": "/gaze_frames/frame_0374.webp?v=neon4",
+      "file": "/gaze_frames/frame_0374.webp?v=neon5",
       "x": 0.1244,
       "y": 0.8569
     },
     {
       "id": 375,
       "seg": 4,
-      "file": "/gaze_frames/frame_0375.webp?v=neon4",
+      "file": "/gaze_frames/frame_0375.webp?v=neon5",
       "x": 0.1175,
       "y": 0.8718
     },
     {
       "id": 376,
       "seg": 4,
-      "file": "/gaze_frames/frame_0376.webp?v=neon4",
+      "file": "/gaze_frames/frame_0376.webp?v=neon5",
       "x": 0.1112,
       "y": 0.8858
     },
     {
       "id": 377,
       "seg": 4,
-      "file": "/gaze_frames/frame_0377.webp?v=neon4",
+      "file": "/gaze_frames/frame_0377.webp?v=neon5",
       "x": 0.1048,
       "y": 0.8976
     },
     {
       "id": 378,
       "seg": 4,
-      "file": "/gaze_frames/frame_0378.webp?v=neon4",
+      "file": "/gaze_frames/frame_0378.webp?v=neon5",
       "x": 0.0984,
       "y": 0.9075
     },
     {
       "id": 379,
       "seg": 4,
-      "file": "/gaze_frames/frame_0379.webp?v=neon4",
+      "file": "/gaze_frames/frame_0379.webp?v=neon5",
       "x": 0.092,
       "y": 0.9148
     },
     {
       "id": 380,
       "seg": 4,
-      "file": "/gaze_frames/frame_0380.webp?v=neon4",
+      "file": "/gaze_frames/frame_0380.webp?v=neon5",
       "x": 0.0856,
       "y": 0.92
     },
     {
       "id": 381,
       "seg": 4,
-      "file": "/gaze_frames/frame_0381.webp?v=neon4",
+      "file": "/gaze_frames/frame_0381.webp?v=neon5",
       "x": 0.0791,
       "y": 0.9244
     },
     {
       "id": 382,
       "seg": 4,
-      "file": "/gaze_frames/frame_0382.webp?v=neon4",
+      "file": "/gaze_frames/frame_0382.webp?v=neon5",
       "x": 0.0726,
       "y": 0.929
     },
     {
       "id": 383,
       "seg": 4,
-      "file": "/gaze_frames/frame_0383.webp?v=neon4",
+      "file": "/gaze_frames/frame_0383.webp?v=neon5",
       "x": 0.066,
       "y": 0.9348
     },
     {
       "id": 384,
       "seg": 4,
-      "file": "/gaze_frames/frame_0384.webp?v=neon4",
+      "file": "/gaze_frames/frame_0384.webp?v=neon5",
       "x": 0.0595,
       "y": 0.9417
     },
     {
       "id": 385,
       "seg": 4,
-      "file": "/gaze_frames/frame_0385.webp?v=neon4",
+      "file": "/gaze_frames/frame_0385.webp?v=neon5",
       "x": 0.0529,
       "y": 0.9496
     },
     {
       "id": 386,
       "seg": 4,
-      "file": "/gaze_frames/frame_0386.webp?v=neon4",
+      "file": "/gaze_frames/frame_0386.webp?v=neon5",
       "x": 0.0464,
       "y": 0.9585
     },
     {
       "id": 387,
       "seg": 4,
-      "file": "/gaze_frames/frame_0387.webp?v=neon4",
+      "file": "/gaze_frames/frame_0387.webp?v=neon5",
       "x": 0.0398,
       "y": 0.9665
     },
     {
       "id": 388,
       "seg": 4,
-      "file": "/gaze_frames/frame_0388.webp?v=neon4",
+      "file": "/gaze_frames/frame_0388.webp?v=neon5",
       "x": 0.0332,
       "y": 0.9737
     },
     {
       "id": 389,
       "seg": 4,
-      "file": "/gaze_frames/frame_0389.webp?v=neon4",
+      "file": "/gaze_frames/frame_0389.webp?v=neon5",
       "x": 0.0266,
       "y": 0.9784
     },
     {
       "id": 390,
       "seg": 4,
-      "file": "/gaze_frames/frame_0390.webp?v=neon4",
+      "file": "/gaze_frames/frame_0390.webp?v=neon5",
       "x": 0.02,
       "y": 0.98
     }
   ],
   "blinkFrames": [
-    "/gaze_frames/blink_0000.webp?v=neon3",
-    "/gaze_frames/blink_0001.webp?v=neon3",
-    "/gaze_frames/blink_0002.webp?v=neon3",
-    "/gaze_frames/blink_0003.webp?v=neon3",
-    "/gaze_frames/blink_0004.webp?v=neon3",
-    "/gaze_frames/blink_0005.webp?v=neon3",
-    "/gaze_frames/blink_0006.webp?v=neon3",
-    "/gaze_frames/blink_0007.webp?v=neon3",
-    "/gaze_frames/blink_0008.webp?v=neon3",
-    "/gaze_frames/blink_0009.webp?v=neon3",
-    "/gaze_frames/blink_0010.webp?v=neon3",
-    "/gaze_frames/blink_0011.webp?v=neon3",
-    "/gaze_frames/blink_0012.webp?v=neon3",
-    "/gaze_frames/blink_0013.webp?v=neon3",
-    "/gaze_frames/blink_0014.webp?v=neon3",
-    "/gaze_frames/blink_0015.webp?v=neon3",
-    "/gaze_frames/blink_0016.webp?v=neon3",
-    "/gaze_frames/blink_0017.webp?v=neon3",
-    "/gaze_frames/blink_0018.webp?v=neon3",
-    "/gaze_frames/blink_0019.webp?v=neon3",
-    "/gaze_frames/blink_0020.webp?v=neon3",
-    "/gaze_frames/blink_0021.webp?v=neon3",
-    "/gaze_frames/blink_0022.webp?v=neon3",
-    "/gaze_frames/blink_0023.webp?v=neon3",
-    "/gaze_frames/blink_0024.webp?v=neon3",
-    "/gaze_frames/blink_0025.webp?v=neon3",
-    "/gaze_frames/blink_0026.webp?v=neon3",
-    "/gaze_frames/blink_0027.webp?v=neon3",
-    "/gaze_frames/blink_0028.webp?v=neon3",
-    "/gaze_frames/blink_0029.webp?v=neon3",
-    "/gaze_frames/blink_0030.webp?v=neon3",
-    "/gaze_frames/blink_0031.webp?v=neon3",
-    "/gaze_frames/blink_0032.webp?v=neon3",
-    "/gaze_frames/blink_0033.webp?v=neon3",
-    "/gaze_frames/blink_0034.webp?v=neon3",
-    "/gaze_frames/blink_0035.webp?v=neon3",
-    "/gaze_frames/blink_0036.webp?v=neon3",
-    "/gaze_frames/blink_0037.webp?v=neon3",
-    "/gaze_frames/blink_0038.webp?v=neon3",
-    "/gaze_frames/blink_0039.webp?v=neon3",
-    "/gaze_frames/blink_0040.webp?v=neon3",
-    "/gaze_frames/blink_0041.webp?v=neon3",
-    "/gaze_frames/blink_0042.webp?v=neon3",
-    "/gaze_frames/blink_0043.webp?v=neon3",
-    "/gaze_frames/blink_0044.webp?v=neon3",
-    "/gaze_frames/blink_0045.webp?v=neon3",
-    "/gaze_frames/blink_0046.webp?v=neon3",
-    "/gaze_frames/blink_0047.webp?v=neon3",
-    "/gaze_frames/blink_0048.webp?v=neon3",
-    "/gaze_frames/blink_0049.webp?v=neon3",
-    "/gaze_frames/blink_0050.webp?v=neon3",
-    "/gaze_frames/blink_0051.webp?v=neon3",
-    "/gaze_frames/blink_0052.webp?v=neon3",
-    "/gaze_frames/blink_0053.webp?v=neon3",
-    "/gaze_frames/blink_0054.webp?v=neon3",
-    "/gaze_frames/blink_0055.webp?v=neon3",
-    "/gaze_frames/blink_0056.webp?v=neon3",
-    "/gaze_frames/blink_0057.webp?v=neon3",
-    "/gaze_frames/blink_0058.webp?v=neon3",
-    "/gaze_frames/blink_0059.webp?v=neon3",
-    "/gaze_frames/blink_0060.webp?v=neon3",
-    "/gaze_frames/blink_0061.webp?v=neon3",
-    "/gaze_frames/blink_0062.webp?v=neon3",
-    "/gaze_frames/blink_0063.webp?v=neon3",
-    "/gaze_frames/blink_0064.webp?v=neon3",
-    "/gaze_frames/blink_0065.webp?v=neon3",
-    "/gaze_frames/blink_0066.webp?v=neon3",
-    "/gaze_frames/blink_0067.webp?v=neon3",
-    "/gaze_frames/blink_0068.webp?v=neon3",
-    "/gaze_frames/blink_0069.webp?v=neon3",
-    "/gaze_frames/blink_0070.webp?v=neon3",
-    "/gaze_frames/blink_0071.webp?v=neon3"
+    "/gaze_frames/blink_0000.webp?v=neon5",
+    "/gaze_frames/blink_0001.webp?v=neon5",
+    "/gaze_frames/blink_0002.webp?v=neon5",
+    "/gaze_frames/blink_0003.webp?v=neon5",
+    "/gaze_frames/blink_0004.webp?v=neon5",
+    "/gaze_frames/blink_0005.webp?v=neon5",
+    "/gaze_frames/blink_0006.webp?v=neon5",
+    "/gaze_frames/blink_0007.webp?v=neon5",
+    "/gaze_frames/blink_0008.webp?v=neon5",
+    "/gaze_frames/blink_0009.webp?v=neon5",
+    "/gaze_frames/blink_0010.webp?v=neon5",
+    "/gaze_frames/blink_0011.webp?v=neon5",
+    "/gaze_frames/blink_0012.webp?v=neon5",
+    "/gaze_frames/blink_0013.webp?v=neon5",
+    "/gaze_frames/blink_0014.webp?v=neon5",
+    "/gaze_frames/blink_0015.webp?v=neon5",
+    "/gaze_frames/blink_0016.webp?v=neon5",
+    "/gaze_frames/blink_0017.webp?v=neon5",
+    "/gaze_frames/blink_0018.webp?v=neon5",
+    "/gaze_frames/blink_0019.webp?v=neon5",
+    "/gaze_frames/blink_0020.webp?v=neon5",
+    "/gaze_frames/blink_0021.webp?v=neon5",
+    "/gaze_frames/blink_0022.webp?v=neon5",
+    "/gaze_frames/blink_0023.webp?v=neon5",
+    "/gaze_frames/blink_0024.webp?v=neon5",
+    "/gaze_frames/blink_0025.webp?v=neon5",
+    "/gaze_frames/blink_0026.webp?v=neon5",
+    "/gaze_frames/blink_0027.webp?v=neon5",
+    "/gaze_frames/blink_0028.webp?v=neon5",
+    "/gaze_frames/blink_0029.webp?v=neon5",
+    "/gaze_frames/blink_0030.webp?v=neon5",
+    "/gaze_frames/blink_0031.webp?v=neon5",
+    "/gaze_frames/blink_0032.webp?v=neon5",
+    "/gaze_frames/blink_0033.webp?v=neon5",
+    "/gaze_frames/blink_0034.webp?v=neon5",
+    "/gaze_frames/blink_0035.webp?v=neon5",
+    "/gaze_frames/blink_0036.webp?v=neon5",
+    "/gaze_frames/blink_0037.webp?v=neon5",
+    "/gaze_frames/blink_0038.webp?v=neon5",
+    "/gaze_frames/blink_0039.webp?v=neon5",
+    "/gaze_frames/blink_0040.webp?v=neon5",
+    "/gaze_frames/blink_0041.webp?v=neon5",
+    "/gaze_frames/blink_0042.webp?v=neon5",
+    "/gaze_frames/blink_0043.webp?v=neon5",
+    "/gaze_frames/blink_0044.webp?v=neon5",
+    "/gaze_frames/blink_0045.webp?v=neon5",
+    "/gaze_frames/blink_0046.webp?v=neon5",
+    "/gaze_frames/blink_0047.webp?v=neon5",
+    "/gaze_frames/blink_0048.webp?v=neon5",
+    "/gaze_frames/blink_0049.webp?v=neon5",
+    "/gaze_frames/blink_0050.webp?v=neon5",
+    "/gaze_frames/blink_0051.webp?v=neon5",
+    "/gaze_frames/blink_0052.webp?v=neon5",
+    "/gaze_frames/blink_0053.webp?v=neon5",
+    "/gaze_frames/blink_0054.webp?v=neon5",
+    "/gaze_frames/blink_0055.webp?v=neon5",
+    "/gaze_frames/blink_0056.webp?v=neon5",
+    "/gaze_frames/blink_0057.webp?v=neon5",
+    "/gaze_frames/blink_0058.webp?v=neon5",
+    "/gaze_frames/blink_0059.webp?v=neon5",
+    "/gaze_frames/blink_0060.webp?v=neon5",
+    "/gaze_frames/blink_0061.webp?v=neon5",
+    "/gaze_frames/blink_0062.webp?v=neon5",
+    "/gaze_frames/blink_0063.webp?v=neon5",
+    "/gaze_frames/blink_0064.webp?v=neon5",
+    "/gaze_frames/blink_0065.webp?v=neon5",
+    "/gaze_frames/blink_0066.webp?v=neon5",
+    "/gaze_frames/blink_0067.webp?v=neon5",
+    "/gaze_frames/blink_0068.webp?v=neon5",
+    "/gaze_frames/blink_0069.webp?v=neon5",
+    "/gaze_frames/blink_0070.webp?v=neon5",
+    "/gaze_frames/blink_0071.webp?v=neon5"
   ]
 }
