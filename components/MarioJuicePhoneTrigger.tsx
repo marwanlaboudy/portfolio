@@ -43,7 +43,7 @@ export default function MarioJuicePhoneTrigger() {
 
   return (
     <div
-      className="fixed right-4 sm:right-8 lg:right-12 top-1/2 -translate-y-1/2 z-30"
+      className="absolute right-4 sm:right-8 lg:right-12 top-1/2 -translate-y-1/2 z-30"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >

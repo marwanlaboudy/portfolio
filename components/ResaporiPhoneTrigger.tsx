@@ -43,7 +43,7 @@ export default function ResaporiPhoneTrigger() {
 
   return (
     <div
-      className="fixed left-4 sm:left-8 lg:left-12 top-1/2 -translate-y-1/2 z-30"
+      className="absolute left-4 sm:left-8 lg:left-12 top-1/2 -translate-y-1/2 z-30"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
