@@ -1,22 +1,26 @@
 #!/usr/bin/env python3
 """
-Process user video frames:
-1. Detect face landmarks, eye gaze blendshapes, and head pose.
-2. Stabilize face center and crop to square 320x320 WebP.
-3. Compute normalized (x, y) coordinates for cursor tracking.
-4. Export manifest.json for the Next.js FaceLooker component.
+High-precision Gaze Dataset Builder:
+1. Extracts native frames and crops a stabilized, well-proportioned square around the head.
+2. Selects clean, blink-free, non-overlapping directional segments.
+3. Uses FFmpeg motion-compensated interpolation (minterpolate mci/aobmc/vsbmc) to generate ~600 ultra-smooth frames.
+4. Runs MediaPipe 3D FaceLandmarker on every interpolated frame to measure exact 3D head forward vector + nose + eye gaze.
+5. Piecewise-normalizes (x, y) anchored strictly at the neutral center frame (0.0, 0.0).
+6. Exports WebP frames + manifest.json + verification grid.
 """
 
 import glob
 import json
 import math
 import os
+import shutil
+import subprocess
 import sys
 from pathlib import Path
 
 import cv2
 import numpy as np
-from PIL import Image
+from PIL import Image, ImageDraw
 from tqdm import tqdm
 
 import mediapipe as mp
@@ -24,16 +28,27 @@ from mediapipe.tasks import python
 from mediapipe.tasks.python import vision
 
 BASE_DIR = Path(__file__).resolve().parent
-RAW_FRAMES_DIR = BASE_DIR / "raw_frames"
+VIDEO_PATH = BASE_DIR / "raw_video" / "user_gaze.mp4"
+FFMPEG_BIN = BASE_DIR / "bin" / "ffmpeg"
+MODEL_PATH = BASE_DIR / ".venv" / "face_landmarker.task"
 OUTPUT_DIR = BASE_DIR / "public" / "gaze_frames"
-OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
-MODEL_PATH = BASE_DIR / "face_landmarker.task"
-if not MODEL_PATH.exists():
-    print(f"Error: {MODEL_PATH} not found.")
-    sys.exit(1)
+TMP_RAW = Path("/tmp/raw_24fps")
+TMP_CROPPED = Path("/tmp/cropped_24fps")
+TMP_INTERP = Path("/tmp/interp_segments")
 
-# Initialize MediaPipe Face Landmarker
+# 1. Ensure raw 24fps frames exist
+if not TMP_RAW.exists() or len(list(TMP_RAW.glob("frame_*.jpg"))) < 350:
+    TMP_RAW.mkdir(parents=True, exist_ok=True)
+    subprocess.run([
+        str(FFMPEG_BIN), "-y", "-i", str(VIDEO_PATH),
+        "-q:v", "2", str(TMP_RAW / "frame_%04d.jpg")
+    ], check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+
+raw_files = sorted(glob.glob(str(TMP_RAW / "frame_*.jpg")))
+print(f"Loaded {len(raw_files)} raw 24fps frames.")
+
+# Initialize MediaPipe FaceLandmarker
 base_options = python.BaseOptions(model_asset_path=str(MODEL_PATH))
 options = vision.FaceLandmarkerOptions(
     base_options=base_options,
@@ -43,142 +58,248 @@ options = vision.FaceLandmarkerOptions(
 )
 detector = vision.FaceLandmarker.create_from_options(options)
 
-frame_files = sorted(glob.glob(str(RAW_FRAMES_DIR / "frame_*.jpg")))
-print(f"Found {len(frame_files)} frames to process.")
+# 2. Compute stabilized global square crop box from sample frames
+sample_centers = []
+for fpath in raw_files[::5]:
+    img = cv2.imread(fpath)
+    h, w, _ = img.shape
+    rgb = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+    res = detector.detect(mp.Image(image_format=mp.ImageFormat.SRGB, data=rgb))
+    if res.face_landmarks:
+        lm = res.face_landmarks[0]
+        xs = [pt.x * w for pt in lm]
+        ys = [pt.y * h for pt in lm]
+        cx = (min(xs) + max(xs)) / 2.0
+        cy = (min(ys) + max(ys)) / 2.0
+        size = max(max(xs) - min(xs), max(ys) - min(ys))
+        sample_centers.append((cx, cy, size, w, h))
 
-records = []
-all_centers = []
+avg_cx = float(np.median([c[0] for c in sample_centers]))
+avg_cy = float(np.median([c[1] for c in sample_centers]))
+avg_size = float(np.median([c[2] for c in sample_centers]))
+W, H = sample_centers[0][3], sample_centers[0][4]
 
-print("Phase 1: Analyzing face landmarks and gaze directions...")
-for fpath in tqdm(frame_files, desc="Analyzing"):
-    img_bgr = cv2.imread(fpath)
-    if img_bgr is None:
-        continue
-    h, w, _ = img_bgr.shape
-    img_rgb = cv2.cvtColor(img_bgr, cv2.COLOR_BGR2RGB)
-    mp_img = mp.Image(image_format=mp.ImageFormat.SRGB, data=img_rgb)
-    
-    detection = detector.detect(mp_img)
-    if not detection.face_landmarks or not detection.face_blendshapes:
-        continue
-    
-    lm = detection.face_landmarks[0]
-    bs = {b.category_name: b.score for b in detection.face_blendshapes[0]}
-    
-    # Eye Gaze Blendshapes
-    look_right = (bs.get('eyeLookOutRight', 0.0) + bs.get('eyeLookInLeft', 0.0)) / 2.0
-    look_left = (bs.get('eyeLookOutLeft', 0.0) + bs.get('eyeLookInRight', 0.0)) / 2.0
-    gaze_x = look_right - look_left
-    
-    look_up = (bs.get('eyeLookUpLeft', 0.0) + bs.get('eyeLookUpRight', 0.0)) / 2.0
-    look_down = (bs.get('eyeLookDownLeft', 0.0) + bs.get('eyeLookDownRight', 0.0)) / 2.0
-    gaze_y = look_up - look_down
-    
-    # Head Pose Euler Angles
-    mat = detection.facial_transformation_matrixes[0]
-    yaw = math.atan2(mat[1][0], mat[0][0])
-    pitch = math.atan2(-mat[2][0], math.sqrt(mat[2][1]**2 + mat[2][2]**2))
-    
-    # Combined Gaze Vector (eye look + head angle)
-    raw_x = gaze_x * 0.75 + yaw * 0.45
-    raw_y = gaze_y * 0.75 + pitch * 0.45
-    
-    # Face bounding box center
-    xs = [pt.x * w for pt in lm]
-    ys = [pt.y * h for pt in lm]
-    min_x, max_x = min(xs), max(xs)
-    min_y, max_y = min(ys), max(ys)
-    cx = (min_x + max_x) / 2.0
-    cy = (min_y + max_y) / 2.0
-    face_w = max_x - min_x
-    face_h = max_y - min_y
-    
-    all_centers.append((cx, cy, max(face_w, face_h)))
-    
-    records.append({
-        'path': fpath,
-        'raw_x': raw_x,
-        'raw_y': raw_y,
-        'cx': cx,
-        'cy': cy,
-        'w': w,
-        'h': h,
-    })
+# Generous square crop (1.95x face mesh size) shifted slightly up so hair & chin both have clean margin
+crop_dim = min(int(avg_size * 1.95), W)
+left = max(0, min(W - crop_dim, int(avg_cx - crop_dim / 2)))
+top = max(0, min(H - crop_dim, int(avg_cy - crop_dim * 0.54)))
+print(f"Stabilized crop: dim={crop_dim}, left={left}, top={top}")
 
-print(f"Successfully tracked {len(records)} valid face frames.")
+# 3. Crop and resize all 358 native frames to 320x320
+shutil.rmtree(TMP_CROPPED, ignore_errors=True)
+TMP_CROPPED.mkdir(parents=True, exist_ok=True)
 
-# Calculate global stabilized crop parameters
-avg_cx = float(np.median([c[0] for c in all_centers]))
-avg_cy = float(np.median([c[1] for c in all_centers]))
-avg_size = float(np.median([c[2] for c in all_centers]))
-
-# Make crop box generous around the head (1.8x face size)
-crop_dim = int(avg_size * 1.9)
-# Ensure square crop fits within image boundaries
-crop_dim = min(crop_dim, int(records[0]['w']))
-half_dim = crop_dim // 2
-
-# Global crop box
-left = max(0, min(records[0]['w'] - crop_dim, int(avg_cx - half_dim)))
-top = max(0, min(records[0]['h'] - crop_dim, int(avg_cy - half_dim * 1.05)))
-
-# Normalize gaze coordinates to range [-1.0 .. 1.0]
-all_rx = np.array([r['raw_x'] for r in records])
-all_ry = np.array([r['raw_y'] for r in records])
-
-# Use 2nd and 98th percentiles to avoid outlier clamping
-min_x, max_x = np.percentile(all_rx, 2), np.percentile(all_rx, 98)
-min_y, max_y = np.percentile(all_ry, 2), np.percentile(all_ry, 98)
-
-print(f"Gaze X range: [{min_x:.3f} .. {max_x:.3f}]")
-print(f"Gaze Y range: [{min_y:.3f} .. {max_y:.3f}]")
-
-print("Phase 2: Cropping, resizing to 320x320, and saving WebP frames...")
-manifest_frames = []
-
-for idx, r in enumerate(tqdm(records, desc="Saving WebP")):
-    # Normalized x and y in [-1 .. 1]
-    norm_x = float(np.clip(2.0 * (r['raw_x'] - min_x) / (max_x - min_x) - 1.0, -1.0, 1.0))
-    # Invert y so positive is up, negative is down (matching screen coordinates)
-    norm_y = float(np.clip(2.0 * (r['raw_y'] - min_y) / (max_y - min_y) - 1.0, -1.0, 1.0))
-    
-    fname = f"frame_{idx:04d}.webp"
-    out_file = OUTPUT_DIR / fname
-    
-    # Load and crop
-    img_bgr = cv2.imread(r['path'])
-    cropped = img_bgr[top:top+crop_dim, left:left+crop_dim]
-    
-    # Resize to 320x320
+for idx, fpath in enumerate(tqdm(raw_files, desc="Cropping 24fps frames")):
+    img = cv2.imread(fpath)
+    cropped = img[top:top+crop_dim, left:left+crop_dim]
     resized = cv2.resize(cropped, (320, 320), interpolation=cv2.INTER_AREA)
-    rgb = cv2.cvtColor(resized, cv2.COLOR_BGR2RGB)
-    
-    # Save as high quality WebP
-    pil_img = Image.fromarray(rgb)
-    pil_img.save(out_file, format="WEBP", quality=85, method=6)
-    
-    manifest_frames.append({
-        'id': idx,
-        'file': f"/gaze_frames/{fname}",
-        'x': round(norm_x, 4),
-        'y': round(-norm_y, 4), # Screen Y: positive down
+    cv2.imwrite(str(TMP_CROPPED / f"f_{idx:04d}.jpg"), resized, [int(cv2.IMWRITE_JPEG_QUALITY), 96])
+
+# 4. Define clean, blink-free segments (0-indexed frame ranges)
+# Note: Segment 2 bridges the 5-frame blink (#81..#85) seamlessly via minterpolate!
+segments = [
+    ("seg0_center", list(range(0, 6)) + list(range(332, 344))),
+    ("seg1_left", list(range(19, 55))),
+    ("seg2_right", list(range(75, 81)) + list(range(86, 111))),
+    ("seg3_diag_tr", list(range(117, 145))),
+    ("seg4_vertical", list(range(166, 212))),
+    ("seg5_circle_sw", list(range(212, 247))),
+    ("seg6_circle_nw", list(range(253, 279))),
+    ("seg7_circle_ne_se", list(range(289, 314))),
+    ("seg8_circle_se", list(range(214, 243))),
+]
+
+shutil.rmtree(TMP_INTERP, ignore_errors=True)
+TMP_INTERP.mkdir(parents=True, exist_ok=True)
+
+interpolated_files = []
+
+print("Running FFmpeg motion-compensated frame interpolation (minterpolate) on clean segments...")
+for seg_id, (seg_name, frame_indices) in enumerate(segments):
+    seg_in = TMP_INTERP / f"{seg_name}_in"
+    seg_out = TMP_INTERP / f"{seg_name}_out"
+    seg_in.mkdir(parents=True, exist_ok=True)
+    seg_out.mkdir(parents=True, exist_ok=True)
+
+    for i, f_idx in enumerate(frame_indices):
+        src_img = TMP_CROPPED / f"f_{f_idx:04d}.jpg"
+        dst_img = seg_in / f"in_{i:04d}.jpg"
+        if seg_name == "seg8_circle_se":
+            # Horizontally mirror the clean SW sweep to provide full SE (Bottom-Right) coverage
+            pil_m = Image.open(src_img).transpose(Image.FLIP_LEFT_RIGHT)
+            pil_m.save(dst_img, quality=96)
+        else:
+            shutil.copy(src_img, dst_img)
+
+    if seg_name == "seg0_center":
+        # No need to motion-interpolate static center anchor frames
+        for i, f_idx in enumerate([335, 336, 338, 2, 3]):
+            out_p = seg_out / f"out_{i:04d}.jpg"
+            shutil.copy(TMP_CROPPED / f"f_{f_idx:04d}.jpg", out_p)
+            interpolated_files.append((seg_id, out_p))
+    else:
+        # Interpolate 24fps -> 60fps using motion-compensated interpolation (mci + aobmc + vsbmc)
+        subprocess.run([
+            str(FFMPEG_BIN), "-y", "-framerate", "24",
+            "-i", str(seg_in / "in_%04d.jpg"),
+            "-vf", "minterpolate=fps=60:mi_mode=mci:mc_mode=aobmc:me_mode=bidir:vsbmc=1",
+            "-q:v", "2", str(seg_out / "out_%04d.jpg")
+        ], check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+
+        seg_generated = sorted(seg_out.glob("out_*.jpg"))
+        for p in seg_generated:
+            interpolated_files.append((seg_id, p))
+
+print(f"Generated {len(interpolated_files)} motion-interpolated frames across {len(segments)} segments.")
+
+# 5. Analyze every generated frame with MediaPipe FaceLandmarker
+analyzed = []
+for seg_id, fpath in tqdm(interpolated_files, desc="Analyzing 3D gaze"):
+    img_bgr = cv2.imread(str(fpath))
+    rgb = cv2.cvtColor(img_bgr, cv2.COLOR_BGR2RGB)
+    res = detector.detect(mp.Image(image_format=mp.ImageFormat.SRGB, data=rgb))
+    if not res.face_landmarks or not res.face_blendshapes:
+        continue
+
+    mat = res.facial_transformation_matrixes[0]
+    lm = res.face_landmarks[0]
+    bs = {b.category_name: b.score for b in res.face_blendshapes[0]}
+
+    # 3D Head Forward vector in camera space:
+    # mat[0][2]: negative = Left, positive = Right
+    # -mat[1][2]: negative = Up, positive = Down
+    fwd_x = float(mat[0][2])
+    fwd_y = float(-mat[1][2])
+
+    # Nose tip relative to ear/cheek midpoint (234 & 454)
+    ear_mid_x = (lm[234].x + lm[454].x) / 2.0
+    ear_mid_y = (lm[234].y + lm[454].y) / 2.0
+    face_w = abs(lm[454].x - lm[234].x) + 1e-6
+    face_h = abs(lm[152].y - lm[10].y) + 1e-6
+    nose_dx = float((lm[1].x - ear_mid_x) / face_w)
+    nose_dy = float((lm[1].y - ear_mid_y) / face_h)
+
+    # Eye horizontal look (anatomical right = screen left, anatomical left = screen right)
+    look_img_left = (bs.get("eyeLookOutRight", 0.0) + bs.get("eyeLookInLeft", 0.0)) / 2.0
+    look_img_right = (bs.get("eyeLookOutLeft", 0.0) + bs.get("eyeLookInRight", 0.0)) / 2.0
+    eye_dx = float(look_img_right - look_img_left)
+
+    look_u = (bs.get("eyeLookUpLeft", 0.0) + bs.get("eyeLookUpRight", 0.0)) / 2.0
+    look_d = (bs.get("eyeLookDownLeft", 0.0) + bs.get("eyeLookDownRight", 0.0)) / 2.0
+    eye_dy = float(look_d - look_u)
+
+    blink = float((bs.get("eyeBlinkLeft", 0.0) + bs.get("eyeBlinkRight", 0.0)) / 2.0)
+
+    # Filter out any residual blink frame when head is not tilted down
+    if blink > 0.42 and fwd_y < 0.15:
+        continue
+
+    analyzed.append({
+        "seg_id": seg_id,
+        "path": fpath,
+        "fwd_x": fwd_x,
+        "fwd_y": fwd_y,
+        "nose_dx": nose_dx,
+        "nose_dy": nose_dy,
+        "eye_dx": eye_dx,
+        "eye_dy": eye_dy,
+        "blink": blink,
     })
 
-# Find the frame closest to center (x=0, y=0)
-distances = [f['x']**2 + f['y']**2 for f in manifest_frames]
-center_idx = int(np.argmin(distances))
-center_frame = manifest_frames[center_idx]['file']
-print(f"Center frame identified: {center_frame} (id={center_idx})")
+print(f"Retained {len(analyzed)} clean, open-eye frames after blink check.")
+
+# 6. Anchor (0, 0) strictly to the neutral center segment (seg_id == 0)
+center_refs = [a for a in analyzed if a["seg_id"] == 0]
+c_fx = float(np.mean([a["fwd_x"] for a in center_refs]))
+c_fy = float(np.mean([a["fwd_y"] for a in center_refs]))
+c_nx = float(np.mean([a["nose_dx"] for a in center_refs]))
+c_ny = float(np.mean([a["nose_dy"] for a in center_refs]))
+c_ex = float(np.mean([a["eye_dx"] for a in center_refs]))
+c_ey = float(np.mean([a["eye_dy"] for a in center_refs]))
+
+for a in analyzed:
+    dfx = a["fwd_x"] - c_fx
+    dfy = a["fwd_y"] - c_fy
+    dnx = a["nose_dx"] - c_nx
+    dny = a["nose_dy"] - c_ny
+    dex = a["eye_dx"] - c_ex
+    dey = a["eye_dy"] - c_ey
+
+    # Only include downward eye gaze when head is not tilted up (avoids foreshortened eyelid artifact)
+    eye_y_w = 0.18 if dfy > -0.05 else 0.0
+
+    a["gx"] = 0.70 * dfx + 0.22 * dnx + 0.08 * dex
+    a["gy"] = 0.65 * dfy + 0.35 * dny + eye_y_w * dey
+
+# Piecewise normalization around 0.0 so Center (0, 0) is strictly (0.0, 0.0)
+all_gx = np.array([a["gx"] for a in analyzed])
+all_gy = np.array([a["gy"] for a in analyzed])
+
+min_gx = float(np.percentile(all_gx, 1.5))
+max_gx = float(np.percentile(all_gx, 98.5))
+min_gy = float(np.percentile(all_gy, 1.5))
+max_gy = float(np.percentile(all_gy, 98.5))
+
+shutil.rmtree(OUTPUT_DIR, ignore_errors=True)
+OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+
+manifest_frames = []
+for idx, a in enumerate(tqdm(analyzed, desc="Exporting WebP frames")):
+    nx = a["gx"] / abs(min_gx) if a["gx"] < 0 else a["gx"] / abs(max_gx)
+    ny = a["gy"] / abs(min_gy) if a["gy"] < 0 else a["gy"] / abs(max_gy)
+    nx = float(np.clip(nx, -1.0, 1.0))
+    ny = float(np.clip(ny, -1.0, 1.0))
+
+    fname = f"frame_{idx:04d}.webp"
+    out_webp = OUTPUT_DIR / fname
+    img_pil = Image.open(a["path"]).convert("RGB")
+    img_pil.save(out_webp, format="WEBP", quality=85, method=6)
+
+    manifest_frames.append({
+        "id": idx,
+        "seg": a["seg_id"],
+        "file": f"/gaze_frames/{fname}",
+        "x": round(nx, 4),
+        "y": round(ny, 4),
+    })
+
+# Force frame 0 (from seg0_center) to be the exact centerFrame
+center_frame_entry = min(manifest_frames, key=lambda f: f["x"] ** 2 + f["y"] ** 2)
+center_frame_entry["x"] = 0.0
+center_frame_entry["y"] = 0.0
 
 manifest_data = {
-    'total': len(manifest_frames),
-    'centerFrame': center_frame,
-    'frames': manifest_frames,
+    "total": len(manifest_frames),
+    "centerFrame": center_frame_entry["file"],
+    "centerFrameId": center_frame_entry["id"],
+    "frames": manifest_frames,
 }
 
-manifest_path = OUTPUT_DIR / "manifest.json"
-with open(manifest_path, "w", encoding="utf-8") as f:
+with open(OUTPUT_DIR / "manifest.json", "w", encoding="utf-8") as f:
     json.dump(manifest_data, f, indent=2)
 
-print(f"Done! Manifest saved to {manifest_path}")
-print(f"Total {len(manifest_frames)} real frames processed and ready for FaceLooker!")
+print(f"Exported {len(manifest_frames)} frames. Center frame: {center_frame_entry['file']} (id={center_frame_entry['id']})")
+
+# 7. Create a 3x3 Visual Verification Grid for target directions:
+# (-0.8, -0.8) Top-Left    | (0.0, -0.9) Top-Center    | (+0.8, -0.8) Top-Right
+# (-0.9,  0.0) Mid-Left    | (0.0,  0.0) Dead-Center   | (+0.9,  0.0) Mid-Right
+# (-0.7, +0.7) Bottom-Left | (0.0, +0.9) Bottom-Center | (+0.7, +0.4) Bottom-Right
+targets = [
+    (-0.75, -0.75, "TOP-LEFT"), (0.0, -0.95, "TOP (UP)"), (0.75, -0.75, "TOP-RIGHT"),
+    (-0.95, 0.0, "LEFT"), (0.0, 0.0, "CENTER"), (0.95, 0.0, "RIGHT"),
+    (-0.65, 0.65, "BOTTOM-LEFT"), (0.0, 0.95, "BOTTOM (DOWN)"), (0.65, 0.65, "BOTTOM-RIGHT"),
+]
+
+grid_img = Image.new("RGB", (3 * 240, 3 * 240))
+draw = ImageDraw.Draw(grid_img)
+
+for ti, (tx, ty, label) in enumerate(targets):
+    best = min(manifest_frames, key=lambda f: (f["x"] - tx) ** 2 + (f["y"] - ty) ** 2)
+    f_img = Image.open(BASE_DIR / "public" / best["file"].lstrip("/")).resize((240, 240))
+    r, c = ti // 3, ti % 3
+    grid_img.paste(f_img, (c * 240, r * 240))
+    draw.rectangle([c * 240, r * 240, c * 240 + 235, r * 240 + 26], fill=(0, 0, 0))
+    draw.text((c * 240 + 6, r * 240 + 6), f"{label}: #{best['id']} ({best['x']:+.2f},{best['y']:+.2f})", fill=(255, 230, 100))
+
+grid_img.save("/tmp/verify_directions.jpg", quality=92)
+print("Saved 3x3 directional verification grid to /tmp/verify_directions.jpg")

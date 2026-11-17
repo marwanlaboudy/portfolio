@@ -4,6 +4,7 @@ import React, { useEffect, useRef, useState, useCallback } from "react";
 
 interface GazeFrame {
   id: number;
+  seg?: number;
   file: string;
   x: number;
   y: number;
@@ -12,6 +13,7 @@ interface GazeFrame {
 interface ManifestData {
   total: number;
   centerFrame: string;
+  centerFrameId?: number;
   frames: GazeFrame[];
 }
 
@@ -35,49 +37,65 @@ export default function FaceLooker({
   const [coords, setCoords] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
   const [loadedCount, setLoadedCount] = useState<number>(0);
 
-  // References for animation loop & preloaded images
+  // References for 60fps animation loop & preloaded images
   const imagesRef = useRef<Map<number, HTMLImageElement>>(new Map());
   const mouseTargetRef = useRef<{ x: number; y: number }>({ x: 0, y: 0 });
   const smoothCoordRef = useRef<{ x: number; y: number }>({ x: 0, y: 0 });
-  const isInteractingRef = useRef<boolean>(false);
   const animFrameIdRef = useRef<number | null>(null);
-  const currentRenderedIdRef = useRef<number | null>(null);
+  const currentFrameRef = useRef<GazeFrame | null>(null);
 
-  // 1. Fetch manifest.json
+  // 1. Fetch manifest.json & preload all 589 WebP frames
   useEffect(() => {
-    fetch(manifestUrl)
+    let cancelled = false;
+    fetch(manifestUrl, { cache: "no-store" })
       .then((res) => res.json())
       .then((data: ManifestData) => {
+        if (cancelled) return;
         setManifest(data);
-        // Preload all frames for instant 60fps frame swapping
+
+        // Preload center frame first for instant initial render
+        const centerEntry =
+          data.frames.find((f) => f.file === data.centerFrame) ||
+          data.frames[0];
+
+        if (centerEntry) {
+          currentFrameRef.current = centerEntry;
+          setActiveFrameId(centerEntry.id);
+        }
+
         let loaded = 0;
         data.frames.forEach((f) => {
-          const img = new Image();
+          const img = new window.Image();
+          img.decoding = "async";
           img.src = f.file;
           img.onload = () => {
+            if (cancelled) return;
             loaded += 1;
             setLoadedCount(loaded);
-            // Draw center frame initially
             if (f.file === data.centerFrame && canvasRef.current) {
               const ctx = canvasRef.current.getContext("2d");
               if (ctx) {
+                ctx.globalAlpha = 1.0;
                 ctx.drawImage(img, 0, 0, size, size);
               }
-              setActiveFrameId(f.id);
             }
           };
           imagesRef.current.set(f.id, img);
         });
       })
       .catch((err) => console.error("Could not load gaze manifest:", err));
+
+    return () => {
+      cancelled = true;
+    };
   }, [manifestUrl, size]);
 
-  // 2. Render Loop with Smooth Spring/Lerp
+  // 2. 60fps Render Loop with Spring Smoothing & Segment Continuity
   const renderFrame = useCallback(() => {
     if (!manifest || manifest.frames.length === 0) return;
 
-    // Smoothly interpolate towards mouse target
-    const lerpFactor = 0.28;
+    // Responsive smooth interpolation toward cursor target
+    const lerpFactor = 0.24;
     smoothCoordRef.current.x +=
       (mouseTargetRef.current.x - smoothCoordRef.current.x) * lerpFactor;
     smoothCoordRef.current.y +=
@@ -86,30 +104,59 @@ export default function FaceLooker({
     const sx = smoothCoordRef.current.x;
     const sy = smoothCoordRef.current.y;
 
-    // Find nearest neighbor frame
-    let bestDist = Infinity;
+    const curFrame = currentFrameRef.current;
+    const curSeg = curFrame?.seg ?? -1;
+    const curId = curFrame?.id ?? -1;
+
+    let bestScore = Infinity;
     let bestFrame = manifest.frames[0];
 
     for (let i = 0; i < manifest.frames.length; i++) {
       const f = manifest.frames[i];
+      // Only consider frames whose Image has finished loading
+      const imgObj = imagesRef.current.get(f.id);
+      if (!imgObj || !imgObj.complete || imgObj.naturalWidth === 0) continue;
+
       const dx = f.x - sx;
       const dy = f.y - sy;
-      const d = dx * dx + dy * dy;
-      if (d < bestDist) {
-        bestDist = d;
+      let score = dx * dx + dy * dy;
+
+      // Temporal & segment hysteresis to prevent boundary jitter
+      if (f.seg === curSeg) {
+        score += Math.min(0.0018, Math.abs(f.id - curId) * 0.00004);
+      } else {
+        score += 0.0022;
+      }
+
+      if (score < bestScore) {
+        bestScore = score;
         bestFrame = f;
       }
     }
 
-    if (bestFrame.id !== currentRenderedIdRef.current) {
-      currentRenderedIdRef.current = bestFrame.id;
-      setActiveFrameId(bestFrame.id);
-
-      const img = imagesRef.current.get(bestFrame.id);
-      if (img && img.complete && canvasRef.current) {
+    if (bestFrame && bestFrame.id !== curFrame?.id) {
+      const nextImg = imagesRef.current.get(bestFrame.id);
+      if (nextImg && nextImg.complete && canvasRef.current) {
         const ctx = canvasRef.current.getContext("2d");
         if (ctx) {
-          ctx.drawImage(img, 0, 0, size, size);
+          // Cross-blend when jumping across different segments for seamless transitions
+          const isSegmentSwitch =
+            curFrame && bestFrame.seg !== curFrame.seg && Math.abs(bestFrame.id - curFrame.id) > 3;
+          ctx.globalAlpha = isSegmentSwitch ? 0.65 : 1.0;
+          ctx.drawImage(nextImg, 0, 0, size, size);
+          ctx.globalAlpha = 1.0;
+        }
+        currentFrameRef.current = bestFrame;
+        setActiveFrameId(bestFrame.id);
+      }
+    } else if (curFrame && canvasRef.current) {
+      // Ensure full opacity settles on the target frame
+      const curImg = imagesRef.current.get(curFrame.id);
+      if (curImg && curImg.complete) {
+        const ctx = canvasRef.current.getContext("2d");
+        if (ctx) {
+          ctx.globalAlpha = 1.0;
+          ctx.drawImage(curImg, 0, 0, size, size);
         }
       }
     }
@@ -117,7 +164,6 @@ export default function FaceLooker({
     animFrameIdRef.current = requestAnimationFrame(renderFrame);
   }, [manifest, size]);
 
-  // Start / stop render loop
   useEffect(() => {
     animFrameIdRef.current = requestAnimationFrame(renderFrame);
     return () => {
@@ -127,42 +173,60 @@ export default function FaceLooker({
     };
   }, [renderFrame]);
 
-  // 3. Mouse Movement tracking across the entire screen
+  // 3. Viewport-Aware Cursor & Touch Tracking
   useEffect(() => {
-    const onMouseMove = (e: MouseEvent) => {
+    const updateFromClientXY = (clientX: number, clientY: number) => {
       if (!containerRef.current) return;
-      isInteractingRef.current = true;
 
       const rect = containerRef.current.getBoundingClientRect();
       const faceCenterX = rect.left + rect.width / 2;
       const faceCenterY = rect.top + rect.height / 2;
 
-      const deltaX = e.clientX - faceCenterX;
-      const deltaY = e.clientY - faceCenterY;
+      const deltaX = clientX - faceCenterX;
+      const deltaY = clientY - faceCenterY;
 
-      // Screen sensitivity bounds
-      const maxDistanceX = window.innerWidth / 1.7;
-      const maxDistanceY = window.innerHeight / 1.7;
+      // Normalize asymmetrically based on actual available distance to each edge of the window
+      const reachLeft = Math.max(160, faceCenterX * 0.85);
+      const reachRight = Math.max(160, (window.innerWidth - faceCenterX) * 0.85);
+      const reachUp = Math.max(160, faceCenterY * 0.85);
+      const reachDown = Math.max(160, (window.innerHeight - faceCenterY) * 0.85);
 
-      const normX = Math.max(-1, Math.min(1, deltaX / maxDistanceX));
-      const normY = Math.max(-1, Math.min(1, deltaY / maxDistanceY));
+      const normX = Math.max(
+        -1,
+        Math.min(1, deltaX < 0 ? deltaX / reachLeft : deltaX / reachRight)
+      );
+      const normY = Math.max(
+        -1,
+        Math.min(1, deltaY < 0 ? deltaY / reachUp : deltaY / reachDown)
+      );
 
       mouseTargetRef.current = { x: normX, y: normY };
       setCoords({ x: normX, y: normY });
     };
 
+    const onMouseMove = (e: MouseEvent) => {
+      updateFromClientXY(e.clientX, e.clientY);
+    };
+
+    const onTouchMove = (e: TouchEvent) => {
+      if (e.touches.length > 0) {
+        updateFromClientXY(e.touches[0].clientX, e.touches[0].clientY);
+      }
+    };
+
     const onMouseLeave = () => {
-      isInteractingRef.current = false;
       mouseTargetRef.current = { x: 0, y: 0 };
       setCoords({ x: 0, y: 0 });
     };
 
-    window.addEventListener("mousemove", onMouseMove);
-    window.addEventListener("mouseleave", onMouseLeave);
+    window.addEventListener("mousemove", onMouseMove, { passive: true });
+    window.addEventListener("touchmove", onTouchMove, { passive: true });
+    document.addEventListener("mouseleave", onMouseLeave);
 
     return () => {
       window.removeEventListener("mousemove", onMouseMove);
-      window.removeEventListener("mouseleave", onMouseLeave);
+      window.removeEventListener("touchmove", onTouchMove);
+      document.removeEventListener("mouseleave", onMouseLeave);
     };
   }, []);
 
@@ -219,17 +283,17 @@ export default function FaceLooker({
           <span className="flex items-center gap-1.5">
             <span
               className={`w-2 h-2 rounded-full ${
-                manifest && loadedCount > 20
+                manifest && loadedCount > 50
                   ? "bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.8)]"
                   : "bg-amber-400 animate-pulse"
               }`}
             />
-            {manifest && loadedCount > 20
-              ? `${manifest.total} Real Frames Active`
-              : "Buffering Frames..."}
+            {manifest && loadedCount > 50
+              ? `${manifest.total} Smooth Frames`
+              : `Loading (${loadedCount}/${manifest?.total ?? 589})...`}
           </span>
           <span>
-            Frame #{activeFrameId} | ({coords.x.toFixed(2)}, {coords.y.toFixed(2)})
+            #{activeFrameId} | ({coords.x.toFixed(2)}, {coords.y.toFixed(2)})
           </span>
         </div>
       </div>
