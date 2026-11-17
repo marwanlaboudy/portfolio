@@ -5,7 +5,7 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import FaceLooker from "@/components/FaceLooker";
 import ResaporiPhoneTrigger from "@/components/ResaporiPhoneTrigger";
 import MarioJuicePhoneTrigger from "@/components/MarioJuicePhoneTrigger";
-import { ArrowRight, Mail } from "lucide-react";
+import { ArrowRight, ChevronDown, Mail } from "lucide-react";
 
 export default function HeroWithKineticSplit() {
   const heroRef = useRef<HTMLDivElement>(null);
@@ -44,6 +44,15 @@ export default function HeroWithKineticSplit() {
             Laboudy
           </span>
         </a>
+
+        {/* Top-Right Status Pill (Mirrored by bottom magnetic CTA) */}
+        <div className="flex items-center gap-2 rounded-full border border-emerald-400/30 bg-emerald-400/10 px-3.5 py-1.5 text-[10px] font-mono tracking-widest text-emerald-300 backdrop-blur-md shadow-[0_0_15px_rgba(52,211,153,0.2)]">
+          <span className="relative flex h-2 w-2">
+            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
+            <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-400 shadow-[0_0_8px_#34d399]" />
+          </span>
+          <span className="font-bold uppercase">AVAILABLE FOR WORK</span>
+        </div>
       </header>
 
       {/* Giant Typography with Kinetic Split (No bounding box) */}
@@ -65,6 +74,21 @@ export default function HeroWithKineticSplit() {
       {/* Portrait: Completely frameless, transparent cutout (NO box, NO borders) */}
       <div className="relative z-10 mt-6 sm:mt-10 flex items-center justify-center pointer-events-auto">
         <FaceLooker size={640} className="max-w-[92vw]" />
+      </div>
+
+      {/* Bottom Scroll Pill Cues into the Signal Trace Section */}
+      <div className="relative z-20 my-4 flex flex-col items-center gap-2">
+        <a
+          href="#signal-trace"
+          className="group relative inline-flex items-center gap-3 rounded-full border border-[#22d3ee]/60 bg-black/85 px-6 py-3 text-[11px] font-extrabold uppercase tracking-[0.25em] text-[#22d3ee] shadow-[0_0_20px_rgba(34,211,238,0.35),inset_0_0_12px_rgba(34,211,238,0.2)] backdrop-blur-xl transition-all duration-300 hover:border-[#ec4899] hover:text-[#ec4899] hover:shadow-[0_0_35px_rgba(236,72,153,0.6),inset_0_0_15px_rgba(236,72,153,0.3)] hover:scale-105 active:scale-95"
+        >
+          <span className="relative flex h-2.5 w-2.5">
+            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#ec4899] opacity-75" />
+            <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-[#22d3ee] group-hover:bg-[#ec4899] shadow-[0_0_8px_#22d3ee]" />
+          </span>
+          <span>SCROLL DOWN TO SEE THE REST OF MY WORK</span>
+          <ChevronDown className="h-4 w-4 animate-bounce text-[#ec4899] group-hover:text-[#22d3ee]" />
+        </a>
       </div>
 
       {/* Bottom row */}
