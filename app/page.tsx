@@ -22,11 +22,11 @@ export default function Home() {
       <section className="relative z-10 mx-auto flex min-h-[calc(100vh-80px)] max-w-7xl flex-col items-center justify-center px-6 pb-16">
         {/* Giant title behind the face */}
         <h1 className="pointer-events-none absolute inset-x-0 top-[14%] z-0 select-none text-center font-black uppercase leading-[0.85] tracking-tight">
-          <span className="block text-[clamp(4rem,15vw,13rem)] text-[#7ee8ff] drop-shadow-[0_0_40px_rgba(34,211,238,0.45)]">
-            Look
+          <span className="block text-[clamp(3.5rem,13vw,11.5rem)] text-[#7ee8ff] drop-shadow-[0_0_40px_rgba(34,211,238,0.45)]">
+            Marwan
           </span>
-          <span className="block text-[clamp(4rem,15vw,13rem)] text-[#ff2fb9] drop-shadow-[0_0_40px_rgba(255,47,185,0.5)]">
-            Forward
+          <span className="block text-[clamp(3.5rem,13vw,11.5rem)] text-[#ff2fb9] drop-shadow-[0_0_40px_rgba(255,47,185,0.5)]">
+            Laboudy
           </span>
         </h1>
 
