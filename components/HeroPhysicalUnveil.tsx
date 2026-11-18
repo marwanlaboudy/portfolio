@@ -2,7 +2,8 @@
 
 import React, { useRef } from "react";
 import { motion, useScroll, useTransform, useSpring } from "framer-motion";
-import HeroPortrait from "@/components/HeroPortrait";
+import FaceLooker from "@/components/FaceLooker";
+import SmokeSequence from "@/components/SmokeSequence";
 import ResaporiPhoneTrigger from "@/components/ResaporiPhoneTrigger";
 import MarioJuicePhoneTrigger from "@/components/MarioJuicePhoneTrigger";
 import { ArrowUpRight } from "lucide-react";
@@ -28,7 +29,14 @@ export default function HeroPhysicalUnveil() {
   const titleRightX = useTransform(smoothProgress, [0.12, 0.82], ["0%", "+140%"]);
   const titleOpacity = useTransform(smoothProgress, [0, 0.6, 0.85], [1, 0.9, 0]);
 
-  // 2. Side Phone Badges morphing outward / fading smoothly on scroll
+  // 2. Face -> smoke dissolve, scrubbed by scroll (transparent frame sequence).
+  // The live gaze face hands over to frame 0 of the smoke (same crop/scale) so the merge is invisible.
+  const smokeProgress = useTransform(smoothProgress, [0.06, 0.78], [0, 1], { clamp: true });
+  const faceOpacity = useTransform(smoothProgress, [0.045, 0.06], [1, 0]);
+  const smokeOpacity = useTransform(smoothProgress, [0.04, 0.06, 0.8, 0.92], [0, 1, 1, 0]);
+  const portraitScale = useTransform(smoothProgress, [0, 0.8], [1, 1.12]);
+
+  // 3. Side Phone Badges morphing outward / fading smoothly on scroll
   const phoneTriggersOpacity = useTransform(smoothProgress, [0, 0.18, 0.45], [1, 0.9, 0]);
   const phoneTriggersScale = useTransform(smoothProgress, [0, 0.45], [1, 1.1]);
 
@@ -98,9 +106,25 @@ export default function HeroPhysicalUnveil() {
           </motion.span>
         </div>
 
-        {/* Central Portrait: Seamlessly dissolves into dark #07070a with cyan/magenta rim lighting on scroll down */}
+        {/* Central Morphing Portrait: Scales down and docks into top-left HUD avatar */}
         <div className="relative z-20 flex-1 flex items-center justify-center pointer-events-auto">
-          <HeroPortrait progress={smoothProgress} />
+          <motion.div
+            style={{ scale: portraitScale, willChange: "transform" }}
+            className="relative origin-center"
+          >
+            {/* Live cursor-tracking face (fades out as the smoke takes over) */}
+            <motion.div style={{ opacity: faceOpacity }}>
+              <FaceLooker size={620} className="max-w-[90vw]" />
+            </motion.div>
+
+            {/* Scroll-scrubbed face -> smoke dissolve, transparent background */}
+            <motion.div
+              style={{ opacity: smokeOpacity }}
+              className="pointer-events-none absolute inset-0"
+            >
+              <SmokeSequence progress={smokeProgress} size={620} className="max-w-[90vw]" />
+            </motion.div>
+          </motion.div>
         </div>
 
         {/* Floating Phone Sites Buttons (Preserved in place on Left and Right) */}
