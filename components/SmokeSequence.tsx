@@ -95,7 +95,14 @@ export default function SmokeSequence({ progress, size = 620, className = "" }: 
       ref={canvasRef}
       width={640}
       height={640}
-      style={{ width: size, aspectRatio: "1 / 1" }}
+      style={{
+        width: size,
+        aspectRatio: "1 / 1",
+        maskImage:
+          "linear-gradient(to right, transparent 0%, rgba(0,0,0,0.5) 6%, black 16%, black 84%, rgba(0,0,0,0.5) 94%, transparent 100%)",
+        WebkitMaskImage:
+          "linear-gradient(to right, transparent 0%, rgba(0,0,0,0.5) 6%, black 16%, black 84%, rgba(0,0,0,0.5) 94%, transparent 100%)",
+      }}
       className={`pointer-events-none block select-none ${className}`}
     />
   );

@@ -153,6 +153,15 @@ _valid = cv2.GaussianBlur(_valid, (0, 0), 38.0)
 _valid = np.clip((_valid - 0.12) / 0.70, 0, 1)
 _valid = _valid * _valid * (3 - 2 * _valid)
 edge_feather = _valid
+# Wide horizontal fade so the left/right of the frame melt seamlessly into the background
+_x0, _x1 = (0 - left) * _s, (W - left) * _s
+_xs = np.arange(SIZE, dtype=np.float32)
+_ramp = 95.0
+_fade_in = np.clip((_xs - (_x0 + 5.0)) / _ramp, 0.0, 1.0)
+_fade_out = np.clip(((_x1 - 5.0) - _xs) / _ramp, 0.0, 1.0)
+_h = _fade_in * _fade_out
+_h = _h * _h * (3.0 - 2.0 * _h)
+hfade = np.tile(_h[None, :], (SIZE, 1)).astype(np.float32)
 
 shutil.rmtree(OUT, ignore_errors=True)
 OUT.mkdir(parents=True)
@@ -194,6 +203,10 @@ for i, fpath in enumerate(files):
     prem = (1 - w) * (g_bgr * a_p[:, :, None]) + w * smoke_layer
     alpha = (1 - w) * a_p + w * np.clip(a_pv * (1 - a_s) + a_s, 0, 1)
     alpha = np.clip(alpha, 0, 1)
+
+    # Apply horizontal fade to both color and alpha so left and right edges dissolve into background
+    prem = prem * hfade[:, :, None]
+    alpha = alpha * hfade
     straight = np.clip(prem / np.maximum(alpha[:, :, None], 1e-3), 0, 1)
 
     out = np.dstack([(straight * 255).astype(np.uint8), (alpha * 255).astype(np.uint8)])
