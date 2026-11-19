@@ -26,6 +26,17 @@ export default function ResaporiPhoneTrigger() {
     return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
+  // Listen for gaze direction looking at Re Sapori
+  useEffect(() => {
+    const handleGaze = () => {
+      if (!isOpen && !showConfirm) {
+        setShowConfirm(true);
+      }
+    };
+    window.addEventListener("gazeAtResapori", handleGaze);
+    return () => window.removeEventListener("gazeAtResapori", handleGaze);
+  }, [isOpen, showConfirm]);
+
   // Close instantly when scrolling down and fade out
   useEffect(() => {
     const onScroll = () => {
@@ -49,7 +60,7 @@ export default function ResaporiPhoneTrigger() {
     <>
       <div
         style={{ opacity: scrollOpacity }}
-        className="absolute left-3 sm:left-8 lg:left-12 top-[68vh] sm:top-[50vh] -translate-y-1/2 z-30 transition-opacity duration-200"
+        className="absolute left-1/2 -translate-x-1/2 top-[15vh] sm:top-[50vh] sm:left-8 lg:left-12 sm:translate-x-0 -translate-y-1/2 z-30 transition-opacity duration-200"
       >
         {/* Neon Break Shockwave & Shards when expanding */}
         <AnimatePresence>
@@ -93,36 +104,53 @@ export default function ResaporiPhoneTrigger() {
             })}
         </AnimatePresence>
 
-        {/* Morphing Container: Small pill on mobile, classic 124px square on laptop, expands to Phone when confirmed */}
+        {/* Morphing Container: Logo badge on mobile (Top), classic 124px square with logo on laptop */}
         {!isOpen ? (
           isMobile ? (
-            /* Very small compact button on mobile */
+            /* Sleek circular logo badge on mobile (Top) */
             <button
               type="button"
               onClick={() => setShowConfirm(true)}
-              className="group flex items-center gap-1.5 rounded-full border border-[#7ee8ff]/80 bg-black/90 px-2.5 py-1 backdrop-blur-md shadow-[0_0_15px_rgba(126,232,255,0.35)] transition-all active:scale-95 select-none"
-              title="Open Re Sapori website"
+              onMouseEnter={() => setShowConfirm(true)}
+              className="group relative flex items-center gap-2 rounded-full border border-[#7ee8ff]/80 bg-black/90 p-1.5 pr-3.5 backdrop-blur-md shadow-[0_0_20px_rgba(126,232,255,0.4)] active:scale-95 transition-all select-none"
+              title="Re Sapori Website"
             >
-              <Smartphone className="h-3 w-3 text-[#7ee8ff]" />
-              <span className="text-[9px] font-bold font-mono tracking-wider uppercase text-[#7ee8ff]">
-                Re Sapori
-              </span>
+              <div className="relative h-8 w-8 overflow-hidden rounded-full border border-[#7ee8ff]/70 bg-black shadow-[0_0_8px_#7ee8ff]">
+                <img
+                  src="/images/resapori-logo.jpg"
+                  alt="Re Sapori Logo"
+                  className="h-full w-full object-cover"
+                />
+              </div>
+              <div className="flex flex-col items-start leading-none">
+                <span className="text-[10px] font-extrabold uppercase tracking-wider text-[#7ee8ff]">
+                  Re Sapori
+                </span>
+                <span className="text-[7.5px] font-mono tracking-widest text-[#ff2fb9] uppercase">
+                  Website
+                </span>
+              </div>
             </button>
           ) : (
-            /* Classic 124px square button on laptop (Image 2) - Click asks before opening */
+            /* Classic 124px square button on laptop with official logo */
             <div
               onClick={() => setShowConfirm(true)}
+              onMouseEnter={() => setShowConfirm(true)}
               style={{ width: 124, height: 124, borderRadius: 22 }}
               className="relative cursor-pointer overflow-hidden backdrop-blur-xl border border-[#7ee8ff]/80 bg-black/85 shadow-[0_0_25px_rgba(126,232,255,0.45),0_0_50px_rgba(255,47,185,0.25),inset_0_0_18px_rgba(126,232,255,0.2)] hover:border-[#7ee8ff] hover:scale-105 active:scale-95 transition-all duration-300"
             >
-              <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 px-2 py-2 select-none">
-                <span className="relative flex h-11 w-11 items-center justify-center rounded-xl border border-[#7ee8ff]/70 bg-gradient-to-br from-[#7ee8ff]/20 to-[#ff2fb9]/25 text-[#7ee8ff] shadow-[0_0_18px_rgba(126,232,255,0.6)]">
-                  <Smartphone className="h-5 w-5 drop-shadow-[0_0_8px_rgba(126,232,255,0.9)]" />
-                  <span className="absolute -right-1 -top-1 flex h-2.5 w-2.5">
+              <div className="absolute inset-0 flex flex-col items-center justify-center gap-1.5 p-2 select-none">
+                <div className="relative h-14 w-14 overflow-hidden rounded-full border border-[#7ee8ff]/70 bg-black shadow-[0_0_15px_rgba(126,232,255,0.5)]">
+                  <img
+                    src="/images/resapori-logo.jpg"
+                    alt="Re Sapori"
+                    className="h-full w-full object-cover"
+                  />
+                  <span className="absolute -right-0.5 -top-0.5 flex h-2.5 w-2.5">
                     <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#ff2fb9] opacity-75" />
                     <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-[#7ee8ff] shadow-[0_0_8px_#7ee8ff]" />
                   </span>
-                </span>
+                </div>
 
                 <div className="flex flex-col items-center text-center leading-tight">
                   <span className="text-[10.5px] font-extrabold uppercase tracking-[0.2em] text-[#7ee8ff] drop-shadow-[0_0_10px_rgba(126,232,255,0.85)]">
@@ -241,8 +269,12 @@ export default function ResaporiPhoneTrigger() {
             >
               {/* Header */}
               <div className="flex items-center gap-3 mb-3">
-                <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-[#7ee8ff]/60 bg-[#7ee8ff]/15 text-[#7ee8ff] shadow-[0_0_12px_rgba(126,232,255,0.4)]">
-                  <Smartphone className="h-5 w-5" />
+                <div className="relative h-12 w-12 overflow-hidden rounded-full border border-[#7ee8ff]/70 bg-black shadow-[0_0_15px_rgba(126,232,255,0.5)]">
+                  <img
+                    src="/images/resapori-logo.jpg"
+                    alt="Re Sapori"
+                    className="h-full w-full object-cover"
+                  />
                 </div>
                 <div>
                   <h3 className="text-sm font-extrabold uppercase tracking-wider text-[#7ee8ff]">

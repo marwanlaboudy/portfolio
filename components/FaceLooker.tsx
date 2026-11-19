@@ -41,6 +41,7 @@ export default function FaceLooker({
   const [manifest, setManifest] = useState<ManifestData | null>(null);
   const [isGyroActive, setIsGyroActive] = useState<boolean>(false);
   const initialOrientationRef = useRef<{ beta: number; gamma: number } | null>(null);
+  const gazeTargetTimerRef = useRef<{ target: string | null; start: number }>({ target: null, start: 0 });
 
   const toggleGyro = useCallback(async () => {
     if (isGyroActive) {
@@ -363,6 +364,35 @@ export default function FaceLooker({
 
     const sx = smoothCoordRef.current.x;
     const sy = smoothCoordRef.current.y;
+
+    // Gaze-triggered confirmation modal:
+    // "when i look on it only it asks the question if i want to open it"
+    const isMobileView = typeof window !== "undefined" && window.innerWidth < 640;
+    let focusedGaze: "resapori" | "mariojuice" | null = null;
+    if (isMobileView) {
+      if (sy < -0.58) focusedGaze = "resapori"; // Look up at top
+      else if (sy > 0.58) focusedGaze = "mariojuice"; // Look down at bottom
+    } else {
+      if (sx < -0.65) focusedGaze = "resapori"; // Look left on laptop
+      else if (sx > 0.65) focusedGaze = "mariojuice"; // Look right on laptop
+    }
+
+    if (focusedGaze) {
+      if (gazeTargetTimerRef.current.target === focusedGaze) {
+        if (performance.now() - gazeTargetTimerRef.current.start > 650) {
+          if (focusedGaze === "resapori") {
+            window.dispatchEvent(new CustomEvent("gazeAtResapori"));
+          } else {
+            window.dispatchEvent(new CustomEvent("gazeAtMarioJuice"));
+          }
+          gazeTargetTimerRef.current.start = performance.now() + 4500; // Debounce so prompt doesn't spam
+        }
+      } else {
+        gazeTargetTimerRef.current = { target: focusedGaze, start: performance.now() };
+      }
+    } else {
+      gazeTargetTimerRef.current = { target: null, start: 0 };
+    }
 
     // ------------------------------------------------------------------------
     // STATE MACHINE:

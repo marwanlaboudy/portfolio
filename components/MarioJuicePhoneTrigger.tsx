@@ -26,6 +26,17 @@ export default function MarioJuicePhoneTrigger() {
     return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
+  // Listen for gaze direction looking at Mario Juice
+  useEffect(() => {
+    const handleGaze = () => {
+      if (!isOpen && !showConfirm) {
+        setShowConfirm(true);
+      }
+    };
+    window.addEventListener("gazeAtMarioJuice", handleGaze);
+    return () => window.removeEventListener("gazeAtMarioJuice", handleGaze);
+  }, [isOpen, showConfirm]);
+
   // Close instantly when scrolling down and fade out
   useEffect(() => {
     const onScroll = () => {
@@ -49,7 +60,7 @@ export default function MarioJuicePhoneTrigger() {
     <>
       <div
         style={{ opacity: scrollOpacity }}
-        className="absolute right-3 sm:right-8 lg:right-12 top-[68vh] sm:top-[50vh] -translate-y-1/2 z-30 transition-opacity duration-200"
+        className="absolute left-1/2 -translate-x-1/2 bottom-[11vh] sm:bottom-auto sm:top-[50vh] sm:right-8 lg:right-12 sm:left-auto sm:translate-x-0 -translate-y-1/2 z-30 transition-opacity duration-200"
       >
         {/* Neon Break Shockwave & Shards when expanding */}
         <AnimatePresence>
@@ -93,36 +104,53 @@ export default function MarioJuicePhoneTrigger() {
             })}
         </AnimatePresence>
 
-        {/* Morphing Container: Small pill on mobile, classic 124px square on laptop, expands to Phone when confirmed */}
+        {/* Morphing Container: Logo badge on mobile (Down), classic 124px square with logo on laptop */}
         {!isOpen ? (
           isMobile ? (
-            /* Very small compact button on mobile */
+            /* Sleek circular logo badge on mobile (Down) */
             <button
               type="button"
               onClick={() => setShowConfirm(true)}
-              className="group flex items-center gap-1.5 rounded-full border border-[#ff2fb9]/80 bg-black/90 px-2.5 py-1 backdrop-blur-md shadow-[0_0_15px_rgba(255,47,185,0.35)] transition-all active:scale-95 select-none"
-              title="Open Mario Juice website"
+              onMouseEnter={() => setShowConfirm(true)}
+              className="group relative flex items-center gap-2 rounded-full border border-[#ff2fb9]/80 bg-black/90 p-1.5 pr-3.5 backdrop-blur-md shadow-[0_0_20px_rgba(255,47,185,0.4)] active:scale-95 transition-all select-none"
+              title="Mario Juice Website"
             >
-              <Smartphone className="h-3 w-3 text-[#ff2fb9]" />
-              <span className="text-[9px] font-bold font-mono tracking-wider uppercase text-[#ff2fb9]">
-                Mario Juice
-              </span>
+              <div className="relative h-8 w-8 overflow-hidden rounded-full border border-[#ff2fb9]/70 bg-black shadow-[0_0_8px_#ff2fb9]">
+                <img
+                  src="/images/mario-juice-logo.jpg"
+                  alt="Mario Juice Logo"
+                  className="h-full w-full object-cover object-top"
+                />
+              </div>
+              <div className="flex flex-col items-start leading-none">
+                <span className="text-[10px] font-extrabold uppercase tracking-wider text-[#ff2fb9]">
+                  Mario Juice
+                </span>
+                <span className="text-[7.5px] font-mono tracking-widest text-[#7ee8ff] uppercase">
+                  Website
+                </span>
+              </div>
             </button>
           ) : (
-            /* Classic 124px square button on laptop (Image 2) - Click asks before opening */
+            /* Classic 124px square button on laptop with official logo */
             <div
               onClick={() => setShowConfirm(true)}
+              onMouseEnter={() => setShowConfirm(true)}
               style={{ width: 124, height: 124, borderRadius: 22 }}
               className="relative cursor-pointer overflow-hidden backdrop-blur-xl border border-[#ff2fb9]/80 bg-black/85 shadow-[0_0_25px_rgba(255,47,185,0.45),0_0_50px_rgba(126,232,255,0.25),inset_0_0_18px_rgba(255,47,185,0.2)] hover:border-[#ff2fb9] hover:scale-105 active:scale-95 transition-all duration-300"
             >
-              <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 px-2 py-2 select-none">
-                <span className="relative flex h-11 w-11 items-center justify-center rounded-xl border border-[#ff2fb9]/70 bg-gradient-to-br from-[#ff2fb9]/25 to-[#7ee8ff]/20 text-[#ff2fb9] shadow-[0_0_18px_rgba(255,47,185,0.6)]">
-                  <Smartphone className="h-5 w-5 drop-shadow-[0_0_8px_rgba(255,47,185,0.9)]" />
-                  <span className="absolute -left-1 -top-1 flex h-2.5 w-2.5">
+              <div className="absolute inset-0 flex flex-col items-center justify-center gap-1.5 p-2 select-none">
+                <div className="relative h-14 w-14 overflow-hidden rounded-full border border-[#ff2fb9]/70 bg-black shadow-[0_0_15px_rgba(255,47,185,0.5)]">
+                  <img
+                    src="/images/mario-juice-logo.jpg"
+                    alt="Mario Juice"
+                    className="h-full w-full object-cover object-top"
+                  />
+                  <span className="absolute -left-0.5 -top-0.5 flex h-2.5 w-2.5">
                     <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#7ee8ff] opacity-75" />
                     <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-[#ff2fb9] shadow-[0_0_8px_#ff2fb9]" />
                   </span>
-                </span>
+                </div>
 
                 <div className="flex flex-col items-center text-center leading-tight">
                   <span className="text-[10.5px] font-extrabold uppercase tracking-[0.2em] text-[#ff2fb9] drop-shadow-[0_0_10px_rgba(255,47,185,0.85)]">
@@ -241,8 +269,12 @@ export default function MarioJuicePhoneTrigger() {
             >
               {/* Header */}
               <div className="flex items-center gap-3 mb-3">
-                <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-[#ff2fb9]/60 bg-[#ff2fb9]/15 text-[#ff2fb9] shadow-[0_0_12px_rgba(255,47,185,0.4)]">
-                  <Smartphone className="h-5 w-5" />
+                <div className="relative h-12 w-12 overflow-hidden rounded-full border border-[#ff2fb9]/70 bg-black shadow-[0_0_15px_rgba(255,47,185,0.5)]">
+                  <img
+                    src="/images/mario-juice-logo.jpg"
+                    alt="Mario Juice"
+                    className="h-full w-full object-cover object-top"
+                  />
                 </div>
                 <div>
                   <h3 className="text-sm font-extrabold uppercase tracking-wider text-[#ff2fb9]">
