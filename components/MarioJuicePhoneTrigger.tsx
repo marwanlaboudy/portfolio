@@ -111,136 +111,160 @@ export default function MarioJuicePhoneTrigger() {
             })}
         </AnimatePresence>
 
-        {/* Morphing Container: Logo ONLY without any circle or border */}
-        {!isOpen ? (
-          isMobile ? (
-            /* Mobile (Down): Pure unconstrained logo showing full Mario & "MARIO JUICE" text */
-            <button
-              type="button"
-              onClick={() => setShowConfirm(true)}
-              className="group relative cursor-pointer active:scale-95 transition-all select-none flex items-center justify-center p-0 bg-transparent border-0"
-              title="Mario Juice"
-            >
-              <img
-                src="/images/mario-juice-logo.jpg"
-                alt="Mario Juice Logo"
-                className="w-16 h-22 object-contain pointer-events-none drop-shadow-[0_0_20px_rgba(255,47,185,0.85)]"
-              />
-            </button>
-          ) : (
-            /* Laptop: Pure unconstrained logo showing full Mario & "MARIO JUICE" text - Opens phone automatically when cursor passes over */
-            <div
-              onClick={() => {
+        {/* Morphing Container: Logo seamlessly expands into Phone in a smooth animation */}
+        <motion.div
+          layout
+          initial={false}
+          animate={{
+            width: isOpen
+              ? (isMobile ? Math.min(320, typeof window !== "undefined" ? window.innerWidth - 24 : 320) : 340)
+              : (isMobile ? 72 : 130),
+            height: isOpen
+              ? (isMobile ? Math.min(570, typeof window !== "undefined" ? window.innerHeight - 100 : 570) : 610)
+              : (isMobile ? 110 : 200),
+            borderRadius: isOpen ? (isMobile ? 32 : 40) : 28,
+            backgroundColor: isOpen ? "#07070c" : "transparent",
+            borderColor: isOpen ? "rgba(255, 75, 185, 0.85)" : "transparent",
+            borderWidth: isOpen ? 3 : 0,
+            boxShadow: isOpen
+              ? "0 0 45px rgba(255,47,185,0.45), 0 0 85px rgba(126,232,255,0.35), inset 0 0 20px rgba(255,47,185,0.2)"
+              : "none",
+          }}
+          transition={{
+            type: "spring",
+            stiffness: 220,
+            damping: 24,
+            mass: 0.85,
+          }}
+          style={{ maxHeight: "86vh", maxWidth: "90vw" }}
+          onMouseEnter={() => {
+            if (!isMobile && !isOpen) {
+              setHasOpenedOnce(true);
+              setIsOpen(true);
+            }
+          }}
+          onMouseLeave={() => {
+            if (!isMobile && isOpen) {
+              setIsOpen(false);
+            }
+          }}
+          onClick={() => {
+            if (!isOpen) {
+              if (isMobile) {
+                setShowConfirm(true);
+              } else {
                 setHasOpenedOnce(true);
                 setIsOpen(true);
-              }}
-              onMouseEnter={() => {
-                setHasOpenedOnce(true);
-                setIsOpen(true);
-              }}
-              onPointerEnter={() => {
-                setHasOpenedOnce(true);
-                setIsOpen(true);
-              }}
-              className="group relative cursor-pointer hover:scale-110 active:scale-95 transition-all duration-300 select-none flex items-center justify-center p-0 bg-transparent border-0"
-              title="Mario Juice"
-            >
-              <img
-                src="/images/mario-juice-logo.jpg"
-                alt="Mario Juice Logo"
-                className="w-28 h-40 lg:w-32 lg:h-44 object-contain pointer-events-none drop-shadow-[0_0_30px_rgba(255,47,185,0.85)] group-hover:drop-shadow-[0_0_50px_rgba(255,47,185,1)] transition-all"
-              />
-            </div>
-          )
-        ) : (
-          /* Expanded Phone View when confirmed */
-          <motion.div
-            layout
-            initial={false}
-            animate={{
-              width: isMobile ? Math.min(320, typeof window !== "undefined" ? window.innerWidth - 24 : 320) : 340,
-              height: isMobile ? Math.min(570, typeof window !== "undefined" ? window.innerHeight - 100 : 570) : 610,
-              borderRadius: isMobile ? 32 : 40,
-            }}
-            transition={{ type: "spring", stiffness: 260, damping: 25, mass: 0.9 }}
-            style={{ maxHeight: "84vh", maxWidth: "88vw" }}
-            onMouseLeave={() => {
-              if (!isMobile) {
-                setIsOpen(false);
               }
+            }
+          }}
+          className={`relative overflow-hidden cursor-pointer select-none flex items-center justify-center ${
+            isOpen ? "backdrop-blur-xl p-2.5" : "p-0"
+          }`}
+        >
+          {/* 1. Closed Logo View: Visible when closed, smoothly scales down and fades out when expanding */}
+          <motion.div
+            animate={{
+              opacity: isOpen ? 0 : 1,
+              scale: isOpen ? 0.75 : 1,
             }}
-            className="relative overflow-hidden backdrop-blur-xl border-[3px] border-[#ff2fb9]/85 bg-[#07070c] p-2.5 shadow-[0_0_45px_rgba(255,47,185,0.45),0_0_85px_rgba(126,232,255,0.35),inset_0_0_20px_rgba(255,47,185,0.2)]"
+            transition={{ duration: 0.22, ease: "easeInOut" }}
+            className={`absolute inset-0 flex items-center justify-center ${isOpen ? "pointer-events-none" : "pointer-events-auto hover:scale-105 active:scale-95 transition-transform"}`}
+            title="Mario Juice"
           >
-            <div className="flex h-full w-full flex-col overflow-hidden rounded-[30px]">
-              {/* Phone Top Bezel & Dynamic Island Notch */}
-              <div className="relative z-20 flex flex-col gap-1.5 rounded-t-[30px] bg-[#0b0b14] px-3 pt-2 pb-2 border-b border-white/10">
-                <div className="mx-auto h-4 w-24 rounded-full bg-black border border-white/10 flex items-center justify-end px-2">
-                  <span className="h-2 w-2 rounded-full bg-[#2a1a2a] ring-1 ring-[#ff2fb9]/40" />
-                </div>
+            <img
+              src="/images/mario-juice-logo.png"
+              alt="Mario Juice Logo"
+              className="w-full h-full object-contain pointer-events-none drop-shadow-[0_0_24px_rgba(255,47,185,0.85)] hover:drop-shadow-[0_0_40px_rgba(255,47,185,1)] transition-all"
+            />
+          </motion.div>
 
-                <div className="flex items-center justify-between gap-2 px-1 pt-0.5">
-                  <div className="flex items-center gap-1.5 rounded-full bg-white/5 border border-white/10 px-2.5 py-1 text-[10px] font-mono text-white/80 flex-1 truncate">
-                    <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 shadow-[0_0_6px_#34d399]" />
-                    <span className="truncate text-[#ff2fb9]">mariojuice.com</span>
-                  </div>
-
-                  <div className="flex items-center gap-1">
-                    <button
-                      type="button"
-                      onClick={() => {
-                        setIsLoaded(false);
-                        setIframeKey((k) => k + 1);
-                      }}
-                      className="rounded-lg p-1 text-white/60 hover:text-white transition-colors"
-                      title="Reload website"
-                    >
-                      <RotateCw className="h-3 w-3" />
-                    </button>
-                    <a
-                      href={MARIO_JUICE_URL}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="rounded-lg p-1 text-white/60 hover:text-[#ff2fb9] transition-colors"
-                      title="Open in new tab"
-                    >
-                      <ExternalLink className="h-3 w-3" />
-                    </a>
-                    <button
-                      type="button"
-                      onClick={() => setIsOpen(false)}
-                      className="rounded-lg p-1 text-white/60 hover:text-[#7ee8ff] transition-colors"
-                      title="Close"
-                    >
-                      <X className="h-4 w-4" />
-                    </button>
-                  </div>
-                </div>
+          {/* 2. Expanded Phone Content: Fades and zooms in as container expands into phone */}
+          <motion.div
+            animate={{
+              opacity: isOpen ? 1 : 0,
+              scale: isOpen ? 1 : 0.88,
+            }}
+            transition={{
+              duration: 0.3,
+              delay: isOpen ? 0.12 : 0,
+              ease: "easeOut",
+            }}
+            className={`flex h-full w-full flex-col overflow-hidden rounded-[30px] ${isOpen ? "pointer-events-auto" : "pointer-events-none"}`}
+          >
+            {/* Phone Top Bezel & Dynamic Island Notch */}
+            <div className="relative z-20 flex flex-col gap-1.5 rounded-t-[30px] bg-[#0b0b14] px-3 pt-2 pb-2 border-b border-white/10">
+              <div className="mx-auto h-4 w-24 rounded-full bg-black border border-white/10 flex items-center justify-end px-2">
+                <span className="h-2 w-2 rounded-full bg-[#2a1a2a] ring-1 ring-[#ff2fb9]/40" />
               </div>
 
-              {/* Live Web Content Frame */}
-              <div className="relative flex-1 w-full bg-white overflow-hidden">
-                {!isLoaded && (
-                  <div className="absolute inset-0 z-10 flex flex-col items-center justify-center bg-[#07070a] gap-2">
-                    <span className="h-7 w-7 animate-spin rounded-full border-2 border-[#ff2fb9] border-t-transparent" />
-                    <span className="text-[11px] font-mono tracking-wider text-[#ff2fb9]/70 uppercase">
-                      Loading Mario Juice...
-                    </span>
-                  </div>
-                )}
-                {hasOpenedOnce && (
-                  <iframe
-                    key={iframeKey}
-                    src={MARIO_JUICE_URL}
-                    title="Mario Juice Website"
-                    className="h-full w-full border-0"
-                    onLoad={() => setIsLoaded(true)}
-                    loading="lazy"
-                  />
-                )}
+              <div className="flex items-center justify-between gap-2 px-1 pt-0.5">
+                <div className="flex items-center gap-1.5 rounded-full bg-white/5 border border-white/10 px-2.5 py-1 text-[10px] font-mono text-white/80 flex-1 truncate">
+                  <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 shadow-[0_0_6px_#34d399]" />
+                  <span className="truncate text-[#ff2fb9]">mariojuice.com</span>
+                </div>
+
+                <div className="flex items-center gap-1">
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setIsLoaded(false);
+                      setIframeKey((k) => k + 1);
+                    }}
+                    className="rounded-lg p-1 text-white/60 hover:text-white transition-colors"
+                    title="Reload website"
+                  >
+                    <RotateCw className="h-3 w-3" />
+                  </button>
+                  <a
+                    href={MARIO_JUICE_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={(e) => e.stopPropagation()}
+                    className="rounded-lg p-1 text-white/60 hover:text-[#ff2fb9] transition-colors"
+                    title="Open in new tab"
+                  >
+                    <ExternalLink className="h-3 w-3" />
+                  </a>
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setIsOpen(false);
+                    }}
+                    className="rounded-lg p-1 text-white/60 hover:text-[#7ee8ff] transition-colors"
+                    title="Close"
+                  >
+                    <X className="h-4 w-4" />
+                  </button>
+                </div>
               </div>
+            </div>
+
+            {/* Live Web Content Frame */}
+            <div className="relative flex-1 w-full bg-white overflow-hidden">
+              {!isLoaded && (
+                <div className="absolute inset-0 z-10 flex flex-col items-center justify-center bg-[#07070a] gap-2">
+                  <span className="h-7 w-7 animate-spin rounded-full border-2 border-[#ff2fb9] border-t-transparent" />
+                  <span className="text-[11px] font-mono tracking-wider text-[#ff2fb9]/70 uppercase">
+                    Loading Mario Juice...
+                  </span>
+                </div>
+              )}
+              {hasOpenedOnce && (
+                <iframe
+                  key={iframeKey}
+                  src={MARIO_JUICE_URL}
+                  title="Mario Juice Website"
+                  className="h-full w-full border-0"
+                  onLoad={() => setIsLoaded(true)}
+                  loading="lazy"
+                />
+              )}
             </div>
           </motion.div>
-        )}
+        </motion.div>
       </div>
 
       {/* Confirmation Dialog: "just asks me if i want to open it" */}
@@ -265,9 +289,9 @@ export default function MarioJuicePhoneTrigger() {
               <div className="flex items-center gap-3 mb-3">
                 <div className="relative h-12 w-12 overflow-hidden rounded-full border border-[#ff2fb9]/70 bg-black shadow-[0_0_15px_rgba(255,47,185,0.5)]">
                   <img
-                    src="/images/mario-juice-logo.jpg"
+                    src="/images/mario-juice-logo.png"
                     alt="Mario Juice"
-                    className="h-full w-full object-cover object-top"
+                    className="h-full w-full object-contain"
                   />
                 </div>
                 <div>
