@@ -42,9 +42,10 @@ export default function FaceLooker({
 
   // Mobile Gyroscope / VR Tilt & Manual Touch Mode
   const [isMobile, setIsMobile] = useState<boolean>(false);
-  const [isGyroActive, setIsGyroActive] = useState<boolean>(true);
-  const isGyroActiveRef = useRef<boolean>(true);
+  const [isGyroActive, setIsGyroActive] = useState<boolean>(false);
+  const isGyroActiveRef = useRef<boolean>(false);
   isGyroActiveRef.current = isGyroActive;
+  const initialOrientationRef = useRef<{ beta: number; gamma: number } | null>(null);
 
   // 2D Face refs
   const imagesRef = useRef<Map<number, HTMLImageElement>>(new Map());
@@ -484,8 +485,10 @@ export default function FaceLooker({
   const toggleGyro = useCallback(async () => {
     if (isGyroActive) {
       isGyroActiveRef.current = false;
+      initialOrientationRef.current = null;
       setIsGyroActive(false);
     } else {
+      initialOrientationRef.current = null;
       // iOS 13+ requires explicit user gesture permission for DeviceOrientationEvent
       if (
         typeof window !== "undefined" &&
@@ -586,26 +589,29 @@ export default function FaceLooker({
       mouseTargetRef.current = { x: targetX, y: targetY };
     };
 
-    // Gyroscope / VR Tilt Listener for phone
+    // Gyroscope / VR Tilt Listener for phone (calibrated to the user's holding angle)
     const onDeviceOrientation = (e: DeviceOrientationEvent) => {
       if (!isGyroActiveRef.current) return;
       if (e.gamma === null || e.beta === null) return;
 
-      // e.gamma: roll [-90, 90], positive is right tilt, negative is left tilt
-      // e.beta: pitch [-180, 180], standard phone holding angle is ~46-50°
-      const baseBeta = 48;
-      const deltaBeta = e.beta - baseBeta; // positive = tilted top towards user (pitch up)
-      const deltaGamma = e.gamma; // positive = tilted right
+      // Calibrate neutral center to the orientation when VR tilt was activated
+      if (!initialOrientationRef.current) {
+        initialOrientationRef.current = { beta: e.beta, gamma: e.gamma };
+        return;
+      }
 
-      // ~24 degrees of tilt maps to full gaze deflection
-      const normX = Math.max(-1, Math.min(1, deltaGamma / 24));
-      // Invert pitch so tilting phone up looks up (matching user's request)
-      const normY = Math.max(-1, Math.min(1, deltaBeta / 22));
+      const deltaBeta = e.beta - initialOrientationRef.current.beta;
+      const deltaGamma = e.gamma - initialOrientationRef.current.gamma;
+
+      // ~20 degrees of phone tilt maps to full gaze deflection
+      const normX = Math.max(-1, Math.min(1, deltaGamma / 20));
+      // Invert pitch so tilting top of phone up looks up
+      const normY = Math.max(-1, Math.min(1, deltaBeta / 18));
 
       const tiltMagnitude = Math.sqrt(normX * normX + normY * normY);
 
       // Dead-zone center: holding steady keeps real face centered
-      if (tiltMagnitude <= 0.20) {
+      if (tiltMagnitude <= 0.18) {
         isCursorOnFaceRef.current = true;
         mouseTargetRef.current = { x: 0, y: 0 };
       } else {
@@ -668,7 +674,7 @@ export default function FaceLooker({
     <div
       ref={containerRef}
       className={`relative block select-none ${className}`}
-      style={{ width: "100%", maxWidth: size, aspectRatio: "1 / 1" }}
+      style={{ maxWidth: size, aspectRatio: "1 / 1" }}
     >
       {/* 2D Real Face Canvas: Always active underneath, visible through unmasked areas */}
       <canvas
@@ -687,7 +693,7 @@ export default function FaceLooker({
       />
 
       {/* Mobile VR Tilt / Manual Touch Toggle Badge (Visible ONLY on mobile, zero desktop interference) */}
-      <div className="sm:hidden absolute -bottom-11 left-1/2 -translate-x-1/2 z-30 pointer-events-auto">
+      <div className="sm:hidden absolute -bottom-14 left-1/2 -translate-x-1/2 z-30 pointer-events-auto">
         <button
           type="button"
           onClick={toggleGyro}
@@ -712,7 +718,7 @@ export default function FaceLooker({
             <>
               <span className="h-2 w-2 rounded-full bg-[#ec4899] shrink-0" />
               <span className="text-[9.5px] font-mono font-bold tracking-[0.14em] uppercase">
-                TOUCH: ACTIVE <span className="text-white/45 text-[8.5px] font-normal font-sans">(TAP FOR VR TILT)</span>
+                TOUCH MODE <span className="text-white/45 text-[8.5px] font-normal font-sans">(TAP FOR VR TILT)</span>
               </span>
             </>
           )}

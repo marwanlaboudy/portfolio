@@ -63,24 +63,24 @@ export default function HeroPhysicalUnveil() {
             </span>
           </a>
 
-          {/* Top-Right: Kept clean with subtle live status indicator */}
-          <div className="flex items-center gap-1.5 sm:gap-2 text-[9px] sm:text-[10px] font-mono tracking-widest text-white/50 uppercase">
+          {/* Top-Right: Kept clean with subtle live status indicator (hidden on mobile per user request) */}
+          <div className="hidden sm:flex items-center gap-2 text-[10px] font-mono tracking-widest text-white/50 uppercase">
             <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 shadow-[0_0_8px_#34d399]" />
             <span>CAIRO // GLOBAL</span>
           </div>
         </header>
 
-        {/* Experience HUD Pill: Prominently showcasing credentials without displacing phone buttons */}
-        <div className="relative z-30 mx-auto mt-1 sm:-mt-2 flex items-center justify-center max-w-[94vw]">
-          <div className="inline-flex items-center gap-1.5 sm:gap-2 rounded-full border border-white/10 bg-black/60 px-3 py-1 sm:px-4 sm:py-1.5 backdrop-blur-md shadow-[0_0_20px_rgba(34,211,238,0.15)]">
+        {/* Experience HUD Pill: Hidden on phone view per user request, visible on desktop */}
+        <div className="hidden sm:flex relative z-30 mx-auto -mt-2 items-center justify-center">
+          <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-black/60 px-4 py-1.5 backdrop-blur-md shadow-[0_0_20px_rgba(34,211,238,0.15)]">
             <span className="relative flex h-2 w-2 shrink-0">
               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#22d3ee] opacity-75" />
               <span className="relative inline-flex h-2 w-2 rounded-full bg-[#22d3ee]" />
             </span>
-            <span className="text-[8.5px] sm:text-[11px] font-mono uppercase tracking-[0.16em] sm:tracking-[0.22em] text-white/90 truncate">
+            <span className="text-[10px] sm:text-[11px] font-mono uppercase tracking-[0.22em] text-white/90">
               <span className="text-[#22d3ee] font-bold">AI Engineer</span>
-              <span className="mx-1.5 sm:mx-2 text-white/30">•</span>
-              <span className="text-[#ec4899] font-bold">Cheri Band</span>
+              <span className="mx-2 text-white/30">•</span>
+              <span className="text-[#ec4899] font-bold">Co-Founder of Cheri Band</span>
               <span className="mx-2 text-white/30 hidden sm:inline">•</span>
               <span className="text-white/70 font-medium hidden sm:inline">Media Buyer &amp; Full-Stack</span>
             </span>
