@@ -396,7 +396,7 @@ export default function FaceLooker({
         const trackingWeight = Math.max(0, Math.min(1, (wear - 0.40) / 0.60));
 
         pivot.rotation.y = sx * 1.15 * trackingWeight;
-        pivot.rotation.x = -sy * 0.45 * trackingWeight;
+        pivot.rotation.x = sy * 0.55 * trackingWeight;
         pivot.rotation.z = -sx * 0.12 * trackingWeight;
 
         const breath = Math.sin(performance.now() * 0.0028) * 0.025;
