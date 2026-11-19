@@ -522,6 +522,12 @@ export default function FaceLooker({
       updateFromClientXY(e.clientX, e.clientY);
     };
 
+    const onTouchStart = (e: TouchEvent) => {
+      if (e.touches.length > 0) {
+        updateFromClientXY(e.touches[0].clientX, e.touches[0].clientY);
+      }
+    };
+
     const onTouchMove = (e: TouchEvent) => {
       if (e.touches.length > 0) {
         updateFromClientXY(e.touches[0].clientX, e.touches[0].clientY);
@@ -546,12 +552,14 @@ export default function FaceLooker({
     };
 
     window.addEventListener("mousemove", onMouseMove, { passive: true });
+    window.addEventListener("touchstart", onTouchStart, { passive: true });
     window.addEventListener("touchmove", onTouchMove, { passive: true });
     window.addEventListener("scroll", onScroll, { passive: true });
     document.addEventListener("mouseleave", onMouseLeave);
 
     return () => {
       window.removeEventListener("mousemove", onMouseMove);
+      window.removeEventListener("touchstart", onTouchStart);
       window.removeEventListener("touchmove", onTouchMove);
       window.removeEventListener("scroll", onScroll);
       document.removeEventListener("mouseleave", onMouseLeave);
