@@ -405,26 +405,36 @@ export default function FaceLooker({
     const sy = smoothCoordRef.current.y;
 
     // Gaze-triggered confirmation modal:
-    // "when i look on it only it asks the question if i want to open it"
+    // Only triggers when at top of page (never while scrolling)
+    const currentScrollY = typeof window !== "undefined" ? (window.scrollY || document.documentElement.scrollTop || 0) : 0;
     const isMobileView = typeof window !== "undefined" && window.innerWidth < 640;
     let focusedGaze: "resapori" | "mariojuice" | null = null;
-    if (isMobileView) {
-      if (sy < -0.58) focusedGaze = "resapori"; // Look up at top
-      else if (sy > 0.58) focusedGaze = "mariojuice"; // Look down at bottom
-    } else {
-      if (sx < -0.65) focusedGaze = "resapori"; // Look left on laptop
-      else if (sx > 0.65) focusedGaze = "mariojuice"; // Look right on laptop
+
+    if (currentScrollY < 15) {
+      if (isMobileView) {
+        // On mobile: ONLY trigger gaze confirmation if user explicitly enabled VR TILT!
+        // Touching or scrolling the screen will NEVER trigger popups!
+        if (isGyroActive) {
+          if (sy < -0.75) focusedGaze = "resapori"; // Deliberately tilted up at top website
+          else if (sy > 0.75) focusedGaze = "mariojuice"; // Deliberately tilted down at bottom website
+        }
+      } else {
+        // On laptop: looking or hovering towards left/right triggers
+        if (sx < -0.65) focusedGaze = "resapori"; // Look left on laptop
+        else if (sx > 0.65) focusedGaze = "mariojuice"; // Look right on laptop
+      }
     }
 
     if (focusedGaze) {
       if (gazeTargetTimerRef.current.target === focusedGaze) {
-        if (performance.now() - gazeTargetTimerRef.current.start > 650) {
+        const requiredHoldTime = isMobileView ? 1100 : 450;
+        if (performance.now() - gazeTargetTimerRef.current.start > requiredHoldTime) {
           if (focusedGaze === "resapori") {
             window.dispatchEvent(new CustomEvent("gazeAtResapori"));
           } else {
             window.dispatchEvent(new CustomEvent("gazeAtMarioJuice"));
           }
-          gazeTargetTimerRef.current.start = performance.now() + 4500; // Debounce so prompt doesn't spam
+          gazeTargetTimerRef.current.start = performance.now() + 12000; // 12s debounce so prompt doesn't spam
         }
       } else {
         gazeTargetTimerRef.current = { target: focusedGaze, start: performance.now() };

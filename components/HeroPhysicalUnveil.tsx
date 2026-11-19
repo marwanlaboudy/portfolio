@@ -10,6 +10,14 @@ import { ArrowUpRight } from "lucide-react";
 export default function HeroPhysicalUnveil() {
   const containerRef = useRef<HTMLDivElement>(null);
   const [isGyroActive, setIsGyroActive] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 640);
+    check();
+    window.addEventListener("resize", check);
+    return () => window.removeEventListener("resize", check);
+  }, []);
 
   useEffect(() => {
     const handleState = (e: any) => {
@@ -31,19 +39,23 @@ export default function HeroPhysicalUnveil() {
   });
 
   // 1. Kinetic Typography Split ("MARWAN" left, "LABOUDY" right)
-  // Extended scroll duration: stays centered longer, then slides outward gradually
   const titleLeftX = useTransform(smoothProgress, [0.12, 0.82], ["0%", "-140%"]);
   const titleRightX = useTransform(smoothProgress, [0.12, 0.82], ["0%", "+140%"]);
   const titleOpacity = useTransform(smoothProgress, [0, 0.6, 0.85], [1, 0.9, 0]);
 
-  // 2. Central Portrait Scale & Dock into Top-Left Navbar (Mask stays on and scales down)
+  // 2. Central Portrait Scale & Position (Responsive: docks into top-left on desktop, stays centered on mobile)
   const portraitScale = useTransform(smoothProgress, [0.12, 0.85], [1, 0.22]);
-  const portraitX = useTransform(smoothProgress, [0.12, 0.85], ["0vw", "-36vw"]);
-  const portraitY = useTransform(smoothProgress, [0.12, 0.85], ["0vh", "-41vh"]);
+  const portraitXDesktop = useTransform(smoothProgress, [0.12, 0.85], ["0vw", "-36vw"]);
+  const portraitXMobile = useTransform(smoothProgress, [0.12, 0.85], ["0vw", "0vw"]);
+  const portraitX = isMobile ? portraitXMobile : portraitXDesktop;
 
-  // 3. Side Phone Badges morphing outward / fading smoothly on scroll
-  const phoneTriggersOpacity = useTransform(smoothProgress, [0, 0.18, 0.45], [1, 0.9, 0]);
-  const phoneTriggersScale = useTransform(smoothProgress, [0, 0.45], [1, 1.1]);
+  const portraitYDesktop = useTransform(smoothProgress, [0.12, 0.85], ["0vh", "-41vh"]);
+  const portraitYMobile = useTransform(smoothProgress, [0.12, 0.85], ["0vh", "-12vh"]);
+  const portraitY = isMobile ? portraitYMobile : portraitYDesktop;
+
+  // 3. Side Phone Badges: fades out immediately upon scrolling
+  const phoneTriggersOpacity = useTransform(smoothProgress, [0, 0.08, 0.22], [1, 0.5, 0]);
+  const phoneTriggersScale = useTransform(smoothProgress, [0, 0.22], [1, 0.95]);
 
   // 4. Mobile VR Tilt Button: stays completely stationary and fades out immediately when scrolling starts
   const vrTiltOpacity = useTransform(smoothProgress, [0, 0.08], [1, 0]);

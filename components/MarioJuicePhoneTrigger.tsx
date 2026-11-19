@@ -67,7 +67,7 @@ export default function MarioJuicePhoneTrigger() {
     <>
       <div
         style={{ opacity: scrollOpacity }}
-        className="absolute left-1/2 -translate-x-1/2 bottom-[14.5vh] sm:bottom-auto sm:top-[50vh] sm:right-8 lg:right-12 sm:left-auto sm:translate-x-0 sm:-translate-y-1/2 z-30 transition-opacity duration-200"
+        className="absolute left-1/2 -translate-x-1/2 bottom-[7vh] sm:bottom-auto sm:top-[50vh] sm:right-8 lg:right-12 sm:left-auto sm:translate-x-0 sm:-translate-y-1/2 z-30 transition-opacity duration-200"
       >
         {/* Neon Break Shockwave & Shards when expanding */}
         <AnimatePresence>
@@ -111,73 +111,88 @@ export default function MarioJuicePhoneTrigger() {
             })}
         </AnimatePresence>
 
-        {/* Morphing Container: Logo seamlessly expands into Phone in a smooth animation */}
-        <motion.div
-          layout
-          initial={false}
-          animate={{
-            width: isOpen
-              ? (isMobile ? Math.min(320, typeof window !== "undefined" ? window.innerWidth - 24 : 320) : 340)
-              : (isMobile ? 72 : 130),
-            height: isOpen
-              ? (isMobile ? Math.min(570, typeof window !== "undefined" ? window.innerHeight - 100 : 570) : 610)
-              : (isMobile ? 110 : 200),
-            borderRadius: isOpen ? (isMobile ? 32 : 40) : 28,
-            backgroundColor: isOpen ? "#07070c" : "transparent",
-            borderColor: isOpen ? "rgba(255, 75, 185, 0.85)" : "transparent",
-            borderWidth: isOpen ? 3 : 0,
-            boxShadow: isOpen
-              ? "0 0 45px rgba(255,47,185,0.45), 0 0 85px rgba(126,232,255,0.35), inset 0 0 20px rgba(255,47,185,0.2)"
-              : "none",
-          }}
-          transition={{
-            type: "spring",
-            stiffness: 220,
-            damping: 24,
-            mass: 0.85,
-          }}
-          style={{ maxHeight: "86vh", maxWidth: "90vw" }}
-          onMouseEnter={() => {
-            if (!isMobile && !isOpen) {
-              setHasOpenedOnce(true);
-              setIsOpen(true);
-            }
-          }}
-          onMouseLeave={() => {
-            if (!isMobile && isOpen) {
-              setIsOpen(false);
-            }
-          }}
-          onClick={() => {
-            if (!isOpen) {
-              if (isMobile) {
-                setShowConfirm(true);
-              } else {
-                setHasOpenedOnce(true);
-                setIsOpen(true);
-              }
-            }
-          }}
-          className={`relative overflow-hidden cursor-pointer select-none flex items-center justify-center ${
-            isOpen ? "backdrop-blur-xl p-2.5" : "p-0"
-          }`}
-        >
-          {/* 1. Closed Logo View: Visible when closed, smoothly scales down and fades out when expanding */}
-          <motion.div
-            animate={{
-              opacity: isOpen ? 0 : 1,
-              scale: isOpen ? 0.75 : 1,
-            }}
-            transition={{ duration: 0.22, ease: "easeInOut" }}
-            className={`absolute inset-0 flex items-center justify-center ${isOpen ? "pointer-events-none" : "pointer-events-auto hover:scale-105 active:scale-95 transition-transform"}`}
+        {/* Mobile View: Pure Logo Button with zero container or background */}
+        {isMobile && !isOpen ? (
+          <button
+            type="button"
+            onClick={() => setShowConfirm(true)}
+            className="group relative cursor-pointer active:scale-95 transition-transform select-none flex items-center justify-center p-0 bg-transparent border-0 outline-none"
             title="Mario Juice"
           >
             <img
               src="/images/mario-juice-logo.png"
               alt="Mario Juice Logo"
-              className="w-full h-full object-contain pointer-events-none drop-shadow-[0_0_24px_rgba(255,47,185,0.85)] hover:drop-shadow-[0_0_40px_rgba(255,47,185,1)] transition-all"
+              className="w-16 h-auto max-h-24 object-contain pointer-events-none drop-shadow-[0_0_18px_rgba(255,47,185,0.85)]"
             />
-          </motion.div>
+          </button>
+        ) : (
+          /* Laptop Morphing Container (or Mobile when opened): Seamlessly expands from logo into phone */
+          <motion.div
+            layout
+            initial={false}
+            animate={{
+              width: isOpen
+                ? (isMobile ? Math.min(320, typeof window !== "undefined" ? window.innerWidth - 24 : 320) : 340)
+                : 130,
+              height: isOpen
+                ? (isMobile ? Math.min(570, typeof window !== "undefined" ? window.innerHeight - 100 : 570) : 610)
+                : 200,
+              borderRadius: isOpen ? (isMobile ? 32 : 40) : 28,
+              backgroundColor: isOpen ? "#07070c" : "transparent",
+              borderColor: isOpen ? "rgba(255, 75, 185, 0.85)" : "transparent",
+              borderWidth: isOpen ? 3 : 0,
+              boxShadow: isOpen
+                ? "0 0 45px rgba(255,47,185,0.45), 0 0 85px rgba(126,232,255,0.35), inset 0 0 20px rgba(255,47,185,0.2)"
+                : "none",
+            }}
+            transition={{
+              type: "spring",
+              stiffness: 220,
+              damping: 24,
+              mass: 0.85,
+            }}
+            style={{ maxHeight: "86vh", maxWidth: "90vw" }}
+            onMouseEnter={() => {
+              if (!isMobile && !isOpen) {
+                setHasOpenedOnce(true);
+                setIsOpen(true);
+              }
+            }}
+            onMouseLeave={() => {
+              if (!isMobile && isOpen) {
+                setIsOpen(false);
+              }
+            }}
+            onClick={() => {
+              if (!isOpen) {
+                if (isMobile) {
+                  setShowConfirm(true);
+                } else {
+                  setHasOpenedOnce(true);
+                  setIsOpen(true);
+                }
+              }
+            }}
+            className={`relative cursor-pointer select-none flex items-center justify-center ${
+              isOpen ? "overflow-hidden backdrop-blur-xl p-2.5" : "overflow-visible p-0"
+            }`}
+          >
+            {/* 1. Closed Logo View: Visible when closed, smoothly scales down and fades out when expanding */}
+            <motion.div
+              animate={{
+                opacity: isOpen ? 0 : 1,
+                scale: isOpen ? 0.75 : 1,
+              }}
+              transition={{ duration: 0.22, ease: "easeInOut" }}
+              className={`absolute inset-0 flex items-center justify-center ${isOpen ? "pointer-events-none" : "pointer-events-auto hover:scale-105 active:scale-95 transition-transform"}`}
+              title="Mario Juice"
+            >
+              <img
+                src="/images/mario-juice-logo.png"
+                alt="Mario Juice Logo"
+                className="w-full h-full object-contain pointer-events-none drop-shadow-[0_0_24px_rgba(255,47,185,0.85)] hover:drop-shadow-[0_0_40px_rgba(255,47,185,1)] transition-all"
+              />
+            </motion.div>
 
           {/* 2. Expanded Phone Content: Fades and zooms in as container expands into phone */}
           <motion.div
@@ -265,6 +280,7 @@ export default function MarioJuicePhoneTrigger() {
             </div>
           </motion.div>
         </motion.div>
+        )}
       </div>
 
       {/* Confirmation Dialog: "just asks me if i want to open it" */}
