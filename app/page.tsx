@@ -1,4 +1,3 @@
-import Preloader from "@/components/Preloader";
 import HeroPhysicalUnveil from "@/components/HeroPhysicalUnveil";
 import KineticSignalTrace from "@/components/KineticSignalTrace";
 import PinnedTelemetryDeck from "@/components/PinnedTelemetryDeck";
@@ -10,9 +9,6 @@ export default function Home() {
       id="top"
       className="relative min-h-screen bg-[#07070a] text-white selection:bg-[#ec4899] selection:text-white"
     >
-      {/* Fullsite Preloader: preloads 3D mask & gaze frames with Arabic signature & flowing gradient */}
-      <Preloader />
-
       {/* Main dark container (z-10) that physically slides upward over the fixed footer (z-0) */}
       <main className="relative z-10 bg-[#07070a] shadow-[0_50px_120px_rgba(0,0,0,0.98)]">
         {/* Background ambient lighting */}
