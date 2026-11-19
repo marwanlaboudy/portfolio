@@ -63,6 +63,7 @@ export default function FaceLooker({
 
   // Donning progress: 0 = cursor on face (not wearing mask), 0 -> 1 = donning transition sweeps down, 1 = fully worn & tracking cursor
   const wearProgressRef = useRef<number>(0);
+  const lastFaceOpacityRef = useRef<number>(1);
 
   const drawImageToCanvas = useCallback(
     (img: HTMLImageElement, key: string) => {
@@ -311,22 +312,26 @@ export default function FaceLooker({
     const isModelReady = threeSceneRef.current?.isModelLoaded ?? false;
     const targetWear = isModelReady && !isCursorOnFaceRef.current ? 1.0 : 0.0;
 
-    // Smooth, cinematic donning animation speed (~360ms)
-    const wearSpeed = targetWear > wearProgressRef.current ? 0.09 : 0.14;
+    // Smooth, cinematic donning animation speed (~320ms)
+    const wearSpeed = targetWear > wearProgressRef.current ? 0.09 : 0.16;
     wearProgressRef.current += (targetWear - wearProgressRef.current) * wearSpeed;
+    if (targetWear === 0 && wearProgressRef.current < 0.012) {
+      wearProgressRef.current = 0;
+    }
     const wear = wearProgressRef.current;
 
     // ------------------------------------------------------------------------
     // Dynamic Face Visibility:
     // Fades out earlier as the mask descends onto the face (starting at 0.12, fully gone by 0.58)
     // ------------------------------------------------------------------------
-    if (faceCanvasRef.current) {
-      const faceOpacity = wear <= 0.12 ? 1 : Math.max(0, 1 - (wear - 0.12) / 0.46);
+    const faceOpacity = wear <= 0.12 ? 1 : Math.max(0, 1 - (wear - 0.12) / 0.46);
+    if (faceCanvasRef.current && Math.abs(lastFaceOpacityRef.current - faceOpacity) > 0.005) {
+      lastFaceOpacityRef.current = faceOpacity;
       faceCanvasRef.current.style.opacity = faceOpacity.toFixed(3);
     }
 
-    // Render 2D Face frames (always active while real face is visible)
-    if (wear < 0.98 && manifest) {
+    // Render 2D Face frames: only when face is actually visible (saves frame budget!)
+    if (faceOpacity > 0.01 && manifest) {
       const blinkCount = manifest.blinkFrames?.length ?? 0;
 
       if (
@@ -406,7 +411,9 @@ export default function FaceLooker({
         wireframePivot.rotation.copy(pivot.rotation);
         wireframePivot.position.copy(pivot.position);
 
-        if (wear > 0.002) {
+        if (wear > 0.001) {
+          if (!pivot.visible) pivot.visible = true;
+
           // Dynamic angled cut matching the reference mockup:
           // Angled diagonally across the forehead and eyes
           const tiltX = sx >= 0 ? -0.28 : 0.28;
@@ -420,15 +427,23 @@ export default function FaceLooker({
           const clipConstant = -1.55 + wear * 3.35;
           clipPlane.constant = clipConstant;
 
-          // Holographic wireframe: wraps face during transition
-          wireframeMat.opacity = Math.sin(wear * Math.PI) * 0.70 + (wear > 0 ? 0.12 : 0);
+          // Holographic wireframe: only visible during the active transition window
+          const showWireframe = wear > 0.02 && wear < 0.94;
+          wireframePivot.visible = showWireframe;
+          if (showWireframe) {
+            wireframeMat.opacity = Math.sin(wear * Math.PI) * 0.70;
+          }
 
           renderer.render(scene, camera);
         } else {
-          // Completely off / inside face area
-          clipPlane.constant = -3.0;
-          wireframeMat.opacity = 0;
-          renderer.clear();
+          // Completely off / inside face area - clear once and pause rendering
+          if (pivot.visible) {
+            pivot.visible = false;
+            wireframePivot.visible = false;
+            clipPlane.constant = -3.0;
+            wireframeMat.opacity = 0;
+            renderer.clear();
+          }
         }
       }
     }
