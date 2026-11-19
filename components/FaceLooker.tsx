@@ -40,6 +40,12 @@ export default function FaceLooker({
 
   const [manifest, setManifest] = useState<ManifestData | null>(null);
 
+  // Mobile Gyroscope / VR Tilt & Manual Touch Mode
+  const [isMobile, setIsMobile] = useState<boolean>(false);
+  const [isGyroActive, setIsGyroActive] = useState<boolean>(true);
+  const isGyroActiveRef = useRef<boolean>(true);
+  isGyroActiveRef.current = isGyroActive;
+
   // 2D Face refs
   const imagesRef = useRef<Map<number, HTMLImageElement>>(new Map());
   const blinkImagesRef = useRef<Map<number, HTMLImageElement>>(new Map());
@@ -460,7 +466,53 @@ export default function FaceLooker({
     };
   }, [renderFrame]);
 
-  // 4. Cursor, Touch & Scroll Tracking (determines when cursor is ON vs OUT of face)
+  // Detect mobile & gyroscope capability
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(
+        window.innerWidth < 768 ||
+          "ontouchstart" in window ||
+          navigator.maxTouchPoints > 0
+      );
+    };
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
+  // Toggle Gyroscope VR Tilt vs Touch Drag Mode
+  const toggleGyro = useCallback(async () => {
+    if (isGyroActive) {
+      isGyroActiveRef.current = false;
+      setIsGyroActive(false);
+    } else {
+      // iOS 13+ requires explicit user gesture permission for DeviceOrientationEvent
+      if (
+        typeof window !== "undefined" &&
+        typeof (window as any).DeviceOrientationEvent !== "undefined" &&
+        typeof (DeviceOrientationEvent as any).requestPermission === "function"
+      ) {
+        try {
+          const res = await (DeviceOrientationEvent as any).requestPermission();
+          if (res === "granted") {
+            isGyroActiveRef.current = true;
+            setIsGyroActive(true);
+          } else {
+            isGyroActiveRef.current = false;
+            setIsGyroActive(false);
+          }
+        } catch {
+          isGyroActiveRef.current = false;
+          setIsGyroActive(false);
+        }
+      } else {
+        isGyroActiveRef.current = true;
+        setIsGyroActive(true);
+      }
+    }
+  }, [isGyroActive]);
+
+  // 4. Cursor, Touch, Scroll & Gyro Tracking
   useEffect(() => {
     const lastClientPos = {
       x: typeof window !== "undefined" ? window.innerWidth / 2 : 0,
@@ -506,11 +558,27 @@ export default function FaceLooker({
       const excessX = Math.max(0, Math.abs(deltaX) - faceRadiusX);
       const excessY = Math.max(0, Math.abs(deltaY) - faceRadiusY);
 
-      const maxExcessX = Math.max(120, (signX > 0 ? window.innerWidth - faceCenterX : faceCenterX) - faceRadiusX);
-      const maxExcessY = Math.max(120, (signY > 0 ? window.innerHeight - faceCenterY : faceCenterY) - faceRadiusY);
+      const maxExcessX = Math.max(
+        120,
+        (signX > 0 ? window.innerWidth - faceCenterX : faceCenterX) - faceRadiusX
+      );
+      const maxExcessY = Math.max(
+        120,
+        (signY > 0 ? window.innerHeight - faceCenterY : faceCenterY) - faceRadiusY
+      );
 
-      const normX = signX * Math.min(1, (excessX / maxExcessX) * 1.18 + (excessX > 0 ? 0.025 : 0));
-      const normY = signY * Math.min(1, (excessY / maxExcessY) * 1.18 + (excessY > 0 ? 0.025 : 0));
+      const normX =
+        signX *
+        Math.min(
+          1,
+          (excessX / maxExcessX) * 1.18 + (excessX > 0 ? 0.025 : 0)
+        );
+      const normY =
+        signY *
+        Math.min(
+          1,
+          (excessY / maxExcessY) * 1.18 + (excessY > 0 ? 0.025 : 0)
+        );
 
       const targetY = normY * (1 - scrollRatio) + 1.0 * scrollRatio;
       const targetX = normX * (1 - scrollRatio * 0.45);
@@ -518,8 +586,42 @@ export default function FaceLooker({
       mouseTargetRef.current = { x: targetX, y: targetY };
     };
 
+    // Gyroscope / VR Tilt Listener for phone
+    const onDeviceOrientation = (e: DeviceOrientationEvent) => {
+      if (!isGyroActiveRef.current) return;
+      if (e.gamma === null || e.beta === null) return;
+
+      // e.gamma: roll [-90, 90], positive is right tilt, negative is left tilt
+      // e.beta: pitch [-180, 180], standard phone holding angle is ~46-50°
+      const baseBeta = 48;
+      const deltaBeta = e.beta - baseBeta; // positive = tilted top towards user (pitch up)
+      const deltaGamma = e.gamma; // positive = tilted right
+
+      // ~24 degrees of tilt maps to full gaze deflection
+      const normX = Math.max(-1, Math.min(1, deltaGamma / 24));
+      // Invert pitch so tilting phone up looks up (matching user's request)
+      const normY = Math.max(-1, Math.min(1, deltaBeta / 22));
+
+      const tiltMagnitude = Math.sqrt(normX * normX + normY * normY);
+
+      // Dead-zone center: holding steady keeps real face centered
+      if (tiltMagnitude <= 0.20) {
+        isCursorOnFaceRef.current = true;
+        mouseTargetRef.current = { x: 0, y: 0 };
+      } else {
+        isCursorOnFaceRef.current = false;
+        mouseTargetRef.current = { x: normX, y: normY };
+      }
+    };
+
     const onMouseMove = (e: MouseEvent) => {
       updateFromClientXY(e.clientX, e.clientY);
+    };
+
+    const onTouchStart = (e: TouchEvent) => {
+      if (e.touches.length > 0) {
+        updateFromClientXY(e.touches[0].clientX, e.touches[0].clientY);
+      }
     };
 
     const onTouchMove = (e: TouchEvent) => {
@@ -546,14 +648,18 @@ export default function FaceLooker({
     };
 
     window.addEventListener("mousemove", onMouseMove, { passive: true });
+    window.addEventListener("touchstart", onTouchStart, { passive: true });
     window.addEventListener("touchmove", onTouchMove, { passive: true });
     window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("deviceorientation", onDeviceOrientation, { passive: true });
     document.addEventListener("mouseleave", onMouseLeave);
 
     return () => {
       window.removeEventListener("mousemove", onMouseMove);
+      window.removeEventListener("touchstart", onTouchStart);
       window.removeEventListener("touchmove", onTouchMove);
       window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("deviceorientation", onDeviceOrientation);
       document.removeEventListener("mouseleave", onMouseLeave);
     };
   }, []);
@@ -562,7 +668,7 @@ export default function FaceLooker({
     <div
       ref={containerRef}
       className={`relative block select-none ${className}`}
-      style={{ width: size, aspectRatio: "1 / 1" }}
+      style={{ width: "100%", maxWidth: size, aspectRatio: "1 / 1" }}
     >
       {/* 2D Real Face Canvas: Always active underneath, visible through unmasked areas */}
       <canvas
@@ -572,13 +678,46 @@ export default function FaceLooker({
         className="absolute inset-0 block h-full w-full select-none pointer-events-none drop-shadow-[-16px_0_36px_rgba(126,232,255,0.22)] drop-shadow-[16px_0_36px_rgba(255,47,185,0.25)] will-change-transform"
       />
 
-      {/* 3D Mask Canvas: Donning transition with hot pink laser & wireframe */}
+      {/* 3D Mask Canvas: Donning transition with obsidian facet reflections & wireframe */}
       <canvas
         ref={threeCanvasRef}
         width={size}
         height={size}
         className="absolute inset-0 block h-full w-full select-none pointer-events-none drop-shadow-[-16px_0_36px_rgba(126,232,255,0.28)] drop-shadow-[16px_0_36px_rgba(255,47,185,0.32)] will-change-transform"
       />
+
+      {/* Mobile VR Tilt / Manual Touch Toggle Badge (Visible ONLY on mobile, zero desktop interference) */}
+      <div className="sm:hidden absolute -bottom-11 left-1/2 -translate-x-1/2 z-30 pointer-events-auto">
+        <button
+          type="button"
+          onClick={toggleGyro}
+          className={`flex items-center gap-2 rounded-full border px-3.5 py-1.5 backdrop-blur-md transition-all active:scale-95 select-none shadow-lg ${
+            isGyroActive
+              ? "border-[#22d3ee]/60 bg-[#07070a]/90 text-[#22d3ee] shadow-[0_0_18px_rgba(34,211,238,0.3)]"
+              : "border-[#ec4899]/60 bg-[#07070a]/90 text-[#ec4899] shadow-[0_0_18px_rgba(236,72,153,0.3)]"
+          }`}
+          title="Toggle VR Tilt / Touch Drag"
+        >
+          {isGyroActive ? (
+            <>
+              <span className="relative flex h-2 w-2 shrink-0">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#22d3ee] opacity-75" />
+                <span className="relative inline-flex h-2 w-2 rounded-full bg-[#22d3ee]" />
+              </span>
+              <span className="text-[9.5px] font-mono font-bold tracking-[0.14em] uppercase">
+                VR TILT: ON <span className="text-white/45 text-[8.5px] font-normal font-sans">(TAP FOR TOUCH)</span>
+              </span>
+            </>
+          ) : (
+            <>
+              <span className="h-2 w-2 rounded-full bg-[#ec4899] shrink-0" />
+              <span className="text-[9.5px] font-mono font-bold tracking-[0.14em] uppercase">
+                TOUCH: ACTIVE <span className="text-white/45 text-[8.5px] font-normal font-sans">(TAP FOR VR TILT)</span>
+              </span>
+            </>
+          )}
+        </button>
+      </div>
     </div>
   );
 }

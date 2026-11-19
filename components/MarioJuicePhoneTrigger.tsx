@@ -15,7 +15,17 @@ export default function MarioJuicePhoneTrigger() {
   const [iframeKey, setIframeKey] = useState(0);
   const [isLoaded, setIsLoaded] = useState(false);
   const [scrollOpacity, setScrollOpacity] = useState(1);
+  const [isMobile, setIsMobile] = useState(false);
   const closeTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 640);
+    };
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
 
   const clearTimer = () => {
     if (closeTimerRef.current) {
@@ -61,10 +71,20 @@ export default function MarioJuicePhoneTrigger() {
 
   if (scrollOpacity <= 0) return null;
 
+  const collapsedSize = isMobile ? 74 : 124;
+  const collapsedRadius = isMobile ? 18 : 22;
+  const expandedW = isMobile
+    ? Math.min(320, typeof window !== "undefined" ? window.innerWidth - 24 : 320)
+    : 340;
+  const expandedH = isMobile
+    ? Math.min(580, typeof window !== "undefined" ? window.innerHeight - 100 : 580)
+    : 610;
+  const expandedRadius = isMobile ? 32 : 40;
+
   return (
     <div
       style={{ opacity: scrollOpacity }}
-      className="absolute right-4 sm:right-8 lg:right-12 top-[50vh] -translate-y-1/2 z-30 transition-opacity duration-200"
+      className="absolute right-2 sm:right-8 lg:right-12 top-[62vh] sm:top-[50vh] -translate-y-1/2 z-30 transition-opacity duration-200"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
@@ -115,9 +135,9 @@ export default function MarioJuicePhoneTrigger() {
         layout
         initial={false}
         animate={{
-          width: isOpen ? 340 : 124,
-          height: isOpen ? 610 : 124,
-          borderRadius: isOpen ? 40 : 22,
+          width: isOpen ? expandedW : collapsedSize,
+          height: isOpen ? expandedH : collapsedSize,
+          borderRadius: isOpen ? expandedRadius : collapsedRadius,
         }}
         transition={{
           type: "spring",
@@ -147,23 +167,25 @@ export default function MarioJuicePhoneTrigger() {
             scale: isOpen ? 1.45 : 1,
           }}
           transition={{ duration: 0.22, ease: "easeOut" }}
-          className={`absolute inset-0 flex flex-col items-center justify-center gap-2 px-2 py-2 select-none ${
+          className={`absolute inset-0 flex flex-col items-center justify-center gap-1.5 sm:gap-2 px-1.5 sm:px-2 py-1.5 sm:py-2 select-none ${
             isOpen ? "pointer-events-none" : "pointer-events-auto"
           }`}
         >
-          <span className="relative flex h-11 w-11 items-center justify-center rounded-xl border border-[#ff2fb9]/70 bg-gradient-to-br from-[#ff2fb9]/25 to-[#7ee8ff]/20 text-[#ff2fb9] shadow-[0_0_18px_rgba(255,47,185,0.6)]">
-            <Smartphone className="h-5 w-5 drop-shadow-[0_0_8px_rgba(255,47,185,0.9)]" />
-            <span className="absolute -left-1 -top-1 flex h-2.5 w-2.5">
+          <span className={`relative flex items-center justify-center rounded-xl border border-[#ff2fb9]/70 bg-gradient-to-br from-[#ff2fb9]/25 to-[#7ee8ff]/20 text-[#ff2fb9] shadow-[0_0_18px_rgba(255,47,185,0.6)] ${
+            isMobile ? "h-8 w-8" : "h-11 w-11"
+          }`}>
+            <Smartphone className={`${isMobile ? "h-4 w-4" : "h-5 w-5"} drop-shadow-[0_0_8px_rgba(255,47,185,0.9)]`} />
+            <span className="absolute -left-1 -top-1 flex h-2 w-2">
               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#7ee8ff] opacity-75" />
-              <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-[#ff2fb9] shadow-[0_0_8px_#ff2fb9]" />
+              <span className="relative inline-flex h-2 w-2 rounded-full bg-[#ff2fb9] shadow-[0_0_8px_#ff2fb9]" />
             </span>
           </span>
 
           <div className="flex flex-col items-center text-center leading-tight">
-            <span className="text-[10.5px] font-extrabold uppercase tracking-[0.2em] text-[#ff2fb9] drop-shadow-[0_0_10px_rgba(255,47,185,0.85)]">
+            <span className={`${isMobile ? "text-[8px]" : "text-[10.5px]"} font-extrabold uppercase tracking-[0.16em] sm:tracking-[0.2em] text-[#ff2fb9] drop-shadow-[0_0_10px_rgba(255,47,185,0.85)]`}>
               Mario Juice
             </span>
-            <span className="text-[9px] font-bold uppercase tracking-[0.25em] text-[#7ee8ff] drop-shadow-[0_0_10px_rgba(126,232,255,0.85)]">
+            <span className={`${isMobile ? "text-[7px]" : "text-[9px]"} font-bold uppercase tracking-[0.2em] sm:tracking-[0.25em] text-[#7ee8ff] drop-shadow-[0_0_10px_rgba(126,232,255,0.85)]`}>
               Website
             </span>
           </div>
