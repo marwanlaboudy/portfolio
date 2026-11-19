@@ -94,7 +94,9 @@ export default function FaceLooker({
       powerPreference: "high-performance",
     });
     renderer.setPixelRatio(Math.min(typeof window !== "undefined" ? window.devicePixelRatio : 1, 2));
-    renderer.setSize(size, size);
+    renderer.setSize(size, size, false);
+    canvas.style.width = "100%";
+    canvas.style.height = "100%";
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
     renderer.toneMappingExposure = 1.25;
 
@@ -577,14 +579,16 @@ export default function FaceLooker({
         ref={faceCanvasRef}
         width={size}
         height={size}
+        style={{ width: "100%", height: "100%" }}
         className="absolute inset-0 block h-full w-full select-none pointer-events-none drop-shadow-[-16px_0_36px_rgba(126,232,255,0.22)] drop-shadow-[16px_0_36px_rgba(255,47,185,0.25)] will-change-transform"
       />
 
-      {/* 3D Mask Canvas: Donning transition with hot pink laser & wireframe */}
+      {/* 3D Mask Canvas: Donning transition with obsidian facet reflections & wireframe */}
       <canvas
         ref={threeCanvasRef}
         width={size}
         height={size}
+        style={{ width: "100%", height: "100%" }}
         className="absolute inset-0 block h-full w-full select-none pointer-events-none drop-shadow-[-16px_0_36px_rgba(126,232,255,0.28)] drop-shadow-[16px_0_36px_rgba(255,47,185,0.32)] will-change-transform"
       />
     </div>
