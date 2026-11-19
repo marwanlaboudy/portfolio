@@ -26,6 +26,26 @@ export default function MarioJuicePhoneTrigger() {
     return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
+  // Broadcast modal state & mutually exclude with Re Sapori modal
+  useEffect(() => {
+    window.dispatchEvent(
+      new CustomEvent("websiteModalState", {
+        detail: { site: "mariojuice", active: isOpen || showConfirm },
+      })
+    );
+  }, [isOpen, showConfirm]);
+
+  useEffect(() => {
+    const handleOtherModal = (e: any) => {
+      if (e.detail?.site === "resapori" && e.detail?.active) {
+        setIsOpen(false);
+        setShowConfirm(false);
+      }
+    };
+    window.addEventListener("websiteModalState", handleOtherModal);
+    return () => window.removeEventListener("websiteModalState", handleOtherModal);
+  }, []);
+
   // Listen for gaze direction looking at Mario Juice
   useEffect(() => {
     const handleGaze = () => {
@@ -41,7 +61,9 @@ export default function MarioJuicePhoneTrigger() {
       }
     };
     window.addEventListener("gazeAtMarioJuice", handleGaze);
-    return () => window.removeEventListener("gazeAtMarioJuice", handleGaze);
+    return () => {
+      window.removeEventListener("gazeAtMarioJuice", handleGaze);
+    };
   }, [isOpen, showConfirm, isMobile]);
 
   // Close instantly when scrolling down and fade out
@@ -52,7 +74,7 @@ export default function MarioJuicePhoneTrigger() {
         setIsOpen(false);
         setShowConfirm(false);
       }
-      const op = Math.max(0, Math.min(1, 1 - sy / 300));
+      const op = Math.max(0, Math.min(1, 1 - sy / 220));
       setScrollOpacity(op);
     };
     window.addEventListener("scroll", onScroll, { passive: true });
@@ -67,7 +89,9 @@ export default function MarioJuicePhoneTrigger() {
     <>
       <div
         style={{ opacity: scrollOpacity }}
-        className="absolute left-1/2 -translate-x-1/2 bottom-[7vh] sm:bottom-auto sm:top-[50vh] sm:right-8 lg:right-12 sm:left-auto sm:translate-x-0 sm:-translate-y-1/2 z-30 transition-opacity duration-200"
+        className={`absolute left-1/2 -translate-x-1/2 pointer-events-auto ${
+          isOpen ? "top-1/2 -translate-y-1/2 bottom-auto z-[90]" : "bottom-[8vh] z-40"
+        } sm:bottom-auto sm:top-[50vh] sm:right-8 lg:right-12 sm:left-auto sm:translate-x-0 sm:-translate-y-1/2 transition-opacity duration-200`}
       >
         {/* Neon Break Shockwave & Shards when expanding */}
         <AnimatePresence>
@@ -290,7 +314,7 @@ export default function MarioJuicePhoneTrigger() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/75 backdrop-blur-sm select-none"
+            className="fixed inset-0 z-[100] pointer-events-auto flex items-center justify-center p-4 bg-black/75 backdrop-blur-sm select-none"
             onClick={() => setShowConfirm(false)}
           >
             <motion.div

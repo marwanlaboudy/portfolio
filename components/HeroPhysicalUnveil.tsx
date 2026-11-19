@@ -61,9 +61,9 @@ export default function HeroPhysicalUnveil() {
   const vrTiltOpacity = useTransform(smoothProgress, [0, 0.08], [1, 0]);
 
   return (
-    <section ref={containerRef} className="relative h-[280vh] w-full bg-[#07070a]">
-      {/* Sticky 100vh Viewport Stage */}
-      <div className="sticky top-0 h-screen sm:h-screen min-h-screen h-[100dvh] w-full bg-[#07070a] overflow-hidden flex flex-col justify-between px-4 sm:px-6 pb-8 pt-6 select-none">
+    <section ref={containerRef} className="relative h-[240vh] sm:h-[280vh] w-full bg-[#07070a]">
+      {/* Sticky 100dvh Viewport Stage */}
+      <div className="sticky top-0 h-[100dvh] w-full bg-[#07070a] overflow-hidden flex flex-col justify-between px-4 sm:px-6 pb-4 sm:pb-8 pt-4 sm:pt-6 select-none">
         {/* Background ambient lighting */}
         <div className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
           <div className="absolute -top-32 -left-32 h-[560px] w-[560px] rounded-full bg-[#22d3ee]/12 blur-[170px]" />
@@ -132,41 +132,33 @@ export default function HeroPhysicalUnveil() {
             }}
             className="origin-center"
           >
-            <FaceLooker size={620} className="max-w-[90vw]" />
+            <FaceLooker size={620} className="max-w-[72vw] sm:max-w-[90vw]" />
           </motion.div>
         </div>
 
-        {/* Floating Phone Sites Buttons (Preserved in place on Left and Right) */}
-        <motion.div
-          style={{
-            opacity: phoneTriggersOpacity,
-            scale: phoneTriggersScale,
-          }}
-          className="pointer-events-auto"
-        >
-          <ResaporiPhoneTrigger />
-          <MarioJuicePhoneTrigger />
-        </motion.div>
+        {/* Floating Phone Sites Buttons (Preserved in place on Left/Right or Top/Bottom, above z-20 mask) */}
+        <ResaporiPhoneTrigger />
+        <MarioJuicePhoneTrigger />
 
-        {/* Bottom Bar: Experience credential ticker & Get in Touch (scroll down button removed) */}
-        <div className="relative z-30 mx-auto w-full max-w-7xl flex items-center justify-between border-t border-white/10 pt-4">
-          <div className="flex items-center gap-3 text-[10px] sm:text-[11px] font-mono uppercase tracking-[0.25em] text-white/70">
+        {/* Bottom Bar: Experience credential ticker & Get in Touch */}
+        <div className="relative z-30 mx-auto w-full max-w-7xl flex items-center justify-between gap-2 border-t border-white/10 pt-3 sm:pt-4">
+          <div className="flex items-center gap-1.5 sm:gap-3 text-[8.5px] sm:text-[11px] font-mono uppercase tracking-[0.11em] sm:tracking-[0.25em] text-white/70 whitespace-nowrap">
             <span className="text-[#22d3ee] font-bold">AI Engineer</span>
             <span className="text-white/30">•</span>
             <span className="text-[#ec4899] font-bold">Co-Founder Cheri Band</span>
-            <span className="text-white/30">•</span>
+            <span className="text-white/30 hidden md:inline">•</span>
             <span className="text-white/60 hidden md:inline">Full-Stack Web &amp; Media Buying</span>
           </div>
 
           <a
             id="contact"
             href="mailto:contact@example.com"
-            className="group inline-flex items-center gap-2 text-[10px] sm:text-[11px] font-mono uppercase tracking-[0.25em] text-white"
+            className="group inline-flex items-center gap-1 sm:gap-2 text-[8.5px] sm:text-[11px] font-mono uppercase tracking-[0.11em] sm:tracking-[0.25em] text-white whitespace-nowrap shrink-0"
           >
             <span className="text-white/70 group-hover:text-[#22d3ee] transition-colors">
               Get in touch
             </span>
-            <ArrowUpRight className="h-3.5 w-3.5 text-[#22d3ee] transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+            <ArrowUpRight className="h-3 w-3 sm:h-3.5 sm:w-3.5 text-[#22d3ee] transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
           </a>
         </div>
       </div>

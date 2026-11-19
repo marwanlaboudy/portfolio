@@ -26,6 +26,26 @@ export default function ResaporiPhoneTrigger() {
     return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
+  // Broadcast modal state & mutually exclude with Mario Juice modal
+  useEffect(() => {
+    window.dispatchEvent(
+      new CustomEvent("websiteModalState", {
+        detail: { site: "resapori", active: isOpen || showConfirm },
+      })
+    );
+  }, [isOpen, showConfirm]);
+
+  useEffect(() => {
+    const handleOtherModal = (e: any) => {
+      if (e.detail?.site === "mariojuice" && e.detail?.active) {
+        setIsOpen(false);
+        setShowConfirm(false);
+      }
+    };
+    window.addEventListener("websiteModalState", handleOtherModal);
+    return () => window.removeEventListener("websiteModalState", handleOtherModal);
+  }, []);
+
   // Listen for gaze direction looking at Re Sapori
   useEffect(() => {
     const handleGaze = () => {
@@ -41,7 +61,9 @@ export default function ResaporiPhoneTrigger() {
       }
     };
     window.addEventListener("gazeAtResapori", handleGaze);
-    return () => window.removeEventListener("gazeAtResapori", handleGaze);
+    return () => {
+      window.removeEventListener("gazeAtResapori", handleGaze);
+    };
   }, [isOpen, showConfirm, isMobile]);
 
   // Close instantly when scrolling down and fade out
@@ -52,7 +74,7 @@ export default function ResaporiPhoneTrigger() {
         setIsOpen(false);
         setShowConfirm(false);
       }
-      const op = Math.max(0, Math.min(1, 1 - sy / 300));
+      const op = Math.max(0, Math.min(1, 1 - sy / 220));
       setScrollOpacity(op);
     };
     window.addEventListener("scroll", onScroll, { passive: true });
@@ -67,7 +89,9 @@ export default function ResaporiPhoneTrigger() {
     <>
       <div
         style={{ opacity: scrollOpacity }}
-        className="absolute left-1/2 -translate-x-1/2 top-[8.5vh] sm:top-[50vh] sm:left-8 lg:left-12 sm:translate-x-0 sm:-translate-y-1/2 z-30 transition-opacity duration-200"
+        className={`absolute left-1/2 -translate-x-1/2 pointer-events-auto ${
+          isOpen ? "top-1/2 -translate-y-1/2 z-[90]" : "top-[10vh] z-40"
+        } sm:top-[50vh] sm:left-8 lg:left-12 sm:translate-x-0 sm:-translate-y-1/2 transition-opacity duration-200`}
       >
         {/* Neon Break Shockwave & Shards when expanding */}
         <AnimatePresence>
@@ -290,7 +314,7 @@ export default function ResaporiPhoneTrigger() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/75 backdrop-blur-sm select-none"
+            className="fixed inset-0 z-[100] pointer-events-auto flex items-center justify-center p-4 bg-black/75 backdrop-blur-sm select-none"
             onClick={() => setShowConfirm(false)}
           >
             <motion.div

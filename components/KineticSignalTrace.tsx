@@ -147,10 +147,10 @@ function VelocityReactiveSemg({
 
   return (
     <div className="relative w-full overflow-hidden rounded-2xl border border-[#22d3ee]/30 bg-[#07070a]/95 p-4 shadow-[0_0_35px_rgba(34,211,238,0.18)]">
-      <div className="flex items-center justify-between border-b border-white/10 pb-3 font-mono text-[10px]">
+      <div className="flex flex-wrap items-center justify-between gap-2 border-b border-white/10 pb-3 font-mono text-[10px]">
         <div className="flex items-center gap-2">
-          <span className="h-2 w-2 rounded-full bg-emerald-400 animate-pulse shadow-[0_0_8px_#34d399]" />
-          <span className="text-white/80 uppercase tracking-widest">
+          <span className="h-2 w-2 shrink-0 rounded-full bg-emerald-400 animate-pulse shadow-[0_0_8px_#34d399]" />
+          <span className="text-white/80 uppercase tracking-wider sm:tracking-widest">
             Cheri Band // Forearm sEMG Waveform
           </span>
         </div>
@@ -191,6 +191,14 @@ function VelocityReactiveSemg({
 export default function KineticSignalTrace() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const pathRef = useRef<SVGPathElement>(null);
+  const [isDesktopGrid, setIsDesktopGrid] = useState(false);
+
+  useEffect(() => {
+    const checkGrid = () => setIsDesktopGrid(window.innerWidth >= 1024);
+    checkGrid();
+    window.addEventListener("resize", checkGrid);
+    return () => window.removeEventListener("resize", checkGrid);
+  }, []);
 
   // 1. Scroll Position & Velocity Tracking
   const { scrollY, scrollYProgress } = useScroll({
@@ -220,23 +228,32 @@ export default function KineticSignalTrace() {
   );
   const orbY = useTransform(smoothProgress, [0, 1], ["0%", "100%"]);
 
-  // 3. Kinetic Typography Horizontal Scrub (Word-by-word parallax like Lando Norris)
-  const kineticWord1X = useTransform(smoothProgress, [0.08, 0.55], ["-25%", "25%"]);
-  const kineticWord2X = useTransform(smoothProgress, [0.08, 0.55], ["25%", "-25%"]);
+  // 3. Kinetic Typography Horizontal Scrub (Non-negative offsets so left letters never clip off-screen)
+  const kineticWord1XDesktop = useTransform(smoothProgress, [0.08, 0.55], ["0%", "14%"]);
+  const kineticWord1XMobile = useTransform(smoothProgress, [0.08, 0.55], ["0%", "4%"]);
+  const kineticWord1X = isDesktopGrid ? kineticWord1XDesktop : kineticWord1XMobile;
 
-  // 4. Staggered Scroll-Driven Depth Parallax for Cards:
-  const reSaporiY = useTransform(smoothProgress, [0.12, 0.55], [140, -140]);
-  const marioJuiceY = useTransform(smoothProgress, [0.12, 0.55], [280, -50]);
-  const marioJuiceRotate = useTransform(smoothProgress, [0.12, 0.55], [-3, 1.5]);
+  const kineticWord2XDesktop = useTransform(smoothProgress, [0.08, 0.55], ["14%", "0%"]);
+  const kineticWord2XMobile = useTransform(smoothProgress, [0.08, 0.55], ["4%", "0%"]);
+  const kineticWord2X = isDesktopGrid ? kineticWord2XDesktop : kineticWord2XMobile;
+
+  // 4. Staggered Scroll-Driven Depth Parallax for Cards (Active on 3-column desktop, 0 on 1-column mobile so cards never overlap):
+  const reSaporiYDesktop = useTransform(smoothProgress, [0.12, 0.55], [140, -140]);
+  const marioJuiceYDesktop = useTransform(smoothProgress, [0.12, 0.55], [280, -50]);
+  const marioJuiceRotateDesktop = useTransform(smoothProgress, [0.12, 0.55], [-3, 1.5]);
+
+  const reSaporiY = isDesktopGrid ? reSaporiYDesktop : 0;
+  const marioJuiceY = isDesktopGrid ? marioJuiceYDesktop : 0;
+  const marioJuiceRotate = isDesktopGrid ? marioJuiceRotateDesktop : 0;
 
   // Card opacity for smooth GPU-accelerated unveil
-  const cardOpacity = useTransform(smoothProgress, [0.1, 0.25], [0.2, 1]);
+  const cardOpacity = useTransform(smoothProgress, [0.08, 0.22], [0.4, 1]);
 
   return (
     <section
       ref={sectionRef}
       id="signal-trace"
-      className="relative z-10 mx-auto w-full max-w-7xl px-4 sm:px-6 py-28 sm:py-40 overflow-hidden"
+      className="relative z-10 mx-auto w-full max-w-7xl px-4 sm:px-6 py-20 sm:py-40 overflow-hidden"
     >
       {/* Background Wide S-Curve SVG Circuit Track */}
       <div className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
@@ -298,18 +315,18 @@ export default function KineticSignalTrace() {
       </div>
 
       {/* Kinetic Typography Section Header (Scrubbed Horizontally) */}
-      <div className="mb-24 flex flex-col items-start gap-4 overflow-hidden">
-        <div className="inline-flex items-center gap-2.5 rounded-full border border-[#22d3ee]/40 bg-[#22d3ee]/10 px-4 py-1.5 text-[10px] font-mono uppercase tracking-[0.35em] text-[#22d3ee] backdrop-blur-md shadow-[0_0_20px_rgba(34,211,238,0.2)]">
-          <Activity className="h-3 w-3 text-[#ec4899] animate-pulse" />
+      <div className="mb-16 sm:mb-24 flex flex-col items-start gap-4 overflow-hidden">
+        <div className="inline-flex flex-wrap items-center gap-2 rounded-full border border-[#22d3ee]/40 bg-[#22d3ee]/10 px-3 sm:px-4 py-1.5 text-[9px] sm:text-[10px] font-mono uppercase tracking-[0.18em] sm:tracking-[0.35em] text-[#22d3ee] backdrop-blur-md shadow-[0_0_20px_rgba(34,211,238,0.2)]">
+          <Activity className="h-3 w-3 text-[#ec4899] animate-pulse shrink-0" />
           <span className="font-extrabold">// 01. SIGNAL TRACE CIRCUIT</span>
           <span className="text-white/40">|</span>
           <span className="text-[#ec4899] font-bold">4 CORE PILLARS</span>
         </div>
 
-        <div className="overflow-hidden py-2">
+        <div className="w-full overflow-hidden py-1 sm:py-2">
           <motion.h2
             style={{ x: kineticWord1X }}
-            className="text-4xl sm:text-6xl lg:text-8xl font-black uppercase tracking-tight text-white select-none whitespace-nowrap"
+            className="text-3xl sm:text-6xl lg:text-8xl font-black uppercase tracking-tight text-white select-none whitespace-nowrap"
           >
             INTERACTIVE{" "}
             <span className="text-[#22d3ee] drop-shadow-[0_0_40px_rgba(34,211,238,0.5)]">
@@ -318,10 +335,10 @@ export default function KineticSignalTrace() {
           </motion.h2>
         </div>
 
-        <div className="overflow-hidden py-1">
+        <div className="w-full overflow-hidden py-1">
           <motion.h2
             style={{ x: kineticWord2X }}
-            className="text-4xl sm:text-6xl lg:text-8xl font-black uppercase tracking-tight text-white select-none whitespace-nowrap"
+            className="text-3xl sm:text-6xl lg:text-8xl font-black uppercase tracking-tight text-white select-none whitespace-nowrap"
           >
             CIRCUIT &{" "}
             <span className="text-[#ec4899] italic drop-shadow-[0_0_40px_rgba(236,72,153,0.6)]">
@@ -895,19 +912,19 @@ export default function KineticSignalTrace() {
               </p>
 
               <div className="mt-4 space-y-2 text-[11px] font-mono text-white/80">
-                <div className="flex items-center justify-between rounded-lg bg-white/5 px-3 py-2">
+                <div className="flex flex-wrap items-center justify-between gap-1 rounded-lg bg-white/5 px-3 py-2">
                   <span className="text-white/60">Smart Home Controls:</span>
                   <span className="text-[#22d3ee] font-bold">Lights, AC, Volume, Locks</span>
                 </div>
-                <div className="flex items-center justify-between rounded-lg bg-white/5 px-3 py-2">
+                <div className="flex flex-wrap items-center justify-between gap-1 rounded-lg bg-white/5 px-3 py-2">
                   <span className="text-white/60">Health Tracker:</span>
                   <span className="text-[#ec4899] font-bold">Continuous HR &amp; Muscle Telemetry</span>
                 </div>
-                <div className="flex items-center justify-between rounded-lg bg-white/5 px-3 py-2">
+                <div className="flex flex-wrap items-center justify-between gap-1 rounded-lg bg-white/5 px-3 py-2">
                   <span className="text-white/60">Sensor Array:</span>
                   <span className="text-white font-bold">24-bit sEMG ADC + 6-Axis IMU</span>
                 </div>
-                <div className="flex items-center justify-between rounded-lg bg-white/5 px-3 py-2">
+                <div className="flex flex-wrap items-center justify-between gap-1 rounded-lg bg-white/5 px-3 py-2">
                   <span className="text-white/60">Edge Model:</span>
                   <span className="text-emerald-400 font-bold">Quantized 1D-CNN (TinyML)</span>
                 </div>

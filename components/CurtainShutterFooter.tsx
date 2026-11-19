@@ -48,9 +48,9 @@ function MagneticPillButton() {
 
 export default function CurtainShutterFooter() {
   return (
-    <footer className="sticky bottom-0 z-0 h-[85vh] w-full overflow-hidden bg-gradient-to-br from-cyan-400 via-sky-400 to-pink-500 text-[#07070a] flex flex-col justify-between">
+    <footer className="sticky bottom-0 z-0 h-[85dvh] w-full overflow-hidden bg-gradient-to-br from-cyan-400 via-sky-400 to-pink-500 text-[#07070a] flex flex-col justify-between">
       {/* Infinite Kinetic Marquee */}
-      <div className="relative overflow-hidden border-b-2 border-[#07070a]/20 py-4 bg-black/10 backdrop-blur-sm select-none">
+      <div className="relative overflow-hidden border-b-2 border-[#07070a]/20 py-3 sm:py-4 bg-black/10 backdrop-blur-sm select-none">
         <motion.div
           animate={{ x: ["0%", "-50%"] }}
           transition={{
@@ -58,7 +58,7 @@ export default function CurtainShutterFooter() {
             duration: 16,
             ease: "linear",
           }}
-          className="flex w-max whitespace-nowrap text-xs sm:text-sm font-mono font-black uppercase tracking-[0.35em] text-[#07070a]"
+          className="flex w-max whitespace-nowrap text-xs sm:text-sm font-mono font-black uppercase tracking-[0.25em] sm:tracking-[0.35em] text-[#07070a]"
         >
           <span className="px-6">
             LET&apos;S BUILD SOMETHING ICONIC ✦ FULL-STACK • AI • HARDWARE ✦
@@ -76,28 +76,28 @@ export default function CurtainShutterFooter() {
       </div>
 
       {/* Main High-Contrast Curtain Content */}
-      <div className="mx-auto max-w-7xl px-6 py-12 flex flex-col items-center text-center my-auto">
-        <span className="rounded-full border-2 border-[#07070a] bg-[#07070a]/10 px-5 py-2 text-[11px] font-mono font-bold uppercase tracking-[0.35em] text-[#07070a]">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 py-4 sm:py-12 flex flex-col items-center text-center my-auto">
+        <span className="rounded-full border-2 border-[#07070a] bg-[#07070a]/10 px-4 sm:px-5 py-1.5 sm:py-2 text-[9px] sm:text-[11px] font-mono font-bold uppercase tracking-[0.2em] sm:tracking-[0.35em] text-[#07070a]">
           ✦ MECHANICAL SHUTTER REVEAL // 2026 ARCHIVE
         </span>
 
-        <h2 className="mt-8 text-4xl sm:text-6xl lg:text-8xl font-black uppercase tracking-tight text-[#07070a] max-w-4xl leading-[0.9]">
+        <h2 className="mt-5 sm:mt-8 text-3xl sm:text-6xl lg:text-8xl font-black uppercase tracking-tight text-[#07070a] max-w-4xl leading-[0.92]">
           LET&apos;S BUILD SOMETHING ICONIC
         </h2>
 
-        <p className="mt-4 max-w-xl text-sm sm:text-base font-medium leading-relaxed text-[#07070a]/80">
+        <p className="mt-3 sm:mt-4 max-w-xl text-xs sm:text-base font-medium leading-relaxed text-[#07070a]/80">
           Available for full-stack platforms, autonomous multi-agent pipelines, and embedded biomedical edge ML architecture.
         </p>
 
         {/* Magnetic Cursor-Following Button */}
-        <div className="mt-10">
+        <div className="mt-6 sm:mt-10">
           <MagneticPillButton />
         </div>
       </div>
 
       {/* Bottom Bar */}
-      <div className="w-full border-t border-[#07070a]/20 px-6 py-6">
-        <div className="mx-auto max-w-7xl flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] font-mono uppercase tracking-[0.25em] text-[#07070a]/70">
+      <div className="w-full border-t border-[#07070a]/20 px-4 sm:px-6 py-4 sm:py-6">
+        <div className="mx-auto max-w-7xl flex flex-col sm:flex-row items-center justify-between gap-2 sm:gap-4 text-[10px] sm:text-[11px] font-mono uppercase tracking-[0.18em] sm:tracking-[0.25em] text-[#07070a]/70">
           <span>© {new Date().getFullYear()} MARWAN LABOUDY</span>
           <span className="font-bold">STATUS: ALL SYSTEMS NOMINAL</span>
           <a

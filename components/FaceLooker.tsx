@@ -40,13 +40,42 @@ export default function FaceLooker({
 
   const [manifest, setManifest] = useState<ManifestData | null>(null);
   const [isGyroActive, setIsGyroActive] = useState<boolean>(false);
-  const initialOrientationRef = useRef<{ beta: number; gamma: number } | null>(null);
-  const gazeTargetTimerRef = useRef<{ target: string | null; start: number }>({ target: null, start: 0 });
+  const isGyroActiveRef = useRef<boolean>(false);
+  const isGyroCenteredRef = useRef<boolean>(true);
+  const initialOrientationRef = useRef<{ beta: number; gamma: number; samples: number } | null>(null);
+  const smoothGyroRef = useRef<{ beta: number; gamma: number } | null>(null);
+  const gazeTargetTimerRef = useRef<{ target: string | null; start: number; fired: boolean }>({
+    target: null,
+    start: 0,
+    fired: false,
+  });
+  const lastScrollTimeRef = useRef<number>(0);
+  const activeModalsRef = useRef<Set<string>>(new Set());
+
+  useEffect(() => {
+    const handleModalState = (e: any) => {
+      const site = e.detail?.site;
+      const active = e.detail?.active;
+      if (!site) return;
+      if (active) {
+        activeModalsRef.current.add(site);
+      } else {
+        activeModalsRef.current.delete(site);
+      }
+    };
+    window.addEventListener("websiteModalState", handleModalState);
+    return () => window.removeEventListener("websiteModalState", handleModalState);
+  }, []);
 
   const toggleGyro = useCallback(async () => {
-    if (isGyroActive) {
+    if (isGyroActiveRef.current) {
+      isGyroActiveRef.current = false;
       setIsGyroActive(false);
       initialOrientationRef.current = null;
+      smoothGyroRef.current = null;
+      isGyroCenteredRef.current = true;
+      isCursorOnFaceRef.current = true;
+      mouseTargetRef.current = { x: 0, y: 0 };
       return;
     }
 
@@ -59,6 +88,9 @@ export default function FaceLooker({
         const state = await (DeviceOrientationEvent as any).requestPermission();
         if (state === "granted") {
           initialOrientationRef.current = null;
+          smoothGyroRef.current = null;
+          isGyroCenteredRef.current = true;
+          isGyroActiveRef.current = true;
           setIsGyroActive(true);
         } else {
           alert("Motion permission denied. You can swipe with your finger to control the mask!");
@@ -68,9 +100,12 @@ export default function FaceLooker({
       }
     } else {
       initialOrientationRef.current = null;
+      smoothGyroRef.current = null;
+      isGyroCenteredRef.current = true;
+      isGyroActiveRef.current = true;
       setIsGyroActive(true);
     }
-  }, [isGyroActive]);
+  }, []);
 
   // Sync with stationary external mobile toggle button
   useEffect(() => {
@@ -80,6 +115,7 @@ export default function FaceLooker({
   }, [toggleGyro]);
 
   useEffect(() => {
+    isGyroActiveRef.current = isGyroActive;
     if (typeof window !== "undefined") {
       window.dispatchEvent(new CustomEvent("vrTiltState", { detail: isGyroActive }));
     }
@@ -89,30 +125,80 @@ export default function FaceLooker({
   useEffect(() => {
     if (!isGyroActive) return;
 
+    const enableTimestamp = performance.now();
+
     const handleOrientation = (e: DeviceOrientationEvent) => {
       if (e.beta === null || e.gamma === null) return;
 
+      // Ignore the first 120ms right after tapping the top-right VR button so thumb tap vibration settles
+      if (performance.now() - enableTimestamp < 120) return;
+
+      const rawBeta = Math.max(-170, Math.min(170, e.beta));
+      const rawGamma = Math.max(-89, Math.min(89, e.gamma));
+
+      // Calibrate baseline over the first 5 samples for a rock-solid neutral reference
       if (!initialOrientationRef.current) {
-        initialOrientationRef.current = { beta: e.beta, gamma: e.gamma };
+        initialOrientationRef.current = { beta: rawBeta, gamma: rawGamma, samples: 1 };
+        smoothGyroRef.current = { beta: rawBeta, gamma: rawGamma };
+        return;
+      } else if (initialOrientationRef.current.samples < 5) {
+        const s = initialOrientationRef.current.samples;
+        initialOrientationRef.current.beta = (initialOrientationRef.current.beta * s + rawBeta) / (s + 1);
+        initialOrientationRef.current.gamma = (initialOrientationRef.current.gamma * s + rawGamma) / (s + 1);
+        initialOrientationRef.current.samples = s + 1;
+        smoothGyroRef.current = {
+          beta: initialOrientationRef.current.beta,
+          gamma: initialOrientationRef.current.gamma,
+        };
+        return;
       }
 
-      const deltaGamma = e.gamma - initialOrientationRef.current.gamma;
-      const deltaBeta = e.beta - initialOrientationRef.current.beta;
+      // Low-pass filter raw sensor stream to eliminate micro-jitter and gimbal spikes
+      if (!smoothGyroRef.current) {
+        smoothGyroRef.current = { beta: rawBeta, gamma: rawGamma };
+      } else {
+        let dG = rawGamma - smoothGyroRef.current.gamma;
+        // Guard against gimbal lock flip near 90 deg beta
+        if (Math.abs(dG) > 90) {
+          dG = 0;
+        }
+        smoothGyroRef.current.gamma += dG * 0.35;
+        smoothGyroRef.current.beta += (rawBeta - smoothGyroRef.current.beta) * 0.35;
+      }
 
-      const normX = Math.max(-1, Math.min(1, deltaGamma / 24));
-      const normY = Math.max(-1, Math.min(1, deltaBeta / 24));
+      const deltaGamma = smoothGyroRef.current.gamma - initialOrientationRef.current.gamma;
+      const deltaBeta = smoothGyroRef.current.beta - initialOrientationRef.current.beta;
+
+      // 18 degrees for full deflection so user can comfortably tilt up/down/left/right while viewing screen
+      const normX = Math.max(-1, Math.min(1, deltaGamma / 18));
+      const normY = Math.max(-1, Math.min(1, deltaBeta / 18));
 
       const tiltDistance = Math.sqrt(normX * normX + normY * normY);
 
-      // When phone returns to the middle (neutral holding position):
-      // Un-wears the mask and reveals the real face!
-      if (tiltDistance < 0.20) {
+      // Hysteresis deadband to prevent flickering between face & mask near the center threshold
+      if (isGyroCenteredRef.current) {
+        if (tiltDistance > 0.22) {
+          isGyroCenteredRef.current = false;
+        }
+      } else {
+        if (tiltDistance < 0.14) {
+          isGyroCenteredRef.current = true;
+        }
+      }
+
+      if (isGyroCenteredRef.current) {
+        // Phone is in neutral middle holding position -> unwear mask & reveal real face
         isCursorOnFaceRef.current = true;
         mouseTargetRef.current = { x: 0, y: 0 };
       } else {
-        // When tilted away from middle: dons the mask and tracks tilt in VR!
+        // Phone is tilted away from center -> don mask & smoothly ramp angle from 0 at deadband edge
         isCursorOnFaceRef.current = false;
-        mouseTargetRef.current = { x: normX, y: normY };
+        const activeMag = Math.min(1, Math.max(0, (tiltDistance - 0.14) / 0.86));
+        const scale = tiltDistance > 0.0001 ? activeMag / tiltDistance : 0;
+        mouseTargetRef.current = {
+          x: Math.max(-1, Math.min(1, normX * scale)),
+          y: Math.max(-1, Math.min(1, normY * scale)),
+        };
       }
     };
 
@@ -406,41 +492,59 @@ export default function FaceLooker({
 
     // Gaze-triggered confirmation modal:
     // Only triggers when at top of page (never while scrolling)
-    const currentScrollY = typeof window !== "undefined" ? (window.scrollY || document.documentElement.scrollTop || 0) : 0;
+    const currentScrollY =
+      typeof window !== "undefined"
+        ? window.scrollY || document.documentElement.scrollTop || 0
+        : 0;
     const isMobileView = typeof window !== "undefined" && window.innerWidth < 640;
+    const isNotScrolling =
+      currentScrollY < 15 && performance.now() - lastScrollTimeRef.current > 400;
+    const isAnyModalOpen = activeModalsRef.current.size > 0;
+
     let focusedGaze: "resapori" | "mariojuice" | null = null;
 
-    if (currentScrollY < 15) {
+    if (isNotScrolling && !isAnyModalOpen && !isCursorOnFaceRef.current) {
       if (isMobileView) {
-        // On mobile: ONLY trigger gaze confirmation if user explicitly enabled VR TILT!
-        // Touching or scrolling the screen will NEVER trigger popups!
-        if (isGyroActive) {
-          if (sy < -0.75) focusedGaze = "resapori"; // Deliberately tilted up at top website
-          else if (sy > 0.75) focusedGaze = "mariojuice"; // Deliberately tilted down at bottom website
-        }
+        // On mobile: works both in VR Tilt mode and intentional touch-look gesture
+        const threshold = isGyroActiveRef.current ? 0.44 : 0.50;
+        if (sy < -threshold) focusedGaze = "resapori"; // Looking up at top logo (Re Sapori)
+        else if (sy > threshold) focusedGaze = "mariojuice"; // Looking down at bottom logo (Mario Juice)
       } else {
-        // On laptop: looking or hovering towards left/right triggers
-        if (sx < -0.65) focusedGaze = "resapori"; // Look left on laptop
-        else if (sx > 0.65) focusedGaze = "mariojuice"; // Look right on laptop
+        // On laptop: looking left/right towards logo triggers
+        if (sx < -0.60) focusedGaze = "resapori";
+        else if (sx > 0.60) focusedGaze = "mariojuice";
       }
     }
 
     if (focusedGaze) {
       if (gazeTargetTimerRef.current.target === focusedGaze) {
-        const requiredHoldTime = isMobileView ? 1100 : 450;
-        if (performance.now() - gazeTargetTimerRef.current.start > requiredHoldTime) {
+        const requiredHoldTime = isMobileView ? 480 : 380;
+        if (
+          !gazeTargetTimerRef.current.fired &&
+          performance.now() - gazeTargetTimerRef.current.start > requiredHoldTime
+        ) {
+          gazeTargetTimerRef.current.fired = true;
           if (focusedGaze === "resapori") {
             window.dispatchEvent(new CustomEvent("gazeAtResapori"));
           } else {
             window.dispatchEvent(new CustomEvent("gazeAtMarioJuice"));
           }
-          gazeTargetTimerRef.current.start = performance.now() + 12000; // 12s debounce so prompt doesn't spam
         }
       } else {
-        gazeTargetTimerRef.current = { target: focusedGaze, start: performance.now() };
+        gazeTargetTimerRef.current = {
+          target: focusedGaze,
+          start: performance.now(),
+          fired: false,
+        };
       }
     } else {
-      gazeTargetTimerRef.current = { target: null, start: 0 };
+      // Reset once gaze returns toward neutral center so looking again re-triggers cleanly
+      const returnedToNeutral = isMobileView
+        ? Math.abs(sy) < 0.32
+        : Math.abs(sx) < 0.42;
+      if (returnedToNeutral || !isNotScrolling) {
+        gazeTargetTimerRef.current = { target: null, start: 0, fired: false };
+      }
     }
 
     // ------------------------------------------------------------------------
@@ -478,9 +582,6 @@ export default function FaceLooker({
         blinkCount > 0 &&
         blinkImagesRef.current.size > 0
       ) {
-        smoothCoordRef.current.x = 0;
-        smoothCoordRef.current.y = 0;
-
         const blinkIdx = Math.floor(performance.now() / (1000 / 24)) % blinkCount;
         const bImg = blinkImagesRef.current.get(blinkIdx);
         const key = `blink_${blinkIdx}`;
@@ -659,26 +760,35 @@ export default function FaceLooker({
     };
 
     const onMouseMove = (e: MouseEvent) => {
+      if (isGyroActiveRef.current) return;
       updateFromClientXY(e.clientX, e.clientY);
     };
 
     const onTouchStart = (e: TouchEvent) => {
+      if (isGyroActiveRef.current) return;
+      const target = e.target as HTMLElement | null;
+      if (target && target.closest("button, a")) return;
       if (e.touches.length > 0) {
         updateFromClientXY(e.touches[0].clientX, e.touches[0].clientY);
       }
     };
 
     const onTouchMove = (e: TouchEvent) => {
+      if (isGyroActiveRef.current) return;
       if (e.touches.length > 0) {
         updateFromClientXY(e.touches[0].clientX, e.touches[0].clientY);
       }
     };
 
     const onScroll = () => {
+      lastScrollTimeRef.current = performance.now();
+      gazeTargetTimerRef.current = { target: null, start: 0, fired: false };
+      if (isGyroActiveRef.current) return;
       updateFromClientXY(lastClientPos.x, lastClientPos.y);
     };
 
     const onMouseLeave = (e: MouseEvent) => {
+      if (isGyroActiveRef.current) return;
       if (
         e.clientX > 8 &&
         e.clientX < window.innerWidth - 8 &&
