@@ -72,6 +72,19 @@ export default function FaceLooker({
     }
   }, [isGyroActive]);
 
+  // Sync with stationary external mobile toggle button
+  useEffect(() => {
+    const handleToggle = () => toggleGyro();
+    window.addEventListener("toggleVrTilt", handleToggle);
+    return () => window.removeEventListener("toggleVrTilt", handleToggle);
+  }, [toggleGyro]);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      window.dispatchEvent(new CustomEvent("vrTiltState", { detail: isGyroActive }));
+    }
+  }, [isGyroActive]);
+
   // Gyroscope Device Orientation Listener (VR Tilt)
   useEffect(() => {
     if (!isGyroActive) return;
@@ -679,24 +692,6 @@ export default function FaceLooker({
         style={{ width: "100%", height: "100%" }}
         className="absolute inset-0 block h-full w-full select-none pointer-events-none drop-shadow-[-16px_0_36px_rgba(126,232,255,0.28)] drop-shadow-[16px_0_36px_rgba(255,47,185,0.32)] will-change-transform"
       />
-
-      {/* Mobile VR Tilt toggle pill: enables iOS Safari gyroscope permission & toggles between VR tilt & finger touch drag */}
-      <div className="sm:hidden absolute -bottom-14 inset-x-0 flex justify-center pointer-events-auto z-40">
-        <button
-          type="button"
-          onClick={toggleGyro}
-          className="inline-flex items-center gap-2 rounded-full border border-[#22d3ee]/40 bg-black/85 px-4 py-2 text-[10px] font-mono uppercase tracking-[0.2em] text-[#22d3ee] shadow-[0_0_22px_rgba(34,211,238,0.35)] backdrop-blur-md active:scale-95 transition-all"
-        >
-          <span
-            className={`h-2 w-2 rounded-full ${
-              isGyroActive
-                ? "bg-[#22d3ee] animate-pulse shadow-[0_0_8px_#22d3ee]"
-                : "bg-white/40"
-            }`}
-          />
-          <span>{isGyroActive ? "VR TILT: ON (TAP FOR TOUCH)" : "ENABLE VR TILT"}</span>
-        </button>
-      </div>
     </div>
   );
 }

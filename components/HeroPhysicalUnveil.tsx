@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 import FaceLooker from "@/components/FaceLooker";
 import ResaporiPhoneTrigger from "@/components/ResaporiPhoneTrigger";
@@ -9,6 +9,15 @@ import { ArrowUpRight } from "lucide-react";
 
 export default function HeroPhysicalUnveil() {
   const containerRef = useRef<HTMLDivElement>(null);
+  const [isGyroActive, setIsGyroActive] = useState(false);
+
+  useEffect(() => {
+    const handleState = (e: any) => {
+      setIsGyroActive(!!e.detail);
+    };
+    window.addEventListener("vrTiltState", handleState);
+    return () => window.removeEventListener("vrTiltState", handleState);
+  }, []);
 
   // Reliable scroll tracking across desktop & mobile (0px to 950px of window scroll scrubs the hero stage)
   const { scrollY } = useScroll();
@@ -35,6 +44,9 @@ export default function HeroPhysicalUnveil() {
   // 3. Side Phone Badges morphing outward / fading smoothly on scroll
   const phoneTriggersOpacity = useTransform(smoothProgress, [0, 0.18, 0.45], [1, 0.9, 0]);
   const phoneTriggersScale = useTransform(smoothProgress, [0, 0.45], [1, 1.1]);
+
+  // 4. Mobile VR Tilt Button: stays completely stationary and fades out immediately when scrolling starts
+  const vrTiltOpacity = useTransform(smoothProgress, [0, 0.08], [1, 0]);
 
   return (
     <section ref={containerRef} className="relative h-[280vh] w-full bg-[#07070a]">
@@ -116,6 +128,27 @@ export default function HeroPhysicalUnveil() {
             <FaceLooker size={620} className="max-w-[90vw]" />
           </motion.div>
         </div>
+
+        {/* Stationary Mobile VR Tilt toggle pill: stays stationary on screen and fades out cleanly on scroll without moving */}
+        <motion.div
+          style={{ opacity: vrTiltOpacity }}
+          className="sm:hidden absolute left-1/2 -translate-x-1/2 bottom-[18vh] z-30 pointer-events-auto"
+        >
+          <button
+            type="button"
+            onClick={() => window.dispatchEvent(new CustomEvent("toggleVrTilt"))}
+            className="inline-flex items-center gap-2 rounded-full border border-[#22d3ee]/40 bg-black/85 px-4 py-2 text-[10px] font-mono uppercase tracking-[0.2em] text-[#22d3ee] shadow-[0_0_22px_rgba(34,211,238,0.35)] backdrop-blur-md active:scale-95 transition-all select-none"
+          >
+            <span
+              className={`h-2 w-2 rounded-full ${
+                isGyroActive
+                  ? "bg-[#22d3ee] animate-pulse shadow-[0_0_8px_#22d3ee]"
+                  : "bg-white/40"
+              }`}
+            />
+            <span>{isGyroActive ? "VR TILT: ON (TAP FOR TOUCH)" : "ENABLE VR TILT"}</span>
+          </button>
+        </motion.div>
 
         {/* Floating Phone Sites Buttons (Preserved in place on Left and Right) */}
         <motion.div
