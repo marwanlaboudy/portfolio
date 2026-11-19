@@ -49,7 +49,7 @@ export default function FaceLooker({
   const animFrameIdRef = useRef<number | null>(null);
   const lastDrawnKeyRef = useRef<string | null>(null);
 
-  // 3D Character & Progressive Piece-by-Piece Assembly refs
+  // 3D Mask Donning & Assembly refs
   const threeSceneRef = useRef<{
     scene: THREE.Scene;
     camera: THREE.PerspectiveCamera;
@@ -57,15 +57,15 @@ export default function FaceLooker({
     pivot: THREE.Group | null;
     wireframePivot: THREE.Group | null;
     clipPlane: THREE.Plane;
-    wireframeClipPlane: THREE.Plane;
-    seamMesh: THREE.Mesh;
-    seamMat: THREE.MeshBasicMaterial;
+    laserGroup: THREE.Group;
+    laserCoreMat: THREE.MeshBasicMaterial;
+    laserGlowMat: THREE.MeshBasicMaterial;
     wireframeMat: THREE.MeshBasicMaterial;
     isModelLoaded: boolean;
   } | null>(null);
 
-  // Blend factor: 0 = face only, 0 -> 1 = mask assembling piece-by-piece onto face, 1 = fully worn
-  const charBlendRef = useRef<number>(0);
+  // Donning progress: 0 = cursor on face (not wearing mask), 0 -> 1 = donning transition sweeps down, 1 = fully worn & tracking cursor
+  const wearProgressRef = useRef<number>(0);
 
   const drawImageToCanvas = useCallback(
     (img: HTMLImageElement, key: string) => {
@@ -80,7 +80,7 @@ export default function FaceLooker({
     [size]
   );
 
-  // 1. Initialize Three.js Scene with Local Clipping for Progressive Piece-by-Piece Donning
+  // 1. Initialize Three.js Scene with Local Clipping & Hot Pink Laser Assembly Seam
   useEffect(() => {
     const canvas = threeCanvasRef.current;
     if (!canvas) return;
@@ -103,11 +103,8 @@ export default function FaceLooker({
     // Enable local clipping planes for progressive slicing assembly
     renderer.localClippingEnabled = true;
 
-    // Clipping plane for the solid mask plates
-    const clipPlane = new THREE.Plane(new THREE.Vector3(0, 1, 0), -2.5);
-
-    // Clipping plane for the holographic wireframe preview that descends ahead of the solid plate
-    const wireframeClipPlane = new THREE.Plane(new THREE.Vector3(0, 1, 0), -2.5);
+    // Clipping plane for the solid mask plates (points with y >= -constant are kept)
+    const clipPlane = new THREE.Plane(new THREE.Vector3(-0.25, 1, 0).normalize(), -3.0);
 
     // Cyberpunk ambient & neon directional lights matching hero palette
     const ambient = new THREE.AmbientLight(0xffffff, 1.4);
@@ -128,26 +125,41 @@ export default function FaceLooker({
     topLight.position.set(0, 4, 1);
     scene.add(topLight);
 
-    // Seam Laser Glow Mesh: visual cybernetic edge separating masked area from face
-    const seamGeo = new THREE.PlaneGeometry(3.2, 0.035);
-    const seamMat = new THREE.MeshBasicMaterial({
-      color: 0x22d3ee,
+    // Hot Pink / Magenta Laser Assembly Seam (matching user's reference mockup)
+    const laserGroup = new THREE.Group();
+    laserGroup.visible = false;
+    scene.add(laserGroup);
+
+    // 1. Bright intense core laser line
+    const coreGeo = new THREE.PlaneGeometry(3.6, 0.04);
+    const laserCoreMat = new THREE.MeshBasicMaterial({
+      color: 0xff2fb9,
       transparent: true,
       opacity: 0,
-      blending: THREE.AdditiveBlending,
       side: THREE.DoubleSide,
+      blending: THREE.AdditiveBlending,
     });
-    const seamMesh = new THREE.Mesh(seamGeo, seamMat);
-    seamMesh.visible = false;
-    scene.add(seamMesh);
+    const laserCore = new THREE.Mesh(coreGeo, laserCoreMat);
+    laserGroup.add(laserCore);
 
-    // Shared wireframe material for the holographic ghost slice
+    // 2. Soft outer laser glow
+    const glowGeo = new THREE.PlaneGeometry(3.6, 0.16);
+    const laserGlowMat = new THREE.MeshBasicMaterial({
+      color: 0xff2fb9,
+      transparent: true,
+      opacity: 0,
+      side: THREE.DoubleSide,
+      blending: THREE.AdditiveBlending,
+    });
+    const laserGlow = new THREE.Mesh(glowGeo, laserGlowMat);
+    laserGroup.add(laserGlow);
+
+    // Cyan holographic wireframe material outlining face & mask features
     const wireframeMat = new THREE.MeshBasicMaterial({
-      color: 0x22d3ee,
+      color: 0x7ee8ff,
       wireframe: true,
       transparent: true,
       opacity: 0,
-      clippingPlanes: [wireframeClipPlane],
     });
 
     const sceneState = {
@@ -157,15 +169,15 @@ export default function FaceLooker({
       pivot: null as THREE.Group | null,
       wireframePivot: null as THREE.Group | null,
       clipPlane,
-      wireframeClipPlane,
-      seamMesh,
-      seamMat,
+      laserGroup,
+      laserCoreMat,
+      laserGlowMat,
       wireframeMat,
       isModelLoaded: false,
     };
     threeSceneRef.current = sceneState;
 
-    // Load 3D Mask GLB
+    // Load 3D Mask GLB (Squid Game Boss Mask)
     const loader = new GLTFLoader();
     loader.load(
       modelUrl,
@@ -214,7 +226,7 @@ export default function FaceLooker({
         pivot.scale.setScalar(targetScale);
         scene.add(pivot);
 
-        // 2. Holographic Wireframe Clone (floating ghost slice assembling ahead of the mask)
+        // 2. Holographic Wireframe Overlay (outlining face features as in reference mockup)
         const wireframeRoot = root.clone(true);
         wireframeRoot.traverse((child) => {
           if ((child as THREE.Mesh).isMesh) {
@@ -314,7 +326,7 @@ export default function FaceLooker({
     };
   }, [manifestUrl, drawImageToCanvas]);
 
-  // 3. 60fps/120fps Render Loop: Progressive Slicing Assembly ("Wearing it Piece by Piece")
+  // 3. 60fps/120fps Render Loop: First Wear Mask via Slicing Transition, Then Follow & Move
   const renderFrame = useCallback(() => {
     // Smooth lerp coordinates
     const lerpFactor = 0.22;
@@ -327,44 +339,30 @@ export default function FaceLooker({
     const sy = smoothCoordRef.current.y;
 
     // ------------------------------------------------------------------------
-    // PIECE-BY-PIECE ASSEMBLY LOGIC:
-    // In the middle (|sx| <= 0.16): blend = 0 (100% natural face).
-    // As you look right or left (|sx| > 0.16):
-    // blend progresses from 0 -> 1:
-    // - blend ~0.20: Top forehead slice appears across brow (matching the reference photo!).
-    // - blend ~0.50: Mask covers down past the eyes & bridge of nose.
-    // - blend ~0.80: Mask latches over mouth down to chin.
-    // - blend ~1.00: Mask is completely locked in place.
+    // STATE MACHINE:
+    // Cursor on face: wearTarget = 0 (un-wears mask, natural face active).
+    // Cursor leaves face: wearTarget = 1 (FIRST triggers donning transition, THEN tracks & moves).
     // ------------------------------------------------------------------------
     const isModelReady = threeSceneRef.current?.isModelLoaded ?? false;
-    let targetBlend = 0;
+    const targetWear = isModelReady && !isCursorOnFaceRef.current ? 1.0 : 0.0;
 
-    if (isModelReady && !isCursorOnFaceRef.current) {
-      const sideDistance = Math.abs(sx);
-      const startThreshold = 0.16;
-      const fullThreshold = 0.58;
-
-      if (sideDistance > startThreshold) {
-        targetBlend = Math.min(1, (sideDistance - startThreshold) / (fullThreshold - startThreshold));
-      }
-    }
-
-    // Smooth spring-like lerp for organic mechanical donning
-    charBlendRef.current += (targetBlend - charBlendRef.current) * 0.14;
-    const blend = charBlendRef.current;
+    // Smooth, cinematic donning animation speed (~360ms)
+    const wearSpeed = targetWear > wearProgressRef.current ? 0.09 : 0.14;
+    wearProgressRef.current += (targetWear - wearProgressRef.current) * wearSpeed;
+    const wear = wearProgressRef.current;
 
     // ------------------------------------------------------------------------
     // Dynamic Face Visibility:
-    // Your face stays 100% visible beneath the unmasked areas!
-    // It only gently fades out when the mask has 92%+ completely covered the face.
+    // Real face remains 100% visible beneath the unmasked areas and through the wireframe!
+    // Fades gently only when the mask completely encases the chin (> 0.90).
     // ------------------------------------------------------------------------
     if (faceCanvasRef.current) {
-      const faceOpacity = blend < 0.90 ? 1 : Math.max(0, (1 - blend) / 0.10);
+      const faceOpacity = wear < 0.88 ? 1 : Math.max(0, (1 - wear) / 0.12);
       faceCanvasRef.current.style.opacity = faceOpacity.toFixed(3);
     }
 
-    // Render 2D Face frames
-    if (blend < 0.98 && manifest) {
+    // Render 2D Face frames (always active while real face is visible)
+    if (wear < 0.98 && manifest) {
       const blinkCount = manifest.blinkFrames?.length ?? 0;
 
       if (
@@ -413,7 +411,8 @@ export default function FaceLooker({
     }
 
     // ------------------------------------------------------------------------
-    // Render 3D Piece-by-Piece Mask Assembly
+    // Render 3D Mask Donning & Movement:
+    // "First it makes me wear it with this transition, then it moves"
     // ------------------------------------------------------------------------
     if (threeSceneRef.current) {
       const {
@@ -423,62 +422,62 @@ export default function FaceLooker({
         pivot,
         wireframePivot,
         clipPlane,
-        wireframeClipPlane,
-        seamMesh,
-        seamMat,
+        laserGroup,
+        laserCoreMat,
+        laserGlowMat,
         wireframeMat,
       } = threeSceneRef.current;
 
       if (pivot && wireframePivot) {
-        // Look tracking
-        pivot.rotation.y = sx * 1.15;
-        pivot.rotation.x = -sy * 0.45;
-        pivot.rotation.z = -sx * 0.12;
+        // Tracking weight delay:
+        // While wearing (wear < 0.45): head stays locked centered so donning transition executes on the face!
+        // As mask completes donning (0.45 -> 1.0): tracking weight ramps to 1.0, tracking cursor in full 3D!
+        const trackingWeight = Math.max(0, Math.min(1, (wear - 0.40) / 0.60));
+
+        pivot.rotation.y = sx * 1.15 * trackingWeight;
+        pivot.rotation.x = -sy * 0.45 * trackingWeight;
+        pivot.rotation.z = -sx * 0.12 * trackingWeight;
 
         const breath = Math.sin(performance.now() * 0.0028) * 0.025;
-        pivot.position.x = sx * 0.15;
-        pivot.position.y = -sy * 0.12 + breath;
+        pivot.position.x = sx * 0.15 * trackingWeight;
+        pivot.position.y = -sy * 0.12 * trackingWeight + breath;
 
         wireframePivot.rotation.copy(pivot.rotation);
         wireframePivot.position.copy(pivot.position);
 
-        if (blend > 0.002) {
-          // Dynamic angled cut matching the reference picture:
-          // Slices diagonally across forehead depending on looking right vs left!
-          const tiltX = sx >= 0 ? -0.26 : 0.26;
+        if (wear > 0.002) {
+          // Dynamic angled cut matching the reference mockup:
+          // Angled diagonally across the forehead and eyes
+          const tiltX = sx >= 0 ? -0.28 : 0.28;
           const planeNormal = new THREE.Vector3(tiltX, 1, 0).normalize();
-
           clipPlane.normal.copy(planeNormal);
 
-          // Progressive slice height constant:
-          // -1.55 = above forehead (nothing visible)
-          // -0.85 = top forehead band visible (matching reference photo!)
-          // +0.10 = down to eyes & bridge of nose
-          // +1.10 = down to mouth & chin
-          // +1.80 = fully assembled
-          const clipConstant = -1.55 + blend * 3.35;
+          // Progressive slice height:
+          // wear = 0.0: constant = -1.55 (above forehead)
+          // wear = 0.5: constant = +0.10 (mid-face, exactly like user's mockup!)
+          // wear = 1.0: constant = +1.80 (chin, fully covering)
+          const clipConstant = -1.55 + wear * 3.35;
           clipPlane.constant = clipConstant;
 
-          // Holographic wireframe leads ahead of the solid plate
-          wireframeClipPlane.normal.copy(planeNormal);
-          wireframeClipPlane.constant = clipConstant + 0.48;
-          wireframePivot.position.y += (1 - blend) * 0.18; // descends from above
-          wireframeMat.opacity = Math.max(0, Math.sin(blend * Math.PI) * 0.45);
+          // Holographic wireframe: wraps face during transition
+          wireframeMat.opacity = Math.sin(wear * Math.PI) * 0.70 + (wear > 0 ? 0.12 : 0);
 
-          // Glowing Cybernetic Seam Laser along the cutting edge
+          // Glowing Hot Pink Laser Assembly Seam (matching reference mockup!)
           const seamY = -clipConstant / planeNormal.y;
-          seamMesh.position.set(pivot.position.x, seamY + pivot.position.y, 0.55);
-          seamMesh.rotation.z = Math.atan2(planeNormal.x, planeNormal.y);
-          seamMesh.visible = blend > 0.04 && blend < 0.94;
-          seamMat.opacity = Math.sin(blend * Math.PI) * 0.9;
-          seamMat.color.setHex(sx >= 0 ? 0x22d3ee : 0xec4899);
+          laserGroup.position.set(pivot.position.x, seamY + pivot.position.y, 0.52);
+          laserGroup.rotation.z = Math.atan2(planeNormal.x, planeNormal.y);
+          laserGroup.visible = wear > 0.03 && wear < 0.96;
+
+          const laserOpacity = Math.sin(wear * Math.PI) * 0.95;
+          laserCoreMat.opacity = laserOpacity;
+          laserGlowMat.opacity = laserOpacity * 0.6;
 
           renderer.render(scene, camera);
         } else {
-          // In center / neutral: mask is retracted above forehead
+          // Completely off / inside face area
           clipPlane.constant = -3.0;
-          wireframeClipPlane.constant = -3.0;
-          seamMesh.visible = false;
+          laserGroup.visible = false;
+          wireframeMat.opacity = 0;
           renderer.clear();
         }
       }
@@ -496,7 +495,7 @@ export default function FaceLooker({
     };
   }, [renderFrame]);
 
-  // 4. Cursor, Touch & Scroll Tracking
+  // 4. Cursor, Touch & Scroll Tracking (determines when cursor is ON vs OUT of face)
   useEffect(() => {
     const lastClientPos = {
       x: typeof window !== "undefined" ? window.innerWidth / 2 : 0,
@@ -520,22 +519,22 @@ export default function FaceLooker({
       const scrollY = window.scrollY || document.documentElement.scrollTop || 0;
       const scrollRatio = Math.min(1, Math.max(0, scrollY / 850));
 
-      // Face bounding radius
+      // Face bounding radius: bounds the central face area
       const faceRadiusX = rect.width * 0.20;
       const faceRadiusY = rect.height * 0.26;
       const normFaceDist =
         (deltaX / faceRadiusX) ** 2 + (deltaY / faceRadiusY) ** 2;
 
-      // 1. When cursor is on the face: lock face in the center and keep blinking
+      // 1. When cursor is on the face: lock in center, keep real face active
       if (normFaceDist <= 1.0 && scrollRatio < 0.05) {
         isCursorOnFaceRef.current = true;
         mouseTargetRef.current = { x: 0, y: 0 };
         return;
       }
 
+      // 2. Cursor moved OUT of the face area: triggers donning transition, then tracks!
       isCursorOnFaceRef.current = false;
 
-      // 2. Off-face cursor tracking
       const signX = deltaX >= 0 ? 1 : -1;
       const signY = deltaY >= 0 ? 1 : -1;
 
@@ -608,7 +607,7 @@ export default function FaceLooker({
         className="absolute inset-0 block h-full w-full select-none pointer-events-none drop-shadow-[-16px_0_36px_rgba(126,232,255,0.22)] drop-shadow-[16px_0_36px_rgba(255,47,185,0.25)] will-change-transform"
       />
 
-      {/* 3D Mask Canvas: Physically assembles piece-by-piece over the face */}
+      {/* 3D Mask Canvas: Donning transition with hot pink laser & wireframe */}
       <canvas
         ref={threeCanvasRef}
         width={size}
