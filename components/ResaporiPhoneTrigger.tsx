@@ -29,13 +29,20 @@ export default function ResaporiPhoneTrigger() {
   // Listen for gaze direction looking at Re Sapori
   useEffect(() => {
     const handleGaze = () => {
-      if (!isOpen && !showConfirm) {
-        setShowConfirm(true);
+      if (!isOpen) {
+        if (!isMobile) {
+          // On laptop: cursor / gaze passes by opens directly without clicking
+          setHasOpenedOnce(true);
+          setIsOpen(true);
+        } else if (!showConfirm) {
+          // On mobile: asks confirmation
+          setShowConfirm(true);
+        }
       }
     };
     window.addEventListener("gazeAtResapori", handleGaze);
     return () => window.removeEventListener("gazeAtResapori", handleGaze);
-  }, [isOpen, showConfirm]);
+  }, [isOpen, showConfirm, isMobile]);
 
   // Close instantly when scrolling down and fade out
   useEffect(() => {
@@ -132,10 +139,16 @@ export default function ResaporiPhoneTrigger() {
               </div>
             </button>
           ) : (
-            /* Classic 124px square button on laptop with official logo */
+            /* Classic 124px square button on laptop with official logo: Opens directly on hover / cursor pass-by */
             <div
-              onClick={() => setShowConfirm(true)}
-              onMouseEnter={() => setShowConfirm(true)}
+              onClick={() => {
+                setHasOpenedOnce(true);
+                setIsOpen(true);
+              }}
+              onMouseEnter={() => {
+                setHasOpenedOnce(true);
+                setIsOpen(true);
+              }}
               style={{ width: 124, height: 124, borderRadius: 22 }}
               className="relative cursor-pointer overflow-hidden backdrop-blur-xl border border-[#7ee8ff]/80 bg-black/85 shadow-[0_0_25px_rgba(126,232,255,0.45),0_0_50px_rgba(255,47,185,0.25),inset_0_0_18px_rgba(126,232,255,0.2)] hover:border-[#7ee8ff] hover:scale-105 active:scale-95 transition-all duration-300"
             >
