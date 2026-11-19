@@ -122,31 +122,37 @@ export default function FaceLooker({
     };
     threeSceneRef.current = sceneState;
 
-    // Load 3D Character GLB (Scream Mask)
+    // Load 3D Character GLB (Squid Game Boss Mask)
     const loader = new GLTFLoader();
     loader.load(
       modelUrl,
       (gltf) => {
         const root = gltf.scene;
 
-        // Traverse mesh to compute smooth normals and set double-sided material
+        // Hide pedestal/stand objects if present and tune obsidian geometric facet reflections
         root.traverse((child) => {
+          if (child.name.includes("Circle") || child.name === "Object_6") {
+            child.visible = false;
+          }
           if ((child as THREE.Mesh).isMesh) {
             const mesh = child as THREE.Mesh;
-            if (mesh.geometry && !mesh.geometry.attributes.normal) {
-              mesh.geometry.computeVertexNormals();
-            }
             if (mesh.material) {
               const mat = mesh.material as THREE.MeshStandardMaterial;
               mat.side = THREE.DoubleSide;
-              mat.roughness = 0.4;
-              mat.metalness = 0.12;
+              mat.roughness = 0.32;
+              mat.metalness = 0.72;
             }
           }
         });
 
-        // Auto-compute bounding box to center & normalize scale
-        const box = new THREE.Box3().setFromObject(root);
+        // Compute bounding box strictly of the visible mask
+        const box = new THREE.Box3();
+        root.traverse((child) => {
+          if ((child as THREE.Mesh).isMesh && child.visible) {
+            box.expandByObject(child);
+          }
+        });
+
         const center = box.getCenter(new THREE.Vector3());
         const sizeVec = box.getSize(new THREE.Vector3());
 
