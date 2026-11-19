@@ -122,12 +122,28 @@ export default function FaceLooker({
     };
     threeSceneRef.current = sceneState;
 
-    // Load 3D Character GLB
+    // Load 3D Character GLB (Scream Mask)
     const loader = new GLTFLoader();
     loader.load(
       modelUrl,
       (gltf) => {
         const root = gltf.scene;
+
+        // Traverse mesh to compute smooth normals and set double-sided material
+        root.traverse((child) => {
+          if ((child as THREE.Mesh).isMesh) {
+            const mesh = child as THREE.Mesh;
+            if (mesh.geometry && !mesh.geometry.attributes.normal) {
+              mesh.geometry.computeVertexNormals();
+            }
+            if (mesh.material) {
+              const mat = mesh.material as THREE.MeshStandardMaterial;
+              mat.side = THREE.DoubleSide;
+              mat.roughness = 0.4;
+              mat.metalness = 0.12;
+            }
+          }
+        });
 
         // Auto-compute bounding box to center & normalize scale
         const box = new THREE.Box3().setFromObject(root);
