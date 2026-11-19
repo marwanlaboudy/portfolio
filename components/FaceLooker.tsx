@@ -1,6 +1,8 @@
 "use client";
 
 import React, { useEffect, useRef, useState, useCallback } from "react";
+import * as THREE from "three";
+import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 
 interface GazeFrame {
   id: number;
@@ -21,20 +23,24 @@ interface ManifestData {
 interface FaceLookerProps {
   src?: string;
   manifestUrl?: string;
+  modelUrl?: string;
   size?: number;
   className?: string;
 }
 
 export default function FaceLooker({
   manifestUrl = "/gaze_frames/manifest.json",
+  modelUrl = "/models/character.glb",
   size = 640,
   className = "",
 }: FaceLookerProps) {
   const containerRef = useRef<HTMLDivElement>(null);
-  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const faceCanvasRef = useRef<HTMLCanvasElement>(null);
+  const threeCanvasRef = useRef<HTMLCanvasElement>(null);
 
   const [manifest, setManifest] = useState<ManifestData | null>(null);
 
+  // 2D Face refs
   const imagesRef = useRef<Map<number, HTMLImageElement>>(new Map());
   const blinkImagesRef = useRef<Map<number, HTMLImageElement>>(new Map());
   const mouseTargetRef = useRef<{ x: number; y: number }>({ x: 0, y: 0 });
@@ -43,9 +49,21 @@ export default function FaceLooker({
   const animFrameIdRef = useRef<number | null>(null);
   const lastDrawnKeyRef = useRef<string | null>(null);
 
+  // 3D Character refs
+  const threeSceneRef = useRef<{
+    scene: THREE.Scene;
+    camera: THREE.PerspectiveCamera;
+    renderer: THREE.WebGLRenderer;
+    pivot: THREE.Group | null;
+    isModelLoaded: boolean;
+  } | null>(null);
+
+  // Blend factor between face (0) and 3D character (1)
+  const charBlendRef = useRef<number>(0);
+
   const drawImageToCanvas = useCallback(
     (img: HTMLImageElement, key: string) => {
-      const canvas = canvasRef.current;
+      const canvas = faceCanvasRef.current;
       if (!canvas) return;
       const ctx = canvas.getContext("2d");
       if (!ctx) return;
@@ -56,7 +74,95 @@ export default function FaceLooker({
     [size]
   );
 
-  // 1. Fetch manifest.json & preload blink loop + gaze frames
+  // 1. Initialize Three.js Scene for the 3D Character
+  useEffect(() => {
+    const canvas = threeCanvasRef.current;
+    if (!canvas) return;
+
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(40, 1, 0.1, 100);
+    camera.position.set(0, 0, 3.6);
+
+    const renderer = new THREE.WebGLRenderer({
+      canvas,
+      alpha: true,
+      antialias: true,
+      powerPreference: "high-performance",
+    });
+    renderer.setPixelRatio(Math.min(typeof window !== "undefined" ? window.devicePixelRatio : 1, 2));
+    renderer.setSize(size, size);
+    renderer.toneMapping = THREE.ACESFilmicToneMapping;
+    renderer.toneMappingExposure = 1.25;
+
+    // Cyberpunk ambient & neon directional lights matching hero palette
+    const ambient = new THREE.AmbientLight(0xffffff, 1.4);
+    scene.add(ambient);
+
+    // Cyan Neon Rim Light from Left
+    const cyanLight = new THREE.DirectionalLight(0x22d3ee, 5.0);
+    cyanLight.position.set(-3, 2, 2.5);
+    scene.add(cyanLight);
+
+    // Magenta Neon Rim Light from Right
+    const magentaLight = new THREE.DirectionalLight(0xec4899, 5.0);
+    magentaLight.position.set(3, 1.5, 2.5);
+    scene.add(magentaLight);
+
+    // Top Rim Light
+    const topLight = new THREE.DirectionalLight(0xffffff, 2.5);
+    topLight.position.set(0, 4, 1);
+    scene.add(topLight);
+
+    const sceneState = {
+      scene,
+      camera,
+      renderer,
+      pivot: null as THREE.Group | null,
+      isModelLoaded: false,
+    };
+    threeSceneRef.current = sceneState;
+
+    // Load 3D Character GLB
+    const loader = new GLTFLoader();
+    loader.load(
+      modelUrl,
+      (gltf) => {
+        const root = gltf.scene;
+
+        // Auto-compute bounding box to center & normalize scale
+        const box = new THREE.Box3().setFromObject(root);
+        const center = box.getCenter(new THREE.Vector3());
+        const sizeVec = box.getSize(new THREE.Vector3());
+
+        root.position.x = -center.x;
+        root.position.y = -center.y;
+        root.position.z = -center.z;
+
+        const maxDim = Math.max(sizeVec.x, sizeVec.y, sizeVec.z);
+        const targetScale = 2.45 / (maxDim || 1);
+
+        const pivot = new THREE.Group();
+        pivot.add(root);
+        pivot.scale.setScalar(targetScale);
+        scene.add(pivot);
+
+        sceneState.pivot = pivot;
+        sceneState.isModelLoaded = true;
+      },
+      undefined,
+      (error) => {
+        console.warn("Could not load 3D character:", error);
+      }
+    );
+
+    return () => {
+      renderer.dispose();
+      scene.clear();
+      threeSceneRef.current = null;
+    };
+  }, [modelUrl, size]);
+
+  // 2. Fetch manifest.json & preload gaze + blink frames for 2D face
   useEffect(() => {
     let cancelled = false;
     fetch(manifestUrl, { cache: "no-store" })
@@ -68,7 +174,7 @@ export default function FaceLooker({
         if (cancelled) return;
         setManifest(data);
 
-        // Preload blink frames first so the initial face & blink animation start immediately
+        // Preload blink frames first
         if (data.blinkFrames && data.blinkFrames.length > 0) {
           data.blinkFrames.forEach((url, idx) => {
             const bImg = new window.Image();
@@ -101,20 +207,21 @@ export default function FaceLooker({
           };
         }
 
-        // Preload all directional gaze frames
-        data.frames.forEach((f) => {
-          if (centerEntry && f.id === centerEntry.id) return;
-          const img = new window.Image();
-          img.decoding = "async";
-          img.src = f.file;
-          img.onload = () => {
-            if (cancelled) return;
-            imagesRef.current.set(f.id, img);
-            if (lastDrawnKeyRef.current === null) {
-              drawImageToCanvas(img, `gaze_${f.id}`);
-            }
-          };
-        });
+        // Lazy load remaining gaze frames
+        setTimeout(() => {
+          if (cancelled) return;
+          data.frames.forEach((f) => {
+            if (imagesRef.current.has(f.id)) return;
+            const img = new window.Image();
+            img.decoding = "async";
+            img.src = f.file;
+            img.onload = () => {
+              if (!cancelled) {
+                imagesRef.current.set(f.id, img);
+              }
+            };
+          });
+        }, 100);
       })
       .catch(() => {
         /* manifest not ready */
@@ -125,19 +232,56 @@ export default function FaceLooker({
     };
   }, [manifestUrl, drawImageToCanvas]);
 
-  // 2. 60fps Render Loop: plays repeating blink loop when cursor is on the face,
-  //    or tracks cursor direction when cursor moves around the screen
+  // 3. 60fps/120fps Render Loop: Face tracking + Smooth Transition to 3D character when looking left/right
   const renderFrame = useCallback(() => {
-    if (manifest) {
-      const lerpFactor = 0.24;
-      smoothCoordRef.current.x +=
-        (mouseTargetRef.current.x - smoothCoordRef.current.x) * lerpFactor;
-      smoothCoordRef.current.y +=
-        (mouseTargetRef.current.y - smoothCoordRef.current.y) * lerpFactor;
+    // Smooth lerp coordinates
+    const lerpFactor = 0.22;
+    smoothCoordRef.current.x +=
+      (mouseTargetRef.current.x - smoothCoordRef.current.x) * lerpFactor;
+    smoothCoordRef.current.y +=
+      (mouseTargetRef.current.y - smoothCoordRef.current.y) * lerpFactor;
 
-      const sx = smoothCoordRef.current.x;
-      const sy = smoothCoordRef.current.y;
+    const sx = smoothCoordRef.current.x;
+    const sy = smoothCoordRef.current.y;
 
+    // ------------------------------------------------------------------------
+    // TRANSITION LOGIC:
+    // When in the middle (|sx| <= 0.22), blend = 0 (Keep real face moving).
+    // When looking right or left (|sx| > 0.22), blend smoothly ramps to 1 (3D Character).
+    // ------------------------------------------------------------------------
+    const isModelReady = threeSceneRef.current?.isModelLoaded ?? false;
+    let targetBlend = 0;
+
+    if (isModelReady && !isCursorOnFaceRef.current) {
+      const sideDistance = Math.abs(sx);
+      const startThreshold = 0.20;
+      const fullThreshold = 0.46;
+
+      if (sideDistance > startThreshold) {
+        targetBlend = Math.min(1, (sideDistance - startThreshold) / (fullThreshold - startThreshold));
+      }
+    }
+
+    // Smoothly interpolate blend value for organic morph
+    charBlendRef.current += (targetBlend - charBlendRef.current) * 0.16;
+    const blend = charBlendRef.current;
+
+    // Apply direct GPU transforms to canvas elements (zero React re-render overhead)
+    if (faceCanvasRef.current) {
+      const faceOpacity = Math.max(0, 1 - blend);
+      faceCanvasRef.current.style.opacity = faceOpacity.toFixed(3);
+      faceCanvasRef.current.style.transform = `scale(${(1 - blend * 0.04).toFixed(3)})`;
+    }
+
+    if (threeCanvasRef.current) {
+      threeCanvasRef.current.style.opacity = blend.toFixed(3);
+      threeCanvasRef.current.style.transform = `scale(${(0.96 + blend * 0.04).toFixed(3)})`;
+    }
+
+    // ------------------------------------------------------------------------
+    // Render 2D Face (when visible)
+    // ------------------------------------------------------------------------
+    if (blend < 0.99 && manifest) {
       const blinkCount = manifest.blinkFrames?.length ?? 0;
 
       if (
@@ -145,11 +289,9 @@ export default function FaceLooker({
         blinkCount > 0 &&
         blinkImagesRef.current.size > 0
       ) {
-        // Lock coordinates firmly at neutral center so face never drifts or moves while cursor is on face
         smoothCoordRef.current.x = 0;
         smoothCoordRef.current.y = 0;
 
-        // Loop through blink frames at 24fps
         const blinkIdx = Math.floor(performance.now() / (1000 / 24)) % blinkCount;
         const bImg = blinkImagesRef.current.get(blinkIdx);
         const key = `blink_${blinkIdx}`;
@@ -187,6 +329,25 @@ export default function FaceLooker({
       }
     }
 
+    // ------------------------------------------------------------------------
+    // Render 3D Character (when visible)
+    // ------------------------------------------------------------------------
+    if (blend > 0.005 && threeSceneRef.current) {
+      const { scene, camera, renderer, pivot } = threeSceneRef.current;
+      if (pivot) {
+        // Natural 3D head/body tracking towards cursor
+        pivot.rotation.y = sx * 1.15;
+        pivot.rotation.x = -sy * 0.45;
+        pivot.rotation.z = -sx * 0.12;
+
+        const breath = Math.sin(performance.now() * 0.0028) * 0.03;
+        pivot.position.x = sx * 0.16;
+        pivot.position.y = -sy * 0.12 + breath;
+
+        renderer.render(scene, camera);
+      }
+    }
+
     animFrameIdRef.current = requestAnimationFrame(renderFrame);
   }, [manifest, drawImageToCanvas]);
 
@@ -199,7 +360,7 @@ export default function FaceLooker({
     };
   }, [renderFrame]);
 
-  // 3. Viewport-Aware Cursor, Touch & Scroll Tracking (detects when cursor is on face & looks down on scroll)
+  // 4. Cursor, Touch & Scroll Tracking
   useEffect(() => {
     const lastClientPos = {
       x: typeof window !== "undefined" ? window.innerWidth / 2 : 0,
@@ -223,13 +384,13 @@ export default function FaceLooker({
       const scrollY = window.scrollY || document.documentElement.scrollTop || 0;
       const scrollRatio = Math.min(1, Math.max(0, scrollY / 850));
 
-      // Face bounding radius: face occupies the central area (~20% width, ~26% height)
+      // Face bounding radius
       const faceRadiusX = rect.width * 0.20;
       const faceRadiusY = rect.height * 0.26;
       const normFaceDist =
         (deltaX / faceRadiusX) ** 2 + (deltaY / faceRadiusY) ** 2;
 
-      // 1. When cursor is on the face: lock face at (0, 0) and keep blinking only!
+      // 1. When cursor is on the face: lock face in the center and keep blinking
       if (normFaceDist <= 1.0 && scrollRatio < 0.05) {
         isCursorOnFaceRef.current = true;
         mouseTargetRef.current = { x: 0, y: 0 };
@@ -238,8 +399,7 @@ export default function FaceLooker({
 
       isCursorOnFaceRef.current = false;
 
-      // 2. As cursor moves off the face, smoothly ramp from 0.0 outwards
-      // so frame 81 (x = 0.025) starts immediately right at the edge of the face with zero jumps!
+      // 2. Off-face cursor tracking
       const signX = deltaX >= 0 ? 1 : -1;
       const signY = deltaY >= 0 ? 1 : -1;
 
@@ -249,11 +409,9 @@ export default function FaceLooker({
       const maxExcessX = Math.max(120, (signX > 0 ? window.innerWidth - faceCenterX : faceCenterX) - faceRadiusX);
       const maxExcessY = Math.max(120, (signY > 0 ? window.innerHeight - faceCenterY : faceCenterY) - faceRadiusY);
 
-      const normX = signX * Math.min(1, (excessX / maxExcessX) * 1.15 + (excessX > 0 ? 0.025 : 0));
-      const normY = signY * Math.min(1, (excessY / maxExcessY) * 1.15 + (excessY > 0 ? 0.025 : 0));
+      const normX = signX * Math.min(1, (excessX / maxExcessX) * 1.18 + (excessX > 0 ? 0.025 : 0));
+      const normY = signY * Math.min(1, (excessY / maxExcessY) * 1.18 + (excessY > 0 ? 0.025 : 0));
 
-      // Blend scroll downward look smoothly:
-      // When scrollRatio increases towards 1, target y smoothly approaches +1.0 (looking straight down at work)
       const targetY = normY * (1 - scrollRatio) + 1.0 * scrollRatio;
       const targetX = normX * (1 - scrollRatio * 0.45);
 
@@ -275,7 +433,6 @@ export default function FaceLooker({
     };
 
     const onMouseLeave = (e: MouseEvent) => {
-      // If pointer entered an iframe inside the viewport (e.g. the phone preview), keep looking at it
       if (
         e.clientX > 8 &&
         e.clientX < window.innerWidth - 8 &&
@@ -307,11 +464,20 @@ export default function FaceLooker({
       className={`relative block select-none ${className}`}
       style={{ width: size, aspectRatio: "1 / 1" }}
     >
+      {/* 2D Real Face Canvas: Active when in the middle */}
       <canvas
-        ref={canvasRef}
+        ref={faceCanvasRef}
         width={size}
         height={size}
-        className="block h-full w-full select-none pointer-events-none drop-shadow-[-16px_0_36px_rgba(126,232,255,0.22)] drop-shadow-[16px_0_36px_rgba(255,47,185,0.25)]"
+        className="absolute inset-0 block h-full w-full select-none pointer-events-none drop-shadow-[-16px_0_36px_rgba(126,232,255,0.22)] drop-shadow-[16px_0_36px_rgba(255,47,185,0.25)] will-change-transform"
+      />
+
+      {/* 3D Character Canvas: Smoothly morphs in when looking right or left */}
+      <canvas
+        ref={threeCanvasRef}
+        width={size}
+        height={size}
+        className="absolute inset-0 block h-full w-full select-none pointer-events-none drop-shadow-[-16px_0_36px_rgba(126,232,255,0.28)] drop-shadow-[16px_0_36px_rgba(255,47,185,0.32)] will-change-transform"
       />
     </div>
   );
