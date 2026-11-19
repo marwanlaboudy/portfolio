@@ -41,7 +41,7 @@ export default function PinnedTelemetryDeck() {
       className="relative h-[320vh] w-full bg-[#07070a] border-t border-white/10"
     >
       {/* Sticky 100vh Viewport Stage */}
-      <div className="sticky top-0 h-screen w-full overflow-hidden flex flex-col justify-center select-none">
+      <div className="sticky top-0 h-screen min-h-screen h-[100dvh] w-full bg-[#07070a] overflow-hidden flex flex-col justify-center select-none">
         {/* Parallax Half-Speed Watermark Background */}
         <motion.div
           style={{ x: watermarkX }}

@@ -39,6 +39,64 @@ export default function FaceLooker({
   const threeCanvasRef = useRef<HTMLCanvasElement>(null);
 
   const [manifest, setManifest] = useState<ManifestData | null>(null);
+  const [isGyroActive, setIsGyroActive] = useState<boolean>(false);
+  const initialOrientationRef = useRef<{ beta: number; gamma: number } | null>(null);
+
+  const toggleGyro = useCallback(async () => {
+    if (isGyroActive) {
+      setIsGyroActive(false);
+      initialOrientationRef.current = null;
+      return;
+    }
+
+    if (
+      typeof window !== "undefined" &&
+      typeof (window as any).DeviceOrientationEvent !== "undefined" &&
+      typeof (DeviceOrientationEvent as any).requestPermission === "function"
+    ) {
+      try {
+        const state = await (DeviceOrientationEvent as any).requestPermission();
+        if (state === "granted") {
+          initialOrientationRef.current = null;
+          setIsGyroActive(true);
+        } else {
+          alert("Motion permission denied. You can swipe with your finger to control the mask!");
+        }
+      } catch (err) {
+        console.error("Device orientation permission error:", err);
+      }
+    } else {
+      initialOrientationRef.current = null;
+      setIsGyroActive(true);
+    }
+  }, [isGyroActive]);
+
+  // Gyroscope Device Orientation Listener (VR Tilt)
+  useEffect(() => {
+    if (!isGyroActive) return;
+
+    const handleOrientation = (e: DeviceOrientationEvent) => {
+      if (e.beta === null || e.gamma === null) return;
+
+      if (!initialOrientationRef.current) {
+        initialOrientationRef.current = { beta: e.beta, gamma: e.gamma };
+      }
+
+      const deltaGamma = e.gamma - initialOrientationRef.current.gamma;
+      const deltaBeta = e.beta - initialOrientationRef.current.beta;
+
+      const normX = Math.max(-1, Math.min(1, deltaGamma / 24));
+      const normY = Math.max(-1, Math.min(1, deltaBeta / 24));
+
+      isCursorOnFaceRef.current = false;
+      mouseTargetRef.current = { x: normX, y: normY };
+    };
+
+    window.addEventListener("deviceorientation", handleOrientation, { passive: true });
+    return () => {
+      window.removeEventListener("deviceorientation", handleOrientation);
+    };
+  }, [isGyroActive]);
 
   // 2D Face refs
   const imagesRef = useRef<Map<number, HTMLImageElement>>(new Map());
@@ -591,6 +649,24 @@ export default function FaceLooker({
         style={{ width: "100%", height: "100%" }}
         className="absolute inset-0 block h-full w-full select-none pointer-events-none drop-shadow-[-16px_0_36px_rgba(126,232,255,0.28)] drop-shadow-[16px_0_36px_rgba(255,47,185,0.32)] will-change-transform"
       />
+
+      {/* Mobile VR Tilt toggle pill: enables iOS Safari gyroscope permission & toggles between VR tilt & finger touch drag */}
+      <div className="sm:hidden absolute -bottom-14 inset-x-0 flex justify-center pointer-events-auto z-40">
+        <button
+          type="button"
+          onClick={toggleGyro}
+          className="inline-flex items-center gap-2 rounded-full border border-[#22d3ee]/40 bg-black/85 px-4 py-2 text-[10px] font-mono uppercase tracking-[0.2em] text-[#22d3ee] shadow-[0_0_22px_rgba(34,211,238,0.35)] backdrop-blur-md active:scale-95 transition-all"
+        >
+          <span
+            className={`h-2 w-2 rounded-full ${
+              isGyroActive
+                ? "bg-[#22d3ee] animate-pulse shadow-[0_0_8px_#22d3ee]"
+                : "bg-white/40"
+            }`}
+          />
+          <span>{isGyroActive ? "VR TILT: ON (TAP FOR TOUCH)" : "ENABLE VR TILT"}</span>
+        </button>
+      </div>
     </div>
   );
 }

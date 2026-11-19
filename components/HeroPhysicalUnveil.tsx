@@ -10,13 +10,12 @@ import { ArrowUpRight } from "lucide-react";
 export default function HeroPhysicalUnveil() {
   const containerRef = useRef<HTMLDivElement>(null);
 
-  // Pin & Scrub progress across an expanded 280vh hero stage for extended scroll time
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start start", "end end"],
-  });
+  // Reliable scroll tracking across desktop & mobile (0px to 950px of window scroll scrubs the hero stage)
+  const { scrollY } = useScroll();
 
-  const smoothProgress = useSpring(scrollYProgress, {
+  const rawProgress = useTransform(scrollY, [0, 950], [0, 1], { clamp: true });
+
+  const smoothProgress = useSpring(rawProgress, {
     stiffness: 240,
     damping: 38,
     restDelta: 0.001,
@@ -40,7 +39,7 @@ export default function HeroPhysicalUnveil() {
   return (
     <section ref={containerRef} className="relative h-[280vh] w-full bg-[#07070a]">
       {/* Sticky 100vh Viewport Stage */}
-      <div className="sticky top-0 h-screen w-full overflow-hidden flex flex-col justify-between px-6 pb-8 pt-6 select-none">
+      <div className="sticky top-0 h-screen sm:h-screen min-h-screen h-[100dvh] w-full bg-[#07070a] overflow-hidden flex flex-col justify-between px-4 sm:px-6 pb-8 pt-6 select-none">
         {/* Background ambient lighting */}
         <div className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
           <div className="absolute -top-32 -left-32 h-[560px] w-[560px] rounded-full bg-[#22d3ee]/12 blur-[170px]" />
