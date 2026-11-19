@@ -73,6 +73,24 @@ export default function HeroPhysicalUnveil() {
               LABOUDY
             </span>
           </a>
+
+          {/* Mobile VR Tilt Toggle Button: Top-Right */}
+          <div className="sm:hidden flex items-center pointer-events-auto">
+            <button
+              type="button"
+              onClick={() => window.dispatchEvent(new CustomEvent("toggleVrTilt"))}
+              className="inline-flex items-center gap-1.5 rounded-full border border-[#22d3ee]/50 bg-black/85 px-3 py-1.5 text-[9.5px] font-mono uppercase tracking-[0.16em] text-[#22d3ee] shadow-[0_0_16px_rgba(34,211,238,0.35)] backdrop-blur-md active:scale-95 transition-all select-none"
+            >
+              <span
+                className={`h-2 w-2 rounded-full ${
+                  isGyroActive
+                    ? "bg-[#22d3ee] animate-pulse shadow-[0_0_8px_#22d3ee]"
+                    : "bg-white/40"
+                }`}
+              />
+              <span>{isGyroActive ? "VR: ON" : "VR TILT"}</span>
+            </button>
+          </div>
         </header>
 
         {/* Giant Kinetic Typography ("MARWAN" left, "LABOUDY" right) - Directly behind face on both mobile and laptop */}
@@ -105,27 +123,6 @@ export default function HeroPhysicalUnveil() {
             <FaceLooker size={620} className="max-w-[90vw]" />
           </motion.div>
         </div>
-
-        {/* Stationary Mobile VR Tilt toggle pill: stays stationary on screen and fades out cleanly on scroll without moving */}
-        <motion.div
-          style={{ opacity: vrTiltOpacity }}
-          className="sm:hidden absolute left-1/2 -translate-x-1/2 bottom-[7.5vh] z-30 pointer-events-auto"
-        >
-          <button
-            type="button"
-            onClick={() => window.dispatchEvent(new CustomEvent("toggleVrTilt"))}
-            className="inline-flex items-center gap-2 rounded-full border border-[#22d3ee]/40 bg-black/85 px-4 py-2 text-[10px] font-mono uppercase tracking-[0.2em] text-[#22d3ee] shadow-[0_0_22px_rgba(34,211,238,0.35)] backdrop-blur-md active:scale-95 transition-all select-none"
-          >
-            <span
-              className={`h-2 w-2 rounded-full ${
-                isGyroActive
-                  ? "bg-[#22d3ee] animate-pulse shadow-[0_0_8px_#22d3ee]"
-                  : "bg-white/40"
-              }`}
-            />
-            <span>{isGyroActive ? "VR TILT: ON (TAP FOR TOUCH)" : "ENABLE VR TILT"}</span>
-          </button>
-        </motion.div>
 
         {/* Floating Phone Sites Buttons (Preserved in place on Left and Right) */}
         <motion.div

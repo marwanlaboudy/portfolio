@@ -160,6 +160,17 @@ export default function FaceLooker({
     [size]
   );
 
+  // Instant initial face frame so user never sees a black or blank canvas on load
+  useEffect(() => {
+    const initImg = new window.Image();
+    initImg.src = "/gaze_frames/blink_0000.webp";
+    initImg.onload = () => {
+      if (lastDrawnKeyRef.current === null) {
+        drawImageToCanvas(initImg, "initial_face");
+      }
+    };
+  }, [drawImageToCanvas]);
+
   // 1. Initialize Three.js Scene with Local Clipping & Hot Pink Laser Assembly Seam
   useEffect(() => {
     const canvas = threeCanvasRef.current;
@@ -177,8 +188,10 @@ export default function FaceLooker({
     });
     renderer.setPixelRatio(Math.min(typeof window !== "undefined" ? window.devicePixelRatio : 1, 2));
     renderer.setSize(size, size, false);
+    renderer.setClearColor(0x000000, 0);
     canvas.style.width = "100%";
     canvas.style.height = "100%";
+    canvas.style.backgroundColor = "transparent";
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
     renderer.toneMappingExposure = 1.25;
 
@@ -555,6 +568,7 @@ export default function FaceLooker({
             wireframePivot.visible = false;
             clipPlane.constant = -3.0;
             wireframeMat.opacity = 0;
+            renderer.setClearColor(0x000000, 0);
             renderer.clear();
           }
         }

@@ -164,6 +164,11 @@ export default function MarioJuicePhoneTrigger() {
             }}
             transition={{ type: "spring", stiffness: 260, damping: 25, mass: 0.9 }}
             style={{ maxHeight: "84vh", maxWidth: "88vw" }}
+            onMouseLeave={() => {
+              if (!isMobile) {
+                setIsOpen(false);
+              }
+            }}
             className="relative overflow-hidden backdrop-blur-xl border-[3px] border-[#ff2fb9]/85 bg-[#07070c] p-2.5 shadow-[0_0_45px_rgba(255,47,185,0.45),0_0_85px_rgba(126,232,255,0.35),inset_0_0_20px_rgba(255,47,185,0.2)]"
           >
             <div className="flex h-full w-full flex-col overflow-hidden rounded-[30px]">
