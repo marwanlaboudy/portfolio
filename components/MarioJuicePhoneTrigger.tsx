@@ -111,35 +111,24 @@ export default function MarioJuicePhoneTrigger() {
             })}
         </AnimatePresence>
 
-        {/* Morphing Container: Logo badge on mobile (Down), classic 124px square with logo on laptop */}
+        {/* Morphing Container: Logo ONLY without anything else on it */}
         {!isOpen ? (
           isMobile ? (
-            /* Sleek circular logo badge on mobile (Down) */
+            /* Mobile (Down): Pure circular logo emblem */
             <button
               type="button"
               onClick={() => setShowConfirm(true)}
-              onMouseEnter={() => setShowConfirm(true)}
-              className="group relative flex items-center gap-2 rounded-full border border-[#ff2fb9]/80 bg-black/90 p-1.5 pr-3.5 backdrop-blur-md shadow-[0_0_20px_rgba(255,47,185,0.4)] active:scale-95 transition-all select-none"
-              title="Mario Juice Website"
+              className="group relative h-12 w-12 overflow-hidden rounded-full border-2 border-[#ff2fb9]/80 bg-black p-0.5 shadow-[0_0_20px_rgba(255,47,185,0.45)] active:scale-95 transition-all select-none flex items-center justify-center"
+              title="Mario Juice"
             >
-              <div className="relative h-8 w-8 overflow-hidden rounded-full border border-[#ff2fb9]/70 bg-black shadow-[0_0_8px_#ff2fb9]">
-                <img
-                  src="/images/mario-juice-logo.jpg"
-                  alt="Mario Juice Logo"
-                  className="h-full w-full object-cover object-top"
-                />
-              </div>
-              <div className="flex flex-col items-start leading-none">
-                <span className="text-[10px] font-extrabold uppercase tracking-wider text-[#ff2fb9]">
-                  Mario Juice
-                </span>
-                <span className="text-[7.5px] font-mono tracking-widest text-[#7ee8ff] uppercase">
-                  Website
-                </span>
-              </div>
+              <img
+                src="/images/mario-juice-logo.jpg"
+                alt="Mario Juice Logo"
+                className="h-full w-full rounded-full object-cover object-top pointer-events-none"
+              />
             </button>
           ) : (
-            /* Classic 124px square button on laptop with official logo: Opens directly on hover / cursor pass-by */
+            /* Laptop: Pure circular logo emblem (110px) - Opens phone automatically when cursor passes over */
             <div
               onClick={() => {
                 setHasOpenedOnce(true);
@@ -149,31 +138,19 @@ export default function MarioJuicePhoneTrigger() {
                 setHasOpenedOnce(true);
                 setIsOpen(true);
               }}
-              style={{ width: 124, height: 124, borderRadius: 22 }}
-              className="relative cursor-pointer overflow-hidden backdrop-blur-xl border border-[#ff2fb9]/80 bg-black/85 shadow-[0_0_25px_rgba(255,47,185,0.45),0_0_50px_rgba(126,232,255,0.25),inset_0_0_18px_rgba(255,47,185,0.2)] hover:border-[#ff2fb9] hover:scale-105 active:scale-95 transition-all duration-300"
+              onPointerEnter={() => {
+                setHasOpenedOnce(true);
+                setIsOpen(true);
+              }}
+              style={{ width: 110, height: 110 }}
+              className="group relative cursor-pointer overflow-hidden rounded-full border-2 border-[#ff2fb9]/80 bg-black shadow-[0_0_30px_rgba(255,47,185,0.5),inset_0_0_15px_rgba(255,47,185,0.3)] hover:scale-110 hover:border-[#ff2fb9] hover:shadow-[0_0_45px_rgba(255,47,185,0.75)] active:scale-95 transition-all duration-300 select-none flex items-center justify-center p-1"
+              title="Mario Juice"
             >
-              <div className="absolute inset-0 flex flex-col items-center justify-center gap-1.5 p-2 select-none">
-                <div className="relative h-14 w-14 overflow-hidden rounded-full border border-[#ff2fb9]/70 bg-black shadow-[0_0_15px_rgba(255,47,185,0.5)]">
-                  <img
-                    src="/images/mario-juice-logo.jpg"
-                    alt="Mario Juice"
-                    className="h-full w-full object-cover object-top"
-                  />
-                  <span className="absolute -left-0.5 -top-0.5 flex h-2.5 w-2.5">
-                    <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#7ee8ff] opacity-75" />
-                    <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-[#ff2fb9] shadow-[0_0_8px_#ff2fb9]" />
-                  </span>
-                </div>
-
-                <div className="flex flex-col items-center text-center leading-tight">
-                  <span className="text-[10.5px] font-extrabold uppercase tracking-[0.2em] text-[#ff2fb9] drop-shadow-[0_0_10px_rgba(255,47,185,0.85)]">
-                    Mario Juice
-                  </span>
-                  <span className="text-[9px] font-bold uppercase tracking-[0.25em] text-[#7ee8ff] drop-shadow-[0_0_10px_rgba(126,232,255,0.85)]">
-                    Website
-                  </span>
-                </div>
-              </div>
+              <img
+                src="/images/mario-juice-logo.jpg"
+                alt="Mario Juice Logo"
+                className="h-full w-full rounded-full object-cover object-top pointer-events-none"
+              />
             </div>
           )
         ) : (
