@@ -57,9 +57,6 @@ export default function FaceLooker({
     pivot: THREE.Group | null;
     wireframePivot: THREE.Group | null;
     clipPlane: THREE.Plane;
-    laserGroup: THREE.Group;
-    laserCoreMat: THREE.MeshBasicMaterial;
-    laserGlowMat: THREE.MeshBasicMaterial;
     wireframeMat: THREE.MeshBasicMaterial;
     isModelLoaded: boolean;
   } | null>(null);
@@ -125,35 +122,6 @@ export default function FaceLooker({
     topLight.position.set(0, 4, 1);
     scene.add(topLight);
 
-    // Hot Pink / Magenta Laser Assembly Seam (matching user's reference mockup)
-    const laserGroup = new THREE.Group();
-    laserGroup.visible = false;
-    scene.add(laserGroup);
-
-    // 1. Bright intense core laser line
-    const coreGeo = new THREE.PlaneGeometry(3.6, 0.04);
-    const laserCoreMat = new THREE.MeshBasicMaterial({
-      color: 0xff2fb9,
-      transparent: true,
-      opacity: 0,
-      side: THREE.DoubleSide,
-      blending: THREE.AdditiveBlending,
-    });
-    const laserCore = new THREE.Mesh(coreGeo, laserCoreMat);
-    laserGroup.add(laserCore);
-
-    // 2. Soft outer laser glow
-    const glowGeo = new THREE.PlaneGeometry(3.6, 0.16);
-    const laserGlowMat = new THREE.MeshBasicMaterial({
-      color: 0xff2fb9,
-      transparent: true,
-      opacity: 0,
-      side: THREE.DoubleSide,
-      blending: THREE.AdditiveBlending,
-    });
-    const laserGlow = new THREE.Mesh(glowGeo, laserGlowMat);
-    laserGroup.add(laserGlow);
-
     // Cyan holographic wireframe material outlining face & mask features
     const wireframeMat = new THREE.MeshBasicMaterial({
       color: 0x7ee8ff,
@@ -169,9 +137,6 @@ export default function FaceLooker({
       pivot: null as THREE.Group | null,
       wireframePivot: null as THREE.Group | null,
       clipPlane,
-      laserGroup,
-      laserCoreMat,
-      laserGlowMat,
       wireframeMat,
       isModelLoaded: false,
     };
@@ -353,11 +318,10 @@ export default function FaceLooker({
 
     // ------------------------------------------------------------------------
     // Dynamic Face Visibility:
-    // Real face remains 100% visible beneath the unmasked areas and through the wireframe!
-    // Fades gently only when the mask completely encases the chin (> 0.90).
+    // Fades out earlier as the mask descends onto the face (starting at 0.12, fully gone by 0.58)
     // ------------------------------------------------------------------------
     if (faceCanvasRef.current) {
-      const faceOpacity = wear < 0.88 ? 1 : Math.max(0, (1 - wear) / 0.12);
+      const faceOpacity = wear <= 0.12 ? 1 : Math.max(0, 1 - (wear - 0.12) / 0.46);
       faceCanvasRef.current.style.opacity = faceOpacity.toFixed(3);
     }
 
@@ -422,9 +386,6 @@ export default function FaceLooker({
         pivot,
         wireframePivot,
         clipPlane,
-        laserGroup,
-        laserCoreMat,
-        laserGlowMat,
         wireframeMat,
       } = threeSceneRef.current;
 
@@ -454,7 +415,7 @@ export default function FaceLooker({
 
           // Progressive slice height:
           // wear = 0.0: constant = -1.55 (above forehead)
-          // wear = 0.5: constant = +0.10 (mid-face, exactly like user's mockup!)
+          // wear = 0.5: constant = +0.10 (mid-face)
           // wear = 1.0: constant = +1.80 (chin, fully covering)
           const clipConstant = -1.55 + wear * 3.35;
           clipPlane.constant = clipConstant;
@@ -462,21 +423,10 @@ export default function FaceLooker({
           // Holographic wireframe: wraps face during transition
           wireframeMat.opacity = Math.sin(wear * Math.PI) * 0.70 + (wear > 0 ? 0.12 : 0);
 
-          // Glowing Hot Pink Laser Assembly Seam (matching reference mockup!)
-          const seamY = -clipConstant / planeNormal.y;
-          laserGroup.position.set(pivot.position.x, seamY + pivot.position.y, 0.52);
-          laserGroup.rotation.z = Math.atan2(planeNormal.x, planeNormal.y);
-          laserGroup.visible = wear > 0.03 && wear < 0.96;
-
-          const laserOpacity = Math.sin(wear * Math.PI) * 0.95;
-          laserCoreMat.opacity = laserOpacity;
-          laserGlowMat.opacity = laserOpacity * 0.6;
-
           renderer.render(scene, camera);
         } else {
           // Completely off / inside face area
           clipPlane.constant = -3.0;
-          laserGroup.visible = false;
           wireframeMat.opacity = 0;
           renderer.clear();
         }
