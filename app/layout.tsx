@@ -19,6 +19,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <link
+          rel="preload"
+          as="image"
+          href="/gaze_frames/blink_0000.webp"
+          type="image/webp"
+        />
+      </head>
       <body className="antialiased">
         {children}
       </body>

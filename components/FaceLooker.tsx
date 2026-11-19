@@ -189,6 +189,7 @@ export default function FaceLooker({
     renderer.setPixelRatio(Math.min(typeof window !== "undefined" ? window.devicePixelRatio : 1, 2));
     renderer.setSize(size, size, false);
     renderer.setClearColor(0x000000, 0);
+    renderer.clear();
     canvas.style.width = "100%";
     canvas.style.height = "100%";
     canvas.style.backgroundColor = "transparent";
@@ -287,6 +288,7 @@ export default function FaceLooker({
         const pivot = new THREE.Group();
         pivot.add(root);
         pivot.scale.setScalar(targetScale);
+        pivot.visible = false;
         scene.add(pivot);
 
         // 2. Holographic Wireframe Overlay (outlining face features as in reference mockup)
@@ -300,6 +302,7 @@ export default function FaceLooker({
         const wireframePivot = new THREE.Group();
         wireframePivot.add(wireframeRoot);
         wireframePivot.scale.setScalar(targetScale);
+        wireframePivot.visible = false;
         scene.add(wireframePivot);
 
         sceneState.pivot = pivot;
