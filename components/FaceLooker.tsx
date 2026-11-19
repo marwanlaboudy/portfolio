@@ -102,8 +102,18 @@ export default function FaceLooker({
       const normX = Math.max(-1, Math.min(1, deltaGamma / 24));
       const normY = Math.max(-1, Math.min(1, deltaBeta / 24));
 
-      isCursorOnFaceRef.current = false;
-      mouseTargetRef.current = { x: normX, y: normY };
+      const tiltDistance = Math.sqrt(normX * normX + normY * normY);
+
+      // When phone returns to the middle (neutral holding position):
+      // Un-wears the mask and reveals the real face!
+      if (tiltDistance < 0.20) {
+        isCursorOnFaceRef.current = true;
+        mouseTargetRef.current = { x: 0, y: 0 };
+      } else {
+        // When tilted away from middle: dons the mask and tracks tilt in VR!
+        isCursorOnFaceRef.current = false;
+        mouseTargetRef.current = { x: normX, y: normY };
+      }
     };
 
     window.addEventListener("deviceorientation", handleOrientation, { passive: true });

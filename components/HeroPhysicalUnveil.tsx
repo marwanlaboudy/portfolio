@@ -109,7 +109,7 @@ export default function HeroPhysicalUnveil() {
         {/* Stationary Mobile VR Tilt toggle pill: stays stationary on screen and fades out cleanly on scroll without moving */}
         <motion.div
           style={{ opacity: vrTiltOpacity }}
-          className="sm:hidden absolute left-1/2 -translate-x-1/2 bottom-[18vh] z-30 pointer-events-auto"
+          className="sm:hidden absolute left-1/2 -translate-x-1/2 bottom-[7.5vh] z-30 pointer-events-auto"
         >
           <button
             type="button"

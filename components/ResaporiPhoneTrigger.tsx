@@ -67,7 +67,7 @@ export default function ResaporiPhoneTrigger() {
     <>
       <div
         style={{ opacity: scrollOpacity }}
-        className="absolute left-1/2 -translate-x-1/2 top-[15vh] sm:top-[50vh] sm:left-8 lg:left-12 sm:translate-x-0 -translate-y-1/2 z-30 transition-opacity duration-200"
+        className="absolute left-1/2 -translate-x-1/2 top-[12vh] sm:top-[50vh] sm:left-8 lg:left-12 sm:translate-x-0 sm:-translate-y-1/2 z-30 transition-opacity duration-200"
       >
         {/* Neon Break Shockwave & Shards when expanding */}
         <AnimatePresence>

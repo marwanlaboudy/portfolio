@@ -67,7 +67,7 @@ export default function MarioJuicePhoneTrigger() {
     <>
       <div
         style={{ opacity: scrollOpacity }}
-        className="absolute left-1/2 -translate-x-1/2 bottom-[11vh] sm:bottom-auto sm:top-[50vh] sm:right-8 lg:right-12 sm:left-auto sm:translate-x-0 -translate-y-1/2 z-30 transition-opacity duration-200"
+        className="absolute left-1/2 -translate-x-1/2 bottom-[14.5vh] sm:bottom-auto sm:top-[50vh] sm:right-8 lg:right-12 sm:left-auto sm:translate-x-0 sm:-translate-y-1/2 z-30 transition-opacity duration-200"
       >
         {/* Neon Break Shockwave & Shards when expanding */}
         <AnimatePresence>
