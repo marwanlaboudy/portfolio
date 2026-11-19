@@ -111,24 +111,24 @@ export default function ResaporiPhoneTrigger() {
             })}
         </AnimatePresence>
 
-        {/* Morphing Container: Logo ONLY without anything else on it */}
+        {/* Morphing Container: Logo ONLY without any circle or border */}
         {!isOpen ? (
           isMobile ? (
-            /* Mobile (Top): Pure circular logo emblem */
+            /* Mobile (Top): Pure unconstrained logo */
             <button
               type="button"
               onClick={() => setShowConfirm(true)}
-              className="group relative h-12 w-12 overflow-hidden rounded-full border-2 border-[#7ee8ff]/80 bg-black p-0.5 shadow-[0_0_20px_rgba(126,232,255,0.45)] active:scale-95 transition-all select-none flex items-center justify-center"
+              className="group relative cursor-pointer active:scale-95 transition-all select-none flex items-center justify-center p-0 bg-transparent border-0"
               title="Re Sapori"
             >
               <img
                 src="/images/resapori-logo.jpg"
                 alt="Re Sapori Logo"
-                className="h-full w-full rounded-full object-cover pointer-events-none"
+                className="w-16 h-16 object-contain pointer-events-none drop-shadow-[0_0_20px_rgba(126,232,255,0.85)]"
               />
             </button>
           ) : (
-            /* Laptop: Pure circular logo emblem (110px) - Opens phone automatically when cursor passes over */
+            /* Laptop: Pure unconstrained logo - Opens phone automatically when cursor passes over */
             <div
               onClick={() => {
                 setHasOpenedOnce(true);
@@ -142,14 +142,13 @@ export default function ResaporiPhoneTrigger() {
                 setHasOpenedOnce(true);
                 setIsOpen(true);
               }}
-              style={{ width: 110, height: 110 }}
-              className="group relative cursor-pointer overflow-hidden rounded-full border-2 border-[#7ee8ff]/80 bg-black shadow-[0_0_30px_rgba(126,232,255,0.5),inset_0_0_15px_rgba(126,232,255,0.3)] hover:scale-110 hover:border-[#7ee8ff] hover:shadow-[0_0_45px_rgba(126,232,255,0.75)] active:scale-95 transition-all duration-300 select-none flex items-center justify-center p-1"
+              className="group relative cursor-pointer hover:scale-110 active:scale-95 transition-all duration-300 select-none flex items-center justify-center p-0 bg-transparent border-0"
               title="Re Sapori"
             >
               <img
                 src="/images/resapori-logo.jpg"
                 alt="Re Sapori Logo"
-                className="h-full w-full rounded-full object-cover pointer-events-none"
+                className="w-32 h-32 lg:w-36 lg:h-36 object-contain pointer-events-none drop-shadow-[0_0_30px_rgba(126,232,255,0.85)] group-hover:drop-shadow-[0_0_50px_rgba(126,232,255,1)] transition-all"
               />
             </div>
           )

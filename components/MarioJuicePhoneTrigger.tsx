@@ -111,24 +111,24 @@ export default function MarioJuicePhoneTrigger() {
             })}
         </AnimatePresence>
 
-        {/* Morphing Container: Logo ONLY without anything else on it */}
+        {/* Morphing Container: Logo ONLY without any circle or border */}
         {!isOpen ? (
           isMobile ? (
-            /* Mobile (Down): Pure circular logo emblem */
+            /* Mobile (Down): Pure unconstrained logo showing full Mario & "MARIO JUICE" text */
             <button
               type="button"
               onClick={() => setShowConfirm(true)}
-              className="group relative h-12 w-12 overflow-hidden rounded-full border-2 border-[#ff2fb9]/80 bg-black p-0.5 shadow-[0_0_20px_rgba(255,47,185,0.45)] active:scale-95 transition-all select-none flex items-center justify-center"
+              className="group relative cursor-pointer active:scale-95 transition-all select-none flex items-center justify-center p-0 bg-transparent border-0"
               title="Mario Juice"
             >
               <img
                 src="/images/mario-juice-logo.jpg"
                 alt="Mario Juice Logo"
-                className="h-full w-full rounded-full object-cover object-top pointer-events-none"
+                className="w-16 h-22 object-contain pointer-events-none drop-shadow-[0_0_20px_rgba(255,47,185,0.85)]"
               />
             </button>
           ) : (
-            /* Laptop: Pure circular logo emblem (110px) - Opens phone automatically when cursor passes over */
+            /* Laptop: Pure unconstrained logo showing full Mario & "MARIO JUICE" text - Opens phone automatically when cursor passes over */
             <div
               onClick={() => {
                 setHasOpenedOnce(true);
@@ -142,14 +142,13 @@ export default function MarioJuicePhoneTrigger() {
                 setHasOpenedOnce(true);
                 setIsOpen(true);
               }}
-              style={{ width: 110, height: 110 }}
-              className="group relative cursor-pointer overflow-hidden rounded-full border-2 border-[#ff2fb9]/80 bg-black shadow-[0_0_30px_rgba(255,47,185,0.5),inset_0_0_15px_rgba(255,47,185,0.3)] hover:scale-110 hover:border-[#ff2fb9] hover:shadow-[0_0_45px_rgba(255,47,185,0.75)] active:scale-95 transition-all duration-300 select-none flex items-center justify-center p-1"
+              className="group relative cursor-pointer hover:scale-110 active:scale-95 transition-all duration-300 select-none flex items-center justify-center p-0 bg-transparent border-0"
               title="Mario Juice"
             >
               <img
                 src="/images/mario-juice-logo.jpg"
                 alt="Mario Juice Logo"
-                className="h-full w-full rounded-full object-cover object-top pointer-events-none"
+                className="w-28 h-40 lg:w-32 lg:h-44 object-contain pointer-events-none drop-shadow-[0_0_30px_rgba(255,47,185,0.85)] group-hover:drop-shadow-[0_0_50px_rgba(255,47,185,1)] transition-all"
               />
             </div>
           )
